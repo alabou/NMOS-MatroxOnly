@@ -5,7 +5,7 @@ This document describes additional Node attributes and their permitted values wh
 
 {:toc}
 
-### Hostnames
+### hostnames
 - **Name:** `urn:x-matrox:hostnames`
 - **Description:** This attributes provides additional information about a Node's interfaces in addition to the rquired "chassis_id", "port_id", "name" attributes. It corresponds to an array of string which are the various names that can resolve to the interface IP address.
 - **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3)
