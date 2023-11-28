@@ -40,7 +40,7 @@ Examples Source resources are provided in [Examples](../examples/).
 
 ### Flows
 
-A mux Flow resource MUST indicate `video/MP2T` or `application/mp2t` in the `media_type` attribute, and `urn:x-nmos:format:mux` for the `format` attribute. A sub-Flow MUST be a member of the mux Flow's `parents` attribute.
+A mux Flow resource MUST indicate `video/MP2T` or `application/mp2t` in the `media_type` attribute, and `urn:x-nmos:format:mux` for the `format` attribute.  When the mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `video/MP2T. Otherwise for other transports it the `media_type` MUST be `application/mp2t`. A sub-Flow MUST be a member of the mux Flow's `parents` attribute.
 
 A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`.
 
