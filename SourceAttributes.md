@@ -16,7 +16,7 @@ This document describes additional Source attributes and their permitted values 
 ### layer
 - **Name:** `urn:x-matrox:layer`
 - **Description:** This attributes indicates the Receiver's sub-Stream providing the essence to the Source.
-- **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3)
+- **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3), [Matrox Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md)
 - **Applicability:** 
 - **Permitted Values:**
   - The layer value matching a sub-Stream Constraint Set of the Receiver's Capabilities.
