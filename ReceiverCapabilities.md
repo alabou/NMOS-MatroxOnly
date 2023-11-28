@@ -162,6 +162,8 @@ A Controller MUST NOT take into consideration a Constraint Set that has this att
 
 If a Constraint Set is enabled or the Receiver does not support offline capabilities then this attribute MAY be omitted.
 
+#### Constraint Set Format, Layer and Layer Compatibility Groups
+
 ### Listing Constraint Sets
 
 The Receiver advertises a list of Constraint Sets as a JSON array of these objects, using the key `constraint_sets` in the `caps` object.
