@@ -174,6 +174,8 @@ A Source associated with a Receiver sub-Stream MUST have a `urn:x-matrox:layer` 
 
 The metadata attribute `urn:x-matrox:cap:meta:layer_compatibility_groups` MAY be used on a sub-Flow/sub-Stream to indicate that a Constraint Set applies to a number of layer compatibility groups. The layer compatibility groups must be an array of unsigned integer in the range 0 to 63. A Constraint Set MAY apply to multiple compatibility groups. A Constraint Set without a `urn:x-matrox:cap:meta:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. Only Constraint Sets that are members of a common group are compatibles. A Controller SHOULD process Constraint Sets according to their compatibility group.
 
+A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute matching the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer_compatibility_groups` meta attribute. The sub-Flow `format` attribute MUST match the associated Sender Constraint Set `urn:x-matrox:cap:meta:format` meta attribute. The intersection of the `urn:x-matrox:layer_compatibility_groups` attribute of all the sub-Flows associated with a mux Flow (parents of a Flow of format `urn:x-nmos:format:mux`) MUST not be empty.
+
 ### Listing Constraint Sets
 
 The Receiver advertises a list of Constraint Sets as a JSON array of these objects, using the key `constraint_sets` in the `caps` object.
