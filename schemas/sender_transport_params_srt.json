@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Describes SRT Sender transport parameters. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. SRT Senders must support all properties in this schema.",
+  "title": "SRT Sender Transport Parameters",
+  "type": "object",
+  "title": "Sender Output",
+  "properties": {
+    "source_ip": {
+      "type": [
+        "string",
+      ],
+      "description": "SRT Source IP address (IP address of the interface bound to the Sender). If the parameter is set to auto the Sender should establish for itself which interface it should use, based on its own internal configuration.",
+      "anyOf": [{
+          "pattern": "^auto$"
+        },
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
+    },
+    "source_port": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "description": "SRT Source Port. If the parameter is set to auto the Sender should establish for itself which port it should use, based on its own internal configuration.",
+      "minimum": 1,
+      "maximum": 65535,
+      "pattern": "^auto$"
+    },
+    "destination_ip": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "SRT Destination IP address (IP address of the Receiver). If the parameter is set to auto the Sender should establish for itself which address it should use, based on its own internal configuration. A null value indicates that the Sender has not yet been configured or is configured in listener mode. This address is used in caller and rendezvous mode to connect to the Receiver.",
+      "anyOf": [{
+          "pattern": "^auto$"
+        },
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "destination_port": {
+      "type": [
+        "integer",
+        "string"
+      ],
+      "description": "SRT Destination Port. If the parameter is set to auto the Sender should establish for itself which port it should use, based on its own internal configuration. This port is used in caller and rendezvous mode to connect to the Receiver",
+      "minimum": 0,
+      "maximum": 65535,
+      "pattern": "^auto$"
+    },
+    "protocol": {
+      "description": "Indicate the SRT sub-protocol to use, in rendezvous mode both source_port and destination_port must be equal"
+      "type": "string",
+      "enum": [
+        "caller",
+        "listener",
+        "rendezvous"
+      ]
+    },
+    "latency": {
+      "type": "integer"
+      "description": SRT target latency in milliseconds. The value 0 indicate to automatically set the latency",
+      "minimum": 0,
+      "maximum": 1000
+    },
+  },
+  "patternProperties": {
+    "^ext_[a-zA-Z0-9_]+$": {
+      "$ref": "sender_transport_params_ext.json"
+    }
+  },
+  "additionalProperties": false
+}
