@@ -164,6 +164,10 @@ If a Constraint Set is enabled or the Receiver does not support offline capabili
 
 #### Constraint Set Format, Layer and Layer Compatibility Groups
 
+A sub-Flow is defined as a member of a multiplexed flow produced by a Flow of format `urn:x-nmos:format:mux`. A sub-Flow MUST be a member of the `parents` attribute of a mux Flow.
+
+A sub-Stream is defined as a member of a multiplexed stream consumed by a Receiver of format `urn:x-nmos:format:mux`.
+
 The metadata attribute `urn:x-matrox:cap:meta:format` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, applies to a specific format. The format MAY be one of `urn:x-nmos:format:video`, `urn:x-nmos:format:audio` or `urn:x-nmos:format:data`.
 
 The metadata attribute `urn:x-matrox:cap:meta:layer` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, applies to a specific layer of a given format. The layer must be an unsigned integer in the range 0 to N-1 where N the total number of layers of a given format.
@@ -174,7 +178,7 @@ A Source associated with a Receiver sub-Stream MUST have a `urn:x-matrox:layer` 
 
 The metadata attribute `urn:x-matrox:cap:meta:layer_compatibility_groups` MAY be used on a sub-Flow/sub-Stream to indicate that a Constraint Set applies to a number of layer compatibility groups. The layer compatibility groups must be an array of unsigned integer in the range 0 to 63. A Constraint Set MAY apply to multiple compatibility groups. A Constraint Set without a `urn:x-matrox:cap:meta:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. Only Constraint Sets that are members of a common group are compatibles. A Controller SHOULD process Constraint Sets according to their compatibility group.
 
-A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute matching the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer_compatibility_groups` meta attribute. The sub-Flow `format` attribute MUST match the associated Sender Constraint Set `urn:x-matrox:cap:meta:format` meta attribute. The intersection of the `urn:x-matrox:layer_compatibility_groups` attribute of all the sub-Flows associated with a mux Flow (parents of a Flow of format `urn:x-nmos:format:mux`) MUST not be empty.
+A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute matching the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer_compatibility_groups` meta attribute. The sub-Flow `format` attribute MUST match the associated Sender Constraint Set `urn:x-matrox:cap:meta:format` meta attribute. The intersection of the `urn:x-matrox:layer_compatibility_groups` attribute of all the sub-Flows associated with a mux Flow MUST not be empty.
 
 ### Listing Constraint Sets
 
