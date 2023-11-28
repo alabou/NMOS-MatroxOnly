@@ -168,6 +168,8 @@ The metadata attribute `urn:x-matrox:cap:meta:format` MUST be used to indicate t
 
 The metadata attribute `urn:x-matrox:cap:meta:layer` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, applies to a specific layer of a given format. The layer must be an unsigned integer in the range 0 to N-1 where N the total number of layers of a given format.
 
+A sub-Flow MUST have a `urn:x-matrox:layer` attribute matching the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer` meta attribute. The sub-Flow `format` attribute MUST match the associated Sender Constraint Set `urn:x-matrox:cap:meta:format` meta attribute.
+
 A Source associated with a Receiver sub-Stream MUST have a `urn:x-matrox:layer` attribute matching the associated Receiver Constraint Set `urn:x-matrox:cap:meta:layer` meta attribute. The Source `format` attribute MUST match the associated Receiver Constraint Set `urn:x-matrox:cap:meta:format` meta attribute.
 
 The metadata attribute `urn:x-matrox:cap:meta:layer_compatibility_groups` MAY be used on a sub-Flow/sub-Stream to indicate that a Constraint Set applies to a number of layer compatibility groups. The layer compatibility groups must be an array of unsigned integer in the range 0 to 63. A Constraint Set MAY apply to multiple compatibility groups. A Constraint Set without a `urn:x-matrox:cap:meta:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. Only Constraint Sets that are members of a common group are compatibles. A Controller SHOULD process Constraint Sets according to their compatibility group.
