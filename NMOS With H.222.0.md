@@ -71,15 +71,15 @@ The following parameter constraints can be used to express limits or preferences
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
-#### RTP transport based on RFC 2250
+#### RTP transport based on RFC 2250 and RFC 3551
 
-For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 adn RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
 
 An example Sender resource is provided in the [Examples](../examples/).
 
 ##### SDP format-specific parameters
 
-The SDP file at the `manifest_href` MUST comply with the requirements of RFC 2250.
+The SDP file at the `manifest_href` MUST comply with the requirements of RFC 2250 adn RFC 3551.
 
 An example SDP file is provided in the [Examples](../examples/).
 
@@ -115,9 +115,9 @@ A coded format specification MAY define additional parameter constraints that ca
 
 An example Receiver resource is provided in the [Examples](../examples/).
 
-### RTP transport based on RFC 2250
+### RTP transport based on RFC 2250 and RFC 3551
 
-For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 adn RFC 3551, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
 
 ### Other transports
 
@@ -131,7 +131,7 @@ Connection Management using IS-05 proceeds in exactly the same manner as for any
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.222.0 stream is expected to comply with RFC 2250. It need not comply with the additional requirements specified for SDP transport files at Senders.
+A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.222.0 stream is expected to comply with RFC 2250 adn RFC 3551. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
 If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
   
@@ -162,6 +162,7 @@ A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that
 [H.222.0]: https://www.itu.int/rec/T-REC-H.222.0 "Generic coding of moving pictures and associated audio information: Systems"
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [RFC-2250]: https://tools.ietf.org/html/rfc2250 "RTP Payload Format for MPEG1/MPEG2 Video"
+[RFC-3551]: https://tools.ietf.org/html/rfc3551 "RTP Profile for Audio and Video Conferences with Minimal Control"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
 [NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
