@@ -20,9 +20,9 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` part of a MPEG2-TS stream produced by a Sender.
+A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` part of a MPEG2-TS Stream produced by a Sender.
 
-A 'sub-Stream' is defined as a stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` part of a MPEG2-TS stream consumed by a Receiver.
+A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` part of a MPEG2-TS Stream consumed by a Receiver.
 
 ## H.222.0 IS-04 Sources, Flows and Senders
 
@@ -46,7 +46,7 @@ A mux Flow MUST have a `source_id` attribute referencing a Source of the same `f
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for H.222.0.
 
-A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes defining the number of sub-Flows of each `format` making MPEG2-TS stream. A non-mux Flow MUST not have such attributes.
+A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an MPEG2-TS stream. A non-mux Flow MUST not have such attributes. The MPEG2-TS Stream MUST not have more or less sub-Streams than indicated by those attributes.
 
 A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an MPEG2-TS stream. A mux Flow MUST not have such attribute.
 
@@ -60,13 +60,13 @@ A Sender associated with a mux Flow through the `flow_id` attribute MUST provide
 
 The following parameter constraints can be used to express limits or preferences on the mux stream:
 
-- [audio_layers]()  
+- [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
   Indicate the minimum and maximum audio layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
-- [video_layers]()  
+- [video_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#video_layers)  
   Indicate the minimum and maximum video layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
-- [audio_layers]()  
+- [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
   Indicate the minimum and maximum audio layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
@@ -99,15 +99,15 @@ If the Receiver has limitations on or preferences regarding the H.222.0 streams 
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on the mux stream:
+The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum and no more than the maximum number of layers supported by the Receiver. Layers in excess of the number of layers supported by the Receiver MUST be ignored. by the Receiver.
 
-- [audio_layers]()  
+- [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
   Indicate the minimum and maximum audio layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
-- [video_layers]()  
+- [video_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#video_layers)  
   Indicate the minimum and maximum video layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
-- [audio_layers]()  
+- [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
   Indicate the minimum and maximum audio layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
