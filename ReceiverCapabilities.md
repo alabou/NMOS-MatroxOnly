@@ -6,11 +6,15 @@ Receivers indicate their `transport` and `format`. These attributes express cons
 
 The Receiver `caps` object is provided as an extensible mechanism to define finer-grained constraints.
 
-IS-04 itself defines `caps` attributes for `media_types` (since v1.1) and, for data Receivers, also  `event_types` (since v1.3). Both these attributes express constraints that can be evaluated against Flow attributes, as arrays whose elements define the alternatives that are acceptable. In each case, the constraint is satisfied when the target Flow attribute matches **any of** the enumerated alternatives.
+IS-04 itself defines `caps` attributes for `media_types` (since v1.1) and, for data Receivers, also  `event_types` (since v1.3). Both these attributes express constraints that can be evaluated against Flow attributes, as arrays whose elements define the alternatives that are acceptable. In each case, the constraint is satisfied when the target Flow attribute matches **any of** the enumerated alternatives.  
 
 When `caps` contains multiple attributes, i.e. both `media_types` and `event_types`, the Receiver indicates that it only accepts streams that satisfy **all of** (both!) the constraints.
 
+The `media_types` and  `event_types` attributes are not used to express sub-Flow/sub-Stream constraints or to evaluate the compatibility of sub-Flows/sub-Streams. When a Receiver is of format `urn:x-nmos:fromat:mux`, those attributes are used for expressing and evaluating the constraints of the mux Receiver only. They are ignored when evaluating the constraints of the Receiver's sub-Streams.
+
 This specification defines a new `constraint_sets` attribute for the Receiver `caps` object, which can also be combined with the existing ones. In common with the existing attributes, its value is an array of alternatives; this constraint is satisfied when **any of** its enumerated Constraint Sets are satisfied.
+
+When evaluating constraints for sub-Flows/sub-Streams, only the Constraint Sets alternatives of matching `urn:x-matrox:format` and `urn:x-matrox:layer` are to be considered. The remaining Constraints Sets of the `constraint_sets` are ignored.
 
 This specification defines a generic JSON syntax to express Constraint Sets made up of individual Parameter Constraints. The Constraint Set is satisfied if **all of** its Parameter Constraints are satisfied.
 
@@ -184,7 +188,8 @@ A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute match
 
 The Receiver advertises a list of Constraint Sets as a JSON array of these objects, using the key `constraint_sets` in the `caps` object.
 
-The `constraint_sets` as a whole is satisfied if **any of** the listed Constraint Sets are satisfied.
+The `constraint_sets` as a whole is satisfied if **any of** the listed Constraint Sets of matching `urn:x-matrox:format` and `urn:x-matrox:layer` are satisfied. For the purpose of filtering the listed Constraint Sets, the absence of the `urn:x-matrox:format` and `urn:x-matrox:layer` meta attributes provides the list of Constraint Sets that are not associated with sub-Flows/sub-Streams. The evaluation of the `constraint_sets` targets a Flow/Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data`, `urn:x-nmos:format:mux` in which the Constraint Sets do not have the `urn:x-matrox:format` and `urn:x-matrox:layer` meta attributes, or the evaluation of the `constraint_sets` targets a sub-Flow/sub-Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data` in which the Constraint Sets have the `urn:x-matrox:format` and `urn:x-matrox:layer` meta attributes.
+
 When the list is empty, or none of the Constraint Sets are satisfied, the `constraint_sets` as a whole is thus not satisfied.
 
 Several worked examples are provided in the [Examples](Examples.md) section.
