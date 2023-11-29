@@ -8,6 +8,8 @@ This document describes additional transport parameters and their permitted valu
 ### audio_layers_mapping, video_layers_mapping, data_layers_mapping
 - **Name:** `ext_audio_layers_mapping`, `ext_video_layers_mapping`, `ext_data_layers_mapping`
 - **Description:** For a Receiver of format `urn:x-nmos:format:mux`, it indicates, for a given format, the sub-Stream of a multiplexed stream corresponding to a Receiver's sub-Stream layer. It corresponds to a string of coma separated unsigned integer values indicating, for each layer of the Receiver, which sub-Stream of the multiplexed stream provides the essence. The length of the coma separated list must be within the min/max range of the `audio_layers`, `video_layers`, `data_layers` capabilities of the Receiver. An empty string indicates that no re-mapping is to be performed. These attributes are optional and may not be supported as transport parameters in which case no re-mapping is performed. A Controller must not specify indices of sub-Streams that are not part of the multiplexed stream.
+- **Specification:** [Matrox Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+- **Applicability:** AMWA IS-05 since v1.1
 
 **Example 1**
 Sender multiplexed stream [v0, v1, a0, a1, a2, d0]
@@ -47,6 +49,3 @@ data_layers_mapping [i,j] length is min(max(sender_data_layers, receiver_data_la
 [d,e,f,g,h] is a 5-shuffle of [0,1,2,3,4,5,6]
 [i,j] is a 2-shuffle of [0,1,2,3]
 
-
-- **Specification:** [Matrox Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
-- **Applicability:** AMWA IS-05 since v1.1
