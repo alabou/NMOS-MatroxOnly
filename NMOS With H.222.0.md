@@ -69,6 +69,8 @@ A Sender associated with a mux Flow through the `flow_id` attribute MUST provide
 
 The mux Sender MUST express its limitations or preferences regarding the H.222.0 streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's streams and sub-streams capabilities. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
+The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
+
 The following parameter constraints can be used to express limits or preferences on the mux stream:
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
@@ -110,7 +112,7 @@ The mux Receiver MUST express its limitations or preferences regarding the H.222
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum and no more than the maximum number of layers supported by the Receiver. Layers in excess of the number of layers supported by the Receiver MUST be ignored. by the Receiver.
+The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers are ignored.
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
   Indicate the minimum and maximum audio layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
@@ -119,10 +121,9 @@ The following parameter constraints can be used to express limits or preferences
   Indicate the minimum and maximum video layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 - [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
-  Indicate the minimum and maximum audio layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum data layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
-
 
 An example Receiver resource is provided in the [Examples](../examples/).
 
@@ -155,8 +156,6 @@ If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/
 If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
 ### Receivers
-
-A Receiver MUST verify that the active parameter sets comply with the Receiver's Capabilities. If a Receiver support only out-of-band parameter sets it SHOULD perform the verification when a Controller PATCH the **/staged** endpoint for activation. In this situation, all the out-of-band parameter sets MUST be compliant with the Receiver Capabilities. Otherwise if a Receiver supports both out-of-band and in-band parameter sets it SHOULD perform the verification of the out-of-band parameter sets when a Controller PATCH the **/staged** endpoint for activation and it MUST perform the verification of the in-band parameter sets just-in-time as it decodes the stream. In this situation, all the out-of-band and in-band parameter sets MUST be compliant with the Receiver Capabilities.
 
 ### Senders
 
