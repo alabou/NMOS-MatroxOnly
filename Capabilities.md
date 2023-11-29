@@ -33,7 +33,7 @@ This document describes values that may be used to identify a capability, used i
 - **Description:** Provide a minimum, maximum or list of layers allowed for multiplexed stream.
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md)
   - **Type:** integer
-  - **Target:** (a) Flow `urn:x-matrox:audio_layers` attribute
+  - **Target:** (a) Flow `urn:x-matrox:audio_layers` attribute of a mux Flow, (b) Number of audio sub-streams of a mux Receiver.
 - **Applicability:** AMWA IS-04 v1.3
 
 ### video_layers
@@ -41,7 +41,7 @@ This document describes values that may be used to identify a capability, used i
 - **Description:** Provide a minimum, maximum or list of layers allowed for multiplexed stream.
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md)
   - **Type:** integer
-  - **Target:** (a) Flow `urn:x-matrox:video_layers` attribute
+  - **Target:** (a) Flow `urn:x-matrox:video_layers` attribute of a mux Flow, (b) Number of video sub-streams of a mux Receiver.
 - **Applicability:** AMWA IS-04 v1.3
 
 ### data_layers
@@ -49,5 +49,5 @@ This document describes values that may be used to identify a capability, used i
 - **Description:** Provide a minimum, maximum or list of layers allowed for multiplexed stream.
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md)
   - **Type:** integer
-  - **Target:** (a) Flow `urn:x-matrox:data_layers` attribute
+  - **Target:** (a) Flow `urn:x-matrox:data_layers` attribute of a mux Flow, (b) Number of data sub-streams of a mux Receiver.
 - **Applicability:** AMWA IS-04 v1.3
