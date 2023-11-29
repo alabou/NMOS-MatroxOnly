@@ -11,7 +11,7 @@ This document describes additional transport parameters and their permitted valu
 - **Specification:** [Matrox Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
 - **Applicability:** AMWA IS-05 since v1.1
 
-**Example 1**
+**Example 1** `
 Sender multiplexed stream [v0, v1, a0, a1, a2, d0]
 Sender video_layers: 2
 Sender audio_layers: 3
@@ -28,9 +28,9 @@ data_layers_mapping [i] length is min(max(sender_data_layers, receiver_data_laye
 
 [a,b] is a 2-shuffle of [0,1]
 [d,e,f] is a 3-shuffle of [0,1,2]
-[i] is 0
+[i] is 0`
 
-**Example 2**
+**Example 2**`
 Sender multiplexed stream [v0, v1, v2, v3, a0, a1, a2, a3, a4, a5, a6, d0, d1, d2, d3]
 Sender video_layers: 4
 Sender audio_layers: 7
@@ -47,5 +47,5 @@ data_layers_mapping [i,j] length is min(max(sender_data_layers, receiver_data_la
 
 [a,b,c] is a 3-shuffle of [0,1,2,3]
 [d,e,f,g,h] is a 5-shuffle of [0,1,2,3,4,5,6]
-[i,j] is a 2-shuffle of [0,1,2,3]
+[i,j] is a 2-shuffle of [0,1,2,3]`
 
