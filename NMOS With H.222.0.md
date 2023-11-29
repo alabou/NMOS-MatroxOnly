@@ -18,7 +18,7 @@ H.222.0 is a transmission multiplexing and synchronization technology standardiz
 
 The Rec. [ITU-T H.222.0][H.222.0] | ISO/IEC 13818-1 specification and associated amendments describe the embedding of various media streams in an MPEG2-TS transport stream. An RTP payload format specification for MPEG2-TS transport stream was developed through the IETF Payloads working group, IETF [RFC 2250][RFC-2250] for transport over RTP and [RFC 3551][RFC-3551] defines the payload format `video/MP2T`. Other normative documents describe the requirements for the streaming of an MPEG2-TS transport stream over other non-RTP transports.
 
-The [Video Services Forum][VSF] developed Technical Recommendation [TR-07][TR-07] fro the transport of JPEG-XS video and AES3 audio in an MPEG2-TS stream over IP.
+The [Video Services Forum][VSF] developed Technical Recommendation [TR-07][TR-07] for the transport of JPEG-XS video and AES3 audio in an MPEG2-TS stream over IP.
 
 ## Use of Normative Language
 
@@ -29,19 +29,19 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` part of a MPEG2-TS Stream produced by a Sender.
+A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of a MPEG2-TS Stream produced by a Sender.
 
-A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` part of a MPEG2-TS Stream consumed by a Receiver.
+A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of a MPEG2-TS Stream consumed by a Receiver.
 
 ## H.222.0 IS-04 Sources, Flows and Senders
 
-Nodes implementing IS-04 v1.3 or higher that are capable of transmitting H.222.0 mux streams MUST have Source, Flow and Sender resources in the IS-04 Node API.
+Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting H.222.0 mux streams, MUST have Source, Flow and Sender resources in the IS-04 Node API.
 
 ### Sources
 
-A mux Source resource MUST indicate `urn:x-nmos:format:mux` for the `format` attribute. A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, associated with a sub-Flow MUST be a member of the mux Source's `parents` attribute.
+A mux Source resource MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and it MUST be associated with a mux Flow of the same `format` through the `source_id` attribute of the mux Flow. A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, associated with a sub-Flow of saif Flow, through the `source_id` attribute of the the sub-Flow, MUST be a member of said mux Source's `parents` attribute.
 
-In addition to those attributes defined in IS-04 for all mux Sources, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SourceAttributes.md) are used for H.222.0.
+In addition to those attributes defined in IS-04 for all mux Sources, the following attributes defined in the [Source Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SourceAttributes.md) are used for H.222.0.
 
 A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
 
@@ -49,9 +49,9 @@ Examples Source resources are provided in [Examples](../examples/).
 
 ### Flows
 
-A mux Flow resource MUST indicate `video/MP2T` or `application/mp2t` in the `media_type` attribute, and `urn:x-nmos:format:mux` for the `format` attribute.  When the mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `video/MP2T. Otherwise for other transports it the `media_type` MUST be `application/mp2t`. A sub-Flow MUST be a member of the mux Flow's `parents` attribute.
+A mux Flow resource MUST indicate `video/MP2T` or `application/mp2t` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, MUST be a member of said mux Flow's `parents` attribute.
 
-A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`.
+When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `video/MP2T. Otherwise for other transports the `media_type` MUST be `application/mp2t`.
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for H.222.0.
 
@@ -65,24 +65,26 @@ Examples Flow resources are provided in [Examples](../examples/).
 
 ### Senders
 
-A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and each sub-Flow using Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` meta attributes values matching the sub-Flows.
+A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and each sub-Flow making an MPEG2-TS stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
+
+The mux Sender MUST express its limitations or preferences regarding the H.222.0 streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's streams and sub-streams capabilities. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The following parameter constraints can be used to express limits or preferences on the mux stream:
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
-  Indicate the minimum and maximum audio layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum audio layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 - [video_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#video_layers)  
-  Indicate the minimum and maximum video layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum video layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 - [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
-  Indicate the minimum and maximum audio layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum data layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
 #### RTP transport based on RFC 2250 and RFC 3551
 
-For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 adn RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
 
 An example Sender resource is provided in the [Examples](../examples/).
 
@@ -102,9 +104,9 @@ The `manifest_href` attribute MAY be `null` if an SDP transport file is not supp
 
 Nodes implementing IS-04 v1.3 or higher that are capable of receiving H.222.0 video streams MUST have Receiver resources in the IS-04 Node API.
 
-A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and each sub-Stream using Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` meta attributes values defining the Receiver's sub-Streams.
+A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and each sub-Stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
 
-If the Receiver has limitations on or preferences regarding the H.222.0 streams that it supports, the Receiver resource MUST indicate constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The mux Receiver MUST express its limitations or preferences regarding the H.222.0 streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
@@ -178,3 +180,4 @@ A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
+[TR-07]: https://vsf.tv/download/technical_recommendations/VSF_TR-07_2022-04-20.pdf "Transport of JPEG XS Video in MPEG-2 Transport Stream over IP"
