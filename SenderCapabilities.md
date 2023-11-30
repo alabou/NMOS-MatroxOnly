@@ -221,6 +221,8 @@ In order to use the finer-grained constraints mechanism defined by this specific
 Senders SHOULD express their capabilities as precisely as possible, using the relevant Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 However, this specification may not be sufficiently expressive to indicate every type of stream or sub-Stream that a Sender can or cannot produce successfully. It is entirely possible that a Sender may fail to produce a stream or sub-Stream even if the Sender's advertised Constraint Sets indicate that it can.
 
+A Sender MUST not produce a stream or sub-Stream that is incompatible with the advertised Sender Capabilities.
+
 The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
 The Sender MUST reflect any change in its capabilities by updating the `caps` object as appropriate and modifying the [`version` attribute](#capabilities-version) of that object as well as the core resource `version`.
