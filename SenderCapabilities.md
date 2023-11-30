@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   
 ---
   
-In [IS-04][], a Sender resource expresses the capabilities of a Sender through attributes that identify constraints on streams or sub-Streams that are compatible with the Sender. Such Sender can be constrained to operate at an operating point within the Sender Capabilities using the [IS-11][] API.
+In [IS-04][], a Sender resource expresses the capabilities of a Sender through attributes that identify constraints on streams and sub-Streams that are compatible with the Sender. Such Sender can be constrained to operate at an operating point within the Sender Capabilities using the [IS-11][] API.
 
 The Sender `caps` object is provided as an extensible mechanism to define fine-grained capabilities.
 
