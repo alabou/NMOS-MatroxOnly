@@ -228,7 +228,7 @@ In order to use the finer-grained constraints mechanism defined by this specific
 Receivers SHOULD express their capabilities as precisely as possible, using the relevant Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 However, this specification may not be sufficiently expressive to indicate every type of stream or sub-Stream that a Receiver can or cannot consume successfully. It is entirely possible that a Receiver may fail to consume a stream or sub-Stream even if the Receiver's advertised Constraint Sets indicate that it can.
 
-A Receiver MUST not consume a stream or sub-Stream that is incompatible with the advertised Receiver Capabilities.
+A Receiver SHOULD not consume a stream or sub-Stream that is incompatible with the advertised Receiver Capabilities.
 
 The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][]and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
