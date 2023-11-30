@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   
 ---
   
-In [IS-04][], a Sender resource expresses the capabilities of a Sender through attributes that identify constraints on streams that are compatible with the Sender. Such Sender can be constrained to operate at an operating point within the Sender Capabilities using the [IS-11][] API.
+In [IS-04][], a Sender resource expresses the capabilities of a Sender through attributes that identify constraints on streams or sub-Streams that are compatible with the Sender. Such Sender can be constrained to operate at an operating point within the Sender Capabilities using the [IS-11][] API.
 
 The Sender `caps` object is provided as an extensible mechanism to define fine-grained capabilities.
 
@@ -34,7 +34,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Defining Parameter Constraints
 
-A specification for each Parameter Constraint is strongly RECOMMENDED to be listed in the Capabilities register in the [NMOS Parameter Registers][]. Each specification defines a unique identifier, the constraint type, and the target parameter, as follows.
+A specification for each Parameter Constraint is strongly RECOMMENDED to be listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md). Each specification defines a unique identifier, the constraint type, and the target parameter, as follows.
 
 ### Parameter Constraint Identifiers
 
@@ -131,7 +131,7 @@ The Constraint Set is represented as a JSON object with attributes that are the 
 
 ### Constraint Set Metadata
 
-Additional metadata about each Constraint Set MAY be included, using the metadata attributes listed in the Capabilities register in the [NMOS Parameter Registers][] with the following unique identifiers:
+Additional metadata about each Constraint Set MAY be included, using the metadata attributes listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md) with the following unique identifiers:
 ```
 urn:x-nmos:cap:meta:<attribute>
 ```
@@ -204,7 +204,7 @@ Several worked examples are provided in the [Examples](Examples.md) section.
 
 This specification includes a JSON Schema for each [Parameter Constraint Type](#parameter-constraint-types) and for Constraint Sets and the `constraint_sets` attribute as a whole, in the [APIs/schemas](../APIs/schemas) directory.
 
-The Capabilities register in the [NMOS Parameter Registers][] includes a supplementary schema that validates the specific requirements for every Parameter Constraint listed in the register.
+The Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md) include a supplementary schema that validates the specific requirements for every Parameter Constraint listed in the register.
 
 ## Capabilities Version
 
@@ -218,21 +218,21 @@ This specification therefore defines a `version` attribute for the `caps` object
 
 In order to use the finer-grained constraints mechanism defined by this specification, Senders MUST include both the `constraint_sets` and `version` attributes in the `caps` object.
 
-Senders SHOULD express their capabilities as precisely as possible, using the relevant Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][].
-However, this specification may not be sufficiently expressive to indicate every type of stream that a Sender can or cannot consume successfully. It is entirely possible that a Sender may fail to produce a stream even if the Sender's advertised Constraint Sets indicate that it can.
+Senders SHOULD express their capabilities as precisely as possible, using the relevant Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
+However, this specification may not be sufficiently expressive to indicate every type of stream or sub-Stream that a Sender can or cannot produce successfully. It is entirely possible that a Sender may fail to produce a stream or sub-Stream even if the Sender's advertised Constraint Sets indicate that it can.
 
-The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][].
+The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
 The Sender MUST reflect any change in its capabilities by updating the `caps` object as appropriate and modifying the [`version` attribute](#capabilities-version) of that object as well as the core resource `version`.
 
 ## Behaviour: Controllers
 
-Controllers are strongly RECOMMENDED to support all Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] that are applicable for the kinds of Sender with which they interact.
+Controllers are strongly RECOMMENDED to support all Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md) that are applicable for the kinds of Sender with which they interact.
 However, Controllers MAY ignore individual Parameter Constraints whose unique identifiers they do not recognize.
 Some Parameter Constraints are only relevant to specific `transport` and `format` values or to particular IANA media types.
-When a Controller cannot evaluate any of the Parameter Constraints in a Constraint Set, that Constraint Set SHOULD be considered to be satisfied, but the Controller MAY distinguish this case for a user.
+When a Controller cannot evaluate any of the Parameter Constraints in a Constraint Set it SHOULD distinguish this case to a user.
 
-Controllers SHOULD provide an indication to a user whether a constraint satisfies a Constraint Set of a Sender. Controllers MAY allow a user to attempt to constraint a Sender whether the Sender's `constraint_sets` are satisfied or not.
+Controllers SHOULD provide an indication to a user whether a Receiver satisfies a Constraint Set of a Sender, for example in a cross-point matrix view. Controllers MAY allow a user to attempt to make a connection to a Sender or to constrain a Sender whether the Sender's `constraint_sets` are satisfied or not.
 
 Controllers MAY use the `version` attribute of the `caps` object to avoid unnecessary re-evaluation of Sender capabilities.
 
