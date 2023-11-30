@@ -11,7 +11,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   
 # AMWA BCP-004-01r: Matrox NMOS Receiver Capabilities
 
-In [IS-04][], a Receiver resource expresses the capabilities of a Receiver through attributes that identify constraints on streams or sub-Streams of compatible Senders.
+In [IS-04][], a Receiver resource expresses the capabilities of a Receiver through attributes that identify constraints on streams and sub-Streams of compatible Senders.
 
 Receivers indicate their `transport` and `format`. These attributes express constraints that can be evaluated against the related attributes of a Sender and its Flow.
 
@@ -19,7 +19,7 @@ The Receiver `caps` object is provided as an extensible mechanism to define fine
 
 IS-04 itself defines `caps` attributes for `media_types` (since v1.1) and, for data Receivers, also  `event_types` (since v1.3). Both these attributes express constraints that can be evaluated against Flow attributes, as arrays whose elements define the alternatives that are acceptable. In each case, the constraint is satisfied when the target Flow attribute matches **any of** the enumerated alternatives.  
 
-When `caps` contains multiple attributes, i.e. both `media_types` and `event_types`, the Receiver indicates that it only accepts streams or sub-Streams that satisfy **all of** (both!) the constraints.
+When `caps` contains multiple attributes, i.e. both `media_types` and `event_types`, the Receiver indicates that it only accepts streams that satisfy **all of** (both!) the constraints.
 
 The `media_types` and  `event_types` attributes are not used to express sub-Flow/sub-Stream constraints or to evaluate the compatibility of sub-Flows/sub-Streams. When a Receiver is of format `urn:x-nmos:fromat:mux`, those attributes are used for expressing and evaluating the constraints of the mux Receiver only. They are ignored when evaluating the constraints of the Receiver's sub-Streams.
 
