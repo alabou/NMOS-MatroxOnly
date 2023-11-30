@@ -15,14 +15,49 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 ## Introduction
 
 The Privacy Encryption Protocol (PEP) is defined in the [VSF][] specification [TR-10-13][]. It provides encryption and authentication of media streams using various transport protocols.
-The [VSF][] TR-10-13 specification provide the adaptation for the RTP transport protocol. Another [VSF][] document [TR-10-14] provides the adaptation for the IPMX USB protocol. 
+The [VSF][] TR-10-13 specification provides the adaptation for the RTP transport protocol. Another [VSF][] document [TR-10-14] provides the adaptation for the IPMX USB protocol. 
 This document will provide the adaptations for the SRT and UDP protocols.
 
-The PEP parameters is provided by a Sender through IS-05 extended transport parameters and through an SDP transport file for the transport protocols supporting SDP. 
-A Receiver is provided the PEP parameters through IS-05 extended transport parameters and through an SDP transport file for the transport protocols supporting SDP.
-This document will briefly describe the PEP parameters. Detailed information is provided by the [VSF][] specifications.
+The PEP parameters are provided by a Sender through IS-05 extended transport parameters and through an SDP transport file for the transport protocols supporting SDP. 
+A Controller provides the PEP parameters to a Receiver through IS-05 extended transport parameters and through an SDP transport file for the transport protocols supporting SDP. This document will briefly describe the PEP parameters. Detailed information is provided by the [VSF][] specifications.
 
-Although the Privacy Encryption Protocol (PEP) is specified for an IPMX streaming environment, it may be used in non-IPMX streaming environments that support the PEP adaptation specific stream format and the configuration of streaming devices with the PEP Pre-Shared Key.
+Although the Privacy Encryption Protocol (PEP) is specified for an IPMX streaming environment, it may be used in non-IPMX streaming environments that support the PEP adaptation specific stream format and the configuration of streaming devices with PEP Pre-Shared Keys.
+
+## Use of Normative Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+
+## Definitions
+
+## Parameters
+
+Transport Parameter Name | Type | SDP Name | Sender | Receiver
+ --- | --- | --- | --- | --- 
+ext_privacy_protocol | string | protocol | r/w | r/w
+ext_privacy_mode | string | mode | r/w | r/w
+ext_privacy_iv | string | iv | read-only | r/w
+ext_privacy_key_generator | string | key_generator | read-only | r/w
+ext_privacy_key_version | string | key_version | read-only | r/w
+ext_privacy_key_id | string | key_id | read-only | r/w
+ext_privacy_ecdh_sender_public_key | string | - | read-only | r/w
+ext_privacy_ecdh_receiver_public_key | string | - | r/w | read-only
+ext_privacy_ecdh_curve | string | - | r/w | r/w
+
+### Protocol
+The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "SRT", "USB", "USB_KV", "SRTP", "NULL"
+
+### Mode
+#### For protocol "RTP" and "RTP_KV"
+The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "AES-128-CTR_CMAC-64", "AES-256-CTR_CMAC-64", "AES-128-CTR_CMAC-64-AAD", "AES-256-CTR_CMAC-64-AAD", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR", "ECDH_AES-128-CTR_CMAC-64", "ECDH_AES-256-CTR_CMAC-64", "ECDH_AES-128-CTR_CMAC-64-AAD", "ECDH_AES-256-CTR_CMAC-64-AAD".
+#### For protocol "UDP" and "UDP_KV"
+The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "AES-128-CTR_CMAC-64", "AES-256-CTR_CMAC-64", "AES-128-CTR_CMAC-64-AAD", "AES-256-CTR_CMAC-64-AAD", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR", "ECDH_AES-128-CTR_CMAC-64", "ECDH_AES-256-CTR_CMAC-64", "ECDH_AES-128-CTR_CMAC-64-AAD", "ECDH_AES-256-CTR_CMAC-64-AAD".
+#### For protocol "USB" and "USB_KV"
+The `mode` parameter MUST be one of: "AES-128-CTR_CMAC-64-AAD", "AES-256-CTR_CMAC-64-AAD", "ECDH_AES-128-CTR_CMAC-64-AAD", "ECDH_AES-256-CTR_CMAC-64-AAD".
+#### For protocol "SRT"
+The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR"
+#### For protocol "SRTP"
+The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "AES-128-GCM-128", "AES-256-GCM-128", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR", "ECDH_AES-128-GCM-128", "ECDH_AES-256-GCM-128"
 
 [H.222.0]: https://www.itu.int/rec/T-REC-H.222.0 "Generic coding of moving pictures and associated audio information: Systems"
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
