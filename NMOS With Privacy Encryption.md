@@ -45,7 +45,7 @@ ext_privacy_ecdh_receiver_public_key | string | - | r/w | read-only
 ext_privacy_ecdh_curve | string | - | r/w | r/w
 
 ### Protocol
-The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "SRT", "USB", "USB_KV", "SRTP", "NULL"
+The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "SRT", "USB", "USB_KV", "NULL"
 
 ### Mode
 #### For protocol "RTP" and "RTP_KV"
@@ -56,8 +56,8 @@ The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "AES-128-CTR_
 The `mode` parameter MUST be one of: "AES-128-CTR_CMAC-64-AAD", "AES-256-CTR_CMAC-64-AAD", "ECDH_AES-128-CTR_CMAC-64-AAD", "ECDH_AES-256-CTR_CMAC-64-AAD".
 #### For protocol "SRT"
 The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR"
-#### For protocol "SRTP"
-The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "AES-128-GCM-128", "AES-256-GCM-128", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR", "ECDH_AES-128-GCM-128", "ECDH_AES-256-GCM-128"
+
+
 
 [H.222.0]: https://www.itu.int/rec/T-REC-H.222.0 "Generic coding of moving pictures and associated audio information: Systems"
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
