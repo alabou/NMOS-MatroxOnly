@@ -57,6 +57,14 @@ The `mode` parameter MUST be one of: "AES-128-CTR_CMAC-64-AAD", "AES-256-CTR_CMA
 #### For protocol "SRT"
 The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR"
 
+## SRT transport
+
+The `protocol` MUST be "SRT".
+
+The `mode` parameter MUST be one of "AES-128-CTR", "AES-256-CTR", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR".
+
+The SRT `passphrase` MUST correspond to the `privacy_key` defined in the Privacy Key Derivation section. The SRT `passphrase` will be used by the SRT protocol to derive the encryption key. SRT encryption takes control of the `iv'_ctr` value and performs its own key management (renewal, derivation) and the `iv` parameter of PEP is unused.
+
 ## UDP transport with MPEG2-TS
 
 The `protocol` MUST be "UDP" or "UDP_KV".
