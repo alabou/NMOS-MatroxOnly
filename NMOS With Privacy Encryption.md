@@ -152,9 +152,9 @@ CTR Full Header|
 
 - All the field are in big-endian unless otherwise specified
 -	ctr_high corresponds to the most significant bits of ctr (first 4 Octet of ctr Octet String)
-  -	ctr0 || ctr1 || ctr2 || ctr3
+    -	ctr0 || ctr1 || ctr2 || ctr3
 -	ctr_low corresponds to the least significant bits of ctr (last 4 Octet of ctr Octet String)
-  - ctr4 || ctr5 || ctr6 || ctr7
+    - ctr4 || ctr5 || ctr6 || ctr7
 
 CTR Short Header|
 --- |
@@ -164,7 +164,7 @@ ctr_short |
 
 -	All the field are in big-endian unless otherwise specified
 -	ctr_short corresponds to the least significant bits of ctr (last 3 Octet of ctr Octet String)
-  - ctr5 || ctr6 || ctr7
+    - ctr5 || ctr6 || ctr7
 
 ### Dynamic key_version
 
