@@ -103,6 +103,8 @@ The MPEG2-TS packets after the first one, if any, completing a video frame/field
 
 Only the PES_packet_data_bytes section of a PES packet MUST be encrypted. The PES packet dta bytes MUST be encoded as a big-endian sequence of bytes subdivided into zero or more complete data slices of 16 bytes, that MAY be terminated by a partial data slice of less than 16 bytes. Partial data slices MUST be assumed to be zero-filled to complete a big-endian data slice of 16 bytes by the AES encryption/decryption internal process. The provided bytes of the partial data slice correspond to the most significant bytes of the big-endian data slice. The zero filled bytes MUST be ignored/discarded and not be considered as being part of the PES packet data bytes.
 
+Note: Any PES packet data bytes sequence is allowed to terminate with a partial data slice of less than 16 bytes.
+
 CTR Full Header|
 --- |
  `0                   1                   2                   3   `|
