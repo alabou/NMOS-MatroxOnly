@@ -71,6 +71,14 @@ The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "ECDH_AES-128
 
 The `mode` "AES-128-CTR" MUST be supported by all devices implementing the "SRT" protocol.
 
+### Elliptic Curve Diffie-Hellman (ECDH)
+
+The ECDH curves available are: "secp256r1", "secp521r1", "25519" and "448".
+
+The ECDH functionality is available through the extended transport parameters only. A Controller MUST exchange the Sender and Receier public keys to activate an ECDH session.
+
+Note: A Sender/Receiver generates a new public key whenever it explicitly or implicitly becomes inactive.
+
 ## RTP transport adaptation
 
 This `protocol` is used for `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:rtp.mcast`, `urn:x-nmos:transport:rtp.ucast` and `urn:x-matrox:transport:rtp.tcp`.
