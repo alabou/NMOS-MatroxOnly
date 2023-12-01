@@ -83,9 +83,13 @@ Note: A Sender/Receiver generates a new public key whenever it explicitly or imp
 
 This `protocol` is used for `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:rtp.mcast`, `urn:x-nmos:transport:rtp.ucast` and `urn:x-matrox:transport:rtp.tcp`.
 
+See the [TR-10-13][] specification for the details.
+
 ## USB-IP transport adaptation
 
 This `protocol` is used for `urn:x-matrox:transport:usb`.
+
+See the [TR-10-14][] specification for the details.
 
 ## SRT transport adaptation
 
