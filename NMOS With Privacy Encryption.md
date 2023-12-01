@@ -45,7 +45,7 @@ ext_privacy_ecdh_receiver_public_key | string | - | r/w | read-only
 ext_privacy_ecdh_curve | string | - | r/w | r/w
 
 ### Protocol
-The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "SRT", "USB", "USB_KV", "NULL"
+The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "SRT", "UDP", "UDP_KV", "USB", "USB_KV", "NULL"
 
 ### Mode
 #### For protocol "RTP" and "RTP_KV"
