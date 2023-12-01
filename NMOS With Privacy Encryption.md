@@ -125,7 +125,7 @@ A Receiver MUST recover the full `ctr` value from the `ctr_low` and `ctr_high` f
 
 A Receiver MUST recover the full `ctr` value from the `ctr_short` field of the CTR Short Header as follow:
 
-> prev24 = ctr5 || ctr6 || ctr7
+> prev24 = ctr5 || ctr6 || ctr7  
 > new24 = ctr_short0 || ctr_short1 || ctr_short2
 
 If the value corresponding to prev24 is smaller than the value corresponding to new24; then the recovered `ctr` is ctr0 || ctr1 || ctr2 || ctr3 || ctr4 || ctr_short0 || ctr_short1 || ctr_short2; else the recovered `ctr` is ctr0 || ctr1 || ctr2 || ctr3 || ctr4 || ctr_short0 || ctr_short1 || ctr_short2 + 00 || 00 || 00 || 00 || 01 || 00 || 00 || 00.
