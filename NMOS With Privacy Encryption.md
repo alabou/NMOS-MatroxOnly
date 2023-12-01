@@ -18,7 +18,7 @@ The Privacy Encryption Protocol (PEP) is defined by the [VSF][] specification [T
 
 This document provides the adaptations for the SRT and UDP protocols.
 
-A Constroller retrieves the Sender's and Receiver's PEP parameters capabilities through their IS-05 transport parameters constraints. A Controller retrieves the PEP parameters from a Sender through IS-05 extended transport parameters, and through an SDP transport file for the transport protocols supporting SDP. Some of the Sender's PEP parameters support being configured by a Constroller within their associated parameter constraints. A Controller provides the PEP parameters to a Receiver through IS-05 extended transport parameters and through an SDP transport file for the transport protocols supporting SDP. 
+A Constroller retrieves the Sender's and Receiver's PEP parameters capabilities through their IS-05 transport parameters constraints. A Controller retrieves the PEP parameters from a Sender through IS-05 extended transport parameters, and through an SDP transport file for the transport protocols supporting SDP. Some of the Sender's PEP parameters support being configured by a Constroller within their associated parameter constraints. A Controller provides the PEP parameters to a Receiver through IS-05 extended transport parameters and through an SDP transport file for the transport protocols supporting SDP. The Receiver's PEP parameters support being configured by a Constroller within their associated parameter constraints.
 
 This document briefly describes the PEP parameters. Detailed information is provided by the [TR-10-13][] specifications.
 
