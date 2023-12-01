@@ -93,7 +93,7 @@ A CTR Full Header MUST be used in the first MPEG2-TS packet of a video frame/fie
 
 The MPEG2-TS packets after the first one, if any, completing a video frame/field, a video frame/field slice or an audio frame/packet SHOULD use a CTR Short Header. The concept of “frame” is used for uncompressed and compressed audio and video. The concept of “field” is used for uncompressed and compressed video. The concept of “packet” is used for uncompressed and compressed audio.
 
-Only the PES_packet_data_bytes section of a PES packet MUST be encrypted.
+Only the PES_packet_data_bytes section of a PES packet MUST be encrypted. The PES packet dta bytes MUST be encoded as a big-endian sequence of bytes subdivided into zero or more complete data slices of 16 bytes, that MAY be terminated by a partial data slice of less than 16 bytes. Partial data slices MUST be assumed to be zero-filled to complete a big-endian data slice of 16 bytes by the AES encryption/decryption internal process. The provided bytes of the partial data slice correspond to the most significant bytes of the big-endian data slice. The zero filled bytes MUST be ignored/discarded and not be considered as being part of the PES packet data bytes.
 
 CTR Full Header|
 --- |
@@ -121,9 +121,9 @@ ctr_short |
 
 ### Dynamic key_version
 
-A Sender/Receiver configured for in-band dynamic changes of the **key_version** MAY change the **key_version** value dynamically at natural boundaries of the media content (frame, field or GOP boundary for video and ancillary data, packet boundary for audio and generic data) to change the Privacy Cipher encryption key. The current value of the **key_version** shall be transmitted in clear to the peer through the **dynamic_key_version** field of the CTR Full Header. The **dynamic_key_version** value shall correspond to the **key_version** value used for deriving the encryption key of the associated PES payload.
+A Sender/Receiver configured for in-band dynamic changes of the **key_version** MAY change the **key_version** value dynamically at natural boundaries of the media content (frame, field or GOP boundary for video and ancillary data, packet boundary for audio and generic data) to change the Privacy Cipher encryption key. The current value of the **key_version** shall be transmitted in clear to the peer through the **dynamic_key_version** field of the CTR Full Header. The **dynamic_key_version** value shall correspond to the **key_version** value used for deriving the encryption key of the associated PES packet data bytes.
 
-When a Receiver configured for in-band dynamic changes of the key_version becomes active it shall select an initial key_version value. Subsequently it may increment the selected key_version value by 1 modulo 232 to change the associated privacy_key during the activation. The key_version may be shared by a number of streams / sub-streams encrypted by a Receiver Device. A Sender/Receiver configured for in-band dynamic changes of the key_version shall use the key_version received in clear from the peer through the dynamic_key_version field of the CTR Full RTP Extension Header to derive the Privacy Cipher decryption key of the associated RTP Payload.
+When a Receiver configured for in-band dynamic changes of the **key_version** becomes active it MUST select an initial **key_version** value. Subsequently it MAY increment the selected **key_version** value by 1 modulo 2^32 to change the associated **privacy_key** during the activation. The **key_version** MAY be shared by a number of streams / sub-streams encrypted by a Receiver Device. A Sender/Receiver configured for in-band dynamic changes of the **key_version** MUST use the **key_version** received in clear from the peer through the **dynamic_key_version** field of the CTR Full Header to derive the Privacy Cipher decryption key of the associated PES packet data bytes.
 
 
 [H.222.0]: https://www.itu.int/rec/T-REC-H.222.0 "Generic coding of moving pictures and associated audio information: Systems"
