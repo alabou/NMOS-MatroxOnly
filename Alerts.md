@@ -35,21 +35,33 @@ Mv   Multi-vendors class prefix.
 
 ## MvAlertManager class
 
-
-
 ```
-interface NcAlertManager : NcManager {
+interface MvAlertManager : NcManager {
 
 	attribute NcUint32 alertPeriod;
 	attribute NcUint32 refreshPeriod;
 	attribute NcUint32 clearPeriod;
-	attribute readonly sequence<NcAlertCapabilityDescriptor> alertCapabilities;
-	attribute sequence<NcAlertDescriptor> alertDescriptors;
+	attribute readonly sequence<MvAlertCapabilityDescriptor> alertCapabilities;
+	attribute sequence<MvAlertDescriptor> alertDescriptors;
 
-	NcMethodResultActiveAlerts GetActiveAlerts();
-	NcMethodResultEventCounters GetEventCounters(NcUint16 alertDescriptorIndex);
+	MvMethodResultActiveAlerts GetActiveAlerts();
+	MvMethodResultEventCounters GetEventCounters(NcUint16 alertDescriptorIndex);
 	NcMethodResult ClearActiveAlert(NcUint16 alertDescriptorIndex);
 	
-	attribute readonly NcAlertEventData alert;
+	attribute readonly MvAlertEventData alert;
 };
 ```
+### Attributes
+#### alertPeriod
+#### refreshPeriod
+#### clearPeriod
+#### alertCapabilities
+#### alertDescriptors
+#### alert
+
+### Methods
+#### GetActivealerts()
+#### GetEventCounters()
+#### ClearActiveAlert()
+
+### Notifications
