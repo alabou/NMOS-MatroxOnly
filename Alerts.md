@@ -33,3 +33,23 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 Mv   Multi-vendors class prefix.
 
+## MvAlertManager class
+
+
+
+```
+interface NcAlertManager : NcManager {
+
+	attribute NcUint32 alertPeriod;
+	attribute NcUint32 refreshPeriod;
+	attribute NcUint32 clearPeriod;
+	attribute readonly sequence<NcAlertCapabilityDescriptor> alertCapabilities;
+	attribute sequence<NcAlertDescriptor> alertDescriptors;
+
+	NcMethodResultActiveAlerts GetActiveAlerts();
+	NcMethodResultEventCounters GetEventCounters(NcUint16 alertDescriptorIndex);
+	NcMethodResult ClearActiveAlert(NcUint16 alertDescriptorIndex);
+	
+	attribute readonly NcAlertEventData alert;
+};
+```
