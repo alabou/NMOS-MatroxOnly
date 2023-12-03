@@ -36,7 +36,7 @@ Mv   Matrox Video class prefix or Multi-vendors class prefix.
 ## Alert Domains
 The alerts are categorized into a limited number of domains. The `link`, `transport`, `essence`, `application` and `clock` domains represent the domains of standards, multi-vendors events. Those domains are also available on a per-vendor basis to provide additional vendor specific events. Finally there is a `vendor` domain for vendor specific events that do not categorized into the 5 base `link`, `transport`, `essence`, `application` and `clock` domains.
 
-The `link`, `transport`, `essence` and `clock` domains MUST be supported by all implementations of the MvAlertManager. The `application`, `vendor`, `vendorLink`, `vendorTransport`, `vendorEssence`, `vendorApplication` and `vendorClock` domains are optional.
+The `link`, `transport`, `essence`, `application` and `clock` domains MUST be supported by all implementations of the MvAlertManager. The `vendor`, `vendorLink`, `vendorTransport`, `vendorEssence`, `vendorApplication` and `vendorClock` domains are optional.
 
 Each alert domain has an associated per-domain event counter, counting all the events of a given domain. An alert is triggered when a domain counter of an active alert descriptor changes value.
 
@@ -86,6 +86,11 @@ The Device scope MUST be supported by all implementations of the MvAlertManager.
 - The alert applies to events at the Input scope
 ### output
 - The alert applies to events at the Output scope
+
+It is possible to reduce the scope of an alert by specifying a list of resource id to restrict to those resources within the scope of matching id. For scopes other than `device` the resource id MUST correspond to a resources of the scope resource type.
+
+It is possible to reduce the scope of an alert by specifying a list of interface name to restrict to those resources within the scope of matching interface name. This does not apply to the `input` and `output` scopes as there is no associated network interfaces.
+
 
 ## MvAlertManager class
 
