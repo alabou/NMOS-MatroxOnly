@@ -34,7 +34,11 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 Mv   Matrox Video class prefix or Multi-vendors class prefix.
 
 ## Alert Domains
-The alerts are categorized into a limited number of domains. The `link`, `transport`, `essence`. `clock` and `application` domains represent the domains of standards, multi-vendors events. Those domains are also available on a per-vendor basis to provide additional vendor specific events. Finally there is a `vendor` domain for vendor specific events that do not categorized into the 5 base `link`, `transport`, `essence`. `clock` and `application` domains.
+The alerts are categorized into a limited number of domains. The `link`, `transport`, `essence`, `application` and `clock` domains represent the domains of standards, multi-vendors events. Those domains are also available on a per-vendor basis to provide additional vendor specific events. Finally there is a `vendor` domain for vendor specific events that do not categorized into the 5 base `link`, `transport`, `essence`, `application` and `clock` domains.
+
+The `link`, `transport`, `essence` and `clock` domains MUST be supported by all implementations of the MvAlertManager. The `application`, `vendor`, `vendorLink`, `vendorTransport`, `vendorEssence`, `vendorApplication` and `vendorClock` domains are optional.
+
+Each alert domain has an associated per-domain event counter, counting all the events of a given domain. An alert is triggered when a domain counter of an active alert descriptor changes value.
 
 ### link, vendorLink
 - ISO level 1 and 2 (physical, data link)
@@ -63,6 +67,25 @@ The alerts are categorized into a limited number of domains. The `link`, `transp
 
 ### vendor
 - vendor specific events like temperature, battery charge, etc.
+
+## Alert Scopes
+The alert scope indicates if the events associated with an alert have to be monitored at the Device, Sender, Receiver, Input or Output level.
+The Device scope MUST be supported by all implementations of the MvAlertManager. The Sender, Receiver, Input and Output scopes are optional.
+
+### device
+- The alert applies to events at the Device scope
+### sender
+- The alert applies to events at the Sender scope
+### senderAudio, senderVideo, senderData, senderMux
+- The alert applies to events at the format-specific Sender scope
+### receiver
+- The alert applies to events at the Receiver scope
+### receiverAudio, receiverVideo, receiverData, receiverMux
+- The alert applies to events at the format-specific Receiver scope
+### input
+- The alert applies to events at the Input scope
+### output
+- The alert applies to events at the Output scope
 
 ## MvAlertManager class
 
