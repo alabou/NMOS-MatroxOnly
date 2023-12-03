@@ -136,9 +136,55 @@ Defines the period after which the device automatically clear active alerts (i.e
 	- Means “clear immediately”
 - A value larger than 86400 (1 day) means do not auto-clear
 
-#### alertCapabilities
+#### alertCapabilities (readonly)
+```
+interface MvAlertCapabilityDescriptor {
+	attribute MvAlertDomain alertDomain;
+	attribute sequence<MvAlertScope> alertScope;
+	attribute sequence<NcUuid> resourceIds;
+	attribute sequence<NcString> interfaceNames;
+	attribute sequence<MvEvent> events;
+};
+```
+
+This attribute provides the alerts and events reporting capabilities of the device. Each capability descriptor of the sequence provides information about how a compliant alert decriptor for a given domain can be created and added to the alertDescriptors sequence.
+
+- An empty `alertScope`, `resourceIds`, `interfaceNames` or `events` sequence indicates that the associated MvAlertDescriptor attribute may be given any value.
+- A sequence of values for those attributes indicates all the possible values that the associated MvAlertDescriptor attribute may be given. All or a subset of the value can be used.
+
 #### alertDescriptors
-#### alert
+```
+interface MvAlertDescriptor {
+	attribute NcBoolean enabled;
+	attribute MvAlertDomain alertDomain;
+	attribute MVAlertScope alertScope;
+	attribute sequence<NcUuid> resourceIds;
+	attribute sequence<NcString> interfaceNames;
+	attribute sequence<MvEvent> events;
+};
+```
+
+This attribute provides the sequence of active alert descriptors.
+
+- A non-empty `resourceIds`, `interfaceNames` sequence MAY be used to narrow the scope of the alert which by default applies to all the events of a given domain within the specified scope.
+
+	- A non-empty sequence of `resourceIds` MAY be used to narrow the scope to those resources of matching resource id within the scope.
+ 	- A non-empty sequence of `interfaceNames` MAY be used to narrow the scope to those events of matching interface name within the scope.
+
+- A non-empty `events` sequence MAY be used to provide detailed event counters with an alert in addition to the default domain event counter. By default only the domain event counter is provided with an alert, even when calling GetEventCounters().
+	- The `events` sequence attributes does not influence when an alert is triggered.
+
+#### alert (readonly)
+```
+interface MvAlertEventData {
+	attribute NcUint64 alertDescriptorIndex;
+	attribute MvAlertDescriptor alertDescriptor;
+	attribute MvEventCounter eventCounter;
+};
+```
+This attributes is used to propagate alert notifications. IS-12 / MS-05 support getting notifications about property changed events from objects. When the MvAlertManager generates an alert, the `alert` property is set to the MvAlertEventData object describing the alert descriptor that triggered the notification. An application subscribing to the MvAlertManager notifications can observe alert notifications coming from the `alert` property. The applicaiton SHOULD not read the value of the `alert` attribute as it continously change every time an alert is triggered. Instead is SHOULD get the active alerts using the GetActiveAlerts() method or get the detailed counter associated with an alert descriptor using the GetEventCounters() method.
+
+The `eventCounter` attribute provided with the MvAlertEventData object corresponds to the domain event counter. The GetEventCounters() method MUST be used to retrieve details event counters.
 
 ### Methods
 #### GetActivealerts()
