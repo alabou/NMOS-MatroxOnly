@@ -177,7 +177,7 @@ This attribute provides the sequence of active alert descriptors.
 #### alert (readonly)
 ```
 interface MvAlertEventData {
-	attribute NcUint64 alertDescriptorIndex;
+	attribute NcUint16 alertDescriptorIndex;
 	attribute MvAlertDescriptor alertDescriptor;
 	attribute MvEventCounter eventCounter;
 };
@@ -188,7 +188,57 @@ The `eventCounter` attribute provided with the MvAlertEventData object correspon
 
 ### Methods
 #### GetActivealerts()
-#### GetEventCounters()
-#### ClearActiveAlert()
+```
+interface MvActiveAlert {
+	attribute NcUint16 alertDescriptorIndex;
+	attribute MvAlertDescriptor alertDescriptor;
+	attribute sequence<MvEventCounter> eventCounters
+};
+
+MvMethodResultActiveAlerts is a sequence of MvActiveAlerts
+```
+
+This method return a sequence of active alerts. Note that an alert notification returns the domain counter in the `eventCounter` attribute while this method additionally returns in the `eventCounters` attribute all the detailed event counters. The `alertDescriptorIndex` value MAY be used to clear the alert using the `ClearActiveAlert()` method.
+
+#### GetEventCounters(NcUint16 alertDescriptorIndex)
+```
+interface MvEventCounter {
+	attribute MVEvent event;
+	attribute NcUint64 eventCounter;
+	attribute MvEventState eventState;
+	attribute NcString eventInfo;
+	attribute NcString interfaceName;
+};
+
+MvMethodResultEventCounters is a sequence of MvEventCounter
+```
+This method returns the sequence of detailed counters associated with the alert descriptor identified by `alertDescriptorIndex`.
+
+#### ClearActiveAlert(NcUint16 alertDescriptorIndex)
+This method clear the alert associated with the alert descriptor identifies by `alertDescriptorIndex`.
 
 ### Notifications
+Notifications about alerts are obtained by subscribing to the MvAlertManager object and monitoring events on the `alert` property.
+
+### Events
+
+There are "domain" events defined for the domain event counter (having id corresponding to a multiple of 1000
+
+#### link (1000)
+#### linkDown (1001)
+#### transport (2000)
+#### transportPacketLost (2001)
+#### transportPacketLate (2002)
+#### transportStreamInvalid (2003)
+#### essence (3000)
+#### essenceStreamInvalid (3001)
+#### application (4000)
+#### clock (5000)
+#### clockPtpLeaderChange (5001)
+#### clockPtpUnlock (5002)
+#### vendor (10000)
+#### vendorLink (11000)
+#### vendorTransport (12000)
+#### vendorEssence (13000)
+#### vendorApplication (14000)
+#### vendorClock (15000)
