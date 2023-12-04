@@ -14,9 +14,9 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-This document describes MvAlertManager IS-12 / MS-05 object and the IS-12 and RestAPI methods for accessing it.
+This document describes MvAlertManager IS-12 / MS-05-02 object and the IS-12 and RestAPI methods for accessing it.
 
-The MvAlertManager is a fully IS-12 / MS-05 compliant object that can be used to configure alerts from various Interfaces, Senders and Receivers events. The object can be accessed as any IS-12 / MS-05 object through a WebSocket interface exposed as the IS-12 standard control endpoint of type "urn:x-nmos:control:ncp/v1.0". The MVAlertManager obejct can also be accessed as a simpler RestAPI at the same endpoint using the POST verb instead of the usual GET upgrading the connection from HTTP(S) to WebSocket. The HTTP(s) RestAPI allows an easier access to the MvAlertManager while still allowing asynchronous alerts to propagate to the RestAPI client through chunked responses.
+The MvAlertManager is a fully IS-12 / MS-05-02 compliant object that can be used to configure alerts from various Interfaces, Senders and Receivers events. The object can be accessed as any IS-12 / MS-05-02 object through a WebSocket interface exposed as the IS-12 standard control endpoint of type "urn:x-nmos:control:ncp/v1.0". The MVAlertManager obejct can also be accessed as a simpler RestAPI at the same endpoint using the POST verb instead of the usual GET upgrading the connection from HTTP(S) to WebSocket. The HTTP(s) RestAPI allows an easier access to the MvAlertManager while still allowing asynchronous alerts to propagate to the RestAPI client through chunked responses.
 
 The alerts provide statistics, states and events about the network interfaces and the streaming engines of Senders and Receivers. By default the MVAlertManager provide a comprehensible set of pre-configured alerts allowing a client to quickly get monitoring alerts without requiring anything but a subscription to the MvAlertManager. More advanced use of the MvAlertManager allow a client to configure its own alerts or reconfigure the existing ones within the capabilities expressed by the MvAlertManager.
 
@@ -91,6 +91,29 @@ It is possible to reduce the scope of an alert by specifying a list of resource 
 
 It is possible to reduce the scope of an alert by specifying a list of interface name to restrict to those resources within the scope of matching interface name. This does not apply to the `input` and `output` scopes as there is no associated network interfaces.
 
+## State
+An event MAY provide the state of the sub-system producing the event, indicating the severity of the event on the sub-system or an up/down, active/inactive state of the sub-system. Note that it is the last state associated with an event that is available for detailed events counters while it is the state of the event that triggered an alert that is available for a domain events counter.
+
+A sub-system that is operating MUST report, if any, one of the `normal`, `warning`, `error` or `unknown` state.
+A sub-system that is not operating MUST report, if any, one of the `inactive`, `noSignal`, `malfunction` or `unknown` state.
+
+### unknown
+This state can represent situations where the system's state cannot be determined or is in an indeterminate state. It's a useful state to account for scenarios where the system's condition is unclear.
+### inactive (down)
+This state signifies that the system is currently not actively engaged in its primary functions or operations. It represents a deliberate state of non-use or idleness, distinct from normal operation. The system is intentionally not performing its usual tasks during this state.
+### noSignal (down)
+This state indicates that the system is presently inactive in its primary functions or operations. It reflects a condition of non-use or idleness, separate from normal operation, triggered by the absence of a signal. During this state, the system deviates from its regular tasks as a result of the missing input or output signal.
+### malfunction (down)
+This state suggests that the system is experiencing a critical failure or is not functioning as intended. It typically implies that the system's core functionality is compromised.
+### normal (up)
+This state represents the ideal, expected operational state where everything is functioning correctly, and there are no errors or issues.
+### warning (up)
+This state indicates that the system is not in a critical error state but has encountered issues or conditions that require attention or monitoring. It serves as an early warning before more severe errors occur.
+### error (up)
+This state represents a more severe issue or error that needs immediate attention. It signifies a significant problem that may impact the system's functionality.
+
+## Info
+An event MAY provide textual information about the event. Note that it is the last information associated with an event that is available for detailed events counters while it is the information of the event that triggered an alert that is available for a domain events counter.
 
 ## MvAlertManager class
 
@@ -110,8 +133,6 @@ interface MvAlertManager : NcManager {
 	attribute readonly MvAlertEventData alert;
 };
 ```
-
-
 ### Attributes
 #### alertPeriod
 Defines the rate at which the device issues active alerts notifications (i.e. every N seconds).
@@ -182,7 +203,7 @@ interface MvAlertEventData {
 	attribute MvEventCounter eventCounter;
 };
 ```
-This attributes is used to propagate alert notifications. IS-12 / MS-05 support getting notifications about property changed events from objects. When the MvAlertManager generates an alert, the `alert` property is set to the MvAlertEventData object describing the alert descriptor that triggered the notification. An application subscribing to the MvAlertManager notifications can observe alert notifications coming from the `alert` property. The applicaiton SHOULD not read the value of the `alert` attribute as it continously change every time an alert is triggered. Instead is SHOULD get the active alerts using the GetActiveAlerts() method or get the detailed counter associated with an alert descriptor using the GetEventCounters() method.
+This attributes is used to propagate alert notifications. IS-12 / MS-05-02 support getting notifications about property changed events from objects. When the MvAlertManager generates an alert, the `alert` property is set to the MvAlertEventData object describing the alert descriptor that triggered the notification. An application subscribing to the MvAlertManager notifications can observe alert notifications coming from the `alert` property. The applicaiton SHOULD not read the value of the `alert` attribute as it continously change every time an alert is triggered. Instead is SHOULD get the active alerts using the GetActiveAlerts() method or get the detailed counter associated with an alert descriptor using the GetEventCounters() method.
 
 The `eventCounter` attribute provided with the MvAlertEventData object corresponds to the domain event counter. The GetEventCounters() method MUST be used to retrieve details event counters.
 
@@ -221,24 +242,48 @@ This method clear the alert associated with the alert descriptor identifies by `
 Notifications about alerts are obtained by subscribing to the MvAlertManager object and monitoring events on the `alert` property.
 
 ### Events
+The events of the enumeration MvEvents MAY be discovered by an application using IS-11 / MS-05-02 NcDataClassManager `datatypes` attribute. An implementation of MvAlertManager MUST support the base domain events `link`, `transport`, `essence`, `application` and `clock`. The vendor specific domains are optional.
 
-There are "domain" events defined for the domain event counter (having id corresponding to a multiple of 1000
+The base domain events are defined for the domain event counter (having an id corresponding to a multiple of 1000). Look at the https://github.com/alabou/NMOS-MatroxOnly/blob/main/Alerts.md#alert-domains section for more detail about the domains.
 
 #### link (1000)
 #### linkDown (1001)
+This is the SRF link down event.
+
 #### transport (2000)
 #### transportPacketLost (2001)
+This is the SRF packet lost event.
+
 #### transportPacketLate (2002)
+This is the SRF packet late event.
+
 #### transportStreamInvalid (2003)
+This is the SRF stream invalid event when detected at the transport level.
+
 #### essence (3000)
 #### essenceStreamInvalid (3001)
+This is the SRF stream invalid event when detected at the essence level.
+
 #### application (4000)
 #### clock (5000)
 #### clockPtpLeaderChange (5001)
+This is the SRF PTP leader change event.
+
 #### clockPtpUnlock (5002)
+This is the SRF PTP unlock event.
+
 #### vendor (10000)
+#### vendorTemperature (10001)
+
 #### vendorLink (11000)
+
 #### vendorTransport (12000)
+#### vendorTransportError (12001)
+
 #### vendorEssence (13000)
+#### vendorEssenceStart (13001)
+#### vendorEssenceStop (13002)
+#### vendorEssenceError (13002)
+
 #### vendorApplication (14000)
 #### vendorClock (15000)
