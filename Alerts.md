@@ -216,7 +216,7 @@ interface MvActiveAlert {
 	attribute sequence<MvEventCounter> eventCounters
 };
 
-MvMethodResultActiveAlerts is a sequence of MvActiveAlerts
+MvMethodResultActiveAlerts is a sequence of MvActiveAlert
 ```
 
 This method return a sequence of active alerts. Note that an alert notification returns the domain counter in the `eventCounter` attribute while this method additionally returns in the `eventCounters` attribute all the detailed event counters. The `alertDescriptorIndex` value MAY be used to clear the alert using the `ClearActiveAlert()` method.
