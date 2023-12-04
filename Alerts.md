@@ -208,7 +208,7 @@ This attributes is used to propagate alert notifications. IS-12 / MS-05-02 suppo
 The `eventCounter` attribute provided with the MvAlertEventData object corresponds to the domain event counter. The GetEventCounters() method MUST be used to retrieve details event counters.
 
 ### Methods
-#### GetActivealerts()
+#### GetActiveAlerts()
 ```
 interface MvActiveAlert {
 	attribute NcUint16 alertDescriptorIndex;
