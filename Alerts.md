@@ -89,9 +89,11 @@ The `device` scope MUST be supported by all implementations of the MvAlertManage
 ### output
 - The alert applies to events at the Output scope. The events monitored are those of all the Outputs associated with the Device.
 
-It is possible to reduce the scope of an alert by specifying a list of resource id to restrict to those resources within the scope of matching id. For scopes other than `device` the resource id MUST correspond to a resources of the scope resource type.
+It is possible to reduce the scope of an alert by specifying a list of resource id to restrict to those resources within the scope of matching id. For scopes other than `device` the resource id MUST correspond to a resources of the scope resource type. There is no list of resource id for the `device` scope as by definition the MvAlertManager operate at the device level.
 
 It is possible to reduce the scope of an alert by specifying a list of interface name to restrict to those resources within the scope of matching interface name. This does not apply to the `input` and `output` scopes as there is no associated network interfaces.
+
+For a `vendor` domain alert, it is possible to reduce the scope of the alert by specifying a list of events in the `vendor` domain to restrict to those matching events within the scope.
 
 ## State
 An event MAY provide the state of the sub-system producing the event, indicating the severity of the event on the sub-system or an up/down, active/inactive state of the sub-system. Note that it is the last state associated with an event that is available for detailed events counters while it is the state of the event that triggered an alert that is available for a domain events counter.
