@@ -34,11 +34,13 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 Mv   Matrox Video class prefix or Multi-vendors class prefix.
 
 ## Alert Domains
-The alerts are categorized into a limited number of domains. The `link`, `transport`, `essence`, `application` and `clock` domains represent the domains of standards, multi-vendors events. Those domains are also available on a per-vendor basis to provide additional vendor specific events. Finally there is a `vendor` domain for vendor specific events that do not categorized into the 5 base `link`, `transport`, `essence`, `application` and `clock` domains.
+The alerts are categorized into a limited number of domains. The `link`, `transport`, `essence`, `application` and `clock` domains represent the domains of standard, multi-vendors events. Those domains are also available on a per-vendor basis to provide additional vendor specific events. Finally there is a `vendor` domain for vendor specific events that do not categorized into the 5 base `link`, `transport`, `essence`, `application` and `clock` domains.
 
 The `link`, `transport`, `essence`, `application` and `clock` domains MUST be supported by all implementations of the MvAlertManager. The `vendor`, `vendorLink`, `vendorTransport`, `vendorEssence`, `vendorApplication` and `vendorClock` domains are optional.
 
-Each alert domain has an associated per-domain event counter, counting all the events of a given domain. An alert is triggered when a domain counter of an active alert descriptor changes value.
+Each alert domain has an associated per-domain event and events counter, counting all the events of a given domain. An alert is triggered when a domain events counter of an active alert descriptor changes value.
+
+The domains are defined according to the OSI model when possible. A failure at a lower level MAY cause failures at higher levels. A User SHOULD look at events from lower levels first before considering events at higher level. In some scenarios, failure at a lower level will not prevent a higher level from functioning normally. For example when using redundancy, a `transport` domain packet lost event on one network interface will not prevent a Receiver from consuming a stream if the packet is recovered on the alternate network interface. In this example the higher level `essence` domain would not register invalid stream events.
 
 ### link, vendorLink
 - ISO level 1 and 2 (physical, data link)
@@ -69,23 +71,23 @@ Each alert domain has an associated per-domain event counter, counting all the e
 - vendor specific events like temperature, battery charge, etc.
 
 ## Alert Scopes
-The alert scope indicates if the events associated with an alert have to be monitored at the Device, Sender, Receiver, Input or Output level.
-The Device scope MUST be supported by all implementations of the MvAlertManager. The Sender, Receiver, Input and Output scopes are optional.
+The alert scope indicates how the events associated with an alert are monitored. The scope MAY be `device`, `sender`, `senderAudio`, `senderVideo`, `senderData`, `senderMux`, `receiver`, `receiverAudio`, `receiverVideo`, `receiverData`, `receiverMux`, `input` or `output`.
+The `device` scope MUST be supported by all implementations of the MvAlertManager. The `sender`, `senderAudio`, `senderVideo`, `senderData`, `senderMux`, `receiver`, `receiverAudio`, `receiverVideo`, `receiverData`, `receiverMux`, `input` or `output` scopes are optional.
 
 ### device
-- The alert applies to events at the Device scope
+- The alert applies to events at the Device scope. The events monitored are those of all the Senders, Receivers, Inputs and Outputs associated with the Device.
 ### sender
-- The alert applies to events at the Sender scope
+- The alert applies to events at the Sender scope.  The events monitored are those of all the Senders associated with the Device.
 ### senderAudio, senderVideo, senderData, senderMux
-- The alert applies to events at the format-specific Sender scope
+- The alert applies to events at the format-specific Sender scope. The events monitored are those of all the Senders of a given `format` associated with the Device.
 ### receiver
-- The alert applies to events at the Receiver scope
+- The alert applies to events at the Receiver scope. The events monitored are those of all the Receivers associated with the Device.
 ### receiverAudio, receiverVideo, receiverData, receiverMux
-- The alert applies to events at the format-specific Receiver scope
+- The alert applies to events at the format-specific Receiver scope. The events monitored are those of all the Receivers of a given `format` associated with the Device.
 ### input
-- The alert applies to events at the Input scope
+- The alert applies to events at the Input scope. The events monitored are those of all the Inputs associated with the Device.
 ### output
-- The alert applies to events at the Output scope
+- The alert applies to events at the Output scope. The events monitored are those of all the Outputs associated with the Device.
 
 It is possible to reduce the scope of an alert by specifying a list of resource id to restrict to those resources within the scope of matching id. For scopes other than `device` the resource id MUST correspond to a resources of the scope resource type.
 
