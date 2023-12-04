@@ -38,7 +38,7 @@ The alerts are categorized into a limited number of domains. The `link`, `transp
 
 The `link`, `transport`, `essence`, `application` and `clock` domains MUST be supported by all implementations of the MvAlertManager. The `vendor`, `vendorLink`, `vendorTransport`, `vendorEssence`, `vendorApplication` and `vendorClock` domains are optional.
 
-Each alert domain has an associated per-domain event and events counter, counting all the events of a given domain. An alert is triggered when a domain events counter of an active alert descriptor changes value.
+Each alert domain has an associated per-domain event identifier and events counter, counting all the events of a given domain. An alert is triggered when a domain events counter of an alert descriptor changes value. Each event within a domain has an associated event identifier and events counter, counting all the identified events within the domain. The events counters of the identified events within a given domain are collectively described as the detailed events counters of the domain.
 
 The domains are defined according to the OSI model when possible. A failure at a lower level MAY cause failures at higher levels. A User SHOULD look at events from lower levels first before considering events at higher level. In some scenarios, failure at a lower level will not prevent a higher level from functioning normally. For example when using redundancy, a `transport` domain packet lost event on one network interface will not prevent a Receiver from consuming a stream if the packet is recovered on the alternate network interface. In this example the higher level `essence` domain would not register invalid stream events.
 
@@ -96,28 +96,25 @@ It is possible to reduce the scope of an alert by specifying a list of interface
 For a `vendor` domain alert, it is possible to reduce the scope of the alert by specifying a list of events in the `vendor` domain to restrict to those matching events within the scope.
 
 ## State
-An event MAY provide the state of the sub-system producing the event, indicating the severity of the event on the sub-system or an up/down, active/inactive state of the sub-system. Note that it is the last state associated with an event that is available for detailed events counters while it is the state of the event that triggered an alert that is available for a domain events counter.
-
-A sub-system that is operating MUST report, if any, one of the `normal`, `warning`, `error` or `unknown` state.
-A sub-system that is not operating MUST report, if any, one of the `inactive`, `noSignal`, `malfunction` or `unknown` state.
+An events counter is associated with a state of the sub-system producing the identified event, indicating the severity of the event on the sub-system or the actual state of the sub-system. A detailed events counter registers the state of the last event cumulated in the events counter. A domain events counter registers the state of the event that triggered an alert.
 
 ### unknown
 This state can represent situations where the system's state cannot be determined or is in an indeterminate state. It's a useful state to account for scenarios where the system's condition is unclear.
-### inactive (down)
+### inactive
 This state signifies that the system is currently not actively engaged in its primary functions or operations. It represents a deliberate state of non-use or idleness, distinct from normal operation. The system is intentionally not performing its usual tasks during this state.
-### noSignal (down)
-This state indicates that the system is presently inactive in its primary functions or operations. It reflects a condition of non-use or idleness, separate from normal operation, triggered by the absence of a signal. During this state, the system deviates from its regular tasks as a result of the missing input or output signal.
-### malfunction (down)
-This state suggests that the system is experiencing a critical failure or is not functioning as intended. It typically implies that the system's core functionality is compromised.
-### normal (up)
+### noSignal
+This state indicates that the system is awaiting a signal to actively engaged in its primary functions or operations. It reflects a condition of non-use or idleness, separate from normal operation, triggered by the absence of a signal. During this state, the system deviates from its regular tasks as a result of the missing input or output signal.
+### normal
 This state represents the ideal, expected operational state where everything is functioning correctly, and there are no errors or issues.
-### warning (up)
+### warning
 This state indicates that the system is not in a critical error state but has encountered issues or conditions that require attention or monitoring. It serves as an early warning before more severe errors occur.
-### error (up)
+### error
 This state represents a more severe issue or error that needs immediate attention. It signifies a significant problem that may impact the system's functionality.
+### malfunction
+This state suggests that the system is experiencing a critical failure or is not functioning as intended. It typically implies that the system's core functionality is compromised.
 
 ## Info
-An event MAY provide textual information about the event. Note that it is the last information associated with an event that is available for detailed events counters while it is the information of the event that triggered an alert that is available for a domain events counter.
+An events counter is associated with textual information from the sub-system producing the identified event. A detailed events counter registers the textual information of the last event cumulated in the events counter. A domain events counter registers the textual information of the event that triggered an alert.
 
 ## MvAlertManager class
 
