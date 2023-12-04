@@ -172,7 +172,7 @@ This attribute provides the sequence of active alert descriptors.
  	- A non-empty sequence of `interfaceNames` MAY be used to narrow the scope to those events of matching interface name within the scope.
 
 - A non-empty `events` sequence MAY be used to provide detailed event counters with an alert in addition to the default domain event counter. By default only the domain event counter is provided with an alert, even when calling GetEventCounters().
-	- The `events` sequence attributes does not influence when an alert is triggered.
+	- The `events` sequence attributes does not influence when an alert is triggered with the exception of the `vendor` domain where the alert descriptor domain counter only counts the events that are part of the `events` sequence.
 
 #### alert (readonly)
 ```
