@@ -55,11 +55,11 @@ When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp`
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for H.222.0.
 
-A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an MPEG2-TS stream. A non-mux Flow MUST not have such attributes. The MPEG2-TS Stream MUST not have more or less sub-Streams than indicated by those attributes.
+A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an MPEG2-TS stream. A non-mux Flow MUST NOT have such attributes. The MPEG2-TS Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
 
-A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an MPEG2-TS stream. A mux Flow MUST not have such attribute.
+A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an MPEG2-TS stream. A mux Flow MUST NOT have such attribute.
 
-A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an MPEG2-TS stream. A mux Flow MUST not have such attribute.
+A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an MPEG2-TS stream. A mux Flow MUST NOT have such attribute.
 
 Examples Flow resources are provided in [Examples](../examples/).
 
@@ -84,7 +84,7 @@ The following parameter constraints can be used to express limits or preferences
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
-If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream, a Sender MUST not use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
+If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
 
 #### RTP transport based on RFC 2250 and RFC 3551
 
