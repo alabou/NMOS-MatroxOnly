@@ -96,14 +96,16 @@ It is possible to reduce the scope of an alert by specifying a list of interface
 For a `vendor` domain alert, it is possible to reduce the scope of the alert by specifying a list of events in the `vendor` domain to restrict to those matching events within the scope.
 
 ## State
-An events counter is associated with a state of the sub-system producing the identified event, indicating the severity of the event on the sub-system or the actual state of the sub-system. A detailed events counter registers the state of the last event cumulated in the events counter. A domain events counter registers the state of the event that triggered an alert.
+An events counter is associated with a state of the sub-system(s) producing the identified event, indicating the severity of the event on the sub-system(s) or the actual state of the sub-system(s). A domain events counter registers the state of the event that triggered an alert. A detailed events counter registers the state of the last event cumulated in the events counter or the last state change of the sub-system(s). The state associated with a details events counter is more useful when a single entity is associated with the alert descriptor, for example when a single interface name is specified in `interfaceNames` or a single resource id is specified in `resourceIds`. When multiple resources or interfaces are cumulated in a detailed events counter, the state canont be associated to a specific resource and represent a random sampling the resources/interfaces.
+
+It is important to note that only events can trigger an alert such that the state associated with a domain events counter always correspond to an event severity state. It is only when getting the events counters using the `GetEventCounters()` that the state represents either an event severity or an actual state of the sub-system(s).
 
 ### unknown
 This state can represent situations where the system's state cannot be determined or is in an indeterminate state. It's a useful state to account for scenarios where the system's condition is unclear.
 ### inactive
 This state signifies that the system is currently not actively engaged in its primary functions or operations. It represents a deliberate state of non-use or idleness, distinct from normal operation. The system is intentionally not performing its usual tasks during this state.
-### noSignal
-This state indicates that the system is awaiting a signal to actively engaged in its primary functions or operations. It reflects a condition of non-use or idleness, separate from normal operation, triggered by the absence of a signal. During this state, the system deviates from its regular tasks as a result of the missing input or output signal.
+### waiting
+In this state, the system awaits a specific condition before actively engaging or continuing its primary functions or operations. It signifies a state of non-use or idleness, distinct from normal operation, triggered by the absence of a necessary condition. During this phase, the system deviates from its regular tasks as it awaits the fulfillment of the necessary condition.
 ### normal
 This state represents the ideal, expected operational state where everything is functioning correctly, and there are no errors or issues.
 ### warning
@@ -114,7 +116,7 @@ This state represents a more severe issue or error that needs immediate attentio
 This state suggests that the system is experiencing a critical failure or is not functioning as intended. It typically implies that the system's core functionality is compromised.
 
 ## Info
-An events counter is associated with textual information from the sub-system producing the identified event. A detailed events counter registers the textual information of the last event cumulated in the events counter. A domain events counter registers the textual information of the event that triggered an alert.
+An events counter is associated with textual information from the sub-system producing the identified event. A domain events counter registers the textual information of the event that triggered an alert. A detailed events counter registers the textual information of the last event cumulated in the events counter.
 
 ## MvAlertManager class
 
