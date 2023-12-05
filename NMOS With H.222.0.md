@@ -84,6 +84,8 @@ The following parameter constraints can be used to express limits or preferences
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
+A Sender MUST not use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than implementing the [Privacy Encryption Protocol][https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md].
+
 #### RTP transport based on RFC 2250 and RFC 3551
 
 For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
