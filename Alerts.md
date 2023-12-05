@@ -245,13 +245,15 @@ This method clear the alert associated with the alert descriptor identifies by `
 Notifications about alerts are obtained by subscribing to the MvAlertManager object and monitoring events on the `alert` property.
 
 ### Events
-The events of the enumeration MvEvents MAY be discovered by an application using IS-11 / MS-05-02 NcDataClassManager `datatypes` attribute. An implementation of MvAlertManager MUST support the base domain events `link`, `transport`, `essence`, `application` and `clock`. The vendor specific domains are optional.
+The event identifiers of the MvEvent enumeration MAY be discovered by an application using IS-11 / MS-05-02 NcDataClassManager `datatypes` attribute. An implementation of MvAlertManager MUST support the base domain events `link`, `transport`, `essence`, `application` and `clock`. The vendor specific domains are optional.
 
 The base domain events are defined for the domain event counter (having an id corresponding to a multiple of 1000). Look at the https://github.com/alabou/NMOS-MatroxOnly/blob/main/Alerts.md#alert-domains section for more detail about the domains.
 
 #### link (1000)
 #### linkDown (1001)
 This is the SRF link down event.
+
+This event indicates that the associated network interface transitionned from the UP to the DOWN state. A network interface that is denied access to the network MUST not report a `linkDown` event because the interface is still UP and "partially" working. If the network interface becomes DOWN because the associated sub-system detected either a disconnect from the network connector, a signal integrity issue or a protocol issue, the severity state MUST be `inactive`. The interface became DOWN because of an external issue. If the network interface becomes DOWN because the associated sub-system detected an internal error the severity state MUST be `malfunction`. The interface became DOWN because of an internal issue. Textual information MAY be provided along withthe event to describe the circumstances of the network interface transitionning to the DOWN state.
 
 #### transport (2000)
 #### transportPacketLost (2001)
