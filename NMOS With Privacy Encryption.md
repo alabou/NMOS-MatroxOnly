@@ -105,6 +105,8 @@ The SRT `passphrase` MUST correspond to the `privacy_key` defined in the Privacy
 
 This `protocol` is used for `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:udp.mcast`, `urn:x-matrox:transport:udp.ucast`, `urn:x-matrox:transport:udp.mp2t`, `urn:x-matrox:transport:udp.mp2t.mcast` and `urn:x-matrox:transport:udp.mp2t.ucast`.
 
+This `protocol` MAY also be used for `urn:x-matrox:transport:srt` and `urn:x-matrox:transport:srt.mp2t`. In this scenario the privacy encryption is performed on the MPEG2-TS stream prior to transmission with the SRT protocol. The SRT encryption is not used or enabled. This scenario allows to use the this `protocol` adaptation with the reliable UDP transport protocol SRT.
+
 The `protocol` MUST be "UDP" or "UDP_KV".
 
 A Sender using the "UDP_KV" protocol MUST transmit the `key_version` along with the ciphered content in the `dynamic_key_version` field of the CTR Full Header. When using the "UDP" protocol, the `dynamic_key_version` field of the CTR Full Header MUST be set to 0. A Receiver using the "UDP" protocol MUST ignore the `dynamic_key_version` field of the CTR Full Header. When using the "UDP_KV" protocol the Receiver MUST monitor it.
