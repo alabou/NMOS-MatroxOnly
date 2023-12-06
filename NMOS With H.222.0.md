@@ -84,8 +84,6 @@ The following parameter constraints can be used to express limits or preferences
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
-If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
-
 #### RTP transport based on RFC 2250 and RFC 3551
 
 For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
@@ -103,6 +101,8 @@ An example SDP file is provided in the [Examples](../examples/).
 For Nodes transmitting H.222.0 using other transports, the Sender resource MUST indicate the associated `urn:x-nmos:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
 
 The `manifest_href` attribute MAY be `null` if an SDP transport file is not supported by the transport. Otherwise the SDP transport file MUST comply with the transport specific requirements. There is no SDP format-specific parameters requirements for transports other than RTP.
+
+If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream and the transport is UDP, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
 
 ## H.222.0 IS-04 Receivers
 
