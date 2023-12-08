@@ -140,9 +140,9 @@ Note: A `PES_packet_data_byte` bytes sequence is allowed to terminate with a par
 
 The `private_data_byte` bytes of the MPEG2-TS `adaptation_field` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, MUST be used to transport the required `dynamic_key_version`, `ctr_low`, `ctr_high` and `ctr_short` parameters of CTR Full Header and CTR Short Header. The CTR Full Header is signaled by the presence of 12 `private_data_byte` bytes while the CTR Short Header is signaled by the presence of 3 `private_data_byte` bytes.
 
-An MPEG2-TS packet `adaptation_field` MAY be padded with `stuffing_byte` bytes to ensure that an integral multiple of 16 `PES_packet_data_byte` bytes or padding bytes are present in the MPEG2-TS packet payload for all MPEG2-TS packets transporting the `PES_packet_data_byte` bytes of a `PES_Packet`.
+An MPEG2-TS packet `adaptation_field` MAY be padded with `stuffing_byte` bytes to ensure that an integral multiple of 16 `PES_packet_data_byte` bytes are present in the MPEG2-TS packet payload for all but the last MPEG2-TS packets transporting the `PES_packet_data_byte` bytes of a `PES_Packet`.
 
-Note: This approach makes privacy encryption compatible with the PES packet slicing of HDCP over MPEG-TS.
+Note: This approach makes privacy encryption compatible with the PES packet slicing of HDCP over MPEG-TS when the `adaptation_field` has space reserved for the `private_data_byte` bytes of the CTR Full/Short Header when `payload_unit_start_indicator` of an MPEG2-TS packet is 1 and that only CTR Full Header are used.
 
 A CTR Full Header MUST be present in the `adaptation_field` of an MPEG2-TS packet having in its payload the first byte (`payload_unit_start_indicator` = 1) of the first `PES_Packet` of a video frame/field, a video frame/field slice, and an audio frame/packet. 
 
