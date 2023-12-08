@@ -434,7 +434,7 @@ A Sender operating with `parameter_sets_flow_mode` set to `dynamic` MAY produce 
 
 ---
   
-  ***This document modifies the original document BCP-006-02 from AMWA obtained from the Matrox proposal document.***
+  ***This document is a modification of the original BCP-006-03 document from AMWA, which was drafted after the Matrox proposal document.***
   
    Copyright 2021 AMWA
 
