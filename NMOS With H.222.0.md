@@ -18,7 +18,7 @@ H.222.0 is a transmission multiplexing and synchronization technology standardiz
 
 The Rec. [ITU-T H.222.0][H.222.0] | ISO/IEC 13818-1 specification and associated amendments describe the embedding of various media streams in an MPEG2-TS transport stream. An RTP payload format specification for MPEG2-TS transport stream was developed through the IETF Payloads working group, IETF [RFC 2250][RFC-2250] for transport over RTP and [RFC 3551][RFC-3551] defines the payload format `video/MP2T`. Other normative documents describe the requirements for the streaming of an MPEG2-TS transport stream over other non-RTP transports.
 
-The [Video Services Forum][VSF] developed Technical Recommendation [TR-07][TR-07] for the transport of JPEG-XS video and AES3 audio in an MPEG2-TS stream over IP.
+The [Video Services Forum][VSF] developed Technical Recommendation [VSF_TR-07][] for the transport of JPEG-XS video and AES3 audio in an MPEG2-TS stream over IP.
 
 ## Use of Normative Language
 
@@ -163,6 +163,10 @@ If the Receiver is not capable of consuming the stream described by a `PATCH` on
 
 A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
+### [VSF_TR-07][] compatibility
+
+An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a JPEG-XS video stream (video/JXSV, VIDEO 0) along with up to 4 AES3 audio streams (SMPTE ST 302M embedding, audio/AM824, AUDIO 0-3) and one ancillary data stream (SMPTE ST 2038 embedding, video/smpte291, DATA 0).
+
 ## H.222.0 IS-11 Senders and Receivers
 
 ### RTP transport
@@ -181,4 +185,4 @@ A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
-[TR-07]: https://vsf.tv/download/technical_recommendations/VSF_TR-07_2022-04-20.pdf "Transport of JPEG XS Video in MPEG-2 Transport Stream over IP"
+[VSF_TR-07]: https://vsf.tv/download/technical_recommendations/VSF_TR-07_2022-04-20.pdf "Transport of JPEG XS Video in MPEG-2 Transport Stream over IP"
