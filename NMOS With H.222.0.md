@@ -86,6 +86,10 @@ The following parameter constraints can be used to express limits or preferences
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
+A coded format specification MAY define Sender's attributes and associated transport capabilities that, for the corresponding audio, video or data sub-stream, MUST be assumed as having their default value.
+
+Note: The Sender's attributes and associated transport capabilities of a coded format specification are assumed to exist for each sub-Stream, each having their default values. For example the `parameter_sets_flow_mode` and `parameter_sets_transport_mode` associated with some coded format specification are assumed as having their default value of `dynamic` and `in_band` respectively.
+
 #### RTP transport based on RFC 2250 and RFC 3551
 
 For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.

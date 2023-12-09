@@ -197,6 +197,8 @@ The metadata attribute `urn:x-matrox:cap:meta:layer_compatibility_groups` MAY be
 
 A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute matching the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer_compatibility_groups` meta attribute. The sub-Flow `format` attribute MUST match the associated Sender Constraint Set `urn:x-matrox:cap:meta:format` meta attribute. The intersection of the `urn:x-matrox:layer_compatibility_groups` attribute of all the sub-Flows associated with a mux Flow MUST not be empty.
 
+A sub-Stream/sub-Flow Constraint Set MUST NOT use transport Receiver/Sender Capabilities. Such Capabilities use the `urn:x-nmos:cap:transport:` or `urn:x-matrox:cap:transport:` prefix and apply only to a Stream/Flow.
+
 ### Listing Constraint Sets
 
 The Receiver advertises a list of Constraint Sets as a JSON array of these objects, using the key `constraint_sets` in the `caps` object.
