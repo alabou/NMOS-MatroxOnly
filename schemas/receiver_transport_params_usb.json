@@ -10,7 +10,7 @@
         "string",
         "null"
       ],
-      "description": "IP address of the TCP server responsible for serving the USB packets (IP address of network interface bound to this sender). A null value indicates that the source IP address has not been configured.",
+      "description": "IP address of the TCP server responsible for serving the USB packets (IP address of network interface bound to the sender). A null value indicates that the source IP address has not been configured.",
       "anyOf": [{
           "format": "ipv4"
         },
