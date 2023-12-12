@@ -10,7 +10,7 @@
         "string",
         "null"
       ],
-      "description": "Source IP address of USB packets. A null value indicates that the source IP address has not been configured .",
+      "description": "IP address of the TCP server responsible for serving the USB packets (IP address of network interface bound to this sender). A null value indicates that the source IP address has not been configured.",
       "anyOf": [{
           "format": "ipv4"
         },
@@ -24,7 +24,7 @@
     },
     "interface_ip": {
       "type": "string",
-      "description": "IP address of the network interface the receiver should use. The receiver should provide an enum in the constraints endpoint, which should contain the available interface addresses. If set to 'auto' in multicast mode the receiver should determine which interface to use for itself, for example by using the routing tables. The behaviour of 'auto' is undefined in unicast mode, and controllers should supply a specific interface address.",
+      "description": "IP address the TCP client responsible for receiving the USB packets (IP address of the network interface bound to this receiver). The receiver should provide an enum in the constraints endpoint, which should contain the available interface addresses. If set to 'auto' the receiver should determine which interface to use for itself, based on routing rules or its own internal configuration.",
       "anyOf": [{
           "format": "ipv4"
         },
@@ -41,7 +41,7 @@
         "integer",
         "null"
       ],
-      "description": "Source port for USB packets (auto = 5004 by default). A null value indicates that the source port has not been configured",
+      "description": "Port of the TCP server responsible for serving the USB packets (auto = 5004 by default). A null value indicates that the source port has not been configured",
       "minimum": 0,
       "maximum": 65535
     }
