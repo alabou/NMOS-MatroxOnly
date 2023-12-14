@@ -44,12 +44,102 @@ Note: The WebSocket IS-12 `ncp` endpoints uses the same approach.
 
 In the following sections of this document we will use one of the following paths to access the IS-12 RestAPI "http://<address>/ncWebSocket/v1.0", "https://<address>/ncWebSocket/v1.0", "http://<address>/ncWebSocketGuest/v1.0" and "https://<address>/ncWebSocketGuest/v1.0". The name "ncWebSocket" is vendor specific and MAY differ from the proposed string.
 
+## JSON Schemas
+command-message-reatapi.json
+```
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Command protocol message structure",
+  "title": "Command protocol message",
+  "allOf": [
+    {
+      "$ref": "base-message.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "commands",
+        "messageType"
+      ],
+      "properties": {
+        "commands": {
+          "description": "Commands being transmited in this transaction",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "handle",
+            ],
+            "properties": {
+              "handle": {
+                "type": "integer",
+                "description": "Integer value used for pairing with the response",
+                "minimum": 1,
+                "maximum": 65535
+              },
+              "oid": {
+                "type": "integer",
+                "description": "Object id containing the method",
+                "minimum": 1
+              },
+              "object": {
+                "type": "string",
+                "description": "Object containing the method provided as a role path where `/` represent the root",
+                "minimum": 1
+              },
+              "methodId": {
+                "type": "object",
+                "description": "ID structure for the target method",
+                "required": [
+                  "level",
+                  "index"
+                ],
+                "properties": {
+                  "level": {
+                    "type": "integer",
+                    "description": "Level component of the method ID",
+                    "minimum": 1
+                  },
+                  "index": {
+                    "type": "integer",
+                    "description": "Index component of the method ID",
+                    "minimum": 1
+                  }
+                }
+              },
+              "method": {
+                "type": "string",
+                "description": "Name of the target method",
+                "minimum": 1
+              },
+              "arguments": {
+                "type": "object",
+                "description": "Method arguments"
+              }
+            }
+          }
+        },
+        "messageType": {
+          "description": "Protocol message type",
+          "type": "integer",
+          "enum": [
+            0
+          ]
+        }
+      }
+    }
+  ]
+}
+```
+
 ## RestAPI Paths
 The IS-12 ResteAPI MUST be accessible using the `POST` or `OPTIONS` verb at the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be reserved for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection.
 
 The IS-12 RestAPI MUST support the `OPTIONS` vers as described in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors) An `OPTION` requrest MUST NOT be subject to read-only / read-write constraints and always respond 
 
-The body of a `POST` request MUST be one of the following IS-12 JSON schema: command-message.json, subscription-message.json.
+The body of a `POST` request MUST be one of the following IS-12 JSON schema: command-message-reatapi.json, subscription-message.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed.
+
 The body of a `POST` response MUST be one of the following IS-12 JSON schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json.
 
 ## Read-Write Authorisation
