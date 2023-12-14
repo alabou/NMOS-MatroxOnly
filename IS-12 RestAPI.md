@@ -45,6 +45,8 @@ Note: The WebSocket IS-12 `ncp` endpoints uses the same approach.
 In the following sections of this document we will use one of the following paths to access the IS-12 RestAPI "http://<address>/ncWebSocket/v1.0", "https://<address>/ncWebSocket/v1.0", "http://<address>/ncWebSocketGuest/v1.0" and "https://<address>/ncWebSocketGuest/v1.0". The name "ncWebSocket" is vendor specific and MAY differ from the proposed string.
 
 ## JSON Schemas
+The followign schema modifies the IS-12 command-message.json slightly to allow an `object` and `method` attribute instead of the usual `ois` and `methodId` ones.
+
 command-message-reatapi.json
 ```
 {
@@ -143,17 +145,71 @@ command-message-reatapi.json
   ]
 }
 ```
+The following schema modifies the IS-12 subscription-message.json slightly to allow an object to be specified as an integer object id as a string role path.
+
+subscription-message-restapi.json
+```
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Subscription protocol message structure",
+  "title": "Subscription protocol message",
+  "allOf": [
+    {
+      "$ref": "base-message.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "subscriptions",
+        "messageType"
+      ],
+      "properties": {
+        "subscriptions": {
+          "description": "Array of OIDs or object role path desired for subscription",
+          "type": "array",
+          "items": {
+            "type": ["integer", "string"]
+          }
+        },
+        "messageType": {
+          "description": "Protocol message type",
+          "type": "integer",
+          "enum": [
+            3
+          ]
+        }
+      }
+    }
+  ]
+}
+```
 
 ## RestAPI Paths
-The IS-12 ResteAPI MUST be accessible using the `POST` or `OPTIONS` verb at the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be reserved for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection.
+The IS-12 ResteAPI MUST be accessible using the `POST` and `OPTIONS` verbs with the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be reserved for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection.
 
-The IS-12 RestAPI MUST support the `OPTIONS` vers as described in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors) An `OPTION` requrest MUST NOT be subject to read-only / read-write constraints and always respond 
+The IS-12 RestAPI MUST support the `OPTIONS` verb as sepecified in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors) An `OPTION` request MUST NOT be subject to read-only / read-write constraints.
 
-The body of a `POST` request MUST be one of the following IS-12 JSON schema: command-message-reatapi.json, subscription-message.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed.
+The body of a `POST` request MUST be one of the following IS-12 JSON schema: command-message-reatapi.json, subscription-message-restapi.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed. For a subscriptions the object MAY be speficied either an an object id or as a role path.
 
-The body of a `POST` response MUST be one of the following IS-12 JSON schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json.
+The body of a `POST` response MUST be one of the following IS-12 JSON schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json. The response MUST be sent using the `chunked` `Transfer-Encoding` such that the client may retrieve command-response, subscription-response, notification and error messages independently.
+
+### Object role path
+The `object` attribute of a command identifies an object using a role path where "/" stands for the `root`.
+
+Example: The `object` "/AlertManager" identifies Matrox mvAlertManager object which is part of the root block and have a role `AlertManager`.
+
+### Object method name
+The `method` attribute of a command identifies the object method optionally using a class path made of class names separated by "::" to odentifies a method on a base class.
+
+Example: For the `object` "/AlertManager" the `method` "Get" identifies the  `Get` method of the mvAlertManager class while the `method` "NcObject::Get" identifies the `Get` method of the NcObject base class.
 
 ## Read-Write Authorisation
-A request to a read-write `ncp` endpoint MUST provide a valid `Bearer` token obtained from the device through a vendor specific method. An `Unauthorized` (401) error MUST be returned if the request does not have a valid `Bearer` token when accessing a read-write `ncp` endpoint.
+A request to a read-write `ncp` endpoint MUST provide a valid `Bearer` token obtained from the device vendor specific method. An `Unauthorized` (401) error MUST be returned if the request does not have a valid `Bearer` token. A request to a read-only `ncp` endpoint MUST NOT require a valid `Bearer` token.
 
-Note: The same is true for using the Websocket interface. When upgrading an HTTP(s) connection of a read-write `ncp` endpoint to the WebSocket protocol using the `GET` verb, the request must have a valid `Bearer` token obtained from the device through a vendor specific method.
+Note: The same is true for using the Websocket interface. When upgrading an HTTP(s) connection of a read-write `ncp` endpoint to the WebSocket protocol using the `GET` verb, the request must have a valid `Bearer` token obtained from the device vendor specific method.
+
+## Notifications
+Notifications from subscriptions MUST be returned in the `POST` response as notification messages compliant with the IS-12 notification-message.json schema. The response MUST be sent using the `chunked` `Transfer-Encoding` such that the client may retrieve notification messages independently.
+
+The notification messages MAY interleave with the command response messages in the `POST` response body.
