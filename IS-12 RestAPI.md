@@ -188,7 +188,7 @@ subscription-message-restapi.json
 ## RestAPI Paths
 The IS-12 ResteAPI MUST be accessible using the `POST` and `OPTIONS` verbs with the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be reserved for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection.
 
-The IS-12 RestAPI MUST support the `OPTIONS` verb as sepecified in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors) An `OPTION` request MUST NOT be subject to read-only / read-write constraints.
+The IS-12 RestAPI MUST support the `OPTIONS` verb as sepecified in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors). An `OPTION` request MUST NOT be subject to read-only / read-write constraints.
 
 The body of a `POST` request MUST be one of the following IS-12 JSON schema: command-message-reatapi.json, subscription-message-restapi.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed. For a subscriptions the object MAY be speficied either an an object id or as a role path.
 
@@ -204,7 +204,7 @@ The `method` attribute of a command identifies the object method optionally usin
 
 Example: For the `object` "/AlertManager" the `method` "Get" identifies the  `Get` method of the mvAlertManager class while the `method` "NcObject::Get" identifies the `Get` method of the NcObject base class.
 
-## Read-Write Authorisation
+## Read-Write Authorization
 A request to a read-write `ncp` endpoint MUST provide a valid `Bearer` token obtained from the device vendor specific method. An `Unauthorized` (401) error MUST be returned if the request does not have a valid `Bearer` token. A request to a read-only `ncp` endpoint MUST NOT require a valid `Bearer` token.
 
 Note: The same is true for using the Websocket interface. When upgrading an HTTP(s) connection of a read-write `ncp` endpoint to the WebSocket protocol using the `GET` verb, the request must have a valid `Bearer` token obtained from the device vendor specific method.
