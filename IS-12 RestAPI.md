@@ -72,7 +72,7 @@ command-message-reatapi.json
               { "required": [
                     "handle",
                     "oid",
-                    "methodId",
+                    "methodId"
                   ]
               },
               { "required": [
