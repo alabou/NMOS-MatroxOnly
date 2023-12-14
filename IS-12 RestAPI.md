@@ -195,14 +195,19 @@ The body of a `POST` request MUST be one of the following IS-12 JSON schema: com
 The body of a `POST` response MUST be one of the following IS-12 JSON schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json. The response MUST be sent using the `chunked` `Transfer-Encoding` such that the client may retrieve command-response, subscription-response, notification and error messages independently.
 
 ### Object role path
-The `object` attribute of a command identifies an object using a role path where "/" stands for the `root`.
+The `object` attribute of a command MUST identify an object with a role path where "/" stands for the `root`.
 
 Example: The `object` "/AlertManager" identifies Matrox mvAlertManager object which is part of the root block and have a role `AlertManager`.
 
 ### Object method name
-The `method` attribute of a command identifies the object method optionally using a class path made of class names separated by "::" to odentifies a method on a base class.
+The `method` attribute of a command MUST identify an object method either with a class path made of class names separated by "::" and terminated by the method name or by the method name only. In the later case it identifies the method of the most derived class.
 
-Example: For the `object` "/AlertManager" the `method` "Get" identifies the  `Get` method of the mvAlertManager class while the `method` "NcObject::Get" identifies the `Get` method of the NcObject base class.
+Example: For the `object` "/AlertManager" the `method` "Get" identifies the `Get` method of the `mvAlertManager` class while the `method` "NcObject::Get" identifies the `Get` method of the `NcObject` base class.
+
+### Object property id
+The `id` argument of type `NcPropertyId` passed to object methods MAY be specified either as an `NcPropertyId` value or a string value. When a string value is used it MUST a class path made of class names separated by "::" and terminated by the property name.
+
+Example: For the `object` "/AlertManager" the property `id` "MvAlertManager::alertCapabilities" identifies the `alertCapabilities` property of the `mvAlertManager` class.
 
 ## Read-Write Authorization
 A request to a read-write `ncp` endpoint MUST provide a valid `Bearer` token obtained from the device vendor specific method. An `Unauthorized` (401) error MUST be returned if the request does not have a valid `Bearer` token. A request to a read-only `ncp` endpoint MUST NOT require a valid `Bearer` token.
