@@ -1,0 +1,58 @@
+# Matrox: IS-12 RestAPI
+{:.no_toc}  
+Copyright 2023, Matrox Graphics Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  
+---
+  
+{:toc}
+
+## Introduction
+This document describes a RestAPI for accessing IS-12 / MS-05-02 objects through an HTTP(S) RestAPI instead of a WebSocket API. 
+
+A Device publishes the IS-12 protocol availability through the declaration of control endpoints.
+```
+"controls": [
+  {
+    "type": "urn:x-nmos:control:ncp/v1.0",
+    "href": "<protocol>://<address>/ncWebSocket/v1.0"
+  }
+],
+```
+The <protocol> is either `ws` or `wss ` for accessing IS-12 / MS-05-02 objects using the WebSocket protocol (ws or wss). This is the standard method for accessing IS-12 / MS-05-02 and this is how an `ncp` endpoint is registered in IS-04. This document supports accessing IS-12 / MS-05-02 objects with the HTTP protocol (http or https) using the IS-12 JSON schemas with minor modifications.
+
+## Use of Normative Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+
+## Definitions
+
+## IS-04 Interactions
+The IS-12 RestAPI MUST be accessible at the same `ncp` control endpoints published in IS-04 by replacing the <protocol> with "http" if the control endpoint is published with the "ws" protocol or "https" if the control endpoint is published with the "wss" protocol. The "http" or "https" protocols MUST NOT be published in IS-04. An implementation MUST support the WebSocket interface and optionally MAY support the RestAPI interface.
+
+Note: The availability of the IS-12 RestAPI can be verified using the `OPTIONS` verb.
+
+An implementation of the IS-12 RestAPI MAY provide read-only access to the objects and require a `Bearer` token to allow read-write access. The read-only `ncp` endpoint MUST have the suffix "Guest" in the path. For example using "ncWebSocketGuest" for the read-only endpoint and "ncWebSocket" for the read-write endpoint. An implementation MAY support either or both read-only  and read-write `ncp` endpoints.
+
+Note: The WebSocket IS-12 `ncp` endpoints uses the same approach.
+
+In the following sections of this document we will use one of the following paths to access the IS-12 RestAPI "http://<address>/ncWebSocket/v1.0", "https://<address>/ncWebSocket/v1.0", "http://<address>/ncWebSocketGuest/v1.0" and "https://<address>/ncWebSocketGuest/v1.0". The name "ncWebSocket" is vendor specific and MAY differ from the proposed string.
+
+## RestAPI Paths
+The IS-12 ResteAPI MUST be accessible using the `POST` or `OPTIONS` verb at the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be reserved for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection.
+
+The IS-12 RestAPI MUST support the `OPTIONS` vers as described in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors) An `OPTION` requrest MUST NOT be subject to read-only / read-write constraints and always respond 
+
+The body of a `POST` request MUST be one of the following IS-12 JSON schema: command-message.json, subscription-message.json.
+The body of a `POST` response MUST be one of the following IS-12 JSON schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json.
+
+## Read-Write Authorisation
+A request to a read-write `ncp` endpoint MUST provide a valid `Bearer` token obtained from the device through a vendor specific method. An `Unauthorized` (401) error MUST be returned if the request does not have a valid `Bearer` token when accessing a read-write `ncp` endpoint.
+
+Note: The same is true for using the Websocket interface. When upgrading an HTTP(s) connection of a read-write `ncp` endpoint to the WebSocket protocol using the `GET` verb, the request must have a valid `Bearer` token obtained from the device through a vendor specific method.
