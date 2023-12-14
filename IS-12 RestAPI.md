@@ -185,7 +185,7 @@ subscription-message-restapi.json
 }
 ```
 
-## RestAPI Paths
+## RestAPI
 The IS-12 ResteAPI MUST be accessible using the `POST` and `OPTIONS` verbs with the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be reserved for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection.
 
 The IS-12 RestAPI MUST support the `OPTIONS` verb as sepecified in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors). An `OPTION` request MUST NOT be subject to read-only / read-write constraints.
@@ -193,6 +193,8 @@ The IS-12 RestAPI MUST support the `OPTIONS` verb as sepecified in the IS-04 spe
 The body of a `POST` request MUST be one of the following IS-12 JSON schema: command-message-reatapi.json, subscription-message-restapi.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed. For a subscriptions the object MAY be speficied either an an object id or as a role path.
 
 The body of a `POST` response MUST be one of the following IS-12 JSON schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json. The response MUST be sent using the `chunked` `Transfer-Encoding` such that the client may retrieve command-response, subscription-response, notification and error messages independently.
+
+The RestAPI transport the same messages that would otherwise be transported in a WebSocket connection. Enhanced messages with object, method and property noptation are provided eith the RestAPI interface to ease the use by `curl` users that could bettern know the name of things than their hierarchical numbering.
 
 ### Object role path
 The `object` attribute of a command MUST identify an object with a role path where "/" stands for the `root`.
@@ -204,7 +206,7 @@ The `method` attribute of a command MUST identify an object method either with a
 
 Example: For the `object` "/AlertManager" the `method` "Get" identifies the `Get` method of the `mvAlertManager` class while the `method` "NcObject::Get" identifies the `Get` method of the `NcObject` base class.
 
-### Object property id
+### Object property name
 The `id` argument of type `NcPropertyId` passed to object methods MAY be specified either as an `NcPropertyId` value or a string value. When a string value is used it MUST a class path made of class names separated by "::" and terminated by the property name.
 
 Example: For the `object` "/AlertManager" the property `id` "MvAlertManager::alertCapabilities" identifies the `alertCapabilities` property of the `mvAlertManager` class.
