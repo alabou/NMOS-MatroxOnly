@@ -68,8 +68,19 @@ command-message-reatapi.json
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "handle",
+            "oneOf": [
+              { "required": [
+                    "handle",
+                    "oid",
+                    "methodId",
+                  ]
+              },
+              { "required": [
+                    "handle",
+                    "object",
+                    "method"
+                  ]
+              }
             ],
             "properties": {
               "handle": {
