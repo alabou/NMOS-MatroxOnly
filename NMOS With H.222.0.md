@@ -112,7 +112,7 @@ If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/b
 
 ## H.222.0 IS-04 Receivers
 
-Nodes implementing IS-04 v1.3 or higher that are capable of receiving H.222.0 video streams MUST have Receiver resources in the IS-04 Node API.
+Nodes implementing IS-04 v1.3 or higher that are capable of receiving H.222.0 multiplexed streams MUST have Receiver resources in the IS-04 Node API.
 
 A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and each sub-Stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
 
