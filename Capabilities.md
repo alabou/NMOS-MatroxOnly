@@ -60,3 +60,19 @@ This document describes values that may be used to identify a capability, used i
   - **Type:** integer
   - **Target:** (a) Flow `urn:x-matrox:data_layers` attribute of a mux Flow, (b) Number of data sub-streams of a mux Receiver.
 - **Applicability:** AMWA IS-04 v1.3
+
+### hkep
+- **Name:** `urn:x-matrox:cap:transport:hkep`
+- **Description:** Indicate that the Receiver / Sender supports HDCP / HKEP protected streams. A value false means that HDCP / HKEP streams are not supported, a value true means that only HDCP / HKEP streams are supported, a value { true, false } or {} indicate that both HDCP / HKEP protected streams and non-protected streams are supported.
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [HKEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-5_2022-03-22.pdf)
+  - **Type:** boolean
+  - **Target:** (a) SDP attribute `a=hkep:` parameter 
+- **Applicability:** AMWA IS-04 v1.3
+
+### privacy
+- **Name:** `urn:x-matrox:cap:transport:privacy`
+- **Description:** Indicate that the Receiver / Sender supports Privacy Encryption Protocol (PEP) protected streams. A value false means that PEP streams are not supported, a value true means that only PEP streams are supported, a value { true, false } or {} indicate that both PEP protected streams and non-protected streams are supported.
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [HKEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-02-13.pdf)
+  - **Type:** boolean
+  - **Target:** (a) SDP attribute `a=privacy:` parameter (b) IS-05 `ext_privacy` transport parameters
+- **Applicability:** AMWA IS-04 v1.3
