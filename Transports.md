@@ -40,7 +40,7 @@ This document describes various transport protocols and defines the identifier u
 - **Specification:** [AMWA IS-04 v1.3](https://specs.amwa.tv/is-04/v1.3)
 - **Applicability:** AMWA IS-04 since v1.3, IS-05 since v1.1
 
-- The `usb` transport is a data transport protocol comprising data sub-streams. A Sender using the `usb` transport must be associated with a Flow of format `urn:x-nmos:format:data`. A Receiver using the `ndi` transport must be of format `urn:x-nmos:format:data`.
+- The `usb` transport is a data transport protocol comprising data sub-streams. A Sender using the `usb` transport must be associated with a Flow of format `urn:x-nmos:format:data`. A Receiver using the `usb` transport must be of format `urn:x-nmos:format:data`.
 
 ### UDP
 - **Name:** `urn:x-matrox:transport:udp`
