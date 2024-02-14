@@ -191,7 +191,7 @@ Examples of SDP transport file are provided in the [Examples](../examples/).
 
 #### Other transports
 
-For Nodes transmitting AAC using other transports, the Sender resource MUST indicate the associated `urn:x-nmos:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting AAC using other transports, the Sender resource MUST indicate the associated `urn:x-nmos:transport:` or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
 
 Sender resources provide no indication of media type or format, since this is described by the associated Flow resource.
 
@@ -294,7 +294,7 @@ The following parameter constraints can be used to express limits or preferences
 
 ### Other transports
 
-For Nodes consuming AAC using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
+For Nodes consuming AAC using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
 
 For Receivers indicating `urn:x-nmos:format:video` for the `format` attribute, the following parameter constraints can be used to express limits or preferences specifically defined for AAC decoders:
 

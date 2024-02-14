@@ -82,7 +82,7 @@ Examples Flow resources are provided in [Examples](../examples/).
 
 ### Senders
 
-An NDI Sender resource MUST indicate `urn:x-nmos:transport:ndi` for the `transport` attribute.
+An NDI Sender resource MUST indicate `urn:x-nmos:transport:ndi` or or `urn:x-matrox:transport:ndi `for the `transport` attribute.
 
 A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and each sub-Flow making an NDI stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
 
@@ -117,7 +117,7 @@ The `manifest_href` MUST be null as there is no SDP transport file with NDI.
 
 ## NDI IS-04 Receivers
 
-An NDI Receiver resource MUST indicate `urn:x-nmos:transport:ndi` for the `transport` attribute.
+An NDI Receiver resource MUST indicate `urn:x-nmos:transport:ndi` or or `urn:x-matrox:transport:ndi` for the `transport` attribute.
 
 Nodes implementing IS-04 v1.3 or higher that are capable of receiving NDI multiplexed streams MUST have Receiver resources in the IS-04 Node API.
 
@@ -146,7 +146,7 @@ An example Receiver resource is provided in the [Examples](../examples/).
 
 ## NDI IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transport using the NDI specific trnaport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json).
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transport using the NDI specific transport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json).
 
 ### Receivers
 

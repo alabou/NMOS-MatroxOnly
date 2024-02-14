@@ -104,7 +104,7 @@ An example SDP file is provided in the [Examples](../examples/).
 
 #### Other transports
 
-For Nodes transmitting H.222.0 using other transports, the Sender resource MUST indicate the associated `urn:x-nmos:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting H.222.0 using other transports, the Sender resource MUST indicate the associated `urn:x-nmos:transport:` or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
 
 The `manifest_href` attribute MAY be `null` if an SDP transport file is not supported by the transport. Otherwise the SDP transport file MUST comply with the transport specific requirements. There is no SDP format-specific parameters requirements for transports other than RTP.
 
@@ -143,7 +143,7 @@ For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 ad
 
 ### Other transports
 
-For Nodes consuming H.222.0 using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
+For Nodes consuming H.222.0 using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
   
 ## H.222.0 IS-05 Senders and Receivers
 
