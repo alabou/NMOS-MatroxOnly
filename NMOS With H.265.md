@@ -235,6 +235,8 @@ This section applies to a Receiver directly or indirectly associated with an H.2
 
 Informative note: When an H.265 stream is directly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:video` and `media_types` of the `caps` attribute contains `video/H265`. When an H.265 stream is part of a multiplexed stream and is indirectly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:mux`, `media_types` of the `caps` attribute does not contains `video/H265` and `constraint_sets` of the `caps` attribute contains `video/H265`.
 
+Informative note: In the following text the word "stream" is used to indicate either an H.265 stream or an H.265 sub-stream depending on the direct verus indiret asssociation with the Receiver.
+
 For a Receiver directly associated with an H.265 stream, the Receiver resource MUST indicate `urn:x-nmos:format:video` for the `format` attribute and MUST list `video/H265` in the `media_types` array within the `caps` object. This has been permitted since IS-04 v1.1.
 
 For a Receiver indirectly associated with an H.265 stream part a multiplexed stream, the Receiver resource MUST indicate `urn:x-nmos:format:mux` for the `format` attribute, MUST list the mux media type in the `media_types` array within the `caps` object and MUST list a constraint set indicating support for the media type `video/H265` in the `constraint_sets` array within the `caps` object.

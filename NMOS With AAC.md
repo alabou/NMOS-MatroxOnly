@@ -21,10 +21,6 @@ A companion RTP payload format specification was developed through the IETF Payl
 
 > RFC 6416 is used in declarative mode as per RFC 6116 section 7.4.1 "Declarative SDP Usage for MPEG-4 Audio".
 
-The [Video Services Forum][VSF] developed Technical Recommendation [TR-??][TR-??] and [TR-??][TR-??] of the IPMX suite of protocols, which cover the end-to-end application use of constant and variable bitrate compression for audio, using the SMPTE ST 2110 and IPMX suite of protocols.
-
-TR-?? and TR-?? mandate the use of the AMWA [IS-04][IS-04] and [IS-05][IS-05] NMOS Specifications in IPMX compliant systems.  
-
 AMWA IS-04 and IS-05 already have support for RTP transport and can signal the media type `audio/mpeg4-generic` as defined in RFC 3640 or `audio/MP4A-LATM` as defined in RFC 6416. For MPEG2-TS transport the AAC codec is signaled as `audio/MP4A-ADTS`.
 
 > MPEG4 audio is a synonym for Advanced Audio Coding, corresponding to the AAC codec. The media type `audio/mpeg4-generic` indicates MPEG4 audio, hence the AAC codec. The media type `audio/MP4A-LATM` indicates MPEG4 audio framed using the LATM multiplexor to transport configuration information along with the audio stream. It indicates the AAC codec. The media type `audio/MP4A-ADTS` indicates MPEG4 audio framed using the ADTS multiplexor to transport configuration information along with the audio stream. Once again it indicates the AAC codec.
@@ -213,6 +209,8 @@ This section applies to a Receiver directly or indirectly associated with an AAC
 
 Informative note: When an AAC stream is directly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:audio` and `media_types` of the `caps` attribute contains `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS`. When an AAC stream is part of a multiplexed stream and is indirectly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:mux`, `media_types` of the `caps` attribute does not contains `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS` and `constraint_sets` of the `caps` attribute contains `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS`.
 
+Informative note: In the following text the word "stream" is used to indicate either an AAC stream or an AAC sub-stream depending on the direct verus indiret asssociation with the Receiver.
+
 For a Receiver directly associated with an AAC stream, the Receiver resource MUST indicate `urn:x-nmos:format:audio` for the `format` attribute and MUST list `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS` in the `media_types` array within the `caps` object. This has been permitted since IS-04 v1.1.
 
 For a Receiver indirectly associated with an AAC stream part a multiplexed stream, the Receiver resource MUST indicate `urn:x-nmos:format:mux` for the `format` attribute, MUST list the mux media type in the `media_types` array within the `caps` object and MUST list a constraint set indicating support for the media type `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS` in the `constraint_sets` array within the `caps` object.
@@ -232,6 +230,7 @@ The following parameter constraints can be used to express limits or preferences
   Some AAC levels are superset of other levels. The AAC specification describe the relationship among the levels. From the point of view of the AAC specification, supporting such superset level is required to also be supporting the associated subset levels. To assist a Controller not having knowledge of the AAC levels relationship, the Receiver Capabilities SHOULD enumerate all the subset levels in addition to the superset level.
 
 - [Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-bit-rate)
+
 - [Constant Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-constant-bit-rate)
 
 A Receiver MUST be able to decode bitstreams conforming to the profiles and levels declared in the Receiver Capabilities. A Receiver MAY have preferences and more optimal profiles and levels that MAY be declared through Receiver Capabilities. A preferred constraint set MAY indicate such preferences while another constraint set MAY indicate full support of some profiles and levels. A Receiver MAY further constrain the support of a coded bitstream compliant with a profile and level using other constraints in its Receiver Capabilities.
@@ -241,11 +240,8 @@ Other existing parameter constraints, such as the following, are also appropriat
 - [Channel Count](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#channel-count)
 - [Sample Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#sample-rate)
 - [Sample Depth](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#sample-depth)
-- [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
-- [Max Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#max-packet-time)
 - [Format Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-bit-rate)
 - [Format Constant Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-constant-bit-rate)
-- [Transport Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#transport-bit-rate)
 
 An example Receiver resource is provided in the [Examples](../examples/).
 
@@ -273,7 +269,12 @@ The following parameter constraints can be used to express limits or preferences
   The config used by the bitstream MUST be compliant with the `profile-level-id` parameter explicitly or implicitly declared in the stream's associated SDP transport file. The config MAY be specified out-of-band using the `config` parameter of an SDP transport file, in-band through the AAC bitstream or in-and-out-of-band using both mechanisms. See the [Parameter Sets](#parameter-sets) section for more details.
 
   A Receiver supporting `in_and_out_of_band` MUST also support the `in_band` and `out_of_band` modes. Such Receiver SHOULD have all "in_band", "out_of_band" and "in_and_out_of_band" values enumerated in the Receiver Capabilities in order to allow Senders operating in any `parameter_sets_transport_mode`.
- 
+
+Other existing parameter constraints, such as the following, are also appropriate to express limitations on supported AAC audio streams:
+
+- [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
+- [Max Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#max-packet-time)
+
 ## RTP transport based on RFC 2250
 
 For Nodes consuming AAC using the RTP payload mapping defined by RFC 2250, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
@@ -292,11 +293,15 @@ The following parameter constraints can be used to express limits or preferences
 
   A Receiver consuming AAC using the RTP payload mapping defined by RFC 2250 MUST support the `in_band` mode or be unconstrained.
 
+  A Sender producing AAC using the RTP payload mapping defined by RFC 2250 SHOULD use an audio frame of 960 samples and fallback to 1024 samples otherwise.
+
 ### Other transports
 
 For Nodes consuming AAC using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
 
-For Receivers indicating `urn:x-nmos:format:video` for the `format` attribute, the following parameter constraints can be used to express limits or preferences specifically defined for AAC decoders:
+A Sender producing AAC for other transports SHOULD use an audio frame of 960 samples and fallback to 1024 samples otherwise.
+ 
+For Receivers indicating `urn:x-nmos:format:audio` for the `format` attribute, the following parameter constraints can be used to express limits or preferences specifically defined for AAC decoders:
 
 - [Parameter Sets Flow Mode](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#parameter-sets-flow-mode)  
   A Receiver declares the `parameter_sets_flow_mode` capability to indicate that it supports bitstreams using parameter sets associated with strictly one (`strict`), one (`static`) or multiple (`dynamic`) Flows. Considering that active parameter sets are associated with a specific Flow, this capability indicates that a Receiver is capable or not of decoding an AAC bitstream where the associated Flow attributes change dynamically. 
@@ -325,7 +330,7 @@ For Receivers indicating `urn:x-nmos:format:mux` for the `format` attribute, the
   The config used by the bitstream MUST be compliant with the profile and level explicitly or implicitly declared in the transport stream. The config MUST be specified in-band through the AAC bitstream. See the [Parameter Sets](#parameter-sets) section for more details.
 
   A Receiver consuming AAC from a multiplexed stream MUST support the `in_band` mode or be unconstrained.
-  
+
 ## AAC IS-05 Senders and Receivers
 
 ### RTP transport
@@ -410,6 +415,3 @@ A Sender operating with `parameter_sets_flow_mode` set to `dynamic` MAY produce 
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
-
-
-- [ ] TODO: consider adding channel-order as per ST2110-30/31
