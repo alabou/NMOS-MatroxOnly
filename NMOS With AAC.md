@@ -179,6 +179,10 @@ Therefore:
 
 - The `maxDisplacement`, `constantDuration` and `de-interleaveBufferSize` format-specific parameters SHOULD be included with the correct value for RFC 3640 if the `packetization-mode` equals one of the interleaved modes.
 
+- The `constantDuration` format-specific parameters MUST be included with the correct value for RFC 3640.
+
+- The `ptime` attribute MUST be included with the correct value for RFC 6416.
+
 - The `sizeLength`, `indexLength` and `indexDeltaLength` MUST always be included for RFC 3640 as only mode AAC-hbr is supported. Expected values for AAC-hbr are `sizeLength` = 13, `indexLength` = 3 and `indexDeltaLength` = 3.
 
 Informative note: The Flow bit_rate information is assumed to be conveyed according to the rules of the standards being implemented by the device. In some scenarios the encoding is not declared out-of-band through the SDP transport file but in-band through the coded stream.
