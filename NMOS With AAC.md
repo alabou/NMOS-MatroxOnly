@@ -19,7 +19,7 @@ A companion RTP payload format specification was developed through the IETF Payl
 
 > RFC 3640 only support passing configuration information out-of-band while RFC 6416 support both in-band and out-of-band methods. When targetting MPEG2-TS transport the configuration information is provided in-band as per the H.222 specification.
 
-> RFC 6416 is used in declarative mode as per RFC 6116 section 7.4.1 "Declarative SDP Usage for MPEG-4 Audio".
+> RFC 6416 is used in declarative mode as per RFC 6416 section 7.4.1 "Declarative SDP Usage for MPEG-4 Audio".
 
 AMWA IS-04 and IS-05 already have support for RTP transport and can signal the media type `audio/mpeg4-generic` as defined in RFC 3640 or `audio/MP4A-LATM` as defined in RFC 6416. For MPEG2-TS transport the AAC codec is signaled as `audio/MP4A-ADTS`.
 
