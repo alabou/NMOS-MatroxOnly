@@ -172,7 +172,9 @@ In addition to those attributes defined in IS-04 for Senders, the following attr
   Informative note: This definition is consistent with the definition of the bit rate attribute (`b=` line) required by ST 2110-22 in the SDP media description. This SDP attribute is not specified in RFC 7798.
 
 - [Packet Transmission Mode](https://specs.amwa.tv/nmos-parameter-registers/branches/main/sender-attributes/#packet-transmission-mode)  
-  A Sender using the interleaved mode MUST include the `packet_transmission_mode` attribute and set it to `interleaved_nal_units`. The `packet_transmission_mode` attribute maps the the RFC 7798 `sprop-max-don-diff` parameter with `non_interleaved_nal_units` corresponding to value 0, `interleaved_nal_units` to value greater than 0. Since the default value of this attribute is `non_interleaved_nal_units`, the Sender MAY omit this attribute when using that mode. 
+  A Sender using the interleaved mode MUST include the `packet_transmission_mode` attribute and set it to `interleaved_nal_units`. The `packet_transmission_mode` attribute maps the the RFC 7798 `sprop-max-don-diff` parameter with `non_interleaved_nal_units` corresponding to value 0, `interleaved_nal_units` to value greater than 0. Since the default value of this attribute is `non_interleaved_nal_units`, the Sender MAY omit this attribute when using that mode.
+
+  PAyload Content Information (PACI) packets MUST not be produced by a Sender conforming to this specification.
 
 - [ST 2110-21 Sender Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/sender-attributes/#st-2110-21-sender-type)  
   If the Sender complies with the traffic shaping and delivery timing requirements for ST 2110-22, it MUST include the `st2110_21_sender_type` attribute.
