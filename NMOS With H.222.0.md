@@ -41,7 +41,7 @@ Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting H.222.
 
 A mux Source resource MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and it MUST be associated with a mux Flow of the same `format` through the `source_id` attribute of the mux Flow. A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, associated with a sub-Flow of said Flow, through the `source_id` attribute of the the sub-Flow, MUST be a member of said mux Source's `parents` attribute.
 
-In addition to those attributes defined in IS-04 for all mux Sources, the following attributes defined in the [Source Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SourceAttributes.md) are used for H.222.0.
+In addition to those attributes defined in IS-04 for audio, video and data Sources, the following attributes defined in the [Source Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SourceAttributes.md) are used for H.222.0.
 
 A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
 
@@ -51,7 +51,7 @@ Examples Source resources are provided in [Examples](../examples/).
 
 A mux Flow resource MUST indicate `video/MP2T` or `application/mp2t` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, MUST be a member of said mux Flow's `parents` attribute.
 
-When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `video/MP2T. Otherwise for other transports the `media_type` MUST be `application/mp2t`.
+When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `video/MP2T`. Otherwise for other transports the `media_type` MUST be `application/mp2t`.
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for H.222.0.
 
@@ -60,6 +60,12 @@ A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` an
 A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an MPEG2-TS stream. A mux Flow MUST NOT have such attribute.
 
 A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an MPEG2-TS stream. A mux Flow MUST NOT have such attribute.
+
+A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/L16`, `audio/L20` or `audio/L24` MUST be embedded in the MPEG2-TS stream as per [ST 302M][].
+
+A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/AM824` MUST be embedded in the MPEG2-TS stream as per [ST 302M][]. Such sub-Flow MUST be an opaque linear PCM AES3 Flow as per [NMOS with AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md).
+
+Note: Linear PCM Flows and opaque AM824 Flows are implicitely embedded in the MPEG2-TS stream as per [ST 302M][]. Coded audio Flows are embedded according to their format as per [H.222.0][]. A fully described AM824 Flow cannot be a sub-Flow of an H.222.0 mux Flow.
 
 Examples Flow resources are provided in [Examples](../examples/).
 
@@ -139,11 +145,11 @@ An example Receiver resource is provided in the [Examples](../examples/).
 
 ### RTP transport based on RFC 2250 and RFC 3551
 
-For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 adn RFC 3551, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 adn RFC 3551, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute and MUST indicate `video/MP2T` as the `media_type`.
 
 ### Other transports
 
-For Nodes consuming H.222.0 using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
+For Nodes consuming H.222.0 using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute and MUST indicate `application/mp2t` in the `media_type`.
   
 ## H.222.0 IS-05 Senders and Receivers
 
@@ -194,3 +200,6 @@ An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a J
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
 [VSF_TR-07]: https://vsf.tv/download/technical_recommendations/VSF_TR-07_2022-04-20.pdf "Transport of JPEG XS Video in MPEG-2 Transport Stream over IP"
+[ST 337]: https://ieeexplore.ieee.org/document/7291671 "ST 337:2015: Format for Non-PCM Audio and Data in an AES3 Serial Digital Audio Interface"
+[ST 302M]: https://ieeexplore.ieee.org/document/7291632 "SMPTE 302M: Mapping of AES3 Data into MPEG-2 Transport Stream"
+[AES3]: http://tech.ebu.ch/docs/tech/tech3250.pdf "SPECIFICATION OF THE DIGITAL AUDIO INTERFACE (The AES/EBU interface)"
