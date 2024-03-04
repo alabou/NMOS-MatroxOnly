@@ -37,7 +37,7 @@ A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio` or `ur
 
 ## AES3 Stream / AM824 Stream
 
-An AES3 Stream MUST be compliant with the standard implementation of the channel status as per section 7.2.2 of [AES3][] and only byte 0, 1, 2 and 23 MAY have a non-zero value. The AES3 Stream MUST be compliant with [AES/EBU Tech 3250-E][AES3] for the base functionality and PCM audio. Additionally it MUST be compliant with [ST 337] for non-PCM coded audio and data. As per ST 2110-31 or [ST 302M][] many such AES3 Streams can be multiplexed together into an RTP or MPEG2-TS stream.
+An AES3 Stream MUST be compliant with the standard implementation of the channel status as per section 7.2.2 of [AES3][] and only byte 0, 1, 2 and 23 MAY have a non-zero value. The AES3 Stream MUST be compliant with [AES/EBU Tech 3250-E][AES3] for the base functionality and PCM audio. Additionally it MUST be compliant with [ST 337] for non-PCM coded audio and data. As per ST 2110-31 or [ST 302M][] many such AES3 Streams can be multiplexed together into an RTP or MPEG2-TS stream. The `channel mode` field of byte 1 of the the channel status SHOULD be one of `mode not indicated`, `two-channel mode` or `stereophonic mode`.
 
 An AM824 Flow/Stream MUST have an associated `audio/AM824` media type and MAY comprise of a number of AES3 Streams. An opaque AM824 Flow/Stream does not provide information about the embedded AES3 Streams other than their count and common sample rate. A fully described AM824 Flow/Stream provides information about each embedded AES3 Stream in addition to their count and common sample rate.
 
