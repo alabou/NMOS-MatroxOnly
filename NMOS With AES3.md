@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 AES3 is a technology for the transmission and multiplexing of digital audio signals, standardized in AES/EBU Tech. 3250-E Third edition [AES/EBU Tech 3250-E][AES3] | IEC 60958.
 
-The Rec. [AES/EBU Tech 3250-E][AES3] | IEC 60958 specification and associated amendments describe the embedding of various media streams in an AES3 transport stream. The SMPTE [ST 2110-31][] specification describes the `audio/AM824` RTP payload format for the transport over RTP of AES3 transport streams. The SMPTE specification [ST 302M][] describes the embedding of AES3 transport streams into an MPEG2-TS stream. The SMPTE specification [ST 337][] describes the embedding of compressed digital audio in an AES3 transport stream.
+The Rec. [AES/EBU Tech 3250-E][AES3] | IEC 60958 specification and associated amendments describe the embedding of various media streams in an AES3 transport stream. The SMPTE ST 2110-31 specification describes the `audio/AM824` RTP payload format for the transport over RTP of AES3 transport streams. The SMPTE specification [ST 302M][] describes the embedding of AES3 transport streams into an MPEG2-TS stream. The SMPTE specification [ST 337][] describes the embedding of compressed digital audio in an AES3 transport stream.
 
 The [Video Services Forum][VSF] developed Technical Recommendation [VSF_TR-10-12][] for the transport of AES3 audio in an AES3 stream over IP.
 
@@ -37,11 +37,11 @@ A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio` or `ur
 
 ## AES3 Stream / AM824 Stream
 
-An AES3 Stream MUST be compliant with the standard implementation of the channel status as per section 7.2.2 of [AES3][] and only byte 0, 1, 2 and 23 MAY have a non-zero value. The AES3 Stream MUST be compliant with [AES/EBU Tech 3250-E][AES3] for the base functionality and PCM audio. Additionally it MUST be compliant with [ST 337] for non-PCM coded audio and data. As per [ST 2110-31][] or [ST 302M][] many such AES3 Streams can be multiplexed together into an RTP or MPEG2-TS stream.
+An AES3 Stream MUST be compliant with the standard implementation of the channel status as per section 7.2.2 of [AES3][] and only byte 0, 1, 2 and 23 MAY have a non-zero value. The AES3 Stream MUST be compliant with [AES/EBU Tech 3250-E][AES3] for the base functionality and PCM audio. Additionally it MUST be compliant with [ST 337] for non-PCM coded audio and data. As per ST 2110-31 or [ST 302M][] many such AES3 Streams can be multiplexed together into an RTP or MPEG2-TS stream.
 
 An AM824 Flow/Stream MUST have an associated `audio/AM824` media type and MAY comprise of a number of AES3 Streams. An opaque AM824 Flow/Stream does not provide information about the embedded AES3 Streams other than their count and common sample rate. A fully described AM824 Flow/Stream provides information about each embedded AES3 Stream in addition to their count and common sample rate.
 
-Note: This definition of an an AES Stream applies in the context of [ST 2110-31][] or [ST 302M][]. An AES/EBU digital audio interface MAY support enhanced functionality. It is expected that a conversion from/to the AES/EBU digital audio interface to/from an AM824 Flow/Stream will be performed when enhanced functionality is used/required on the AES/EBU digital audio interface.
+Note: This definition of an an AES Stream applies in the context of ST 2110-31 or [ST 302M][]. An AES/EBU digital audio interface MAY support enhanced functionality. It is expected that a conversion from/to the AES/EBU digital audio interface to/from an AM824 Flow/Stream will be performed when enhanced functionality is used/required on the AES/EBU digital audio interface.
 
 ## AES3 IS-04 Sources, Flows and Senders
 
