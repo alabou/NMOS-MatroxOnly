@@ -216,7 +216,7 @@ A Sender exposes either an opaque AM824 Stream (audio format) or an fully descri
 
 A Controller SHOULD allow opaque and fully described AM824 Streams to interoperate, converting Receiver capabilities to ones corresponding to the `format` of the Sender before verifying compatibility.
 
-### AM824 opaque Sender
+### AM824 fully described Receiver
 A Controller attempting to connect a fully described AM824 Receiver to an opaque AM824 Sender MUST consider the Receiver as being of `format` `urn:x-nmos:format:audio` and construct new capabilities for such Receiver with a `media_types` attribute having `audio/AM824` as the only member and the following capabilities if they exist for the actual mux Receiver capabilities:
 
   - NewAudioConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:enabled"
@@ -224,16 +224,16 @@ A Controller attempting to connect a fully described AM824 Receiver to an opaque
   - NewAudioConstraintSet."urn:x-nmos:cap:meta:label" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:label"
   - NewAudioConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
   - NewAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" = CurrentMuxConstraintSet."urn:x-nmos:cap:format:sample_rate" *if defined*
-  - NewAudioConstraintSet."urn:x-nmos:cap:format:channel_count" = 2 * CurrentMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" *if defined*
+  - NewAudioConstraintSet."urn:x-nmos:cap:format:channel_count" = 2 to SUM over layers of MAX(layer's PCM maximum channels, 2) *if defined*
   - NewAudioConstraintSet."urn:x-nmos:cap:transport:ptime" = CurrentMuxConstraintSet."urn:x-xnmos:cap:transport:ptime" *if defined*
   - NewAudioConstraintSet."urn:x-nmos:cap:transport:maxptime" = CurrentMuxConstraintSet."urn:x-nmos:cap:transport:maxptime" *if defined*
   - NewAudioConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" = CurrentMuxConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" *if defined*
   - NewAudioConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*
   - NewAudioConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*
 
-The mux capabilities (constraint sets) of the fully described AM824 audio Receiver are retrieved and converted to audio capabilities of an opaque AM824 Receiver before checking compliance with the opaque Sender.
+The mux capabilities (constraint sets) of the fully described AM824 audio Receiver are retrieved and converted to audio capabilities of an opaque AM824 Receiver before checking compliance with the opaque Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `audio_layers` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies withthe Receiver `audio_layers` capability.
 
-### AM824 fully described Sender
+### AM824 opaque Receiver
 A Controller attempting to connect an opaque AM824 Receiver to a fully described AM824 Sender MUST consider the Receiver as being of `format` `urn:x-nmos:format:mux` and construct new capabilities for such Receiver with a `media_types` attribute having `audio/AM824` as the only member and the following capabilities if they exist for the actual audio Receiver capabilities:
 
   - NewMuxConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:enabled"
@@ -241,7 +241,7 @@ A Controller attempting to connect an opaque AM824 Receiver to a fully described
   - NewMuxConstraintSet."urn:x-nmos:cap:meta:label" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:label"
   - NewMuxConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
   - NewMuxConstraintSet."urn:x-nmos:cap:format:sample_rate" = CurrentAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" *if defined*
-  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = CurrentAudioConstraintSet."urn:x-nmos:cap:format:channel_count" / 2 *if defined*
+  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = CurrentAudioConstraintSet."urn:x-nmos:cap:format:channel_count" / MAX(sub-streams PCM channels, 2) *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:ptime" = CurrentAudioConstraintSet."urn:x-xnmos:cap:transport:ptime" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:maxptime" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:maxptime" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" *if defined*
