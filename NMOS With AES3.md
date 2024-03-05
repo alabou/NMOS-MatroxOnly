@@ -222,7 +222,7 @@ A Sender exposes either an opaque AM824 Stream (audio format) or an fully descri
 
 A Controller SHOULD allow opaque and fully described AM824 Streams to interoperate, converting Receiver capabilities to ones corresponding to the `format` of the Sender before verifying compatibility.
 
-### AM824 fully described Receiver
+### AM824 fully described Receiver with an opaque Sender
 A Controller attempting to connect a fully described AM824 Receiver to an opaque AM824 Sender MUST consider the Receiver as being of `format` `urn:x-nmos:format:audio` and construct new capabilities for such Receiver with a `media_types` attribute having `audio/AM824` as the only member and the following capabilities if they exist for the actual mux Receiver capabilities:
 
   - NewAudioConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:enabled"
@@ -237,9 +237,9 @@ A Controller attempting to connect a fully described AM824 Receiver to an opaque
   - NewAudioConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*
   - NewAudioConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*
 
-The mux capabilities (constraint sets) of the fully described AM824 audio Receiver are retrieved and converted to audio capabilities of an opaque AM824 Receiver before checking compliance with the opaque Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `audio_layers` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies withthe Receiver `audio_layers` capability.
+The mux capabilities (constraint sets) of the fully described AM824 audio Receiver are retrieved and converted to audio capabilities of an opaque AM824 Receiver before checking compliance with the opaque Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `audio_layers` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies with its `audio_layers` capability.
 
-### AM824 opaque Receiver
+### AM824 opaque Receiver with a fully described Sender
 A Controller attempting to connect an opaque AM824 Receiver to a fully described AM824 Sender MUST consider the Receiver as being of `format` `urn:x-nmos:format:mux` and construct new capabilities for such Receiver with a `media_types` attribute having `audio/AM824` as the only member and the following capabilities if they exist for the actual audio Receiver capabilities:
 
   - NewMuxConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:enabled"
@@ -254,7 +254,7 @@ A Controller attempting to connect an opaque AM824 Receiver to a fully described
   - NewMuxConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*
   - NewMuxConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*
 
-The audio capabilities (constraint sets) of the opaque AM824 audio Receiver are retrieved and converted to mux capabilities of a fully described AM824 Receiver being unconstrained at the sub-streams level, before checking compliance with the opaque Sender.
+The audio capabilities (constraint sets) of the opaque AM824 audio Receiver are retrieved and converted to mux capabilities of a fully described AM824 Receiver being unconstrained at the sub-streams level, before checking compliance with the fully described Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `channel_order` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies its `channel_order` capability.
 
 [AES3]: http://tech.ebu.ch/docs/tech/tech3250.pdf "SPECIFICATION OF THE DIGITAL AUDIO INTERFACE (The AES/EBU interface)"
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
