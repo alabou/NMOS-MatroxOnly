@@ -113,6 +113,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 - [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
 - [Max Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#max-packet-time)
 - [ST 2110-21 Sender Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#st-2110-21-sender-type)
+- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
 
 #### RTP transport based on ST 2110-31
 
@@ -170,6 +171,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 - [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
 - [Max Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#max-packet-time)
 - [ST 2110-21 Sender Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#st-2110-21-sender-type)
+- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
 
 A Receiver MUST be able to consume compliant AES3 Streams.
 
