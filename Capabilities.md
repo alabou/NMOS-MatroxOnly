@@ -72,7 +72,7 @@ This document describes values that may be used to identify a capability, used i
 ### privacy
 - **Name:** `urn:x-matrox:cap:transport:privacy`
 - **Description:** Indicate that the Receiver / Sender supports Privacy Encryption Protocol (PEP) protected streams. A value false means that PEP streams are not supported, a value true means that only PEP streams are supported, a value { true, false } or {} indicate that both PEP protected streams and non-protected streams are supported.
-- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [HKEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-02-13.pdf)
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [PEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-02-13.pdf)
   - **Type:** boolean
   - **Target:** (a) SDP attribute `a=privacy:` parameter (b) IS-05 `ext_privacy` transport parameters
 - **Applicability:** AMWA IS-04 v1.3
