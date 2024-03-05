@@ -76,3 +76,11 @@ This document describes values that may be used to identify a capability, used i
   - **Type:** boolean
   - **Target:** (a) SDP attribute `a=privacy:` parameter (b) IS-05 `ext_privacy` transport parameters
 - **Applicability:** AMWA IS-04 v1.3
+- 
+### channel_order
+- **Name:** `urn:x-matrox:cap:transport:channel_order`
+- **Description:** Provides the ordering of channels into groups as per ST 2110-30 and ST 2110-31 channel grouping symbols for PCM amd AM824 streams.
+- **Specification:** SMPTE ST 2110-30 and ST 2110-31, [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md), [NMOS With AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md)
+  - **Type:** string
+  - **Target:** (a) SDP channel-order parameter.
+- **Applicability:** AMWA IS-04 v1.3
