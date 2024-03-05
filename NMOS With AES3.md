@@ -126,7 +126,7 @@ The SDP file at the `manifest_href` MUST comply with the requirements of ST 2110
 
 ###### channel-order
 
-The `channel-order` parameter of the SDP transport file associated with an AM824 Stream MUST use the ST 2110-30 PCM channel grouping symbols to indicate layout of an AM824 Stream. The ST 2110-31 AES symbol MUST be used for non-linear AES Streams. Such layout MUST indicate the number of audio layers multiplexed in the AM824 Stream. Thie requirement applies to both opaque and fully described AM824 Streams.
+The SDP transport file associated with an AM824 Stream MUST have `channel-order` parameter to indicate the grouping of channels in AM824 Stream. The `channel-order` parameter MUST use the ST 2110-30 channel grouping symbols for linear PCM AES3 Streamsand the ST 2110-31 channel grouping symbol `AES` for non-linear AES Streams. Such layout MUST indicate the number of audio layers multiplexed in the AM824 Stream. This requirement applies to both opaque and fully described AM824 Streams.
 
 An example SDP file is provided in the [Examples](../examples/).
 
