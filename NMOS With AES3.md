@@ -124,6 +124,10 @@ An example Sender resource is provided in the [Examples](../examples/).
 
 The SDP file at the `manifest_href` MUST comply with the requirements of ST 2110-31 for the AM824 Stream.
 
+###### channel-order
+
+The `channel-order` parameter of the SDP transport file associated with an AM824 Stream MUST use the ST 2110-30 PCM channel grouping symbols to indicate layout of an AM824 Stream. The ST 2110-31 AES symbol MUST be used for non-linear AES Streams. Such layout MUST indicate the number of audio layers multiplexed in the AM824 Stream. Thie requirement applies to both opaque and fully described AM824 Streams.
+
 An example SDP file is provided in the [Examples](../examples/).
 
 #### Other transports
@@ -241,7 +245,7 @@ A Controller attempting to connect an opaque AM824 Receiver to a fully described
   - NewMuxConstraintSet."urn:x-nmos:cap:meta:label" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:label"
   - NewMuxConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
   - NewMuxConstraintSet."urn:x-nmos:cap:format:sample_rate" = CurrentAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" *if defined*
-  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = CurrentAudioConstraintSet."urn:x-nmos:cap:format:channel_count" / MAX(sub-streams PCM channels, 2) *if defined*
+  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = groups in CurrentAudioConstraintSet."urn:x-matrox:cap:format:channel_order" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:ptime" = CurrentAudioConstraintSet."urn:x-xnmos:cap:transport:ptime" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:maxptime" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:maxptime" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" *if defined*
