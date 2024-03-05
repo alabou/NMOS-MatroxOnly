@@ -247,7 +247,7 @@ A Controller attempting to connect an opaque AM824 Receiver to a fully described
   - NewMuxConstraintSet."urn:x-nmos:cap:meta:label" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:label"
   - NewMuxConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
   - NewMuxConstraintSet."urn:x-nmos:cap:format:sample_rate" = CurrentAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" *if defined*
-  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = groups in CurrentAudioConstraintSet."urn:x-matrox:cap:format:channel_order" *if defined*
+  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = groups in CurrentAudioConstraintSet."urn:x-matrox:cap:transport:channel_order" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:ptime" = CurrentAudioConstraintSet."urn:x-xnmos:cap:transport:ptime" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:maxptime" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:maxptime" *if defined*
   - NewMuxConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" *if defined*
