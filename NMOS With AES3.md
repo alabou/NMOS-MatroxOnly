@@ -109,11 +109,12 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 - [Media Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#media-type)
 - [Channel Count](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#channel-count)
+- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
+    When both `channel_order` and `channel_count` capabilities are declared, they MUST enumerate the same number of elements where element i of the `channel_count` array indicates the number of channels for all the groups of the `channel_order` element i.
 - [Sample Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#sample-rate)
 - [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
 - [Max Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#max-packet-time)
 - [ST 2110-21 Sender Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#st-2110-21-sender-type)
-- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
 
 #### RTP transport based on ST 2110-31
 
@@ -167,11 +168,12 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 - [Media Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#media-type)
 - [Channel Count](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#channel-count)
+- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
+    When both `channel_order` and `channel_count` capabilities are declared, they MUST enumerate the same number of elements where element i of the `channel_count` array indicates the number of channels for all the groups of the `channel_order` element i.
 - [Sample Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#sample-rate)
 - [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
 - [Max Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#max-packet-time)
 - [ST 2110-21 Sender Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#st-2110-21-sender-type)
-- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
 
 A Receiver MUST be able to consume compliant AES3 Streams.
 
@@ -229,14 +231,10 @@ A Controller attempting to connect a fully described AM824 Receiver to an opaque
   - NewAudioConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:preference"
   - NewAudioConstraintSet."urn:x-nmos:cap:meta:label" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:label"
   - NewAudioConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
-  - NewAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" = CurrentMuxConstraintSet."urn:x-nmos:cap:format:sample_rate" *if defined*
-  - NewAudioConstraintSet."urn:x-nmos:cap:format:channel_count" = 2 to SUM over layers of MAX(layer's PCM maximum channels, 2) *if defined*
-  - NewAudioConstraintSet."urn:x-nmos:cap:transport:ptime" = CurrentMuxConstraintSet."urn:x-xnmos:cap:transport:ptime" *if defined*
-  - NewAudioConstraintSet."urn:x-nmos:cap:transport:maxptime" = CurrentMuxConstraintSet."urn:x-nmos:cap:transport:maxptime" *if defined*
-  - NewAudioConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" = CurrentMuxConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" *if defined*
+  - NewAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" = 48 KHz
   - NewAudioConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*
   - NewAudioConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*
-
+    
 The mux capabilities (constraint sets) of the fully described AM824 audio Receiver are retrieved and converted to audio capabilities of an opaque AM824 Receiver before checking compliance with the opaque Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `audio_layers` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies with its `audio_layers` capability.
 
 ### AM824 opaque Receiver with a fully described Sender
@@ -246,15 +244,18 @@ A Controller attempting to connect an opaque AM824 Receiver to a fully described
   - NewMuxConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:preference"
   - NewMuxConstraintSet."urn:x-nmos:cap:meta:label" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:label"
   - NewMuxConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
-  - NewMuxConstraintSet."urn:x-nmos:cap:format:sample_rate" = CurrentAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" *if defined*
-  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = groups in CurrentAudioConstraintSet."urn:x-matrox:cap:transport:channel_order" *if defined*
-  - NewMuxConstraintSet."urn:x-nmos:cap:transport:ptime" = CurrentAudioConstraintSet."urn:x-xnmos:cap:transport:ptime" *if defined*
-  - NewMuxConstraintSet."urn:x-nmos:cap:transport:maxptime" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:maxptime" *if defined*
-  - NewMuxConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" = CurrentAudioConstraintSet."urn:x-nmos:cap:transport:st2110_21_sender_type" *if defined*
+  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = 1 to MAX groups in CurrentAudioConstraintSet."urn:x-matrox:cap:transport:channel_order" elements
   - NewMuxConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*
   - NewMuxConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*
 
-The audio capabilities (constraint sets) of the opaque AM824 audio Receiver are retrieved and converted to mux capabilities of a fully described AM824 Receiver being unconstrained at the sub-streams level, before checking compliance with the fully described Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `channel_order` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies its `channel_order` capability.
+  For layer = 0 to layer smaller than MAX groups of CurrentAudioConstraintSet."urn:x-nmos:cap:format:channel_order" elements: 
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:enabled" = true
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:preference"
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:format" = "urn:x-nmos:format:audio"
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:layer" = layer
+    - SubStreamConstraintSet."urn:x-nmos:cap:format:sample_rate" = 48 KHz
+
+The audio capabilities (constraint sets) of the opaque AM824 audio Receiver are retrieved and converted to mux capabilities of a fully described AM824 Receiver being unconstrained at the sub-streams level except for the `sample_rate`, before checking compliance with the fully described Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `channel_order` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies its `channel_order` capability.
 
 [AES3]: http://tech.ebu.ch/docs/tech/tech3250.pdf "SPECIFICATION OF THE DIGITAL AUDIO INTERFACE (The AES/EBU interface)"
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
