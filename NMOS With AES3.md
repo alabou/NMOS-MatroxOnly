@@ -227,33 +227,33 @@ A Controller SHOULD allow opaque and fully described AM824 Streams to interopera
 ### AM824 fully described Receiver with an opaque Sender
 A Controller attempting to connect a fully described AM824 Receiver to an opaque AM824 Sender MUST consider the Receiver as being of `format` `urn:x-nmos:format:audio` and construct new capabilities for such Receiver with a `media_types` attribute having `audio/AM824` as the only member and the following capabilities if they exist for the actual mux Receiver capabilities:
 
-  - NewAudioConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:enabled"
-  - NewAudioConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:preference"
-  - NewAudioConstraintSet."urn:x-nmos:cap:meta:label" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:label"
-  - NewAudioConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
-  - NewAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" = 48 KHz
-  - NewAudioConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*
-  - NewAudioConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*
+  - NewAudioConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:enabled"  
+  - NewAudioConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:preference"  
+  - NewAudioConstraintSet."urn:x-nmos:cap:meta:label" = CurrentMuxConstraintSet."urn:x-nmos:cap:meta:label"  
+  - NewAudioConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`  
+  - NewAudioConstraintSet."urn:x-nmos:cap:format:sample_rate" = 48 KHz  
+  - NewAudioConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*  
+  - NewAudioConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentMuxConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*  
     
 The mux capabilities (constraint sets) of the fully described AM824 audio Receiver are retrieved and converted to audio capabilities of an opaque AM824 Receiver before checking compliance with the opaque Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `audio_layers` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies with its `audio_layers` capability.
 
 ### AM824 opaque Receiver with a fully described Sender
 A Controller attempting to connect an opaque AM824 Receiver to a fully described AM824 Sender MUST consider the Receiver as being of `format` `urn:x-nmos:format:mux` and construct new capabilities for such Receiver with a `media_types` attribute having `audio/AM824` as the only member and the following capabilities if they exist for the actual audio Receiver capabilities:
 
-  - NewMuxConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:enabled"
-  - NewMuxConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:preference"
-  - NewMuxConstraintSet."urn:x-nmos:cap:meta:label" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:label"
-  - NewMuxConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`
-  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = 1 to MAX groups in CurrentAudioConstraintSet."urn:x-matrox:cap:transport:channel_order" elements
-  - NewMuxConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*
-  - NewMuxConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*
+  - NewMuxConstraintSet."urn:x-nmos:cap:meta:enabled" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:enabled"  
+  - NewMuxConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:preference"  
+  - NewMuxConstraintSet."urn:x-nmos:cap:meta:label" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:label"  
+  - NewMuxConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`  
+  - NewMuxConstraintSet."urn:x-matrox:cap:format:audio_layers" = 1 to MAX groups in CurrentAudioConstraintSet."urn:x-matrox:cap:transport:channel_order" elements  
+  - NewMuxConstraintSet."urn:x-matrox:cap:transport:hkep" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*  
+  - NewMuxConstraintSet."urn:x-matrox:cap:transport:privacy" = CurrentAudioConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*  
 
-  For layer = 0 to layer smaller than MAX groups of CurrentAudioConstraintSet."urn:x-nmos:cap:format:channel_order" elements: 
-    - SubStreamConstraintSet."urn:x-nmos:cap:meta:enabled" = true
-    - SubStreamConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:preference"
-    - SubStreamConstraintSet."urn:x-nmos:cap:meta:format" = "urn:x-nmos:format:audio"
-    - SubStreamConstraintSet."urn:x-nmos:cap:meta:layer" = layer
-    - SubStreamConstraintSet."urn:x-nmos:cap:format:sample_rate" = 48 KHz
+  For layer = 0 to layer smaller than MAX groups of CurrentAudioConstraintSet."urn:x-nmos:cap:format:channel_order" elements:  
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:enabled" = true  
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:preference" = CurrentAudioConstraintSet."urn:x-nmos:cap:meta:preference"  
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:format" = "urn:x-nmos:format:audio"  
+    - SubStreamConstraintSet."urn:x-nmos:cap:meta:layer" = layer  
+    - SubStreamConstraintSet."urn:x-nmos:cap:format:sample_rate" = 48 KHz  
 
 The audio capabilities (constraint sets) of the opaque AM824 audio Receiver are retrieved and converted to mux capabilities of a fully described AM824 Receiver being unconstrained at the sub-streams level except for the `sample_rate`, before checking compliance with the fully described Sender. The Controller SHOULD use the `channel-order` parameter of the SDP transport file to verify the compliance of the Sender with the Receiver `channel_order` capability. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file complies its `channel_order` capability.
 
