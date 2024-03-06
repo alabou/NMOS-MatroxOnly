@@ -109,7 +109,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 - [Media Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#media-type)
 - [Channel Count](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#channel-count)
-- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
+- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)  
     When both `channel_order` and `channel_count` capabilities are declared, they MUST enumerate the same number of elements where element i of the `channel_count` array indicates the number of channels for all the groups of the `channel_order` element i.
 - [Sample Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#sample-rate)
 - [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
@@ -168,7 +168,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 - [Media Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#media-type)
 - [Channel Count](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#channel-count)
-- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)
+- [Channel Order](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#channel_order)  
     When both `channel_order` and `channel_count` capabilities are declared, they MUST enumerate the same number of elements where element i of the `channel_count` array indicates the number of channels for all the groups of the `channel_order` element i.
 - [Sample Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#sample-rate)
 - [Packet Time](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#packet-time)
