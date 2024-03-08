@@ -33,33 +33,33 @@ A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:
 
 The "urn:x-nmos:tag:grouphint/v1.0" tag array MUST comprise a single string formatted as follow:
 
-"<group-name> <group-index>:<role-in-group> <role-index>"
+`"<group-name> <group-index>:<role-in-group> <role-index>"`
 
-The <group-name>, <group-index>, <role-in-group>, <role-index> sequences MUST be replaced with the proper value as defined in the followign sections. The <group-name> MUST be a sequence of the letters [a-zA-Z]. The <group-index> MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The <group-name> and <group-index> sequences MUST be seperated by a single space. The <role-in-group> MUST be a sequence of the letters [a-zA-Z]. The <role-index> MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The <role-in-group> and <role-index> sequences MUST be seperated by a single space. The <group-index> and <role-in-group> MUST be seperated by a colon ':'.
+The `<group-name>`, `<group-index>`, `<role-in-group>`, `<role-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<group-name>` MUST be a sequence of the letters [a-zA-Z]. The `<group-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<group-name>` and `<group-index>` sequences MUST be seperated by a single space. The `<role-in-group>` MUST be a sequence of the letters [a-zA-Z]. The `<role-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<role-in-group>` and `<role-index>` sequences MUST be seperated by a single space. The `<group-index>` and `<role-in-group>` MUST be seperated by a colon ':'.
 
 The scope is always `device` which is the default value as per [Group Hint](https://specs.amwa.tv/nmos-parameter-registers/branches/main/tags/grouphint.html#group-hint-urn).
 
 ## Transport
 
-A <group-name> is associated with a transport and describes a grouping over IP. For the base transports `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:mqtt`, `urn:x-nmos:transport:websocket`, `urn:x-matrox:transport:ndi`, `urn:x-matrox:transport:srt`, `urn:x-matrox:transport:usb`, `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:tcp` and their sub-classes the <group-name> is the base transport name. The <group-name> SHOULD be using uppercase letters.
+A `<group-name>` is associated with a transport and describes a grouping over IP. For the base transports `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:mqtt`, `urn:x-nmos:transport:websocket`, `urn:x-matrox:transport:ndi`, `urn:x-matrox:transport:srt`, `urn:x-matrox:transport:usb`, `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:tcp` and their sub-classes the `<group-name>` is the base transport name. The `<group-name>` SHOULD be using uppercase letters.
 
-For the base transports rtp, srt and udp, when the Flow associated with a Sender is of format `urn:x-nmos:format:mux` the <group-name> SHOULD be "MP2T". Similarly when the Receiver is of format `urn:x-nmos:format:mux` the <group-name> SHOULD be "MP2T". Otherwise the <group-name> MUST be "RTP", "SRT" and "UDP" respectively. Similarly for the `urn:x-nmos:transport:mqtt`, `urn:x-nmos:transport:websocket`, `urn:x-matrox:transport:ndi`, `urn:x-matrox:transport:usb` and `urn:x-matrox:transport:tcp` the <group-name> MUST be "MQTT", "WS", "NDI", "USB" and "TCP" respectively.
+For the base transports rtp, srt and udp, when the Flow associated with a Sender is of format `urn:x-nmos:format:mux` the `<group-name>` SHOULD be "MP2T". Similarly when the Receiver is of format `urn:x-nmos:format:mux` the `<group-name>` SHOULD be "MP2T". Otherwise the `<group-name>` MUST be "RTP", "SRT" and "UDP" respectively. Similarly for the `urn:x-nmos:transport:mqtt`, `urn:x-nmos:transport:websocket`, `urn:x-matrox:transport:ndi`, `urn:x-matrox:transport:usb` and `urn:x-matrox:transport:tcp` the `<group-name>` MUST be "MQTT", "WS", "NDI", "USB" and "TCP" respectively.
 
 ## Format
 
-A <role-in-group> is associated with the format of a Sender or Receiver. For the formats `urn:x-nmos:format:video`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:data` and `urn:x-nmos:format:mux` the <role-in-group> MUST be "VIDEO", "AUDIO", "DATA" and "MUX" respectively.
+A `<role-in-group>` is associated with the format of a Sender or Receiver. For the formats `urn:x-nmos:format:video`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:data` and `urn:x-nmos:format:mux` the `<role-in-group>` MUST be "VIDEO", "AUDIO", "DATA" and "MUX" respectively.
 
 ## Layer
 
-The <role-index> is associated with the concept of "layer" of sub-Flows/sub-Streams. For independent Senders/Receivers it describes an ordering of the independent Senders/Receivers for a given role/format. The <role-index> MUST start at 0 and increment for each succesive layer of the same format. The <role-index> values MUST be consecutive integer values starting at 0.
+The `<role-index>` is associated with the concept of "layer" of sub-Flows/sub-Streams. For independent Senders/Receivers it describes an ordering of the independent Senders/Receivers for a given role/format. The `<role-index>` MUST start at 0 and increment for each succesive layer of the same format. The `<role-index>` values MUST be consecutive integer values starting at 0.
 
 ## Senders
 
-The <group-index> value for a Sender "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Senders within a Device. The groups of Senders SHOULD be considered independent of the groups of Receivers within a Device. Identical <group-name> <group-index> groups for Senders and Receivers have no special meaning and are allowed.
+The `<group-index>` value for a Sender "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Senders within a Device. The groups of Senders SHOULD be considered independent of the groups of Receivers within a Device. Identical `<group-name> <group-index>` groups for Senders and Receivers have no special meaning and are allowed.
 
 ## Receivers
 
-The <group-index> value for a Receiver "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Receivers within a Device. The groups of Receivers SHOULD be considered independent of the groups of Senders within a Device. Identical <group-name> <group-index> groups for Senders and Receivers have no special meaning and are allowed.
+The `<group-index>` value for a Receiver "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Receivers within a Device. The groups of Receivers SHOULD be considered independent of the groups of Senders within a Device. Identical `<group-name> <group-index>` groups for Senders and Receivers have no special meaning and are allowed.
 
 ## Controllers
 
