@@ -85,7 +85,7 @@ This document describes values that may be used to identify a capability, used i
   - **Target:** (a) SDP channel-order parameter of PCM streams and opaque AM824 streams.
 - **Applicability:** AMWA IS-04 v1.3
 
-- ### Parameter Sets Transport Mode
+### Parameter Sets Transport Mode
 - **Name:** `urn:x-matrox:cap:transport:parameter_sets_transport_mode`
 - **Description:** Identifies the acceptable parameter sets transport modes.
 - **Specification:** per AMWA BCP-004-01
