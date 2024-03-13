@@ -85,7 +85,7 @@ This document describes values that may be used to identify a capability, used i
   - **Target:** (a) SDP channel-order parameter of PCM streams and opaque AM824 streams.
 - **Applicability:** AMWA IS-04 v1.3
 
-### Parameter Sets Transport Mode
+### parameter_sets_transport_mode
 - **Name:** `urn:x-matrox:cap:transport:parameter_sets_transport_mode`
 - **Description:** Identifies the acceptable parameter sets transport modes.
 - **Specification:** per AMWA BCP-004-01
@@ -93,7 +93,7 @@ This document describes values that may be used to identify a capability, used i
   - **Target:** (a) Sender `parameter_sets_transport_mode`, (b) SDP attribute `a=fmtp:` format-specific parameter `sprop-parameter-sets`, per [RFC 6184][RFC-6184], (c) SDP attribute `a=fmtp:` format-specific parameters `sprop-vps`, `sprop-sps` and `sprop-pps`, per [RFC 7798][RFC-7798], (d) SDP attribute `a=fmtp:` format-specific parameter `config` per [RFC 6416][RFC-6416]
 - **Applicability:** AMWA IS-04
 
-### Parameter Sets Flow Mode
+### parameter_sets_flow_mode
 - **Name:** `urn:x-matrox:cap:transport:parameter_sets_flow_mode`
 - **Description:** Identifies the acceptable parameter sets flow modes.
 - **Specification:** per AMWA BCP-004-01
