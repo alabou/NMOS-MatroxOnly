@@ -84,3 +84,19 @@ This document describes values that may be used to identify a capability, used i
   - **Type:** string
   - **Target:** (a) SDP channel-order parameter of PCM streams and opaque AM824 streams.
 - **Applicability:** AMWA IS-04 v1.3
+
+- ### Parameter Sets Transport Mode
+- **Name:** `urn:x-matrox:cap:transport:parameter_sets_transport_mode`
+- **Description:** Identifies the acceptable parameter sets transport modes.
+- **Specification:** per AMWA BCP-004-01
+  - **Type:** string (enumerated values as per the specifications [H.264](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.264.md), [H.265](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.265.md), [AAC](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AAC.md))
+  - **Target:** (a) Sender `parameter_sets_transport_mode`, (b) SDP attribute `a=fmtp:` format-specific parameter `sprop-parameter-sets`, per [RFC 6184][RFC-6184], (c) SDP attribute `a=fmtp:` format-specific parameters `sprop-vps`, `sprop-sps` and `sprop-pps`, per [RFC 7798][RFC-7798], (d) SDP attribute `a=fmtp:` format-specific parameter `config` per [RFC 6416][RFC-6416]
+- **Applicability:** AMWA IS-04
+
+### Parameter Sets Flow Mode
+- **Name:** `urn:x-matrox:cap:transport:parameter_sets_flow_mode`
+- **Description:** Identifies the acceptable parameter sets flow modes.
+- **Specification:** per AMWA BCP-004-01
+  - **Type:** string (enumerated values as per the specifications [H.264](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.264.md), [H.265](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.265.md), [AAC](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AAC.md))
+  - **Target:** (a) Sender `parameter_sets_flow_mode`
+- **Applicability:** AMWA IS-04
