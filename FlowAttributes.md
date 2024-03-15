@@ -37,3 +37,10 @@ This document describes additional Flow attributes and their permitted values wh
 - **Applicability:** 
 - **Permitted Values:**
   - It corresponds to an unsigned integer in the range 0 to N-1 where N is the total number of layers of a given format.
+
+### constant_bit_rate
+- **Name:** `urn:x-matrox:constant_bit_rate`
+- **Description:** This attributes qualifies the `bit_rate` attribute as being constant or variable.
+- **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3), [Matrox Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md)
+- **Applicability:** 
+- **Permitted Values:** true, false
