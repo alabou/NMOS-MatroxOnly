@@ -29,3 +29,10 @@ This document describes additional Source attributes and their permitted values 
 - **Applicability:** 
 - **Permitted Values:**
   - The layer value matching a sub-Stream Constraint Set of the Receiver's Capabilities.
+
+### synchronous_media
+- **Name:** `urn:x-matrox:synchronous_media`
+- **Description:** This attributes indicates the media is synchronous (true) or asynchronous (false) to the source reference clock. An unspecified attribute shall be interpreted according to the operational environment. For an ST-2110 environment an unspecified attribute must be interpreted as synchronous media. For an IPMX environment an unspecified attribute must be interpreted as an asynchronous media. If this attribute is not specified for a Source then the SDP transport file a=mediaclk attribute should be used to know about the media being synchronous or asynchronous.
+- **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3)
+- **Applicability:** 
+- **Permitted Values:** true, false

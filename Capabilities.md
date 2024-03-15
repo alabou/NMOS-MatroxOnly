@@ -88,15 +88,39 @@ This document describes values that may be used to identify a capability, used i
 ### parameter_sets_transport_mode
 - **Name:** `urn:x-matrox:cap:transport:parameter_sets_transport_mode`
 - **Description:** Identifies the acceptable parameter sets transport modes.
-- **Specification:** per AMWA BCP-004-01
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
   - **Type:** string (enumerated values as per the specifications [H.264](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.264.md), [H.265](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.265.md), [AAC](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AAC.md))
   - **Target:** (a) Sender `parameter_sets_transport_mode`, (b) SDP attribute `a=fmtp:` format-specific parameter `sprop-parameter-sets`, per [RFC 6184][RFC-6184], (c) SDP attribute `a=fmtp:` format-specific parameters `sprop-vps`, `sprop-sps` and `sprop-pps`, per [RFC 7798][RFC-7798], (d) SDP attribute `a=fmtp:` format-specific parameter `config` per [RFC 6416][RFC-6416]
-- **Applicability:** AMWA IS-04
+- **Applicability:** AMWA IS-04 v1.3
 
 ### parameter_sets_flow_mode
 - **Name:** `urn:x-matrox:cap:transport:parameter_sets_flow_mode`
 - **Description:** Identifies the acceptable parameter sets flow modes.
-- **Specification:** per AMWA BCP-004-01
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
   - **Type:** string (enumerated values as per the specifications [H.264](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.264.md), [H.265](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.265.md), [AAC](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AAC.md))
   - **Target:** (a) Sender `parameter_sets_flow_mode`
-- **Applicability:** AMWA IS-04
+- **Applicability:** AMWA IS-04 v1.3
+
+### clock_ref_type
+- **Name:** `urn:x-matrox:cap:transport:clock_ref_type`
+- **Description:** Identifies the acceptable clock reference supported by a Receiver. The clock associated with a Flow is identified by the `clock_name` attribute of the Source associated with the Flow. The value `internal` implies recovering the Sender's internal clock, while the value `ptp` implies using the common reference clock. 
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+  - **Type:** string (enumerated values as per IS-04 schema clock_internal.json `internal` and clock_ptp.json `ptp`)
+  - **Target:** (a) `ref_type` of Source's associated `clock_name` clock. (b) SDP a=ts-refclk attributes
+- **Applicability:** AMWA IS-04 v1.3
+
+### synchronous_media
+- **Name:** `urn:x-matrox:cap:transport:synchronous_media`
+- **Description:** Identifies the acceptable media types supported by a Receiver. A media is either synchronous or asynchronous to the reference clock. A receiver may support either or both types.
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+  - **Type:** boolean
+  - **Target:** (a) `urn:x-matrox:synchronous_media` attribute of a Source. (b) SDP a=mediaclk attribute (`sender` implies asynchronous, `direct` implies synchronous)
+- **Applicability:** AMWA IS-04 v1.3
+
+### info_block
+- **Name:** `urn:x-matrox:cap:transport:info_block`
+- **Description:** Identifies if the Receiver supports in-band dynamic updates of some of the SDP transport file parameters from Media Info Blocks. The info block mechanism is standard for IPMX Senders but it is optional for Receivers. A list of supportted Media Info Block types is provided. En empty list indicate that the info block mechanism is not supported at all. A partial list indicate the Media Info Block types that are supported. An empty list indicates that the Receiver does not support in-band SDP transport file parameters updates and require the Controller to PATCH an updated SDP transport file. If the Media Info Block type of a stream is part of the list it indicates that the Receiver will internally update itself using the in-band parameters of the info block and that a Controller does not have to intervene if the content of the SDP transport file that has changed is part of the IPMX info block. If anything changes in the SDP transport file that is not part of an info block then the Controller has to intervene and PATCH the new SDP transport file to the Receiver. Note that for coded Flows the Sender `parameter_sets_flow_mode` attribute allows for a similar functionality when the content of the SDP transport file does not change. The `info_block` capability allows for more flexibility when the SDP transport file changes are transmitted as part of the IPMX info block.
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+  - **Type:** array of integer (Media Info Block type identifiers)
+  - **Target:** (a) `transport_file` activation attribute of the Receiver.
+- **Applicability:** AMWA IS-04 v1.3, AMWA IS-05 v1.1
