@@ -94,7 +94,7 @@ The `protocol` transport parameter MUST default to `listener` on an SRT Sender a
 
 The SRT native stream encryption MAY be controlled using the [Privacy Encrption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the SRT transport adaptation. When using this protocol adaptation the SRT passphrase is derived from the PEP key derivation function.
 
-The SRT stream MAY further be encrypted using the [Privacy Encrption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the USP transport adaptation when the transport is `urn:x-matrox:transport:srt` or `urn:x-matrox:transport:srt.mp2t` or using the RTP transport adaptation when the transport is `urn:x-matrox:transport:srt.rtp`.
+The SRT stream MAY further be encrypted using the [Privacy Encrption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the UDP transport adaptation when the transport is `urn:x-matrox:transport:srt` or `urn:x-matrox:transport:srt.mp2t` or using the RTP transport adaptation when the transport is `urn:x-matrox:transport:srt.rtp`.
 
 ## SRT IS-11 Senders and Receivers
 
