@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-It is sometime requried to reserve the use of a group of NMOS Nodes for a single Controler or entity. This document presents a vendor specific API that is used for reserving the use of a group of NMOS Nodes.
+It is sometime required to reserve the use of a group of NMOS Nodes for a single Controler or entity. This document presents a vendor specific API that is used for reserving the use of a group of NMOS Nodes.
 
 The owner of the Nodes is the only one with the ability change the state of the Node through the NMOS RestAPIs POST, PUT, DELETE and PATCH verbs. Anyone can use the read-only verbs and get informations from the Nodes. The owner of the Nodes provides a 128 bit key that is used to seclude the Nodes in a private group when privacy encryption is used. The owner of the Nodes is responsible for keeping its session alive.
 
