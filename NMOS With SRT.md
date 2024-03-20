@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-SRT (Secure Reliable Transport) is an open source media transport protocol that utilises the UDP protocol and supports packet recovery. The open source project is available at ŜRTç(https://github.com/Haivision/srt).
+SRT (Secure Reliable Transport) is an open source media transport protocol that utilises the UDP protocol and supports packet recovery. The open source project is available at [SRT](https://github.com/Haivision/srt).
 
 The SRT protocol provides a reliable transport of anything using the UDP protocol. As such it can be used to transport an MPEG2-TS stream over SRT or an RTP stream over SRT. This specification supports both uses. The former MPEG2-TS mode is the default when using the `urn:x-matrox:transport:srt` transport, more specificatlly identified as `urn:x-matrox:transport:srt.mp2t`. The later RTP mode is identified as `urn:x-matrox:transport:srt.rtp`. Although SRT is well known for the reliable transport of an MPEG2-TS stream, it can also be used for the reliable transport of an RTP stream.
 
