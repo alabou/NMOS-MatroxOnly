@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   
 ---
   
-This document describes values that may be used to identify a capability, used in the `caps` property of the resources defined in the [AMWA IS-04 NMOS Discovery and Registration Specification](https://specs.amwa.tv/is-04).
+This document describes values that may be used to identify a capability, used in the `caps` property of the resources defined in the [AMWA IS-04 NMOS Discovery and Registration Specification](https://specs.amwa.tv/is-04). Note that capabilities are defined from the Receiver Capabilities perspective but are allowed to be used as Sender Capabilities also. When Sender Capabilities are available, they become an alternate target that a Controller MAY use to verifiy compliance with Receiver Capabilities.
 
 {:toc}
 
