@@ -33,6 +33,10 @@ A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nm
 
 A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of an NDI stream consumed by a Receiver.
 
+A non-NMOS NDI Sender is an NDI sender device that is not an NMOS Node and as such not part of an NMOS system.
+
+A non-NMOS NDI Receiver is an NDI receiver device that is not an NMOS Node and as such not part of an NMOS system.
+
 ## NDI IS-04 Sources, Flows and Senders
 
 Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting NDI mux streams, MUST have Source, Flow and Sender resources in the IS-04 Node API.
@@ -145,15 +149,21 @@ An example Receiver resource is provided in the [Examples](../examples/).
 
 ## NDI IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transport using the NDI specific transport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json).
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transport using the NDI specific transport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json). Because of the one Sender to N Receivers relationship of the NDI transport the `receiver_id` attribute of the NDI Sender's activation MUST be `null`. The `sender_id` attribute of the NDI Receiver's activation MUST be set to the id of an NDI Sender or `null` if connecting to a non-NMOS NDI Sender.
+
+NDI Senders and Receivers MUST be controlled through IS-05 only. The activation of a Sender / Receiver and the associated transport parameters MUST be under the control of IS-05 only. 
 
 ### Receivers
 
 If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
+An NDI Receiver MAY connect to a non-NMOS NDI Sender. IS-05 is then used only on the Receiver side and an unspecified mechanism MUST be used to activate such non-NMOS NDI Sender.
+
 ### Senders
 
 A Sender MAY, unless constrained by IS-11, produce any NDI stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
+
+A non-NMOS NDI Receiver MAY connect to an NDI Sender. IS-05 is then used only on the Sender side and an unspecified mechanism MUST be used to activate such non-NMOS NDI Receiver.
 
 ## NDI IS-11 Senders and Receivers
 
