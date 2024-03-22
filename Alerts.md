@@ -100,6 +100,8 @@ An events counter is associated with a state of the sub-system(s) producing the 
 
 It is important to note that only events can trigger an alert such that the state associated with a domain events counter always correspond to an event severity state. It is only when getting the events counters using the `GetEventCounters()` that the state represents either an event severity or an actual state of the sub-system(s).
 
+Note: For example let consider that a device produces internal events made of a (event, count, state, info). Usually the count value will indicate how many instance of such event occured and how to increment the associated event counter. In that scenario the state would indicate the severity of the event on the associated sub-system. It is allowed for a device to internally produce events with a count of 0 in order to update a detailed event counter associated state. As a count of 0 cannot trigger a notification, because the associated domain events counter will not change, the updated state is only visible from the associated detailed event counter. Thi sis the method that devices are expected to use to provide the actual state of teh sub-system associated with a detailed event counter.
+
 ### unknown
 This state can represent situations where the system's state cannot be determined or is in an indeterminate state. It's a useful state to account for scenarios where the system's condition is unclear.
 ### inactive
