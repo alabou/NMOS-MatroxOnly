@@ -33,6 +33,8 @@ A Receiver MAY support either or both clock reference types.
 
 A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file and check for the a=ts-refclk attribute. It MAY also verify the compliance using the Sender's associated Source `clock_name` attribute and checking the clock's `ref_type` atribute.
 
+A Sender MAY provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate the reference clocks that it supports. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers.
+
 ## Asynchronous/Synchronous Media
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for IPMX Senders media that is synchronous or not to the Sender's reference clock. The capability value `true` indicates the support of synchronous media while the value `false` indicates the support of asynchronous media.
@@ -40,6 +42,8 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capab
 A Receiver MAY support either or both clock reference types.
 
 A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file and check for the a=mediaclk attribute. It MAY also verify the compliance using the Sender's associated Source `synchronous_media` attribute.
+
+A Sender MAY provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate the media synchronisation that it supports. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers.
 
 ## Info Block
 
@@ -49,6 +53,8 @@ A Receiver MAY support none, some or all the IPMX media info block types.
 
 A Controller MUST either a) assume that the Receiver is not processing the info blocks and always PATCH the latest SDP transport file from a Sender to the Receiver, or b) verify which content of an SDP transport file has changed and if not provided as part of an IPMX info block supported by the Receiver, PATCH the latest SDP transport file from a Sender to the Receiver, otherwise let the Receiver handle the SDP transport file changes from the info block.
 
+A Sender MAY provide a `urn:x-matrox:cap:transport:info_block` capability to indicate the media info block types that it supports. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as info block are a required feature of IPMX.
+
 ## HKEP
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:hkep` capability to indicate its support for IPMX Senders HDCP encryption and the HKEP protocol. The capability value `true` indicates the support of HDCP encryption and the HKEP protocol. The capability value `false` indicates that HDCP encryption and the HKEP protocol are not supported.
@@ -56,6 +62,8 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:hkep` capability to indi
 A Receiver MAY support either or both true and false values.
 
 A Controller MUST verify the compliance of the Receiver with a Sender using HDCP encryption from the SDP transport file `hkep` attribute. The presence of such attribute in an SDP transport file indicate that the stream is HDCP protected. Only Receivers supporting HDCP encryption and the HKEP protocol can consume such streams.
+
+A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encrypted streams are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as HKEP is a protection mechanism under the controle of the Sender.
 
 ## Privacy
 
@@ -65,17 +73,23 @@ A Receiver MAY support either or both true and false values.
 
 A Controller MUST verify the compliance of the Receiver with a Sender using privacy encryption from the SDP transport file `privacy` attribute. The presence of such attribute in an SDP transport file indicate that the stream is privacy protected. Only Receivers supporting privacy encryption and the PEP protocol can consume such streams. The fine grained Receiver privacy capabilities are provided as part of the associated Receiver's transport parameters constraints.
 
+A Sender MAY provide a `urn:x-matrox:cap:transport:privacy` capability to indicate that privacy encrypted streams are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as PEP is a protection mechanism under the controle of the Sender.
+
 ## Channel Order
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:channel_order` capability for opaque AM824 multiplexed audio streams to indicate its support for IPMX Senders transparent transport of AES3 streams. The channel_order MUST follow the SMPTE2110 `channel-order` convention. The `channel_order` capability allows a Receiver to describe the number of audio sub-streams that it supports and for each the channels configuration and wether it is linear PCM or non-PCM data.
 
 A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file and check for the format specific `channel-order` parameter.
 
+A Sender MAY provide a `urn:x-matrox:cap:transport:channel_order` capability to indicate the channels ordering that are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as it is not allowed to change the layering of audio, video and data sub-Flows.
+
 ## Audio layers
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:audio_layers` capability for fully described AM824 multiplexed audio streams to indicate its support for IPMX Senders transparent transport of AES3 streams. The `audio_layers` capability allows a Receiver to describe the number of audio sub-streams that it supports. A Receiver SHOULD also provide sub-streams capabilities for each audio layer to indicate what audio sub-streams it supports.
 
 A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file format specific `channel-order` parameter and the Sender's mux Flow atributes and parent sub-Flows attributes.
+
+A Sender MAY provide a `urn:x-matrox:cap:transport:audio_layers` capability to indicate the number of audio layers that is supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. Only the number of audio layers MAY be constrained.
 
 A Controller MAY use IS-11 to constrain the Sender's sub-Flows to make them compliant with the Receiver.
 
