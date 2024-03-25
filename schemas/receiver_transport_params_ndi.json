@@ -3,7 +3,6 @@
     "description": "Describes NDI Receiver transport parameters. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. NDI Receivers must support all parameters in this schema.",
     "title": "NDI Receiver Transport Parameters",
     "type": "object",
-    "title": "Receiver Input",
     "properties": {
       "interface_ip": {
         "type": "string",
