@@ -3,7 +3,6 @@
     "description": "Describes SRT Sender transport parameters. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. SRT Senders must support all properties in this schema.",
     "title": "SRT Sender Transport Parameters",
     "type": "object",
-    "title": "Sender Output",
     "properties": {
       "source_ip": {
         "type": [
