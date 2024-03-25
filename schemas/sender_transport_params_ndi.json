@@ -3,7 +3,6 @@
     "description": "Describes NDI Sender transport parameters. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. NDI Senders must support all properties in this schema.",
     "title": "NDI Sender Transport Parameters",
     "type": "object",
-    "title": "Sender Output",
     "properties": {
       "server_ip": {
         "type": [
