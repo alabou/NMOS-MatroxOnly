@@ -155,13 +155,19 @@ NDI Senders and Receivers MUST be controlled through IS-05 only. The activation 
 
 ### Receivers
 
+An NDI Receiver MUST search for NDI Senders first in the `Public` group and then in other groups, unless configured differently through a vendor-specific mechanism.
+
+> Note: The NDI transport parameters of a Receiver do not include information about the Sender's group membership. A vendor-specific mechanism could be employed to configure NDI Senders and Receivers to utilize groups other than the default NDI `Public` group.
+
 If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
 An NDI Receiver MAY connect to a non-NMOS NDI Sender. IS-05 is then used only on the Receiver side and an unspecified mechanism MUST be used to activate such non-NMOS NDI Sender.
 
 ### Senders
 
-A Sender MAY, unless constrained by IS-11, produce any NDI stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
+An NDI Sender MUST be a member of the default `Public` NDI group unless configured otherwise through a vendor-specific mechanism.
+
+An NDI Sender MAY, unless constrained by IS-11, produce any NDI stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
 A non-NMOS NDI Receiver MAY connect to an NDI Sender. IS-05 is then used only on the Sender side and an unspecified mechanism MUST be used to activate such non-NMOS NDI Receiver.
 

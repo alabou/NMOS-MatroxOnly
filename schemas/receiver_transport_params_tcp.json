@@ -42,7 +42,7 @@
       ],
       "description": "source port for TCP packets. A null value indicates that the source port has not been configured.",
       "minimum": 1,
-      "maximum": 65535,
+      "maximum": 65535
     }
   },
   "patternProperties": {
