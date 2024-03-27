@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Describes NDI Receiver transport parameters. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. NDI Receivers must support all parameters in this schema.",
+    "description": "Describes NDI Receiver transport parameters. The constraints in this schema are minimum constraints, but may be further constrained at the constraints endpoint. NDI Receivers must support all but the source_url parameters in this schema.",
     "title": "NDI Receiver Transport Parameters",
     "type": "object",
     "properties": {
@@ -18,16 +18,13 @@
           }
         ]
       },      
-      "server_host": {
+      "source_ip": {
         "type": [
           "string",
           "null"
         ],
-        "description": "Hostname or IP hosting the NDI server. A null value indicates that the Receiver has not yet been configured.",
+        "description": "IP address hosting the NDI server. A null value indicates that the Receiver has not yet been configured or the parameter is unspecified.",
         "anyOf": [
-          {
-            "format": "hostname"
-          },
           {
             "format": "ipv4"
           },
@@ -39,28 +36,66 @@
           }
         ]
       },
-      "server_port": {
+      "source_port": {
         "type": [
           "integer",
-          "string"
+          "null"
         ],
-        "description": "Port for NDI server. If the parameter is set to 'auto' the Receiver should establish for itself which port it should use, based on a discovery mechanism or its own internal configuration.",
-        "minimum": 0,
-        "maximum": 65535,
-        "pattern": "^auto$"
+        "description": "Port for NDI server. A null value indicates that the Receiver has not yet been configured or the parameter is unspecified.",
+        "anyOf": [
+          {
+            "minimum": 0,
+            "maximum": 65535
+          }, 
+          {
+            "type": "null" 
+          }
+        ]
       },
       "source_name": {
-        "type": [
-          "string"
-        ],
-        "description": "NDI sender source name"
-      },
-      "group_name": {
         "type": [
           "string",
           "null"
         ],
-        "description": "NDI sender source group name. `null` indicates the default group"
+        "description": "NDI sender source name. A null value indicates that the Receiver has not yet been configured.",
+        "anyOf": [
+          {
+            "format": "string"
+          }, 
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "machine_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "NDI sender machine name. A null value indicates that the Receiver has not yet been configured.",
+        "anyOf": [
+          {
+            "format": "string"
+          }, 
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "source_url": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "NDI sender source url. A null value indicates that the Receiver has not yet been configured or the parameter is unspecified.",
+        "anyOf": [
+          {
+            "format": "string"
+          }, 
+          {
+            "type": "null"
+          }
+        ]
       }
     },
     "patternProperties": {
@@ -68,5 +103,6 @@
         "$ref": "receiver_transport_params_ext.json"
       }
     },
+
     "additionalProperties": false
-  }
+}
