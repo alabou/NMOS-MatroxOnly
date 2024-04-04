@@ -87,6 +87,8 @@ This `protocol` MAY also be used for `urn:x-matrox:transport:srt.rtp`. In this s
 
 See the [TR-10-13][] specification for the details.
 
+See the [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md) document for a detailed definition of the RTP Payload Header of various media types.
+
 ## USB-IP transport adaptation
 
 This `protocol` is used for `urn:x-matrox:transport:usb`.
