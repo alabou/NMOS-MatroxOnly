@@ -65,6 +65,10 @@ A Controller MUST verify the compliance of the Receiver with a Sender using HDCP
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encrypted streams are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as HKEP is a protection mechanism under the controle of the Sender.
 
+### RTP Payload Header
+
+Refer to the Privacy section "RTP Payload Header" for the detailed definition of an RTP Payload Header for various audio and video media types. Those definitions MUST be used to determine the part of the RTP Payload that is HDCP encrypted.
+
 ## Privacy
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:privacy` capability to indicate its support for IPMX Senders privacy encryption and the PEP protocol. The capability value `true` indicates the support of privacy encryption and the PEP protocol. The capability value `false` indicates that privacy encryption and the PEP protocol are not supported.
@@ -74,6 +78,37 @@ A Receiver MAY support either or both true and false values.
 A Controller MUST verify the compliance of the Receiver with a Sender using privacy encryption from the SDP transport file `privacy` attribute. The presence of such attribute in an SDP transport file indicate that the stream is privacy protected. Only Receivers supporting privacy encryption and the PEP protocol can consume such streams. The fine grained Receiver privacy capabilities are provided as part of the associated Receiver's transport parameters constraints.
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:privacy` capability to indicate that privacy encrypted streams are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as PEP is a protection mechanism under the controle of the Sender.
+
+### RTP Payload Header
+
+The concept of RTP Payload Header as defined by RFC 8088 (How to Write an RTP Payload Format) "RTP payload formats often need to include metadata relating to the payload data being transported. Such metadata is sent as a payload header, at the start of the payload section of the RTP packet." is important to encryption as such RTP Payload Headers are not encrypted. We define here the propoer interpretation of the various RTP paylado specifications.
+
+#### RFC 4175 (video/raw)
+As per [section 4](https://datatracker.ietf.org/doc/html/rfc4175#section-4) the RTP Payload Header is defined as the first 2 + (6 * lines) byte of the RTP Payload. The size of the RTP Payload Header depends on the number of lines or partial lines that are part of the RTP Payload. Those byte MUST NOT be encrypted.
+
+#### RFC 9134 (video/jxsv)
+As per [section 4.3](https://datatracker.ietf.org/doc/html/rfc9134#section-4.3) the RTP Payload Header is defined as the first 4 byte of the RTP Payload. Those byte MUST NOT be encrypted.
+
+#### RFC 3640 (audio/mpeg4-generic)
+As per [section 3.3.6](https://www.rfc-editor.org/rfc/rfc3640.html#section-3.3.6) and by the requirements of [NMOS With AAC](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AAC.md) that supports only the `hbr` mode, the first bytes of the RTP Payload defined as the AU Header section correspond to the RFC 8088 definition of RTP Paylaod Header and MUST NOT be encrypted. The size of the RTP Payload Header depends on the number of access units that are part of the RTP Payload.
+
+#### RFC 6416 (audio/MP4A-LATM)
+As per [section 6.1](https://datatracker.ietf.org/doc/html/rfc6416#section-6.1) there is no RTP Payload Header defined. The complete RTP Payload MUST be encrypted.
+
+#### RFC 2250 (video/MP2T)
+As per [section 2](https://datatracker.ietf.org/doc/html/rfc2250#section-2) there is no RTP Payload Header defined. The complete RTP Payload MUST be encrypted.
+
+#### RFC 6184 (video/H264)
+As per [section 5.2](https://datatracker.ietf.org/doc/html/rfc6184#section-5.2) the RTP Payload Header is defined as the first byte of the RTP Payload. This byte MUST NOT be encrypted.
+
+#### RFC 7798 (video/H265)
+As per [section 54.2](https://datatracker.ietf.org/doc/html/rfc7798#section-4.2) the RTP Payload Header is defined as the first 2 byte of the RTP Payload. Those byte MUST NOT be encrypted. As PACI carrying RTP packet are not supported as per [NMOS With H.265](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.265.md) this 2 byte definition applies in all scenarios.
+
+#### RFC (video/smpte291)
+As per [section 2.1](https://datatracker.ietf.org/doc/html/rfc8331#section-2.1)The RTP Payload Header is defined as the first 8 byte of the RTP Payload. Those byte MUST NOT be encrypted.
+
+#### ST 2110-31 (audio/AM824)
+As per ST 2110-31 there is no RTP Payload Header defined. The complete RTP Payload MUST be encrypted.
 
 ## Channel Order
 
