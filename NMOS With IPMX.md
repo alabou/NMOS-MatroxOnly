@@ -37,7 +37,7 @@ A Sender MAY provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to
 
 ## Asynchronous/Synchronous Media
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for IPMX Senders media that is synchronous or not to the Sender's reference clock. The capability value `true` indicates the support of synchronous media while the value `false` indicates the support of asynchronous media.
+A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for IPMX Senders media that is synchronous or asynchronous to the Sender's reference clock. The capability value `true` indicates the support of synchronous media while the value `false` indicates the support of asynchronous media.
 
 A Receiver MAY support either or both clock reference types.
 
