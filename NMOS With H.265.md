@@ -27,9 +27,9 @@ The [Society of Media Professionals, Technologists and Engineers][SMPTE] develop
 
 > Note that the definition of constant bit rate of ST 2110-22 is very strict. "The video compression or the packetization of the video compression shall produce a constant number of bytes per frame. The packetization shall produce a constant number of RTP packets per frame." This definition of constant bit rate is hereafter described as strict-CBR, using the H.265 definition of constant bit rate for CBR.
 
-The [Video Services Forum][VSF] developed Technical Recommendation [TR-10-11][TR-10-11] and [TR-10-??][TR-10-??] of the IPMX suite of protocols, which cover the end-to-end application use of constant and variable bit rate compression for video, using the SMPTE ST 2110 and IPMX suite of protocols.
+The [Video Services Forum][VSF] developed Technical Recommendation [TR-10-11][TR-10-11] and [TR-10-7][TR-10-7] of the IPMX suite of protocols, which cover the end-to-end application use of constant and variable bit rate compression for video, using the SMPTE ST 2110 and IPMX suite of protocols.
 
-TR-10-11 and TR-10-?? mandate the use of the AMWA [IS-04][IS-04] and [IS-05][IS-05] NMOS Specifications in IPMX compliant systems.
+TR-10-11 and TR-10-7 mandate the use of the AMWA [IS-04][IS-04] and [IS-05][IS-05] NMOS Specifications in IPMX compliant systems.
 
 AMWA IS-04 and IS-05 have support for various transport protocols and can signal the media type `video/H265` as defined in RFC 7798.
 
@@ -431,8 +431,8 @@ A Sender operating with `parameter_sets_flow_mode` set to `dynamic` MAY produce 
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
 [NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
-[TR-10-11]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-11_2023-??-??.pdf "ADD TEXT"
-[TR-10-??]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-??_2023-??-??.pdf "ADD TEXT"
+[TR-10-11]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-11_2024-02-23.pdf "Constant Bit-Rate Compressed Video"
+[TR-10-7]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-7_2023-09-26.pdf "Compressed Video"
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [ST-2110-22]: https://ieeexplore.ieee.org/document/9893780 "ST 2110-22:2022 - SMPTE Standard - Professional Media Over Managed IP Networks: Constant Bit-Rate Compressed Video"
