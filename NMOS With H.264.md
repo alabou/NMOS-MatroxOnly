@@ -123,6 +123,8 @@ Informative note: The maximum bit rate information relates to the codec profile 
 
 Informative note: For streams compliant with ST 2110-22, the constant bit rate mode is more appropriately described as a strict-CBR mode where "the video compression or the packetization of the video compression shall produce a constant number of bytes per frame. The packetization shall produce a constant number of RTP packets per frame." For other streams, not compliant with ST 2110-22, it is the constant bit rate definition of the H.264 specification that prevails.
 
+A Sender MUST declare its compliance to ST 2110-22 with the SSN parameter of the fmtp attribute of the SDP transport file set to one of "ST2110-22:2019" or "ST2110-22:2022". A Sender not declaring an SSN parameter or declaring one that does not start with "ST2110-22" SHOULD be assumed as not being compliant to ST 2110-22.
+
 The H.264 encoder associated with the Flow MUST produce an H.264 bitstream that is compliant with the `profile` and `level` attributes.
 
 Examples Flow resources are provided in [Examples](../examples/).
