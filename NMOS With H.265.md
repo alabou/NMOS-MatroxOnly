@@ -144,7 +144,7 @@ Informative note: For streams compliant with ST 2110-22, the constant bit rate m
 
 A Sender MUST declare its compliance to ST 2110-22 with the SSN parameter of the fmtp attribute of the SDP transport file set to one of "ST2110-22:2019" or "ST2110-22:2022". A Sender not declaring an SSN parameter or declaring one that does not start with "ST2110-22" SHOULD be assumed as not being compliant to ST 2110-22.
 
-The H.265 encoder associated with the Flow MUST produce an H.265 bitstream that is compliant with the `profile` and `level` attributes.
+The H.265 encoder associated with the Flow MUST produce an H.265 bitstream that is compliant with the `profile` and `level` attributes. The bitstream NAL units MUST have nuh_layer_id set to zero.
 
 Examples Flow resources are provided in [Examples](../examples/).
 
