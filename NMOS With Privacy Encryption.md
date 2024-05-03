@@ -144,6 +144,8 @@ Note: A `PES_packet_data_byte` bytes sequence is allowed to terminate with a par
 
 The `private_data_byte` bytes of the MPEG2-TS `adaptation_field` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, MUST be used to transport the required `dynamic_key_version`, `ctr_low`, `ctr_high` and `ctr_short` parameters of CTR Full Header and CTR Short Header. The CTR Full Header is signaled by the presence of 12 `private_data_byte` bytes while the CTR Short Header is signaled by the presence of 3 `private_data_byte` bytes. An MPEG2-TS packet with encrypted `PES_packet_data_byte` bytes in its payload MUST have a CTR Full Header or CTR Short Header in its `adaptation_field`.
 
+Note: The use of `private_data_byte` bytes in encrypted MPEG2-TS packets is reserved for the PEP protocol implementation. such usage is signaled by the stream associated `privacy` SDP transport file attribute and/or NMOS transport parameters. A compliant MPEG2-TS stream is not allowed to use private data for other pusposes.
+
 An MPEG2-TS packet `adaptation_field` MAY be padded with `stuffing_byte` bytes to ensure that an integral multiple of 16 `PES_packet_data_byte` bytes are present in the MPEG2-TS packet payload for all but the last MPEG2-TS packets transporting the `PES_packet_data_byte` bytes of a `PES_Packet`.
 
 Note: This approach makes privacy encryption compatible with the PES packet slicing of HDCP over MPEG-TS when the `adaptation_field` has space reserved for the `private_data_byte` bytes of the CTR Full/Short Header when `payload_unit_start_indicator` of an MPEG2-TS packet is 1 and that only CTR Full Header are used.
