@@ -142,19 +142,21 @@ The `PES_packet_data_byte` bytes section of a `PES_Packet` MUST be encrypted. Ot
 
 Note: A `PES_packet_data_byte` bytes sequence is allowed to terminate with a partial data slice of less than 16 bytes.
 
-The `private_data_byte` bytes of the MPEG2-TS `adaptation_field` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, MUST be used to transport the required `dynamic_key_version`, `ctr_low`, `ctr_high` and `ctr_short` parameters of CTR Full Header and CTR Short Header. The CTR Full Header is signaled by the presence of 12 `private_data_byte` bytes while the CTR Short Header is signaled by the presence of 3 `private_data_byte` bytes.
+The `private_data_byte` bytes of the MPEG2-TS `adaptation_field` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, MUST be used to transport the required `dynamic_key_version`, `ctr_low`, `ctr_high` and `ctr_short` parameters of CTR Full Header and CTR Short Header. The CTR Full Header is signaled by the presence of 12 `private_data_byte` bytes while the CTR Short Header is signaled by the presence of 3 `private_data_byte` bytes. An MPEG2-TS packet with encrypted `PES_packet_data_byte` bytes in its payload MUST have a CTR Full Header or CTR Short Header in its `adaptation_field`.
 
 An MPEG2-TS packet `adaptation_field` MAY be padded with `stuffing_byte` bytes to ensure that an integral multiple of 16 `PES_packet_data_byte` bytes are present in the MPEG2-TS packet payload for all but the last MPEG2-TS packets transporting the `PES_packet_data_byte` bytes of a `PES_Packet`.
 
 Note: This approach makes privacy encryption compatible with the PES packet slicing of HDCP over MPEG-TS when the `adaptation_field` has space reserved for the `private_data_byte` bytes of the CTR Full/Short Header when `payload_unit_start_indicator` of an MPEG2-TS packet is 1 and that only CTR Full Header are used.
 
-A CTR Full Header MUST be present in the `adaptation_field` of an MPEG2-TS packet having in its payload the first byte (`payload_unit_start_indicator` = 1) of the first `PES_Packet` of a video frame/field, a video frame/field slice, and an audio frame/packet. 
+A CTR Full Header MUST be present in the `adaptation_field` of an encrypted MPEG2-TS packet having in its payload the first byte (`payload_unit_start_indicator` = 1) of the first `PES_Packet` of a video frame/field, a video frame/field slice, and an audio frame/packet. 
 
-A CTR Short Header or a CTR Full Header MUST be present in the `adaptation_field` of an MPEG2-TS packet having in its payload the first byte (`payload_unit_start_indicator` = 1) of a subsequent `PES_packet`, if any, completing a video frame/field, a video frame/field slice or an audio frame/packet. A CTR Short Header SHOULD be used unless the distance between the associated `ctr` values of two consecutive CTR Full Headers is larger or equat than 2^24 units. The concept of “frame” is used for uncompressed and compressed audio and video. The concept of “field” is used for uncompressed and compressed video. The concept of “packet” is used for uncompressed and compressed audio.
+A CTR Short Header or a CTR Full Header MUST be present in the `adaptation_field` of an encrypted MPEG2-TS packet having in its payload the first byte (`payload_unit_start_indicator` = 1) of a subsequent `PES_packet`, if any, completing a video frame/field, a video frame/field slice or an audio frame/packet. A CTR Short Header SHOULD be used unless the distance between the associated `ctr` values of two consecutive CTR Full Headers is larger or equat than 2^24 units. The concept of “frame” is used for uncompressed and compressed audio and video. The concept of “field” is used for uncompressed and compressed video. The concept of “packet” is used for uncompressed and compressed audio.
 
-A CTR Full Header MUST also be be present in the `adaptation_field` of an MPEG2-TS packet having in its payload the first byte (`payload_unit_start_indicator` = 1) of a `PES_Packet` that is not categorized as video or audio. 
+A CTR Full Header MUST also be be present in the `adaptation_field` of an encrypted MPEG2-TS packet having in its payload the first byte (`payload_unit_start_indicator` = 1) of a `PES_Packet` that is not categorized as video or audio. 
 
-A CTR Full/Short Header MUST NOT be present in the `adaptation_field` of an MPEG2-TS packet unless the first byte (`payload_unit_start_indicator` = 1) of a `PES_Packet` is present in the MPEG2-TS payload. 
+A CTR Full Header MUST NOT be present in the `adaptation_field` of an encrypted MPEG2-TS packet unless the first byte (`payload_unit_start_indicator` = 1) of a `PES_Packet` is present in the MPEG2-TS payload. 
+
+A CTR Short Header MUST be present in the `adaptation_field` of an encrypted MPEG2-TS packet unless a CTR Full Header is present.
 
 ### Headers
 
