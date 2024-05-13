@@ -395,6 +395,8 @@ A Sender operating with `parameter_sets_flow_mode` set to `static` MAY produce a
 
 A Sender operating with `parameter_sets_flow_mode` set to `dynamic` MAY produce a coded bitstream using a number of SPS and PPS that MAY be associated with multiple Flows. The parameter sets MAY be defined in-band or out-of-band and MAY be refreshed by in-band duplicates or updated, replaced or augmented by in-band ones.
 
+The parameter sets MUST convey, so far as the SPS, and PPS syntax elements allow, the same information about the stream as conveyed by the Source and Flow attributes defined by this specification and IS-04.
+
 ## H.264 IS-11 Senders and Receivers
 
 ### RTP transport
