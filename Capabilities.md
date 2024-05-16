@@ -20,7 +20,7 @@ The [NMOS Parameter Registers](https://specs.amwa.tv/nmos-parameter-registers/br
 
 >`Manufacturers MAY use their own namespaces to indicate capabilities which are not currently defined within the NMOS namespace (urn:x-nmos:cap:). In order to avoid collisions with simple names allocated by AMWA specifications, they MUST NOT use capability names that do not start with urn:.`
 
-The JSON schemas constraint_set.json used by IS-04 and IS-11 and constraints_supported.json used by IS-11 do not adhere to the language of the [NMOS Parameter Registers](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) by now allowing Manufacturer's namespaces. The following schemas MUST be used.
+The JSON schemas constraint_set.json used by IS-04 and IS-11 and constraints_supported.json used by IS-11 do not adhere to the language of the [NMOS Parameter Registers](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) by not allowing Manufacturer's namespaces. The following schemas MUST be used.
 
 > The manufacturer namespace is expected to used lower case letters only. This seems a reasonable restriction.
 
