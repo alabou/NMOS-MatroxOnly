@@ -14,6 +14,66 @@ This document describes values that may be used to identify a capability, used i
 
 {:toc}
 
+## Manufacturer defined capabilities
+
+The [NMOS Parameter Registers](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) allows Manufacturer to define and use their own capabilities.
+
+>`Manufacturers MAY use their own namespaces to indicate capabilities which are not currently defined within the NMOS namespace (urn:x-nmos:cap:). In order to avoid collisions with simple names allocated by AMWA specifications, they MUST NOT use capability names that do not start with urn:.`
+
+The JSON schemas constraint_set.json used by IS-04 and IS-11 and constraints_supported.json used by IS-11 do not adhere to the language of the [NMOS Parameter Registers](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) by now allowing Manufacturer's namespaces. The following schemas MUST be used.
+
+> The manufacturer namespace is expected to used lower case letters only. This seems a reasonable restriction.
+
+### Updated JSON schemas
+constraint-set.json
+```
+{
+  ...
+   "patternProperties": {
+      "^urn:x-nmos:cap:(?!meta:)": {
+        "$ref": "param_constraint.json"
+      }
+  }
+  
+  "patternProperties": {
+      "^urn:x-[a-z]+:cap:(?!meta:)": {
+        "$ref": "param_constraint.json"
+      }
+  }
+
+  "patternProperties": {
+      "^urn:x-[a-z]+:cap:meta:": {
+          "oneOf": [
+              {
+                "type": [ "boolean", "integer", "number", "string", "null" ]
+              },
+              {
+                "type": "array",
+                "items": {
+                    "type": [ "boolean", "integer", "number", "string" ]
+                }
+              }
+          ]
+      }
+  }
+  ...
+}
+```
+
+constraints_supported.json
+```
+{
+  ...
+  {
+    "pattern": "^urn:x-nmos:cap:"
+  },
+  {
+    "pattern": "^urn:x-[a-z]+:cap:"
+  }
+  ...
+}
+```
+
 ## Constraint Set Metadata
 ### format
 - **Name:** `urn:x-matrox:cap:meta:format`
