@@ -190,7 +190,7 @@ The IS-12 ResteAPI MUST be accessible using the `POST` and `OPTIONS` verbs at th
 
 The IS-12 RestAPI MUST support the `OPTIONS` verb as sepecified in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors). An `OPTION` request MUST NOT be subject to read-only / read-write constraints.
 
-The body of a `POST` request MUST be one of the following IS-12 schema: command-message-reatapi.json, subscription-message-restapi.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed. For a subscriptions the object MAY be speficied either as an object id or as a role path.
+The body of a `POST` request MUST be one of the following IS-12 schema: command-message-restapi.json, subscription-message-restapi.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed. For a subscription the object MAY be speficied either as an object id or as a role path.
 
 The body of a `POST` response MUST be one of the following IS-12 schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json. The response MUST be sent using the `chunked` `Transfer-Encoding` such that the client may retrieve command-response, subscription-response, notification and error messages independently. Each response message MUST be sent in its own chunk.
 
