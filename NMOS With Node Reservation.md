@@ -35,7 +35,7 @@ The 'Session AliveTime' determine the amount of time after being used that a ses
 
 ## Reservation RestAPI
 
-This RestAPI MUST use the HTTPS protocol with TLS v1.2 or TLE v1.3. It is not allowed to use the bare HTTP protocol.
+This RestAPI MUST use the HTTPS protocol with TLS v1.2 or TLS v1.3. It is not allowed to use the bare HTTP protocol.
 
 ### Acquire
 
