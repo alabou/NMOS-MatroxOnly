@@ -42,7 +42,7 @@ An implementation of the IS-12 RestAPI MAY provide read-only access to objects a
 
 Note: The WebSocket IS-12 `ncp` endpoints uses the same approach for declaring read-only and read-write endpoints.
 
-In the following sections of this document we will use one of the following paths to access the IS-12 RestAPI "http://<address>/ncWebSocket/v1.0", "https://<address>/ncWebSocket/v1.0", "http://<address>/ncWebSocketGuest/v1.0" and "https://<address>/ncWebSocketGuest/v1.0". The string "ncWebSocket" MAY be replaced by a vendor specific string.
+In the following sections of this document we will use one of the following paths to access the IS-12 RestAPI `http://<address>/ncWebSocket/v1.0`, `https://<address>/ncWebSocket/v1.0`, `http://<address>/ncWebSocketGuest/v1.0` and `https://<address>/ncWebSocketGuest/v1.0`. The string "ncWebSocket" MAY be replaced by a vendor specific string.
 
 ## JSON Schemas
 The followign schema modifies the IS-12 command-message.json schema slightly to allow the `object` and `method` attributes instead of the usual `oid` and `methodId` ones.
