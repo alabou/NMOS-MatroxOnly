@@ -51,7 +51,7 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability t
 
 A Receiver MAY support none, some or all the IPMX media info block types.
 
-When media stream attributes associated with a Sender change, a Controller MAY let the Receiver handle the media stream attributes changes from the media info blocks produced by the Sender, if all of media info block types are supported by the Receiver.
+When media stream attributes associated with a Sender change, a Controller MAY let the Receiver handle the media stream attributes changes from the media info blocks produced by the Sender, if all of media info block types produced by a Sender are supported by the Receiver.
 
 A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to indicate the media info block types that it generates. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as info block are a required feature of IPMX.
 
