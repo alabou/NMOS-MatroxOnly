@@ -29,9 +29,9 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-The 'Session Lifetime' determines the amount of time after being acquired or renewed that a session and its token remain valid. A session can be renewed after half of its lifetime. A session expires after its lifetime if not renewed or after its alivetime if unused and an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. By default the lifetime of a session is 5 minutes.
+The 'Session Lifetime' determines the amount of time, after being acquired or renewed, that a session and its token remain valid. A session can be renewed after half of its lifetime. A session expires after its lifetime if not renewed or after its alivetime if unused and an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. By default the lifetime of a session is 5 minutes.
 
-The 'Session AliveTime' determine the amount of time after being used that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. By default the alivetime of a session is 60 seconds.
+The 'Session AliveTime' determine the amount of time, after being used, that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired if an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. By default the alivetime of a session is 60 seconds.
 
 ## Reservation RestAPI
 
@@ -52,7 +52,7 @@ POST /x-manufacturer/exclusive/acquire
 input to ACQUIRE:
 {
     owner: <string>,          // free form string indicating the owner
-    exclusive_key: <string>   // 16 bytes big-endian hexadecimal value (without 0x prefix)
+    exclusive_key: <string>   // 16 bytes big-endian value in hexadecimal (without 0x prefix) => total of 32 hexadecimal characters
 }
 
 output from ACQUIRE:
