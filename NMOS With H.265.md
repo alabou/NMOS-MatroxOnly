@@ -418,7 +418,7 @@ A Sender operating with `parameter_sets_flow_mode` set to `dynamic` MAY produce 
 
 The parameter sets MUST convey, so far as the VPS, SPS, and PPS syntax elements allow, the same information about the stream as conveyed by the Source and Flow attributes defined by this specification and IS-04.
 
-Informative note: When encoding a video described as RGB 4:4:4 in the [Components](https://specs.amwa.tv/nmos-parameter-registers/branches/main/flow-attributes/#components) Flow attribute, the encoder might use an intermediate 4:4:4 format optimized for H.265 compression, and the VPS, SPS, and PPS syntax elements would represent this intermediate color representation. The coded bitstream is expected to include a colour remapping information SEI message to ensure that the final video output correctly represents the original RGB 4:4:4 colors.
+Informative note: When encoding a video described as RGB 4:4:4 in the [Components](https://specs.amwa.tv/nmos-parameter-registers/branches/main/flow-attributes/#components) Flow attribute, the encoder might use an intermediate 4:4:4 format optimized for H.265 compression, and the VPS, SPS, and PPS syntax elements would represent this intermediate color representation. The coded bitstream is expected to include a `colour remapping information` SEI message to ensure that the final video output correctly represents the original RGB 4:4:4 colors.
 
 ## H.265 IS-11 Senders and Receivers
 
