@@ -33,7 +33,7 @@ A Receiver that is not configured for using redundancy MAY connect to a Sender t
 
 A Receiver that is configured for using redundancy MAY connect to a Sender that is not configured for using redundancy, and connect or subscribe to media using either path (leg) and disabling the other paths (legs). Entry 0 of the `transport_params` array cannot be disabled. The ability to disable a path (leg) is described by the associated transport parameter constraints. A device is allowed to disallow disabling the redundancy paths (legs) and in this case the Receiver SHOULD NOT be connected to a Sender not configured for using redundancy. 
 
-A Receiver that is configured for using redundancy MAY also connect or subscribe to media using multiple paths to a Sender that is not configured for using redundancy if multiple redundant paths are provided by a mean out of the control of the Sender. In that case the information about the redundant paths is out of the NMOS scope.
+A Receiver that is configured for using redundancy MAY connect to a Sender that is not configured for using redundancy, and connect or subscribe to media using multiple paths provided by a mean out of the control of the Sender. In that case the information about the redundant paths MUST be provided by the SDP transport file of the Sender, possibly augmented by the Controller to add extra redundant paths, if any.
 
 This redundancy "logic" applies to all transports, push or pull protocols, connection oriented ot not. Temporal redundancy is not allowed to add entries to the `interface_bindings` and `transport_params` arrays. For example FEC have its own transport mechanism.
 
