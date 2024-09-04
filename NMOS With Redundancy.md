@@ -35,7 +35,7 @@ A Receiver that is configured for using redundancy MAY connect to a Sender that 
 
 A Receiver that is configured for using redundancy MAY connect to a Sender that is not configured for using redundancy, and connect or subscribe to media using multiple paths provided by a mean out of the control of the Sender. In that case the information about the redundant paths MUST be provided by the SDP transport file of the Sender, possibly augmented by the Controller to add extra redundant paths, if any.
 
-This redundancy "logic" applies to all transports, push or pull protocols, connection oriented ot not. Temporal redundancy is not allowed to add entries to the `interface_bindings` and `transport_params` arrays. For example FEC have its own transport mechanism.
+This redundancy "logic" applies to all transports, push or pull protocols, connection oriented or not. Temporal redundancy is not allowed to add entries to the `interface_bindings` and `transport_params` arrays. For example FEC have its own transport mechanism.
 
 ## Routing
 
