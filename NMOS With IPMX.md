@@ -124,7 +124,7 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:audio_layers` capability
 
 A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file format specific `channel-order` parameter and the Sender's mux Flow atributes and parent sub-Flows attributes.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:audio_layers` capability to indicate the number of audio layers that is supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. Only the number of audio layers MAY be constrained.
+A Sender MAY provide a `urn:x-matrox:cap:transport:audio_layers` capability to indicate the number of audio layers that are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. Only the number of audio layers MAY be constrained.
 
 A Controller MAY use IS-11 to constrain the Sender's sub-Flows to make them compliant with the Receiver.
 
