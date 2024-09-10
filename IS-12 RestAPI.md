@@ -26,6 +26,8 @@ A Device publishes the IS-12 protocol availability through the declaration of co
 ```
 The `<protocol>` is either `ws` or `wss ` for accessing IS-12 / MS-05-02 objects using the WebSocket protocol (ws or wss). This is the standard method for accessing IS-12 / MS-05-02 and this is how an `ncp` endpoint is registered in IS-04. This document supports accessing IS-12 / MS-05-02 objects with the HTTP protocol (http or https) using the IS-12 JSON schemas with minor modifications.
 
+A Device MAY also declare a "ncWebSocketGuest" control endpoint in addition or instead of the "ncWebSocket" endpoint for read-only access to the IS-12 / MS-05-02 objects.
+
 ## Use of Normative Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
