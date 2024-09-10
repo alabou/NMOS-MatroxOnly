@@ -1,1 +1,43 @@
+# Matrox: NMOS With OAuth2.0
+{:.no_toc}  
+Copyright 2024, Matrox Graphics Inc.
 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  
+---
+  
+{:toc}
+
+## Introduction
+
+This document presents the modifications / changes to the AMWA/NMOS IS-10 and BCP-003-02 specifications in Matrox devices implementing OAuth2.0 authentication.
+
+The AMWA/NMOS IS-10 and BCP-003-02 specifications are overly generic and complex for implementation across all device classes. In particular, the overhead associated with these specifications, as currently written, is too demanding for smaller devices. This document proposes a balanced approach, offering a compromise between full specification support and the practical need for managing read/write access authorizations to NMOS APIs of an NMOS Node.
+
+## Use of Normative Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
+and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+
+## Definitions
+
+The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
+
+## Behaviour
+
+### Time Synchronization
+
+Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for a complete work day of 12 hours. The requirements on the clock used by the various sub-systems (OAuth2.0 authorization server, NMOS Controller, Nmos Node, etc) of the NMOS system is then relaxed. A sub-system is not required be capable of synchronizing their clocks to an external source of time. A sub-system's estimation of the true time MUST be within 30 minutes of the true time.
+
+
+
+
+
+[RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
+[IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
+[IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
+[NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
