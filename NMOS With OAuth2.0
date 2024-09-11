@@ -14,9 +14,11 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-This document presents the modifications / changes to the AMWA/NMOS IS-10 and BCP-003-02 specifications in Matrox devices implementing OAuth2.0 authentication.
+This document presents the modifications / changes to the AMWA/NMOS IS-10 and BCP-003-02 specifications in Matrox NMOS Node devices implementing OAuth2.0 authentication.
 
 The AMWA/NMOS IS-10 and BCP-003-02 specifications are overly generic and complex for implementation across all device classes. In particular, the overhead associated with these specifications, as currently written, is too demanding for smaller devices. This document proposes a balanced approach, offering a compromise between full specification support and the practical need for managing read/write access authorizations to NMOS APIs of an NMOS Node.
+
+An NMOS Node configured to perforn OAuth2.0 Bearer token validation on its NMOS API endpoints implements, as a Resource Server, the modified specification. An NMOS Node is not expected to behave as an OAuth2.0 Client, the NMOS Registry registration API being expected to be secured by TLS client/server certificates only.
 
 ## Use of Normative Language
 
@@ -27,17 +29,10 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-## Behaviour
-
-### Time Synchronization
-
-Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for a complete work day of 12 hours. The requirements on the clock used by the various sub-systems (OAuth2.0 authorization server, NMOS Controller, Nmos Node, etc) of the NMOS system is then relaxed. A sub-system is not required be capable of synchronizing their clocks to an external source of time. A sub-system's estimation of the true time MUST be within 30 minutes of the true time.
-
-
-
 
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
+[BCP-002-02]: https://specs.amwa.tv/bcp-002-02/ "AMWA BCP-002-02: NMOS Asset Distinguishing Information"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
 [NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
