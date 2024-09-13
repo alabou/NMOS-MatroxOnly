@@ -33,6 +33,13 @@ The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are 
 
 An NMOS Registry MUST NOT enable OAuth2.0 authorizations on its registration API. It SHOULD instead enforces the use of TLS v1.2 or v1.3, with client-server mutual authentication if restricting access to the Registry is required, with server authentication otherwise.
 
+## Paths
+
+Access to "/" and "/x-nmos" MUST use the "node" API scope.
+Access to "/x-manufacturer" and "/x-manufacturer/*" MUST use the "manufacturer" scope.
+
+Access to an endpoint of the `urn:x-nmos:control:ncp` control type MUST use the "nc" API scope.
+
 ## Behaviour
 
 ### Time Synchronization
