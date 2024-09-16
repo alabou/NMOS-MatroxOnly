@@ -53,7 +53,7 @@ The requirements on the clock used by Nmos Nodes of the NMOS system is relaxed. 
 
 ### Public Keys
 
-An NMOS Node MUST cache the OAuth2.0 authorization server Public Keys. An NMOS Node MUST fetch an initial set of Public Keys after it boots/resets/restarts or an explicit administrative request and it MUST update them every 23 hours plus X seconds, where X is a random number in the range 0 to 3600. If an NMOS Node cannot obtain an initial set of the Public Keys, it MUST refuse access to the NMOS APIs until it retries and obtains an initial set of Public Keys. An NMOS Node MUST invalidate the Public Keys from a previous fetch / update operation 48 hours after obtaining them. It MUST then refuse access to NMOS APIs until it retries and is able to obtain an new set of Public Keys. An NMOS Node MUST use an exponential backoff, from 1 to 64 seconds, when retrying a fetch / update operation.
+An NMOS Node MUST cache the OAuth2.0 authorization server Public Keys. An NMOS Node MUST fetch an initial set of Public Keys after it boots/resets/restarts or an explicit administrative request and it MUST update them every 23 hours plus X seconds, where X is a random number in the range 0 to 3600. If an NMOS Node cannot obtain an initial set of the Public Keys, it MUST refuse access to the NMOS APIs until it retries and obtains an initial set of Public Keys. An NMOS Node MUST invalidate the Public Keys from a previous fetch / update operation 36 hours after obtaining them. It MUST then refuse access to NMOS APIs until it retries and is able to obtain an new set of Public Keys. An NMOS Node MUST use an exponential backoff, from 1 to 64 seconds, when retrying a fetch / update operation.
 
 An NMOS Node MUST log an event if it invalidates the Public Keys and it SHOULD log an event when it gets a set of Public Keys. An NMOS Node MAY log an event when it start refusing access because of a lack of Public Keys. An NMOS Node MAY log an event when it stop refusing access because of a lack of Public Keys.
 
@@ -65,7 +65,7 @@ An NMOS Node MUST use TLS v1.2 or v1.3 when fetching / updating Public Keys from
 
 #### Lifetime
 
-Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for an immediate need for a complete work day. An OAuth2.0 Bearer token MUST have a minimum expiration time (`exp1` claim) of 12 hours and a maximum of 24 hours from its creation time (`iat` claim).
+Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for an immediate need for a complete work day. An OAuth2.0 Bearer token MUST have a minimum expiration time (`exp1` claim) of 1 hours and a maximum of 24 hours from its creation time (`iat` claim).
 
 ### Type and Algorithms
 
