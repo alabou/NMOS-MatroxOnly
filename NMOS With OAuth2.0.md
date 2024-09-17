@@ -75,7 +75,13 @@ The algorithm `alg` used for signing the Bearer token MUST be one of `RS256`, `R
 
 ### Grants
 
-NMOS Controllers and similar NMOS Tools MUST obtain Bearer tokens with "client credentials" grants to access the APIs of NMOS Nodes. The `sub` and `client_id` claims of a Bearer token MUST be equal for the `client credentials` grant and MUST NOT be equal for the `authorization_code` and other grants.
+NMOS Controllers and similar NMOS sub-systems MUST obtain Bearer tokens with `client credentials` grants to access the APIs of NMOS Nodes. 
+
+The `sub` and `client_id` claims of a Bearer token MUST be equal for the `client credentials` grant and MUST NOT be equal for the `authorization_code` and other grants.
+
+Users and tools MAY obtain Bearer tokens with `authorization_code` grants to access the APIs of NMOS Nodes. 
+
+An NMOS Node MAY be configured to accept Access Tokens with either `client credentials` grants or `authorization_code` grants or both.
 
 ### Claims
 
@@ -92,7 +98,7 @@ An NMOS Node MUST require TLS v1.2 or v1.3 when serving HTTP requests. An NMOS N
 ReadOnly access to a Node's API MUST be blocked if one of the following claims reject Read accesses.
 ReadWrite access to a Node's API MUST be blocked if one of the following claims reject Read or Write accesses.
 
-The `sub` and `client_id` claims MUST be equal which indicate "client credentials", otherwise access to the current API MUST NOT be allowed.
+The `sub` and `client_id` claims MUST be equal which indicate `client_credentials`, otherwise access to the current API MUST NOT be allowed.
 
 The `aud` claim MUST NOT allow access to the current API if it not ["\*"] and it does not contain a DNS name that include the [BCP-002-02][] `Instance Identifier` string of the NMOS Node. There MAY be additional characters before and after the `Instance Identifier` in the DNS name. Authorizations SHOULD be delivered to OAuth2.0 Client for specific NMOS Nodes based on their serial number, as defined in the [BCP-002-02][] `Instance Identifier`.
 
