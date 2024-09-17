@@ -83,6 +83,8 @@ The claims `iss`, `aud`, `sub`, `exp`, `scope`, `client_id` MUST be present in t
 
 The `nbf` claim SHOULD NOT be present in the Bearer token. If it is present is MUST be ignored.
 
+The private claims `x-nmos-*` SHOULD be placed in an `ext` claim to separate them from standard claims. An NMOS Node MUST support having the private claims `x-nmos-*` either in the `ext` claim or along with the standard claims. An Access Token SHOULD either have the private claims `x-nmos-*` in the `ext` claim or along with the standard claims. If the private `x-nmos-*` claims are duplicated they MUST be identical.
+
 #### Validation
 
 An NMOS Node MUST require TLS v1.2 or v1.3 when serving HTTP requests. An NMOS Node MUST only accept Access Tokens from the Authorization HTTP Header of a request.
