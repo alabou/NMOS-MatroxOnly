@@ -33,6 +33,12 @@ The 'Session Lifetime' determines the amount of time, after being acquired or re
 
 The 'Session AliveTime' determine the amount of time, after being used, that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired if an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. By default the alivetime of a session is 60 seconds.
 
+## Using Reservation along with OAuth2.0 authorizations
+
+If accesses to the NMOS APIs are authorized by OAuth2.0, the OAuth2.0 Bearer token MUST be stored in the `Authorization` HTTP header and the exclusive session Bearer token MUST be store in the `PEP-Exclusive-Authorization` HTTP header. Otherwise when OAuth2.0 authorizations are not used, the exclusive session Bearer token MUST be stored in the `Authorization` HTTP header.
+
+In this document, references to the `Authorization` HTTP header MUST be replaced by references to the `PEP-Exclusive-Authorization` HTTP header when OAuth2.0 authorizations are used by an NMOS Node to authorize access to the NMOS RestAPIs.
+
 ## Reservation RestAPI
 
 This RestAPI MUST use the HTTPS protocol with TLS v1.2 or TLS v1.3. It is not allowed to use the bare HTTP protocol.
@@ -47,6 +53,7 @@ This operation attemps to acquire an exclusive session and obtain an associated 
 
 The operation fail with a status `BadRequest` if the posted JSON is invalid. The operation fail with a status `Locked` if there is an active session. Otherwise a status `Ok` and a bearer token are returned. The token MUST be used to access the NMOS RestAPIs that may change the Node state.
 
+```
 POST /x-manufacturer/exclusive/acquire
 
 input to ACQUIRE:
@@ -57,7 +64,7 @@ input to ACQUIRE:
 
 output from ACQUIRE:
     <string>                  // bearer token as a base64 string
-
+```
 ### Renew
 
 The renew endpoint MUST be accessed with an `Authorization` header and a token of the form "Bearer <base64>" where <base64> is the token as a base64 string obtained from the acquire or renew endpoint. The renew endpoint MAY be protected by either the use of an HTTPS server certificate, an HTTPS client certificate with mutual authentication. Other methods of authentication MUST NOT be used.
@@ -72,10 +79,12 @@ This operation fails if attempted before 1/3 of the session lifetime.
 
 This operation returns a new bearer token to be used subsequently.
 
+```
 POST /x-manufacturer/exclusive/renew
 
 output from RENEW:
     string                  // bearer token as a base64 string
+```
 
 ### Release
 
@@ -87,7 +96,9 @@ This operation attemps to release an exclusive session, making it expired.
 
 This operation fails if the bearer token is invalid or the session has expired.
 
+```
 POST /x-manufacturer/exclusive/release
+```
 
 ### KeepAlive
 
@@ -99,7 +110,9 @@ This operation attemps to keep alive an exclusive session, updating its alive ti
 
 This operation fails if the bearer token is invalid or the session has expired.
 
+```
 POST /x-manufacturer/exclusive/keepalive
+```
 
 ## NMOS RestAPIs
 
