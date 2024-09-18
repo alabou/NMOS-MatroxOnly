@@ -29,15 +29,23 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-The 'Session Lifetime' determines the amount of time, after being acquired or renewed, that a session and its token remain valid. A session can be renewed after half of its lifetime. A session expires after its lifetime if not renewed or after its alivetime if unused and an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. By default the lifetime of a session is 5 minutes.
+The 'Session Lifetime' determines the amount of time, after being acquired or renewed, that a session and its token remain valid. A session can be renewed after half of its lifetime. A session expires after its lifetime if not renewed or after its alivetime if unused and an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. By default the lifetime of a session is 60 minutes.
 
-The 'Session AliveTime' determine the amount of time, after being used, that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired if an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. By default the alivetime of a session is 60 seconds.
+The 'Session AliveTime' determines the amount of time, after being used, that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired if an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. By default the alivetime of a session is 60 seconds.
 
 ## Using Reservation along with OAuth2.0 authorizations
 
 If accesses to the NMOS APIs are authorized by OAuth2.0, the OAuth2.0 Bearer token MUST be stored in the `Authorization` HTTP header and the exclusive session Bearer token MUST be store in the `PEP-Exclusive-Authorization` HTTP header. Otherwise when OAuth2.0 authorizations are not used, the exclusive session Bearer token MUST be stored in the `Authorization` HTTP header.
 
 In this document, references to the `Authorization` HTTP header MUST be replaced by references to the `PEP-Exclusive-Authorization` HTTP header when OAuth2.0 authorizations are used by an NMOS Node to authorize access to the NMOS RestAPIs.
+
+## Session Lifetime versus AliveTime
+
+A session is associated with a lifetime to protect against compromised Bearer tokens. A session is associated with an alivetime to quickly terminate a previous session when no longer used. 
+
+An entity MUST acquire NMOS Nodes to exclusively used them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective a a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST remain 60 seconds. The current values have been choosen to allow a wuick turnaround when am entity that reserved NMOS Node becomes dead after a malfunction, power down or other reasons.
+
+The owner of an exclusive regularly Renew its session to obtain a new Bearer token to prevent its session to expire. Between the renewing intervals, the owner of an exclusive session regularly keeps its session alive by calling the KeepAlive endpoint or by using its Bearer token in an access to an NMOS Node RestAPI to keeep its session alive.
 
 ## Reservation RestAPI
 
@@ -49,7 +57,7 @@ The acquire endpoint MAY be protected by either the use of an HTTPS server certi
 
 This operation is atomic on a per Node basis. It is not possible to reserve multiple Nodes simultaneously. 
 
-This operation attemps to acquire an exclusive session and obtain an associated bearer token. The session expires in 5 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. The `exclusive_key` is used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key remains valid even if the session expires until a new owner activate a Sender / Receiver.
+This operation attemps to acquire an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. The `exclusive_key` is used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key remains valid even if the session expires until a new owner activate a Sender / Receiver.
 
 The operation fail with a status `BadRequest` if the posted JSON is invalid. The operation fail with a status `Locked` if there is an active session. Otherwise a status `Ok` and a bearer token are returned. The token MUST be used to access the NMOS RestAPIs that may change the Node state.
 
@@ -58,7 +66,7 @@ POST /x-manufacturer/exclusive/acquire
 
 input to ACQUIRE:
 {
-    owner: <string>,          // free form string indicating the owner
+    owner: <string>,          // free form string indicating the owner of the NMOS Node
     exclusive_key: <string>   // 16 bytes big-endian value in hexadecimal (without 0x prefix) => total of 32 hexadecimal characters
 }
 
@@ -71,7 +79,7 @@ The renew endpoint MUST be accessed with an `Authorization` header and a token o
 
 This operation is atomic on a per Node basis. It is not possible to renew multiple Nodes simultaneously. 
 
-This operation attemps to renew an exclusive session and obtain an associated bearer token. The session expires in 5 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. 
+This operation attemps to renew an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. 
 
 This operation fails with a status `Unauthorized` if the bearer token of an `Authorization` header is invalid or the session has expired or if an `Authorization` header is not used and there is an alive session. This operation fails with a status `Locked` if an `Authorization` header is not used and there is no alive session.
 
