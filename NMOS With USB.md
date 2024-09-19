@@ -87,6 +87,13 @@ A USB Receiver is a TCP/IP client. A USB Sender accept connections from connecti
 
 An example Receiver resource is provided in the [Examples](../examples/).
 
+### Grouping of Receivers
+In some scenarios a group of Receivers control the USB sub-system of a Device. 
+
+The grouping scheme described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md) MUST be used. All those Receivers MUST be in the same `<group-name> <group-index>` group and each MUST use a different `<role-index>` in the `DATA` role.
+
+With this grouping convention a Controller can identify the number of Senders that can simultaneously control the USB sub-system of a Device. 
+
 ## USB IS-05 Senders and Receivers
 
 Connection Management using IS-05 proceeds in exactly the same manner as for any other transport using the USB specific transport parameters defined in [USB Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_usb.json) and [USB Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_usb.json).
