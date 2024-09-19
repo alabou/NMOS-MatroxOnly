@@ -37,15 +37,15 @@ The 'Session AliveTime' determines the amount of time, after being used, that a 
 
 If accesses to the NMOS APIs are authorized by OAuth2.0, the OAuth2.0 Bearer token MUST be stored in the `Authorization` HTTP header and the exclusive session Bearer token MUST be store in the `PEP-Exclusive-Authorization` HTTP header. Otherwise when OAuth2.0 authorizations are not used, the exclusive session Bearer token MUST be stored in the `Authorization` HTTP header.
 
-In this document, references to the `Authorization` HTTP header MUST be replaced by references to the `PEP-Exclusive-Authorization` HTTP header when OAuth2.0 authorizations are used by an NMOS Node to authorize access to the NMOS RestAPIs.
+In this document, references to the `Authorization` HTTP header MUST be replaced by references to the `PEP-Exclusive-Authorization` HTTP header when OAuth2.0 authorizations are used by a Node to authorize access to the NMOS RestAPIs.
 
 ## Session Lifetime versus AliveTime
 
 A session is associated with a lifetime to protect against compromised Bearer tokens. A session is associated with an alivetime to quickly terminate a previous session when no longer used. 
 
-An entity MUST acquire NMOS Nodes to exclusively used them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective a a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST remain 60 seconds. The current values have been choosen to allow a wuick turnaround when am entity that reserved NMOS Node becomes dead after a malfunction, power down or other reasons.
+An entity MUST acquire Nodes to exclusively used them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective a a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST remain 60 seconds. The current values have been choosen to allow a wuick turnaround when am entity that reserved Node becomes dead after a malfunction, power down or other reasons.
 
-The owner of an exclusive regularly Renew its session to obtain a new Bearer token to prevent its session to expire. Between the renewing intervals, the owner of an exclusive session regularly keeps its session alive by calling the KeepAlive endpoint or by using its Bearer token in an access to an NMOS Node RestAPI to keeep its session alive.
+The owner of an exclusive regularly Renew its session to obtain a new Bearer token to prevent its session to expire. Between the renewing intervals, the owner of an exclusive session regularly keeps its session alive by calling the KeepAlive endpoint or by using its Bearer token in an access to a Node RestAPI to keeep its session alive.
 
 ## Reservation RestAPI
 
@@ -53,7 +53,7 @@ This RestAPI MUST use the HTTPS protocol with TLS v1.2 or TLS v1.3. It is not al
 
 ### Acquire
 
-The acquire endpoint MAY be protected by either the use of an HTTPS server certificate, an HTTPS client certificate with mutual authentication or using credential in some form of username and password. It is up to the vendor to decide of the exact mechanism and possibly return a `WWW-Authenticate` header with the proper authentication information. 
+The acquire endpoint MAY be protected by either the use of an HTTPS server certificate, an HTTPS client certificate with mutual authentication or using credential in some form of username and password. It is up to the vendor to decide of the exact mechanism and possibly return a `WWW-Authenticate` header with the proper authentication information. The acquire endpoint SHOULD NOT be accessed with an `Authorization` header.
 
 This operation is atomic on a per Node basis. It is not possible to reserve multiple Nodes simultaneously. 
 
@@ -66,7 +66,7 @@ POST /x-manufacturer/exclusive/acquire
 
 input to ACQUIRE:
 {
-    owner: <string>,          // free form string indicating the owner of the NMOS Node
+    owner: <string>,          // free form string indicating the owner of the Node
     exclusive_key: <string>   // 16 bytes big-endian value in hexadecimal (without 0x prefix) => total of 32 hexadecimal characters
 }
 
@@ -81,9 +81,9 @@ This operation is atomic on a per Node basis. It is not possible to renew multip
 
 This operation attemps to renew an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. 
 
-This operation fails with a status `Unauthorized` if the bearer token of an `Authorization` header is invalid or the session has expired or if an `Authorization` header is not used and there is an alive session. This operation fails with a status `Locked` if an `Authorization` header is not used and there is no alive session.
+This operation fails with a status `Unauthorized` if the bearer token of an `Authorization` header is invalid or the session has expired.
 
-This operation fails if attempted before 1/3 of the session lifetime.
+This operation fails with a status `TooEarly` if attempted before 1/3 of the session lifetime.
 
 This operation returns a new bearer token to be used subsequently.
 
@@ -102,7 +102,7 @@ This operation is atomic on a per Node basis. It is not possible to release mult
 
 This operation attemps to release an exclusive session, making it expired. 
 
-This operation fails if the bearer token is invalid or the session has expired.
+This operation fails with a status `Unauthorized` if the bearer token of an `Authorization` header is invalid or the session has expired.
 
 ```
 POST /x-manufacturer/exclusive/release
@@ -116,7 +116,7 @@ This operation is atomic on a per Node basis. It is not possible to keepalive mu
 
 This operation attemps to keep alive an exclusive session, updating its alive time. The owner SHOULD call this endpoint before the 60 seconds alive timeout of a session is reached.
 
-This operation fails if the bearer token is invalid or the session has expired.
+This operation fails with a status `Unauthorized` if the bearer token of an `Authorization` header is invalid or the session has expired.
 
 ```
 POST /x-manufacturer/exclusive/keepalive
@@ -124,11 +124,15 @@ POST /x-manufacturer/exclusive/keepalive
 
 ## NMOS RestAPIs
 
-Unless there is no currently active session, a client MUST use a previously acquired bearer token to access NMOS RestAPIs that may change the state of a Node. The `Authorization` header MUST be used along with a token of the form "Bearer <base64>" where <base64> is the token as a base64 string obtained from the acquire endpoint. Nodes may be used without reservation if there is no currently active session.
+Unless there is no currently active session or stated otherwise, a client MUST use a previously acquired bearer token to access NMOS RestAPIs that may change the state of a Node. The `Authorization` header MUST be used along with a token of the form "Bearer <base64>" where <base64> is the token as a base64 string obtained from the acquire endpoint. Nodes MAY be used without reservation if there is no currently active session.
 
-An `Unauthorized` status is returned if the session associated with a bearer token is expired or alive, and the verb is one of PUT, POST, PATCH, DELETE and the operation may change the state of the Node.
+An `Unauthorized` status is returned if a) the session associated with a bearer token is expired or b) if a bearer token is not used and there is an alive session, and the verb is one of PUT, POST, PATCH, DELETE and the operation may change the state of the Node.
 
 Nodes reservation SHOULD be used in environments where multiple Controllers and/or entities compete for using the Nodes. The Node's exclusivity extend to the exclusive privacy of the streaming. Knowlege of the PEP Pre-Shared Key (PSK) and all the related parameters is not enough for accessing the content. The session exclusive key used in the privacy key derivation process ensures that only the owner of the exclusive session can access the content, providing further privacy in 1-to-N scenarios (note: peer-to-peer ECDH provides a similar exclusivity in a 1-to-1 scenario).
+
+## Verifying Ownership
+
+If an entity in possession of a exclusive session token lost track of the renewal and keep-alive schedules it SHOULD first attempt to KeepAlive its token and if successful it SHOULD then attempt to renew the token. If the renewal returns a `TooEarly` status, the token SHOULD be considered to be still valid for at least half of its 'Session Lifetime'.
 
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
