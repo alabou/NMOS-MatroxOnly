@@ -51,6 +51,8 @@ The owner of an exclusive regularly Renew its session to obtain a new Bearer tok
 
 This RestAPI MUST use the HTTPS protocol with TLS v1.2 or TLS v1.3. It is not allowed to use the bare HTTP protocol.
 
+The Reservation RestAPI MUST be publised as a Node service of type `urn:x-matrox:service:exclusive/v1.0`. The service declaration indicate the URL where the service is accessible and if OAuth2.0 authorizations are required to access the service.
+
 ### Acquire
 
 The acquire endpoint MAY be protected by either the use of an HTTPS server certificate, an HTTPS client certificate with mutual authentication or using credential in some form of username and password. It is up to the vendor to decide of the exact mechanism and possibly return a `WWW-Authenticate` header with the proper authentication information. The acquire endpoint SHOULD NOT be accessed with an `Authorization` header.
