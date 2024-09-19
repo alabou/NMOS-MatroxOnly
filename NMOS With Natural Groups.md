@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-[BCP-002-01][] Describes a method for grouping Sender and Receiver resources into natural groups in a very generic way. This specification strengten the requirements and provides a very percise defintion of natural grouping in Matrox products. The objective is to make natural grouping of Senders and Receivers compatible and homogeneous with the concept of sub-Flows/sub-Streams of multiplexed Senders and Receivers. A Controller should be able to process and connect a group of independent Senders/Receivers in the same way ot processes a group of multiplexed Flows/Streams.
+[BCP-002-01][] Describes a method for grouping Sender and Receiver resources into natural groups in a very generic way. This specification strengten the requirements and provides a very percise defintion of natural grouping in Matrox products. The objective is to make natural grouping of Senders and Receivers compatible and homogeneous with the concept of sub-Flows/sub-Streams of multiplexed Senders and Receivers. A Controller should be able to process and connect a group of independent Senders/Receivers in the same way it processes a group of multiplexed Flows/Streams.
 
 ## Use of Normative Language
 
