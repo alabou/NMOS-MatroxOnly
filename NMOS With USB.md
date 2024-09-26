@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-The VSF/IPMX [TR-10-14](https://vsf.tv/download/technical_recommendations/VSF_TR-10-14.pdf) technical recommendation defines the transport of USB multiplexed streams over TCP/IP. It allows the transport of multiplexed keyboard, mouse, data, audio and video sub-streams over TCP/IP. Senders and Receivers using the USB transport have their `format` attribute set to `urn:x-nmos:format:data` and their `transport` attribute set to  `urn:x-matrox:transport:usb`. The `media_type` attribute of an USB Receiver is `application/usb`. The `media_type` of a data Flow connected with an USB Sender is `application/usb`.
+The VSF/IPMX [TR-10-14][] technical recommendation defines the transport of USB multiplexed streams over TCP/IP. It allows the transport of multiplexed keyboard, mouse, data, audio and video sub-streams over TCP/IP. Senders and Receivers using the USB transport have their `format` attribute set to `urn:x-nmos:format:data` and their `transport` attribute set to  `urn:x-matrox:transport:usb`. The `media_type` attribute of an USB Receiver is `application/usb`. The `media_type` of a data Flow connected with an USB Sender is `application/usb`.
 
 The content of a USB stream is not exposed at the NMOS level and as such a USB stream is not exposed as a multiplexed stream but as an opaque data stream. A USB Receiver connecting to a USB Sender is granted access to the various USB devices accessible at the Sender. For each device there is a corresponding multiplexed data sub-stream. Such devices may be plugged and unplugged dynamically without impacting the connection of a Receiver to the Sender, without impacting the associated Source, Flow and Sender resources.
 
@@ -130,3 +130,4 @@ A Sender MAY, unless constrained by IS-11, produce any USB stream that is compli
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
 [TR-10-8]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-8_2023-04-14.pdf "NMOS Requirements"
+[TR-10-14]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-14_2024-09-24.pdf "IPMX	USB"
