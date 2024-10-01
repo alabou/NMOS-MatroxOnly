@@ -194,6 +194,22 @@ A Receiver configured for in-band dynamic changes of the `key_version` MUST use 
 
 Note: Bidirectional streams are not supported by the "UDP" and "UDP_KV" protocols.
 
+## Node Reservation
+
+When [Node Reservation](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Node%20Reservation.md) is used along with Privacy Encryption Protocol (PEP) an additional `key_xcl` parameter is used along with the already existing key_pfs in the key derivation process.
+
+The privacy_key MUST be derived from a Pre-Shared Key (PSK), a key generator (key_generator), a key version (key_version), a Perfect Forward Secrecy shared secret (key_pfs) and a Node Reservation shared exclusive key using a KDF in counter mode as per NIST.SP.800-108Rev1 section 4.1. 
+
+### 128-bit key derivation (PSK is 128 bits):
+```privacy_key = CMAC(PSK, AB || key_generator || key_version || key_pfs || key_xcl)```
+### 256-bit key derivation (PSK is 128 or 256 bits):
+```privacy_key = CMAC(PSK, AB || key_generator || key_version|| HIGH(key_pfs) || key_xcl) ||```  
+```              CMAC(PSK, CD || key_generator || key_version|| LOW(key_pfs)  || key_xcl)```
+### 256-bit key derivation (PSK is 512 bits):
+```privacy_key = HMAC-SHA-512/256(PSK, AB || key_generator || key_version|| key_pfs || key_xcl)``` 
+
+The `key_xcl` MUST be the 128 bit `exclusive_key` of the exclusive session, acquired through the `acquire` endpoint of the Node Reservation RestAPI, that activated an associated Sender / Receiver. When  Node Reservation is not used, the key_xcl value MUST be an empty Octet String and it is not used by the key derivation process. Otherwise it MUST be a 16 byte Octet String. It is an Octet String in binary form. 
+
 [H.222.0]: https://www.itu.int/rec/T-REC-H.222.0 "Generic coding of moving pictures and associated audio information: Systems"
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [RFC-2250]: https://tools.ietf.org/html/rfc2250 "RTP Payload Format for MPEG1/MPEG2 Video"
