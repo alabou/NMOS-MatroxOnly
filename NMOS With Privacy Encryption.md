@@ -196,7 +196,7 @@ Note: Bidirectional streams are not supported by the "UDP" and "UDP_KV" protocol
 
 ## Node Reservation
 
-When [Node Reservation](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Node%20Reservation.md) is used along with Privacy Encryption Protocol (PEP) an additional `key_xcl` parameter is used along with the already existing key_pfs in the key derivation process.
+When [Node Reservation](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Node%20Reservation.md) is used along with the Privacy Encryption Protocol (PEP) an additional `key_xcl` parameter is used in the key derivation process.
 
 The privacy_key MUST be derived from a Pre-Shared Key (PSK), a key generator (key_generator), a key version (key_version), a Perfect Forward Secrecy shared secret (key_pfs) and a Node Reservation shared exclusive key using a KDF in counter mode as per NIST.SP.800-108Rev1 section 4.1. 
 
