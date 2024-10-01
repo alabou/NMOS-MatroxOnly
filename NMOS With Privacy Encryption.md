@@ -203,8 +203,8 @@ The privacy_key MUST be derived from a Pre-Shared Key (PSK), a key generator (ke
 ### 128-bit key derivation (PSK is 128 bits):
 ```privacy_key = CMAC(PSK, AB || key_generator || key_version || key_pfs || key_xcl)```
 ### 256-bit key derivation (PSK is 128 or 256 bits):
-```privacy_key = CMAC(PSK, AB || key_generator || key_version|| HIGH(key_pfs) || key_xcl) ||```  
-```              CMAC(PSK, CD || key_generator || key_version|| LOW(key_pfs)  || key_xcl)```
+```privacy_key = CMAC(PSK, AB || key_generator || key_version || HIGH(key_pfs) || key_xcl) ||```  
+```              CMAC(PSK, CD || key_generator || key_version || LOW(key_pfs)  || key_xcl)```
 ### 256-bit key derivation (PSK is 512 bits):
 ```privacy_key = HMAC-SHA-512/256(PSK, AB || key_generator || key_version|| key_pfs || key_xcl)``` 
 
