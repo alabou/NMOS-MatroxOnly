@@ -55,13 +55,15 @@ The Reservation RestAPI MUST be publised as a Node service of type `urn:x-matrox
 
 ### Acquire
 
-The acquire endpoint MAY be protected by either the use of an HTTPS server certificate, an HTTPS client certificate with mutual authentication or using credential in some form of username and password. It is up to the vendor to decide of the exact mechanism and possibly return a `WWW-Authenticate` header with the proper authentication information. The acquire endpoint SHOULD NOT be accessed with an `Authorization` header.
+The acquire endpoint MAY be protected by either the use of an HTTPS server certificate, an HTTPS client certificate with mutual authentication or using credentials in some form of username and password. It is up to the vendor to decide of the exact mechanism and possibly return a `WWW-Authenticate` header with the proper authentication information. If OAuth2.0 is not used, the acquire endpoint SHOULD NOT be accessed with an `Authorization` header. Otherwise if OAuth2.0 is used, the acquire endpoint SHOULD NOT be accessed with an `PEP-Exclusive-Authorization` header.
 
 This operation is atomic on a per Node basis. It is not possible to reserve multiple Nodes simultaneously. 
 
-This operation attemps to acquire an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. The `exclusive_key` is used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key remains valid even if the session expires until a new owner activate a Sender / Receiver.
+This operation attemps to acquire an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. The `exclusive_key` is used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key remains valid even if the session expires until a new owner activate a Sender / Receiver. See [PEP](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) for more details about the Privacy Encryption Protocol.
 
 The operation fail with a status `BadRequest` if the posted JSON is invalid. The operation fail with a status `Locked` if there is an active session. Otherwise a status `Ok` and a bearer token are returned. The token MUST be used to access the NMOS RestAPIs that may change the Node state.
+
+The client receiving a `Locked` status MUST use an exponential back-off mechanism when retrying to obtain an exclusive session. Such a mechanism MUST consider the lifetime of 60 minutes and alivetime of 60 seconds of an exclusive session.
 
 ```
 POST /x-manufacturer/exclusive/acquire
