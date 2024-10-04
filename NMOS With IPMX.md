@@ -63,7 +63,9 @@ A Receiver MAY support either or both true and false values.
 
 A Controller MUST verify the compliance of the Receiver with a Sender using HDCP encryption from the SDP transport file `hkep` attribute. The presence of such attribute in an SDP transport file indicate that the stream is HDCP protected. Only Receivers supporting HDCP encryption and the HKEP protocol can consume such streams.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encrypted streams are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as HKEP is a protection mechanism under the controle of the Sender.
+A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encrypted streams are supported. A Sender MAY support either or both true and false values. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as HKEP is a protection mechanism under the control of the Sender.
+
+Informative Note: A Sender indicating both `true` and `false` values in its capabilities describes that it may produce both HDCP and non-HDCP streams according to some internal criteria at activation time. 
 
 ### RTP Payload Header
 
@@ -77,7 +79,9 @@ A Receiver MAY support either or both true and false values.
 
 A Controller MUST verify the compliance of the Receiver with a Sender using privacy encryption from the SDP transport file `privacy` attribute. The presence of such attribute in an SDP transport file indicate that the stream is privacy protected. Only Receivers supporting privacy encryption and the PEP protocol can consume such streams. The fine grained Receiver privacy capabilities are provided as part of the associated Receiver's transport parameters constraints.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:privacy` capability to indicate that privacy encrypted streams are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as PEP is a protection mechanism under the controle of the Sender.
+A Sender MAY provide a `urn:x-matrox:cap:transport:privacy` capability to indicate that privacy encrypted streams are supported. A Sender MAY support either true or false values. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as PEP is a protection mechanism under the controle of the Sender.
+
+Informative Note: A Sender is configured by an administrator to produce either privacy encrypted streams or non-encrypted streams. The Sender capability indicates the current configuration.
 
 ### RTP Payload Header
 
