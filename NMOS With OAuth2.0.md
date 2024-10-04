@@ -75,11 +75,12 @@ The algorithm `alg` used for signing the Bearer token MUST be one of `RS256`, `R
 
 ### Grants
 
-NMOS Controllers and similar NMOS sub-systems MUST obtain Bearer tokens with `client_credentials` grants to access the APIs of NMOS Nodes. 
+NMOS Controllers and similar NMOS sub-systems MUST obtain Bearer tokens to access the APIs of NMOS Nodes. 
+
+NMOS Controllers and similar NMOS sub-systems SHOULD obtain Bearer tokens with `client_credentials` grants to access the APIs of NMOS Nodes. 
+NMOS Controllers, similar NMOS sub-systems, users and tools MAY obtain Bearer tokens with `authorization_code` grants to access the APIs of NMOS Nodes. 
 
 The `sub` and `client_id` claims of a Bearer token MUST be equal for the `client_credentials` grant and MUST NOT be equal for the `authorization_code` and other grants.
-
-Users and tools MAY obtain Bearer tokens with `authorization_code` grants to access the APIs of NMOS Nodes. 
 
 An NMOS Node MAY be configured to accept Access Tokens with either `client_credentials` grants or `authorization_code` grants or both.
 
