@@ -20,7 +20,9 @@ The Rec. [AES/EBU Tech 3250-E][AES3] | IEC 60958 specification and associated am
 
 The [Video Services Forum][VSF] developed Technical Recommendation [VSF_TR-10-12][] for the transport of AES3 audio in an AES3 stream over IP.
 
-This specification outlines AES3 transport streams that are either opaque or fully described. An opaque `audio/AM824` Flow does not have `parents` Flows as opposed to a fully described one that describe the `parents` Flows making the `audio/AM824` Flow. For the opaque case, the Flow's `format` is `urn:x-nmos:format:audio` and for the fully descvribed case the Flow's `format` is `urn:x-nmos:format:mux`.
+This specification outlines AES3 transport streams that are either opaque or fully described. An opaque `audio/AM824` Flow does not have `parents` Flows as opposed to a fully described  `application/AM824` Flow that describe the `parents` Flows making the `application/AM824` Flow. For the opaque case, the Flow's `format` is `urn:x-nmos:format:audio` and for the fully described case the Flow's `format` is `urn:x-nmos:format:mux`. For the fully described case the media type use the type `application` instead of `audio` to differentiate it from the opaque case.
+
+Note: In the SDP transport file the media type will always be `audio/AM824` irrespective of the opaque or full described definition of the Senders/Receivers.
 
 ## Use of Normative Language
 
@@ -39,7 +41,9 @@ A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio` or `ur
 
 An AES3 Stream MUST be compliant with the standard implementation of the channel status as per section 7.2.2 of [AES3][] and only byte 0, 1, 2 and 23 MAY have a non-zero value. The AES3 Stream MUST be compliant with [AES/EBU Tech 3250-E][AES3] for the base functionality and PCM audio. Additionally it MUST be compliant with [ST 337] for non-PCM coded audio and data. As per ST 2110-31 or [ST 302M][] many such AES3 Streams can be multiplexed together into an RTP or MPEG2-TS stream. The `channel mode` field of byte 1 of the the channel status SHOULD be one of `mode not indicated`, `two-channel mode` or `stereophonic mode`.
 
-An AM824 Flow/Stream MUST have an associated `audio/AM824` media type and MAY comprise of a number of AES3 Streams. An opaque AM824 Flow/Stream does not provide information about the embedded AES3 Streams other than their count and common sample rate. A fully described AM824 Flow/Stream provides information about each embedded AES3 Stream in addition to their count and common sample rate.
+An opaque AM824 Flow/Stream MUST have an associated `audio/AM824` media type and MAY comprise of a number of AES3 Streams. An opaque AM824 Flow/Stream does not provide information about the embedded AES3 Streams other than their count and common sample rate. 
+
+An fully described AM824 Flow/Stream MUST have an associated `application/AM824` media type and MAY comprise of a number of AES3 Streams. A fully described AM824 Flow/Stream provides information about each embedded AES3 Stream in addition to their count and common sample rate.
 
 Note: This definition of an an AES Stream applies in the context of ST 2110-31 or [ST 302M][]. An AES/EBU digital audio interface MAY support enhanced functionality. It is expected that a conversion from/to the AES/EBU digital audio interface to/from an AM824 Flow/Stream will be performed when enhanced functionality is used/required on the AES/EBU digital audio interface.
 
@@ -65,7 +69,7 @@ Examples Source resources are provided in [Examples](../examples/).
 
 An opaque AM824 Flow resource MUST indicate `audio/AM824` in the `media_type` attribute and `urn:x-nmos:format:audio` for the `format` attribute. An AM824 Flow MUST have a `source_id` attribute referencing a Source of the same `format`.
 
-A fully described AM824 Flow resource MUST indicate `audio/AM824` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. An AM824 Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio` or `urn:x-nmos:format:data` MUST be a member of said fully described AM824 Flow's `parents` attribute. Such audio sub-flows MUST NOT use the `audio/AM824` media type.
+A fully described AM824 Flow resource MUST indicate `application/AM824` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. An AM824 Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio` or `urn:x-nmos:format:data` MUST be a member of said fully described AM824 Flow's `parents` attribute. Such audio sub-flows MUST NOT use the `audio/AM824` media type.
 
 In addition to those attributes defined in IS-04 for a coded audio Flow, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for AM824 Flows.
 
@@ -144,7 +148,7 @@ Nodes implementing IS-04 v1.3 or higher that are capable of receiving AM824 Stre
 
 An opaque AM824 Receiver MUST indicate `urn:x-nmos:format:audio` for the `format` attribute and MUST provide Receiver's Capabilities for the `audio/AM824` Stream. An opaque AM824 Receiver MUST omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the AM824 Stream.
 
-A fully described AM824 Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the `audio/AM824` Stream and for each sub-Stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
+A fully described AM824 Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the `application/AM824` Stream and for each sub-Stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
 
 The Receiver MUST express its limitations or preferences regarding the AM824 Streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
@@ -181,11 +185,11 @@ An example Receiver resource is provided in the [Examples](../examples/).
 
 ### RTP transport based on ST 2110-31
 
-For Nodes consuming AM824 Streams using the RTP payload mapping defined by ST 2110-31, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute and MUST indicate `audio/AM824` as the `media_type`.
+For Nodes consuming AM824 Streams using the RTP payload mapping defined by ST 2110-31, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute and MUST indicate `audio/AM824` or `application/AM824` as the `media_type`.
 
 ### Other transports
 
-For Nodes consuming AM824 Streams using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute and MUST indicate `audio/AM824` as the `media_type`.
+For Nodes consuming AM824 Streams using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute and MUST indicate `audio/AM824` or `application/AM824` as the `media_type`.
   
 ## AES3 IS-05 Senders and Receivers
 
@@ -237,12 +241,12 @@ A Controller attempting to connect a fully described AM824 Receiver to an opaque
 The Controller MAY use the `channel-order` parameter of the SDP transport file and other parameters to verify the compliance of the Sender with the fully described Receiver capabilities. A Receiver MUST verify that the `channel-order` parameter of the SDP transport file and other parameters comply with its `audio_layers` and other capabilities.
 
 ### AM824 opaque Receiver with a fully described Sender
-A Controller attempting to connect an opaque AM824 Receiver to a fully described AM824 Sender SHOULd consider the Receiver as being of format `urn:x-nmos:format:mux` and that the `media_types` attribute of the Receiver contains only `audio/AM824`. The Controller MAY assume the following additional capabilities for the AM824 fully described Receiver.
+A Controller attempting to connect an opaque AM824 Receiver to a fully described AM824 Sender SHOULd consider the Receiver as being of format `urn:x-nmos:format:mux` and that the `media_types` attribute of the Receiver contains only `application/AM824`. The Controller MAY assume the following additional capabilities for the AM824 fully described Receiver.
 
   - MuxConstraintSet."urn:x-nmos:cap:meta:enabled" = true  
   - MuxConstraintSet."urn:x-nmos:cap:meta:preference" = 100  
-  - MuxConstraintSet."urn:x-nmos:cap:meta:label" = "fully described AM824 stream capabilities"
-  - MuxConstraintSet."urn:x-nmos:cap:format:media_type" = `audio/AM824`  
+  - MuxConstraintSet."urn:x-nmos:cap:meta:label" = "fully described AM824 stream capabilities"  
+  - MuxConstraintSet."urn:x-nmos:cap:format:media_type" = `application/AM824`  
   - MuxConstraintSet."urn:x-matrox:cap:transport:hkep" = AudioConstraintSet."urn:x-matrox:cap:transport:hkep" *if defined*  
   - MuxConstraintSet."urn:x-matrox:cap:transport:privacy" = AudioConstraintSet."urn:x-matrox:cap:transport:privacy" *if defined*  
 
