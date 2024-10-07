@@ -43,7 +43,7 @@ An AES3 Stream MUST be compliant with the standard implementation of the channel
 
 An opaque AM824 Flow/Stream MUST have an associated `audio/AM824` media type and MAY comprise of a number of AES3 Streams. An opaque AM824 Flow/Stream does not provide information about the embedded AES3 Streams other than their count and common sample rate. 
 
-An fully described AM824 Flow/Stream MUST have an associated `application/AM824` media type and MAY comprise of a number of AES3 Streams. A fully described AM824 Flow/Stream provides information about each embedded AES3 Stream in addition to their count and common sample rate.
+A fully described AM824 Flow/Stream MUST have an associated `application/AM824` media type and MAY comprise of a number of AES3 Streams. A fully described AM824 Flow/Stream provides information about each embedded AES3 Stream in addition to their count and common sample rate.
 
 Note: This definition of an an AES Stream applies in the context of ST 2110-31 or [ST 302M][]. An AES/EBU digital audio interface MAY support enhanced functionality. It is expected that a conversion from/to the AES/EBU digital audio interface to/from an AM824 Flow/Stream will be performed when enhanced functionality is used/required on the AES/EBU digital audio interface.
 
