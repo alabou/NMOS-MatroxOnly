@@ -75,7 +75,7 @@ The `mode` "AES-128-CTR" MUST be supported by all devices implementing the "SRT"
 
 The ECDH curves available are: "secp256r1", "secp521r1", "25519" and "448".
 
-The ECDH functionality is available through the extended transport parameters only. A Controller MUST exchange the Sender and Receier public keys to activate an ECDH session.
+The ECDH functionality is available through the extended transport parameters only. A Controller MUST exchange the Sender and Receiver public keys to activate an ECDH session.
 
 Note: A Sender/Receiver generates a new public key whenever it explicitly or implicitly becomes inactive.
 
