@@ -20,7 +20,7 @@ This document describes various transport protocols and defines the identifier u
 - **Specification:** [AMWA IS-04 v1.3](https://specs.amwa.tv/is-04/v1.3)
 - **Applicability:** AMWA IS-04 since v1.3, IS-05 since v1.1
 
-- The `ndi` transport is a multiplexed transport protocol comprising video, audio and data sub-streams. A Sender using the `ndi` transport must be associated with a Flow of format `urn:x-nmos:format:mux`. A Receiver using the `ndi` transport must be of format `urn:x-nmos:format:mux`.
+- The `ndi` transport is a multiplexed transport protocol comprising video, audio and data sub-streams. A Sender using the `ndi` transport MUST be associated with a Flow of format `urn:x-nmos:format:mux`. A Receiver using the `ndi` transport MUST be of format `urn:x-nmos:format:mux`.
 
 ### SRT
 - **Name:** `urn:x-matrox:transport:srt`
@@ -31,7 +31,7 @@ This document describes various transport protocols and defines the identifier u
 -The `srt` transport is, by default, an MPEG2-TS multiplexed transport protocol comprising video, audio, and data sub-streams.
 
 - The protocol supports the `.mp2t` and `.rtp` subclassifications.
-  - The `mp2t` subclassification is the default one, being implicit when a subclassification is not povided. It corresponds to an MPEG2-TS multiplexed stream being sent through the SRT protocol. A Sender using the `srt` or `srt.mp2t` transport must be associated with a Flow of format `urn:x-nmos:format:mux`. A Receiver using the `srt` or `srt.mp2t` transport must be of format `urn:x-nmos:format:mux`.
+  - The `mp2t` subclassification is the default one, being implicit when a subclassification is not povided. It corresponds to an MPEG2-TS multiplexed stream being sent through the SRT protocol. A Sender using the `srt` or `srt.mp2t` transport MUST be associated with a Flow of format `urn:x-nmos:format:mux`. A Receiver using the `srt` or `srt.mp2t` transport MUST be of format `urn:x-nmos:format:mux`.
   -The `.rtp` subclassification corresponds to an RTP stream being sent through the SRT protocol. The RTP stream may be an MPEG2-TS stream but this is signaled at the RTP level, not as a subclassification.
 
 ### USB
@@ -40,7 +40,7 @@ This document describes various transport protocols and defines the identifier u
 - **Specification:** [AMWA IS-04 v1.3](https://specs.amwa.tv/is-04/v1.3)
 - **Applicability:** AMWA IS-04 since v1.3, IS-05 since v1.1
 
-- The `usb` transport is a data transport protocol comprising data sub-streams. A Sender using the `usb` transport must be associated with a Flow of format `urn:x-nmos:format:data`. A Receiver using the `usb` transport must be of format `urn:x-nmos:format:data`.
+- The `usb` transport is a data transport protocol comprising data sub-streams. A Sender using the `usb` transport MUST be associated with a Flow of format `urn:x-nmos:format:data`. A Receiver using the `usb` transport MUST be of format `urn:x-nmos:format:data`.
 
 ### UDP
 - **Name:** `urn:x-matrox:transport:udp`
@@ -51,7 +51,7 @@ This document describes various transport protocols and defines the identifier u
 - The `udp` transport protocol is, by default, an MPEG2-TS multiplexed transport protocol comprising video, audio and data sub-streams.
 
 - The protocol supports the `.mcast`, `.ucast`, `.mp2t`, `.mp2t.mcast` and `.mp2t.ucast` subclassifications.
-  - The `mp2t` subclassification is the default one, being implicit when a subclassification is not povided. It corresponds to an MPEG2-TS multiplexed stream being sent through the UDP protocol. A Sender using the `udp`, `udp.mp2t`, `udp.mcast`, `udp.ucast`, `udp.mp2t.mcast` or `udp.mp2t.ucast` transport must be associated with a Flow of format `urn:x-nmos:format:mux`. A Receiver using those transports must be of format `urn:x-nmos:format:mux`.
+  - The `mp2t` subclassification is the default one, being implicit when a subclassification is not povided. It corresponds to an MPEG2-TS multiplexed stream being sent through the UDP protocol. A Sender using the `udp`, `udp.mp2t`, `udp.mcast`, `udp.ucast`, `udp.mp2t.mcast` or `udp.mp2t.ucast` transport MUST be associated with a Flow of format `urn:x-nmos:format:mux`. A Receiver using those transports MUST be of format `urn:x-nmos:format:mux`.
 
 ### RTP.TCP
 - **Name:** `urn:x-matrox:transport:rtp.tcp`
