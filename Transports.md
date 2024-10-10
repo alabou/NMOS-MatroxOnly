@@ -32,7 +32,7 @@ This document describes various transport protocols and defines the identifier u
 
 - The protocol supports the `.mp2t` and `.rtp` subclassifications.
   - The `mp2t` subclassification is the default one, being implicit when a subclassification is not povided. It corresponds to an MPEG2-TS multiplexed stream being sent through the SRT protocol. A Sender using the `srt` or `srt.mp2t` transport MUST be associated with a Flow of format `urn:x-nmos:format:mux`. A Receiver using the `srt` or `srt.mp2t` transport MUST be of format `urn:x-nmos:format:mux`.
-  -The `.rtp` subclassification corresponds to an RTP stream being sent through the SRT protocol. The RTP stream may be an MPEG2-TS stream but this is signaled at the RTP level, not as a subclassification.
+  -The `.rtp` subclassification corresponds to an RTP stream being sent through the SRT protocol. The RTP stream MAY be an MPEG2-TS stream but this is signaled at the RTP level, not as a subclassification.
 
 ### USB
 - **Name:** `urn:x-matrox:transport:usb`
