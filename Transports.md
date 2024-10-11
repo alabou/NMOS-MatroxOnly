@@ -16,6 +16,8 @@ This document describes various transport protocols and defines the identifier u
 
 ## Transports
 
+This document summarize the various transports available.
+
 ### NDI
 - **Name:** `urn:x-matrox:transport:ndi`
 - **Description:** Identifies the NDI Transport Protocol.
@@ -68,3 +70,9 @@ This document describes various transport protocols and defines the identifier u
 A Flow of format `urn:x-nmos:format:mux` MUST have parents Flows of the `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` format. 
 
 Informative Note: An opaque MPEG2-TS stream scenario is still possible using a Flow of format `urn:x-nmos:format:video` with the `video/MP2T` media type. This is similar to the opaque AES3 stream scenario using `urn:x-nmos:format:audio` as the Flow format and `audio/AM824` as the media type.
+
+## Testing
+
+The previous transports, along with the `urn:x-matrox:transport:rtp` transport can be tested using the forked [nmos-testing repository](https://github.com/alabou/nmos-testing.git) with the `MatroxOnly` branch. The `Matrox-Transports` testsuite provides the tests for the various transports.
+
+Note: Currently the testsuite does not activate the Senders and Receivers to perform live/activation testing.
