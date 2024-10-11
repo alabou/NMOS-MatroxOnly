@@ -98,7 +98,7 @@ With this grouping convention a Controller can identify the number of Senders th
 
 Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the USB specific transport parameters defined in [USB Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_usb.json) and [USB Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_usb.json).
 
-Redundancy MUST be implemented using MPTCP. At most two sets of transport parameters MUST be specified for Senders and Receivers supporting redundancy with the `urn:x-nmos:transport:usb` transport. The trhsport parameters of the first leg are provided as entry 0 of the transport parameters array while those of the second leg are provided as entry 1.
+Redundancy MUST be implemented using MPTCP. At most two sets of transport parameters MUST be specified for Senders and Receivers supporting redundancy with the `urn:x-nmos:transport:usb` transport. The transport parameters of the first leg are provided as entry 0 of the transport parameters array while those of the second leg are provided as entry 1.
 
 ### Receivers
 
