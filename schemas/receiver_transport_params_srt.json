@@ -62,7 +62,7 @@
         "pattern": "^auto$"
       },
       "protocol": {
-        "description": "Indicate the SRT sub-protocol(s) to use",
+        "description": "Indicate the SRT sub-protocol(s) to use, in rendezvous mode both source_port and destination_port must be equal",
         "type": "string",
         "enum": [
           "caller",
