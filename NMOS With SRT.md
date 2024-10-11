@@ -84,7 +84,11 @@ Receivers having the `transport` attribute set to `urn:x-matrox:transport:srt.rt
   
 ## SRT IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transport using the SRT specific transport parameters defined in [SRT Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_srt.json) and [SRT Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_srt.json).
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the SRT specific transport parameters defined in [SRT Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_srt.json) and [SRT Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_srt.json).
+
+All the Sender's `source_ip`, `source_port`, `destination_ip`, `destination_port`, `protocol` and `latency` transport parameters MUST be part of the Sender's `active`, `staged` and `constraints` endpoints.
+
+All the Receivers's `destination_ip`, `destination_port`, `source_ip`, `source_port`, `protocol` and `latency` transport parameters MUST be part of the Receiver's `active`, `staged` and `constraints` endpoints.
 
 The `protocol` transport parameter MUST default to `listener` on an SRT Sender and to `caller` on an SRT Receiver. A Controller MAY use other combinations in specific connection scenarios. Those are a) both Sender and Receiver using the `rendezvous` protocol or b) the Sender is the `caller` while the Receiver is the `listener`. The default `protocol` values provide an NMOS compatible configuration where a Receiver connects to a Sender based on information optionally received from an SDP transport file. Other configurations require that the Controller uses the transport parameters of both the Sender and Receiver to make a connection.
 
