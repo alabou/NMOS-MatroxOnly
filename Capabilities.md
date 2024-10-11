@@ -22,7 +22,7 @@ The [NMOS Parameter Registers](https://specs.amwa.tv/nmos-parameter-registers/br
 
 The JSON schemas constraint_set.json used by IS-04 and IS-11 and constraints_supported.json used by IS-11 do not adhere to the language of the [NMOS Parameter Registers](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) by not allowing Manufacturer's namespaces. The following schemas MUST be used.
 
-> The manufacturer namespace is expected to used lower case letters only. This seems a reasonable restriction.
+> The manufacturer namespace is expected to use lower case letters only. This seems a reasonable restriction.
 
 ### Updated JSON schemas
 constraint-set.json
