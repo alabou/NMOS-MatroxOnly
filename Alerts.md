@@ -31,7 +31,7 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 ## Definitions
 
-Mv   	Matrox Video class prefix or Multi-vendors class prefix.
+The `Mv` prefix identifies either a Matrox Video class prefix or Multi-vendors class prefix.
 
 ## Alert Domains
 The alerts are categorized into a limited number of domains. The `link`, `transport`, `essence`, `application` and `clock` domains represent the domains of standard, multi-vendors events. Those domains are also available on a per-vendor basis to provide additional vendor specific events. Finally there is a `vendor` domain for vendor specific events that do not categorized into the 5 base `link`, `transport`, `essence`, `application` and `clock` domains.
