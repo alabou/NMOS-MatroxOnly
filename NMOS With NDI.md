@@ -149,11 +149,11 @@ An example Receiver resource is provided in the [Examples](../examples/).
 
 ## NDI IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transport using the NDI specific transport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json). Because of the one Sender to N Receivers relationship of the NDI transport the `receiver_id` attribute of the NDI Sender's activation MUST be `null`. The `sender_id` attribute of the NDI Receiver's activation MUST be set to the id of an NDI Sender or `null` if connecting to a non-NMOS NDI Sender.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the NDI specific transport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json). Because of the one Sender to N Receivers relationship of the NDI transport the `receiver_id` attribute of the NDI Sender's activation MUST be `null`. The `sender_id` attribute of the NDI Receiver's activation MUST be set to the id of an NDI Sender or `null` if connecting to a non-NMOS NDI Sender.
 
 NDI Senders and Receivers MUST be controlled through IS-05 only. The activation of a Sender / Receiver and the associated transport parameters MUST be under the control of IS-05 only.
 
-The `source_name` associated with a Sender MUST be made of the following characters: lower case characters from 'a' to 'z', upper case characters from 'A' to 'Z', numeric characters from '0' to '9', underscore character '_'.
+The `source_name` associated with a Sender MUST be made of the following characters: lower case characters from 'a' to 'z', upper case characters from 'A' to 'Z', numeric characters from '0' to '9', underscore character '_'. If the `source_name` transport parameter is a Receiver is not null, it follows the same rule.
 
 ### Receivers
 
