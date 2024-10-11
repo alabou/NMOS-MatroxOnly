@@ -48,9 +48,9 @@ Senders of such multiplexed stream for non-RTP transports.
 
 The `manifest_href` attribute of the Sender MUST provide the URL to an SDP transport file compliant with the following requirements:
 
-- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have <media> set to `application`, <proto> set to `UDP` and <fmt> set to `mp2t` to express that the `media_type` is `application/mp2t` and the UDP protocol is used by the `urn:x-nmos:transport:srt` and `urn:x-nmos:transport:srt.mp2t` transports. The <port> MUST be set to the UDP port of the SRT Sender listener.
+- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have `<media>` set to `application`, `<proto>` set to `UDP` and `<fmt>` set to `mp2t` to express that the `media_type` is `application/mp2t` and the UDP protocol is used by the `urn:x-nmos:transport:srt` and `urn:x-nmos:transport:srt.mp2t` transports. The `<port>` MUST be set to the UDP port of the SRT Sender listener.
 
-- The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have <connection-address> set to the IP address of the SRT Sender listener.
+- The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have `<connection-address>` set to the IP address of the SRT Sender listener.
 
 - As there is no multi-paths redundancy there MUST be only one media descriptor.
 
@@ -62,9 +62,9 @@ Senders having the `transport` attribute set to `urn:x-matrox:transport:srt.rtp`
 
 The `manifest_href` attribute of the Sender MUST provide the URL to an SDP transport file compliant with the requirements of transport  `urn:x-nmos:transaport:rtp` and the following:
 
-- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have <media> set to `application`, <proto> set to `UDP` and <fmt> set to `mp2t` to express that the `media_type` is `application/mp2t` and the UDP protocol is used by the `urn:x-nmos:transport:srt.rtp` transport. The <port> MUST be set to the UDP port of the SRT Sender listener.
+- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have `<media>` set to `application`, `<proto>` set to `UDP` and `<fmt>` set to `mp2t` to express that the `media_type` is `application/mp2t` and the UDP protocol is used by the `urn:x-nmos:transport:srt.rtp` transport. The `<port>` MUST be set to the UDP port of the SRT Sender listener.
 
-- The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have <connection-address> set to the IP address of the SRT Sender listener.
+- The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have `<connection-address>` set to the IP address of the SRT Sender listener.
 
 - As there is no multi-paths redundancy there MUST be only one media descriptor.
 
