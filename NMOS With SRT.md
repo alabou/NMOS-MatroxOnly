@@ -92,6 +92,8 @@ All the Receivers's `destination_ip`, `destination_port`, `source_ip`, `source_p
 
 The `protocol` transport parameter MUST default to `listener` on an SRT Sender and to `caller` on an SRT Receiver. A Controller MAY use other combinations in specific connection scenarios. Those are a) both Sender and Receiver using the `rendezvous` protocol or b) the Sender is the `caller` while the Receiver is the `listener`. The default `protocol` values provide an NMOS compatible configuration where a Receiver connects to a Sender based on information optionally received from an SDP transport file. Other configurations require that the Controller uses the transport parameters of both the Sender and Receiver to make a connection.
 
+In `rendezvous` mode for both the Sender and Receiver the `source_port` and `destination_port` MUST be equal.
+
 > The SDP transport file information is invariant to the value of the `protocol` transport parameter of the Sender. It always indicate the Sender's `source_ip` and `source_port` transport parameters.
 
 ### Encryption
