@@ -14,6 +14,8 @@ This document describes various transport protocols and defines the identifier u
 
 {:toc}
 
+## Transports
+
 ### NDI
 - **Name:** `urn:x-matrox:transport:ndi`
 - **Description:** Identifies the NDI Transport Protocol.
@@ -61,3 +63,8 @@ This document describes various transport protocols and defines the identifier u
 
 - The `rtp.tcp` transport is the RTP transport protocol over TCP instead of UDP.
 
+## Multiplexing
+
+A Flow of format `urn:x-nmos:format:mux` MUST have parents Flows of the `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` format. 
+
+Informative Note: An opaque MPEG2-TS stream scenario is still possible using a Flow of format `urn:x-nmos:format:video` with the `video/MP2T` media type. This is similar to the opaque AES3 stream scenario using `urn:x-nmos:format:audio` as the Flow format and `audio/AM824` as the media type.
