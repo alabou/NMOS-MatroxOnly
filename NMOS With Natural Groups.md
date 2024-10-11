@@ -67,7 +67,7 @@ Controllers SHOULD present to a User a group of Senders/Receivers in a similar w
 
 ## Display Walls
 
-While the "urn:x-nmos:tag:grouphint/v1.0" tag allows grouping Senders and Receivers from a given Device, the "urn:x-nmos:tag:wallhint/v1.0" tag allows grouping Receivers across multiple Devices. The wallhint does not applies to Senders. It allows grouping all the Receivers of a given group and associated to a given wall, connecting to Senders of the same group to be processed at once.
+While the "urn:x-nmos:tag:grouphint/v1.0" tag allows grouping Senders and Receivers from a given Device, the "urn:x-nmos:tag:wallhint/v1.0" tag allows grouping Receivers across multiple Devices. The wallhint does not apply to Senders. It allows grouping all the Receivers of a given group associated to a given wall, connecting to Senders of the same group to be processed at once.
 
 The "urn:x-nmos:tag:wallhint/v1.0" tag array MUST comprise a single string formatted as follow:
 
