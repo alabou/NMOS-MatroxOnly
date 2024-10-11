@@ -35,7 +35,7 @@ The "urn:x-nmos:tag:grouphint/v1.0" tag array MUST comprise a single string form
 
 `"<group-name> <group-index>:<role-in-group> <role-index>"`
 
-The `<group-name>`, `<group-index>`, `<role-in-group>`, `<role-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<group-name>` MUST be a sequence of the letters [a-zA-Z]. The `<group-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<group-name>` and `<group-index>` sequences MUST be seperated by a single space. The `<role-in-group>` MUST be a sequence of the letters [a-zA-Z]. The `<role-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<role-in-group>` and `<role-index>` sequences MUST be seperated by a single space. The `<group-index>` and `<role-in-group>` MUST be seperated by a colon ':'.
+The `<group-name>`, `<group-index>`, `<role-in-group>`, `<role-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<group-name>` MUST be a sequence of the letters [a-zA-Z]. The `<group-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<group-name>` and `<group-index>` sequences MUST be separated by a single space. The `<role-in-group>` MUST be a sequence of the letters [a-zA-Z]. The `<role-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<role-in-group>` and `<role-index>` sequences MUST be separated by a single space. The `<group-index>` and `<role-in-group>` MUST be separated by a colon ':'.
 
 The scope is always `device` which is the default value as per [Group Hint](https://specs.amwa.tv/nmos-parameter-registers/branches/main/tags/grouphint.html#group-hint-urn).
 
@@ -73,7 +73,7 @@ The "urn:x-nmos:tag:wallhint/v1.0" tag array MUST comprise a single string forma
 
 `"WALL <wall-index>"`
 
-The `<wall-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<wall-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `WALL` and `<wall-index>` sequences MUST be seperated by a single space.
+The `<wall-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<wall-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `WALL` and `<wall-index>` sequences MUST be separated by a single space.
 
 The `<wall-index>` MUST correspond to the <group-index> of the Receiver summed with a large integer value identifying the wall. Such a large integer value SHOULD be N multiplied by a power of 10 larger than the largest <group-index> of all the devices part of an NMOS deployment. N MUST be an integer in the range [1, maxInt] identifying a wall. For example if there are at most 100 groups per Device then a choice for the power of ten could be 100, having walls identified as 100, 200, 300, etc.
 
