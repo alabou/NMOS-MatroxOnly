@@ -25,7 +25,7 @@ The `media_types` and  `event_types` attributes are not used to express sub-Flow
 
 This specification defines a new `constraint_sets` attribute for the Receiver `caps` object, which can also be combined with the existing ones. In common with the existing attributes, its value is an array of alternatives; this constraint is satisfied when **any of** its enumerated Constraint Sets are satisfied.
 
-When evaluating constraints for sub-Flows/sub-Streams, only the Constraint Sets alternatives of matching `urn:x-matrox:format` and `urn:x-matrox:layer` are to be considered. The remaining Constraints Sets of the `constraint_sets` are ignored.
+When evaluating constraints for sub-Flows/sub-Streams, only the Constraint Sets alternatives of matching `format` and `urn:x-matrox:layer` are to be considered. The remaining Constraints Sets of the `constraint_sets` are ignored.
 
 This specification defines a generic JSON syntax to express Constraint Sets made up of individual Parameter Constraints. The Constraint Set is satisfied if **all of** its Parameter Constraints are satisfied.
 
@@ -203,7 +203,7 @@ A sub-Stream/sub-Flow Constraint Set MUST NOT use transport Receiver/Sender Capa
 
 The Receiver advertises a list of Constraint Sets as a JSON array of these objects, using the key `constraint_sets` in the `caps` object.
 
-The `constraint_sets` as a whole is satisfied if **any of** the listed Constraint Sets of matching `urn:x-matrox:format` and `urn:x-matrox:layer` are satisfied. For the purpose of filtering the list of Constraint Sets, the absence of the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes provides the list of Constraint Sets that are not associated with sub-Flows/sub-Streams. The evaluation of the `constraint_sets` targets a Flow/Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data`, `urn:x-nmos:format:mux` in which the Constraint Sets do not have the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes, or the evaluation of the `constraint_sets` targets a sub-Flow/sub-Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data` in which the Constraint Sets have the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes.
+The `constraint_sets` as a whole is satisfied if **any of** the listed Constraint Sets of matching `format` and `urn:x-matrox:layer` are satisfied. For the purpose of filtering the list of Constraint Sets, the absence of the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes provides the list of Constraint Sets that are not associated with sub-Flows/sub-Streams. The evaluation of the `constraint_sets` targets a Flow/Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data`, `urn:x-nmos:format:mux` in which the Constraint Sets do not have the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes, or the evaluation of the `constraint_sets` targets a sub-Flow/sub-Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data` in which the Constraint Sets have the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes.
 
 When the list is empty, or none of the Constraint Sets are satisfied, the `constraint_sets` as a whole is thus not satisfied.
 
