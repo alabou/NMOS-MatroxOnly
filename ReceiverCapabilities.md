@@ -21,7 +21,7 @@ IS-04 itself defines `caps` attributes for `media_types` (since v1.1) and, for d
 
 When `caps` contains multiple attributes, i.e. both `media_types` and `event_types`, the Receiver indicates that it only accepts streams that satisfy **all of** (both!) the constraints.
 
-The `media_types` and  `event_types` attributes are not used to express sub-Flow/sub-Stream constraints or to evaluate the compatibility of sub-Flows/sub-Streams. When a Receiver is of format `urn:x-nmos:fromat:mux`, those attributes are used for expressing and evaluating the constraints of the mux Receiver only. They are ignored when evaluating the constraints of the Receiver's sub-Streams.
+The `media_types` and  `event_types` attributes are not used to express sub-Flow/sub-Stream constraints or to evaluate the compatibility of sub-Flows/sub-Streams. When a Receiver is of format `urn:x-nmos:format:mux`, those attributes are used for expressing and evaluating the constraints of the mux Receiver only. They are ignored when evaluating the constraints of the Receiver's sub-Streams.
 
 This specification defines a new `constraint_sets` attribute for the Receiver `caps` object, which can also be combined with the existing ones. In common with the existing attributes, its value is an array of alternatives; this constraint is satisfied when **any of** its enumerated Constraint Sets are satisfied.
 
