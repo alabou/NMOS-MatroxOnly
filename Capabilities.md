@@ -145,10 +145,18 @@ constraints_supported.json
   - **Target:** (a) SDP channel-order parameter of PCM streams and opaque AM824 streams.
 - **Applicability:** AMWA IS-04 v1.3
 
+### constant_bit_rate
+- **Name:** `urn:x-matrox:cap:format:constant_bit_rate`
+- **Description:** Identifies the `bit_rate` of a Flow as being constant or variable.
+- **Specification:** [Matrox Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Matrox Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+- **Type:** boolean
+- **Target:** (a) Flow's `constant_bit_rate` attribute
+- **Applicability:** AMWA IS-04 v1.3
+
 ### parameter_sets_transport_mode
 - **Name:** `urn:x-matrox:cap:transport:parameter_sets_transport_mode`
 - **Description:** Identifies the acceptable parameter sets transport modes.
-- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+- **Specification:** [Matrox Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Matrox Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
   - **Type:** string (enumerated values as per the specifications [H.264](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.264.md), [H.265](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20H.265.md), [AAC](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AAC.md))
   - **Target:** (a) Sender `parameter_sets_transport_mode`, (b) SDP attribute `a=fmtp:` format-specific parameter `sprop-parameter-sets`, per [RFC 6184][RFC-6184], (c) SDP attribute `a=fmtp:` format-specific parameters `sprop-vps`, `sprop-sps` and `sprop-pps`, per [RFC 7798][RFC-7798], (d) SDP attribute `a=fmtp:` format-specific parameter `config` per [RFC 6416][RFC-6416]
 - **Applicability:** AMWA IS-04 v1.3

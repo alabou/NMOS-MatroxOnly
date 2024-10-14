@@ -1,0 +1,150 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Describes a Constraint Set with typed Parameter Constraints and Constraint Set Metadata from the Capabilities register of the NMOS Parameter Registers. This file adds Matrox specific capabilities to the NMOS registry",
+    "title": "Constraint Set",
+    "type": "object",
+    "minProperties": 1,
+    "properties": {
+      "urn:x-nmos:cap:meta:label": {
+        "type": "string"
+      },
+      "urn:x-nmos:cap:meta:preference": {
+        "type": "integer",
+        "default": 0,
+        "maximum": 100,
+        "minimum": -100
+      },
+      "urn:x-nmos:cap:meta:enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "urn:x-matrox:cap:meta:format": {
+        "type": "string",
+        "enum": ["urn:x-nmos:format:video", "urn:x-nmos:format:audio",  "urn:x-nmos:format:data"]
+      },
+      "urn:x-matrox:cap:meta:layer": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "urn:x-matrox:cap:meta:layer_compatibility_groups ": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "maximum": 63,
+          "minimum": 0
+        }
+      },
+      "urn:x-nmos:cap:format:media_type": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:grain_rate": {
+        "$ref": "param_constraint_rational.json"
+      },
+      "urn:x-nmos:cap:format:frame_width": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-nmos:cap:format:frame_height": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-nmos:cap:format:interlace_mode": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:colorspace": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:transfer_characteristic": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:color_sampling": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:component_depth": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-nmos:cap:format:bit_rate": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-nmos:cap:format:profile": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:level": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:sublevel": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:format:channel_count": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-nmos:cap:format:sample_rate": {
+        "$ref": "param_constraint_rational.json"
+      },
+      "urn:x-nmos:cap:format:sample_depth": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-nmos:cap:format:event_type": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:transport:bit_rate": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-nmos:cap:transport:packet_time": {
+        "$ref": "param_constraint_number.json"
+      },
+      "urn:x-nmos:cap:transport:max_packet_time": {
+        "$ref": "param_constraint_number.json"
+      },
+      "urn:x-nmos:cap:transport:packet_transmission_mode": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-nmos:cap:transport:st2110_21_sender_type": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-matrox:cap:format:constant_bit_rate": {
+        "$ref": "param_constraint_boolean.json"
+      },      
+      "urn:x-matrox:cap:format:audio_layers": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-matrox:cap:format:video_layers": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-matrox:cap:format:data_layers": {
+        "$ref": "param_constraint_integer.json"
+      },
+      "urn:x-matrox:cap:transport:hkep": {
+        "$ref": "param_constraint_boolean.json"
+      },
+      "urn:x-matrox:cap:transport:privacy": {
+        "$ref": "param_constraint_boolean.json"
+      },
+      "urn:x-matrox:cap:transport:channel_order": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-matrox:cap:transport:parameter_sets_transport_mode": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-matrox:cap:transport:parameter_sets_flow_mode": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-matrox:cap:transport:clock_ref_type": {
+        "$ref": "param_constraint_string.json"
+      },
+      "urn:x-matrox:cap:transport:synchronous_media": {
+        "$ref": "param_constraint_boolean.json"
+      },      
+      "urn:x-matrox:cap:transport:info_block": {
+        "$ref": "param_constraint_integer.json"
+      }
+    },
+    "patternProperties": {
+      "^urn:x-nmos:cap:(?!meta:)": {
+        "$ref": "param_constraint.json"
+      }
+    },
+    "patternProperties": {
+      "^urn:x-[a-z]+:cap:(?!meta:)": {
+        "$ref": "param_constraint.json"
+      }
+    }
+  }
