@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "patternProperties": {
     "^[a-zA-Z0-9_]+$":{
-      "$ref": "constraint-schema.json#/definitions/constraint"
+      "$ref": "is-05-constraint-schema.json#/definitions/constraint"
     }
   }
 }
