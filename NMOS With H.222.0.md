@@ -20,6 +20,12 @@ The Rec. [ITU-T H.222.0][H.222.0] | ISO/IEC 13818-1 specification and associated
 
 The [Video Services Forum][VSF] developed Technical Recommendation [VSF_TR-07][] for the transport of JPEG-XS video and AES3 audio in an MPEG2-TS stream over IP.
 
+This specification outlines MPEG2-TS transport streams that are either opaque or fully described. An opaque `video/MP2T` Flow does not have parents Flows as opposed to a fully described `application/MP2T` or `application/mp2t` Flow that describe the parents Flows making the `application/MP2T` or `application/mp2t` Flow. For the opaque case, the Flow's format is `urn:x-nmos:format:video` and for the fully described case the Flow's format is `urn:x-nmos:format:mux`. For the fully described case the media type uses the type `application` instead of `video` to differentiate it from the opaque case.
+
+Note: In the SDP transport file the media type will always be `video/MP2T` irrespective of the opaque or fully described definition of the Senders/Receivers when using the RTP transport. It will always be `application/mp2t` for other transports using an SDP transport file.
+
+This document presents the fully-described `application/MP2T` or `application/mp2t` cases and allows for the opaque case to use the `video/MP2T` media type along with the `video` format. The complete specification of the opaque case is to be defined in another document.
+
 ## Use of Normative Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
@@ -49,9 +55,9 @@ Examples Source resources are provided in [Examples](../examples/).
 
 ### Flows
 
-A mux Flow resource MUST indicate `video/MP2T` or `application/mp2t` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, MUST be a member of said mux Flow's `parents` attribute.
+A mux Flow resource MUST indicate `application/MP2T` or `application/mp2t` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, MUST be a member of said mux Flow's `parents` attribute.
 
-When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `video/MP2T`. Otherwise for other transports the `media_type` MUST be `application/mp2t`.
+When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `application/MP2T`. Otherwise for other transports the `media_type` MUST be `application/mp2t`.
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for H.222.0.
 
@@ -104,7 +110,7 @@ An example Sender resource is provided in the [Examples](../examples/).
 
 ##### SDP format-specific parameters
 
-The SDP file at the `manifest_href` MUST comply with the requirements of RFC 2250 adn RFC 3551.
+The SDP file at the `manifest_href` MUST comply with the requirements of RFC 2250 and RFC 3551.
 
 An example SDP file is provided in the [Examples](../examples/).
 
@@ -145,12 +151,16 @@ An example Receiver resource is provided in the [Examples](../examples/).
 
 ### RTP transport based on RFC 2250 and RFC 3551
 
-For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 adn RFC 3551, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute and MUST indicate `video/MP2T` as the `media_type`.
+For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute and MUST indicate `application/MP2T` as the `media_type`.
+
+Note: A Controller can connect a fully-described MPEG2-TS Receiver to an opaque Sender, matching the Receiver `application/MP2T` media type with the Sender `video/MP2T` media type. The concept of an opaque MPEG2-TS Sender exists only for the RTP transport.
 
 ### Other transports
 
 For Nodes consuming H.222.0 using other transports, the Receiver resource MUST indicate the associated `urn:x-nmos:transport:` or or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute and MUST indicate `application/mp2t` in the `media_type`.
   
+Note: In the SDP transport file the media type will always be `video/MP2T` irrespective of the opaque or fully described definition of the Senders/Receivers when using the RTP transport. It will always be `application/mp2t` for other transports using an SDP transport file. For an RTP based Receiver, the `application/MP2T` media type of the `media_types` and `constraint_sets` capabilities always matches the SDP transport file `video/MP2T` media type. For Receivers usingother transport the `application/mp2t` is used in the SDP transport file and the Receiver's capabilities.
+
 ## H.222.0 IS-05 Senders and Receivers
 
 ### RTP transport
@@ -159,7 +169,7 @@ Connection Management using IS-05 proceeds in exactly the same manner as for any
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.222.0 stream is expected to comply with RFC 2250 adn RFC 3551. It need not comply with the additional requirements specified for SDP transport files at Senders.
+A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.222.0 stream is expected to comply with RFC 2250 and RFC 3551. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
 If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
   
