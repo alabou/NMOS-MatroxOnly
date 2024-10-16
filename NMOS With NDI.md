@@ -87,7 +87,7 @@ Examples Flow resources are provided in [Examples](../examples/).
 
 An NDI Sender resource MUST indicate `urn:x-nmos:transport:ndi` or `urn:x-matrox:transport:ndi `for the `transport` attribute.
 
-A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and each sub-Flow making an NDI stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
+A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and each sub-Flow making an NDI stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
 
 A mux Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the NDI stream and that it cannot be constrained as no sub-Flows are exposed.
 
@@ -124,7 +124,7 @@ An NDI Receiver resource MUST indicate `urn:x-nmos:transport:ndi` or `urn:x-matr
 
 Nodes implementing IS-04 v1.3 or higher that are capable of receiving NDI multiplexed streams MUST have Receiver resources in the IS-04 Node API.
 
-A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and each sub-Stream using the Constraint Set `urn:x-matrox-format`, `urn:x-matrox-layer` and `urn:x-matrox-layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
+A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and each sub-Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
 
 A mux Receiver not exposing the sub-Streams MAY omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the NDI stream.
 
