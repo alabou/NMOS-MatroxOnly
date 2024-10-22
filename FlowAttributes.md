@@ -24,7 +24,7 @@ This document describes additional Flow attributes and their permitted values wh
 
 ### layer_compatibility_groups
 - **Name:** `urn:x-matrox:layer_compatibility_groups`
-- **Description:** This attributes identifies the compatibility groups of a sub-Flow providing an essence to a multiplexed Sender. It is valid and allowed only for a sub-Flow. A sub-Flow is a member of the `parents` attribute of a Flow of format `urn:x-nmos:format:mux`. The mux Flow is associated with a Sender providing Sender Capabilities.
+- **Description:** This attributes identifies the compatibility groups of a sub-Flow providing an essence to a multiplexed Sender. It is valid and allowed only for a sub-Flow. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute is assumed as being part of all groups. A sub-Flow is a member of the `parents` attribute of a Flow of format `urn:x-nmos:format:mux`. The mux Flow is associated with a Sender providing Sender Capabilities. 
 - **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3), [Matrox Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md)
 - **Applicability:** 
 - **Permitted Values:**

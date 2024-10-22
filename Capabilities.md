@@ -91,7 +91,7 @@ constraints_supported.json
 
 ### layer_compatibility_groups
 - **Name:** `urn:x-matrox:cap:meta:layer_compatibility_groups`
-- **Description:** Indicates the layer compatibility groups associated with the Constraint Set
+- **Description:** Indicates the layer compatibility groups associated with the Constraint Set. A Constraint Set without a `urn:x-matrox:cap:meta:layer_compatibility_groups` attribute is assumed as being part of all groups.
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
   - **Type:** array of integer
 - **Applicability:** AMWA IS-04 v1.3
