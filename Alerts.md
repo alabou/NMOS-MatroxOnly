@@ -52,13 +52,13 @@ The domains are defined according to the OSI model when possible. A failure at a
 - IPv4, IPv6, UDP, TCP, SRT, USB
 - IGMP, MLD
 - RTP, MPEG2-TS
-- Notion of “packet”, raw messages, raw streams
+- Notion of “packet”, raw messages, raw streams. Example: socket errors
 
 ### essence, vendorEssence
 - ISO level 5, 6 and 7 (session, presentation, application)
 - HTTP, WebSocket, HDCP, TLS, PEP, NMOS
 - RTP format, media stream
-- Notion of media stream and messages
+- Notion of media stream and messages. Example: protocol errors
 
 ### application, vendorApplication
 - ISO level 7 (application)
@@ -96,11 +96,11 @@ It is possible to reduce the scope of an alert by specifying a list of interface
 For a `vendor` domain alert, it is possible to reduce the scope of the alert by specifying a list of events in the `vendor` domain to restrict to those matching events within the scope.
 
 ## State
-An events counter is associated with a state of the sub-system(s) producing the identified event, indicating the severity of the event on the sub-system(s) or the actual state of the sub-system(s). A domain events counter registers the state of the event that triggered an alert. A detailed events counter registers the state of the last event cumulated in the events counter or the last state change of the sub-system(s). The state associated with a detailed events counter is more useful when a single entity is associated with the alert descriptor, for example when a single interface name is specified in `interfaceNames` or a single resource id is specified in `resourceIds`. When multiple resources or interfaces are cumulated in a detailed events counter, the state canont be associated to a specific resource and represent a random sampling the resources/interfaces.
+An events counter is associated with a state of the sub-system(s) producing the identified event, indicating the severity of the event on the sub-system(s) or the actual state of the sub-system(s). A domain events counter registers the state of the event that triggered an alert. A detailed events counter registers the state of the last event cumulated in the events counter or the last state change of the sub-system(s). The state associated with a detailed events counter is more useful when a single entity is associated with the alert descriptor, for example when a single interface name is specified in `interfaceNames` or a single resource id is specified in `resourceIds`. When multiple resources or interfaces are cumulated in a detailed events counter, the state cannot be associated to a specific resource and represent a random sampling the resources/interfaces.
 
 It is important to note that only events can trigger an alert such that the state associated with a domain events counter always correspond to an event severity state. It is only when getting the events counters using the `GetEventCounters()` that the state represents either an event severity or an actual state of the sub-system(s).
 
-Note: For example let consider that a device produces internal events made of a (event, count, state, info). Usually the count value will indicate how many instance of such event occured and how to increment the associated event counter. In that scenario the state would indicate the severity of the event on the associated sub-system. It is allowed for a device to internally produce events with a count of 0 in order to update a detailed event counter associated state. As a count of 0 cannot trigger a notification, because the associated domain events counter will not change, the updated state is only visible from the associated detailed event counter. This is the method that devices are expected to use to provide the actual state of the sub-system associated with a detailed event counter.
+An `Ok` event is provided to indicate and initial/current state of a sub-system and when a sub-system recovers from a non-Ok event.
 
 ### unknown
 This state can represent situations where the system's state cannot be determined or is in an indeterminate state. It's a useful state to account for scenarios where the system's condition is unclear.
@@ -257,6 +257,9 @@ This is the SRF link down event.
 
 This event indicates that the associated network interface transitionned from the UP to the DOWN state. A network interface that is denied access to the network MUST not report a `linkDown` event because the interface is still UP and "partially" working. If the network interface becomes DOWN because the associated sub-system detected either a disconnect from the network connector, a signal integrity issue or a protocol issue, the severity state MUST be `inactive`. The interface became DOWN because of an external issue. If the network interface becomes DOWN because the associated sub-system detected an internal error the severity state MUST be `malfunction`. The interface became DOWN because of an internal issue. Textual information MAY be provided along withthe event to describe the circumstances of the network interface transitionning to the DOWN state.
 
+#### linkOk (1002)
+This event is used to notify the recovery state of a link domain after a non-Ok event.
+
 #### transport (2000)
 #### transportPacketLost (2001)
 This is the SRF packet lost event.
@@ -264,33 +267,54 @@ This is the SRF packet lost event.
 #### transportPacketLate (2002)
 This is the SRF packet late event.
 
-#### transportStreamInvalid (2003)
+#### transportStreamError (2003)
 This is the SRF stream invalid event when detected at the transport level.
 
+#### transportPacketRecovered (2004)
+This event indicate that a packet has been recovered using a redundancy or FEC mechanism.
+
+#### transportOk (2005)
+This event is used to notify the recovery state of a transport domain after a non-Ok event.
+
 #### essence (3000)
-#### essenceStreamInvalid (3001)
+#### essenceStreamError (3001)
 This is the SRF stream invalid event when detected at the essence level.
 
+#### essenceOk (3002)
+This event is used to notify the recovery state of an essence domain after a non-Ok event.
+
 #### application (4000)
+
+#### applicationOk (4002)
+This event is used to notify the recovery state of an application domain after a non-Ok event.
+
 #### clock (5000)
-#### clockPtpLeaderChange (5001)
+#### clockSourceChange (5001)
 This is the SRF PTP leader change event.
 
-#### clockPtpUnlock (5002)
+#### clockUnlock (5002)
 This is the SRF PTP unlock event.
+
+#### clockOk (5003)
+This event is used to notify the recovery state of an clock domain after a non-Ok event.
 
 #### vendor (10000)
 #### vendorTemperature (10001)
 
-#### vendorLink (11000)
+#### vendorAllDomainsOk (10002)
+This event is used to notify the recovery state of all domains after a non-Ok event.
 
+#### vendorLink (11000)
 #### vendorTransport (12000)
 #### vendorTransportError (12001)
 
 #### vendorEssence (13000)
 #### vendorEssenceStart (13001)
 #### vendorEssenceStop (13002)
-#### vendorEssenceError (13002)
+#### vendorEssenceError (13003)
 
 #### vendorApplication (14000)
+#### vendorApplicationError (14001)
+
 #### vendorClock (15000)
+#### vendorClockError (15001)

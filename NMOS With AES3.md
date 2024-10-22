@@ -77,13 +77,13 @@ A fully described AM824 Flow MUST have `urn:x-matrox:audio_layers` and `urn:x-ma
 
 A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an AM824 Stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
 
-A sub-Flow MUST have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an AM824 Stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
+A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an AM824 Stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow MUST NOT have such attribute.
 
 Examples Flow resources are provided in [Examples](../examples/).
 
 ### Senders
 
-A Sender associated with an AM824 Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the AM824 Stream and if fully described for each sub-Flow making an AM824 Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
+A Sender associated with an AM824 Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the AM824 Stream and if fully described, for each sub-Flow making an AM824 Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
 
 An opaque AM824 Sender MUST omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the AM824 Stream and that sub-Flows cannot be constrained as they are not exposed.
 

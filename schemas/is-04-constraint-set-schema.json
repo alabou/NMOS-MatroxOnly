@@ -138,12 +138,7 @@
       }
     },
     "patternProperties": {
-      "^urn:x-nmos:cap:(?!meta:)": {
-        "$ref": "param_constraint.json"
-      }
-    },
-    "patternProperties": {
-      "^urn:x-[a-z]+:cap:(?!meta:)": {
+      "^urn:(x-nmos|x-[a-z]+):cap:(?!meta:)": {
         "$ref": "param_constraint.json"
       }
     }
