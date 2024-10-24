@@ -65,6 +65,12 @@ This document summarize the various transports available.
 
 - The `rtp.tcp` transport is the RTP transport protocol over TCP instead of UDP.
 
+### RTSP
+- **Name:** `urn:x-matrox:transport:rtsp`, `urn:x-matrox:transport:rtsp.tcp`
+- **Description:** Identifies the RTSP Control Protocol over TCP (media transport as per SDP transport file from DESCRIBE)
+- **Specification:** [AMWA IS-04 v1.3](https://specs.amwa.tv/is-04/v1.3)
+- **Applicability:** AMWA IS-04 since v1.3, IS-05 since v1.1
+
 ## Multiplexing
 
 A Flow of format `urn:x-nmos:format:mux` MUST have parents Flows of the `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` format. 
