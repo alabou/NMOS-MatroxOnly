@@ -22,11 +22,11 @@ RTSP is used as a specific NMOS transport protocol `urn:x-matrox:transport:rtsp`
 
 The `urn:x-matrox:transport:rtsp` transport identifies the `non-interleaved` mode of operation and allows the transmission/reception of a) multiple independent RTP/AVP/UDP sub-streams, b) a single aggregated multiplexed RTP/AVP/UDP stream and c) a single aggregated multiplexed UDP stream. The `media_type` associated with the mux Flow/Stream determine the effective transport scheme.
 
-`urn:x-matrox:transport:rtsp` => media type `application/rtsp` (over RTP/AVP/UDP) or `application/MP2T` (over RTP/AVP/UDP) or `application/mp2t` (over UDP)
+`urn:x-matrox:transport:rtsp` => media type `application/rtsp` (over RTP/AVP/UDP) or `application/MP2T` (over RTP/AVP/UDP) or `application/AM824` (over RTP/AVP/UDP) or `application/mp2t` (over UDP)
 
 The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mode of operation and allows the transmission/reception of a single aggregated multiplexed RTP/RTSP/TCP stream.
 
-`urn:x-matrox:transport:rtsp.tcp` => media type `application/rtsp` or `application/MP2T` (over RTP/RTSP/TCP) 
+`urn:x-matrox:transport:rtsp.tcp` => media type `application/rtsp` or `application/MP2T` or `application/AM824` (all over RTP/RTSP/TCP).
 
 > Note: The RTSP interleaved mode is supported by an NMOS device as a specific transport to emphasis the TCP nature of this option. TCP-based interleaving is often necessary for firewall/NAT traversal.
 
@@ -73,15 +73,17 @@ Examples Source resources are provided in [Examples](../examples/).
 
 ### Flows
 
-A mux Flow resource MUST indicate one of `application/rtsp`, `application/MP2T`, `application/mp2t` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, MUST be a member of said mux Flow's `parents` attribute.
+A mux Flow resource MUST indicate one of `application/rtsp`, `application/MP2T`, `application/AM824` or `application/mp2t` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, MUST be a member of said mux Flow's `parents` attribute.
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for RTSP.
 
 A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an RTSP stream. A non-mux Flow MUST NOT have such attributes. The RTSP Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
 
+A mux Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an RTSP stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
+
 A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an RTSP stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
 
-A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an RTSP stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow MUST NOT have such attribute.
+A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an RTSP stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
 Examples Flow resources are provided in [Examples](../examples/).
 
@@ -126,7 +128,7 @@ When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Enc
 
 The SDP transport file from the RTSP Sender MUST contain an `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name><group-index>` session attribute that indicate to the RTSP Receiver and non-NMOS RTSP Receiver the URL to use for RTSP commands. The `/x-nmos/` path element indicates that the RTSP server is of an NMOS RTSP Sender, otherwise it must be assumed as being of non-NMOS RTSP Sender.
 
-The media type MUST be “application/rtsp” for both `urn:x-matrox:transport:rtsp` transports.
+The media type MUST be “application/rtsp” for both `urn:x-matrox:transport:rtsp` and `urn:x-matrox:transport:rtsp.tcp` transports.
 
 `m=application <port> TCP rtsp`
 

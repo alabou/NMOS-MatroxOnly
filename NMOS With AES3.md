@@ -75,9 +75,11 @@ In addition to those attributes defined in IS-04 for a coded audio Flow, the fol
 
 A fully described AM824 Flow MUST have `urn:x-matrox:audio_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an AM824 Stream. An opaque AM824 Flow MUST NOT have such attributes. The fully described AM824 Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
 
+A fully described AM824 Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an AM824 stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. An opaque AM824 Flow MUST NOT have such attributes. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
+
 A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an AM824 Stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
 
-A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an AM824 Stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow MUST NOT have such attribute.
+A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an AM824 Stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
 Examples Flow resources are provided in [Examples](../examples/).
 
