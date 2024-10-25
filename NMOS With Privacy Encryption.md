@@ -46,7 +46,7 @@ ext_privacy_ecdh_receiver_public_key | string | - | r/w | read-only
 ext_privacy_ecdh_curve | string | - | r/w | r/w
 
 ### Protocol
-The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "SRT", "UDP", "UDP_KV", "USB", "USB_KV", "NULL"
+The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "SRT", "UDP", "UDP_KV", "USB", "USB_KV", "RTSP", "RTSP_KV", "NULL"
 
 Note: The "NULL" protocol value MAY only be used in PEP extended transport parameters to indicate that privacy encryption is not available / disabled.
 
@@ -88,6 +88,8 @@ This `protocol` MAY also be used for `urn:x-matrox:transport:srt.rtp`. In this s
 See the [TR-10-13][] specification for the details.
 
 See the [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md) document for a detailed definition of the RTP Payload Header of various media types.
+
+> Note: When the `urn:x-nmos:transport:rtp.tcp` transport is used the packets are transmitted as `RTP/AVP` and hence the protocol is either "RTP" or "RTP_KV".
 
 ## USB-IP transport adaptation
 
@@ -193,6 +195,14 @@ A Sender configured for in-band dynamic changes of the `key_version` MAY change 
 A Receiver configured for in-band dynamic changes of the `key_version` MUST use the `key_version` received in clear from the peer through the `dynamic_key_version` field of the CTR Full Header to derive the Privacy Cipher decryption key of the associated PES packet data bytes.
 
 Note: Bidirectional streams are not supported by the "UDP" and "UDP_KV" protocols.
+
+## RTSP transport adaptation
+
+This `protocol` is used for `urn:x-nmos:transport:rtsp`, `urn:x-nmos:transport:rtsp.tcp`.
+
+This protocol indicates that the effective transport adaptation of the media streams is based upon the negotiation between the client and server for the transmission protocol. For "RTSP" the possibilities are "RTP" or "UDP" while for "RTSP_KV" the possibilities are "RTP_KV" or "UDP_KV". 
+
+> Note: When the `urn:x-nmos:transport:rtsp.tcp` transport is used the packets are transmitted as `RTP/AVP` and hence the protocol is either "RTP" or "RTP_KV".
 
 ## Node Reservation
 
