@@ -34,7 +34,7 @@ The RTSP control endpoints of RTSP Senders/Receivers support the same security f
 
 The media sub-streams of an RTSP session support the same privacy encryption features that non-RTSP streams offer.
 
-The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name sub-Flows/sub-Streams according to the `<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregated control of the RTSP mux stream according tot he `<group-name><group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
+The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name sub-Flows/sub-Streams according to the `<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregated control of the RTSP mux stream according to the `<group-name> <group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
 
 For a non-NMOS RTSP Sender, the use of aggregate and/or individual controls and the URL path of such controls is out of the scope of this document. An RTSP Receiver adapts, as a best effort, to the non-NMOS RTSP Sender.
 
@@ -126,7 +126,9 @@ When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Enc
 
 ##### Sender's SDP transport file
 
-The SDP transport file from the RTSP Sender MUST contain an `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name><group-index>` session attribute that indicate to the RTSP Receiver and non-NMOS RTSP Receiver the URL to use for RTSP commands. The `/x-nmos/` path element indicates that the RTSP server is of an NMOS RTSP Sender, otherwise it must be assumed as being of non-NMOS RTSP Sender.
+The SDP transport file from the RTSP Sender MUST contain an `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session or media attribute that indicate to the RTSP Receiver and non-NMOS RTSP Receiver the URL to use for RTSP commands. The `/x-nmos/` path element indicates that the RTSP server is of an NMOS RTSP Sender, otherwise it must be assumed as being of non-NMOS RTSP Sender.
+
+> Note: The `<group-name> <group-index>` are separated by a '/' in the rtsp URL, while a space is used for the grouphint.
 
 The media type MUST be “application/rtsp” for both `urn:x-matrox:transport:rtsp` and `urn:x-matrox:transport:rtsp.tcp` transports.
 
@@ -142,7 +144,9 @@ An example SDP file is provided in the [Examples](../examples/).
 
 ##### DESCRIBE SDP transport file
 
-The response by an RTSP Sender of a `DESCRIBE` for an aggregate control URL MUST be an `application/sdp` SDP transport file describing all the media streams of the associated group <group-name><group-index>. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name><group-index>` session attribute MUST indicate the URL to use for aggregate control. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name><group-index>/<role-in-group><role-index>` media attribute MUST indicate for each sub-Stream the URL to use for individual control.
+The response by an RTSP Sender of a `DESCRIBE` for an aggregate control URL MUST be an `application/sdp` SDP transport file describing all the media streams of the associated group <group-name><group-index>. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session attribute MUST indicate the URL to use for aggregate control. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` media attribute MUST indicate for each sub-Stream the URL to use for individual control.
+
+> Note: The `<role-in-group> <role-index>` are separated by a '/' in the rtsp URL, while a space is used for the grouphint.
 
 The response by an RTSP Sender of a `DESCRIBE` for a sub-Stream individual control URL MUST be an `application/sdp` SDP transport file describing a specific media stream of the associated group hint `<group-name><group-index>:<role-in-group><role-index>`.
 
