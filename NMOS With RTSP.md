@@ -142,13 +142,13 @@ The `role` of the `a=setup` attribute MUST be “passive”.
 
 An example SDP file is provided in the [Examples](../examples/).
 
-##### DESCRIBE SDP transport file
+##### DESCRIBE SDP transport files
 
-The response by an RTSP Sender of a `DESCRIBE` for an aggregate control URL MUST be an `application/sdp` SDP transport file describing all the media streams of the associated group <group-name><group-index>. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session attribute MUST indicate the URL to use for aggregate control. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` media attribute MUST indicate for each sub-Stream the URL to use for individual control.
+An RTSP Sender MUST respond to a `DESCRIBE` request for an aggregate stream control URL with an `application/sdp` SDP transport file describing all the media sub-Streams of the associated group `<group-name><group-index>`, including redundant sub-Streams if redundancy is used. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session attribute MUST indicate the URL to use for aggregate control. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` or `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>/<mid>` media attribute MUST indicate for each sub-Stream the URL to use for individual sub-Stream control. When redundancy is used the control attribute terminates by the identifier from the `a=mid:` attribute. 
 
 > Note: The `<role-in-group> <role-index>` are separated by a '/' in the rtsp URL, while a space is used for the grouphint.
 
-The response by an RTSP Sender of a `DESCRIBE` for a sub-Stream individual control URL MUST be an `application/sdp` SDP transport file describing a specific media stream of the associated group hint `<group-name><group-index>:<role-in-group><role-index>`.
+An RTSP Sender MUST respond to a `DESCRIBE` request for an individual sub-Stream control URL with an `application/sdp` SDP transport file describing a specific media sub-Stream of the associated group `<group-name><group-index>:<role-in-group><role-index>`. An RTSP Sender MUST respond to a `DESCRIBE` request for an URL `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>/<mid>` as if the URL is `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` and describe the two legs of a duplication group. See the "Redundancy" section for more details. 
 
 ## RTSP IS-04 Receivers
 
@@ -232,9 +232,14 @@ The server endpoint of an RTSP Sender MUST follow the IS-05 Device's `urn:x-nmos
 
 ## Redundancy
 
-The sub-Streams MUST use the media interfaces that are specified for the RTSP IS-05 transport parameters.
+The sub-Streams MUST use the media interfaces that are associated with the RTSP IS-05 transport parameters.
 
-The SDP transport file describing all the media of a group MUST include multiple `a=group:` session attributes to describe all the duplicate pairs of media streams that are described after the session section of the SDP transport file.
+The aggregate SDP transport file describing all the media sub-Streams of a group MUST include multiple `a=group:` session attributes to describe all the duplicate pairs of media sub-Streams that are described after the session section of the SDP transport file.
+
+The `a=control:` attributes MUST use the names of the `a=mid` attribute to reference a specific leg of a given sub-Stream. 
+
+
+
 
 Example:
 
@@ -243,7 +248,7 @@ v=0
 o=- 1122334455 1122334466 IN IP4 example.com
 s=SDP transport file example
 t=0 0
-a=control:rtsp://matrox.com/x-nmos/RTSP0
+a=control:rtsp://matrox.com/x-nmos/RTSP/0
 a=group:DUP S1a S1b
 a=group:DUP S2a S2b
 
@@ -252,26 +257,26 @@ c=IN IP4 233.252.0.1/127
 a=rtpmap:103 raw/90000
 a=source-filter: incl IN IP4 233.252.0.1 198.51.100.1
 a=mid:S1a
-a=control:rtsp://matrox.com/x-nmos/RTSP0/VIDEO0/leg0`
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/VIDEO/0/S1a`
 m=video 5000 RTP/AVP 103
 c=IN IP4 233.252.0.2/127
 a=rtpmap:103 raw/90000
 a=source-filter: incl IN IP4 233.252.0.2 198.51.100.1
 a=mid:S1b
-a=control:rtsp://matrox.com/x-nmos/RTSP0/VIDEO0/leg1`
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/VIDEO/0/S1b`
 
 m=audio 5004 RTP/AVP 96
 c=IN IP4 233.252.0.1/127
 a=rtpmap:96 L24/48000/2
 a=source-filter: incl IN IP4 233.252.0.1 198.51.100.1
 a=mid:S2a
-a=control:rtsp://matrox.com/x-nmos/RTSP0/AUDIO0/leg0`
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/AUDIO/0/S2a`
 m=audio 5004 RTP/AVP 96
 c=IN IP4 233.252.0.2/127
 a=rtpmap:96 L24/48000/2
 a=source-filter: incl IN IP4 233.252.0.2 198.51.100.1
 a=mid:S2b
-a=control:rtsp://matrox.com/x-nmos/RTSP0/AUDIO0/leg1`
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/AUDIO/0/S2b`
 ```
 
 > Note: This is an incomplete example without the format specific parameters
