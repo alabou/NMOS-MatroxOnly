@@ -173,13 +173,13 @@ The `constraint_sets` parameter within the `caps` object MUST be used to describ
 The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers are ignored.
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
-  Indicate the minimum and maximum audio layers supported from the RTSP stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum audio layers supported from the RTSP Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 - [video_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#video_layers)  
-  Indicate the minimum and maximum video layers supported from the RTSP stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum video layers supported from the RTSP Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 - [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
-  Indicate the minimum and maximum data layers supported from the RTSP stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum data layers supported from the RTSP Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
@@ -193,17 +193,17 @@ RTSP Senders and Receivers MUST be controlled through IS-05 only. The activation
 
 ### Receivers
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment. An RTSP Receiver MUST obtain the SDP transport files describing the sub-Streams using the `DESCRIBE` method and assess the stream compatibility.
+If the Receiver is not capable of consuming the RTSP Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment. An RTSP Receiver MUST obtain the SDP transport files describing the RTSP Stream/sub-Streams using the `DESCRIBE` method and assess the stream compatibility.
 
 An RTSP Receiver MAY connect to a non-NMOS RTSP Sender. IS-05 is then used only on the Receiver side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Sender. Such RTSP Receiver SHOULD as a best effort interoperate with the non-NMOS RTSP Sender.
 
 An RTSP Receiver MUST use the `GET_PARAMETER` method with no entity body ping the RTSP server and SHOULD keep the connection alive. The RTSP Receiver SHOULD NOT send a ping before half the session `timeout` period, from the last `SETUP` response, is reached.
 
-An RTSP Receiver SHOULD monitor and adapt to changes in the sub-Streams parameters from SDP transport files received through the `DESCRIBE` method. Such changes MAY be communicated by the RTSP server to the client using an error code response, using the `ANNOUNCE` method, by closing unicast sub-Streams or by pausing multicast sub-Streams.
+An RTSP Receiver SHOULD monitor and adapt to changes in the RTSP Stream/sub-Streams parameters from SDP transport files received through the `DESCRIBE` method. Such changes MAY be communicated by the RTSP server to the client using an error code response, using the `ANNOUNCE` method, by closing unicast Stream/sub-Streams or by pausing multicast Stream/sub-Streams.
 
 ### Senders
 
-An RTSP Sender MAY, unless constrained by IS-11, produce any RTSP stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
+An RTSP Sender MAY, unless constrained by IS-11, produce any RTSP Stream/sub-Streams that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
 A non-NMOS RTSP Receiver MAY connect to an RTSP Sender. IS-05 is then used only on the Sender side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Receiver. Such RTSP Sender MUST behave as if an RTSP Receiver was connecting.
 
