@@ -236,7 +236,7 @@ sub-stream-id = role-major + role-index
 
 iv' = (iv + sub-stream-id) mod 2^64
 
-> Note: An RTSP Receiver gets the role-in-group and role-index values from a `DESCRIBE` SDP transport file `a=control:` attribute from an RTSP Sender. This is no privacy encryption for non-NMOS RTSP Sender.
+> Note: An RTSP Receiver gets the role-in-group and role-index values from a `DESCRIBE` SDP transport file `a=control:` attribute of an RTSP Sender. There is no privacy encryption with non-NMOS RTSP Sender.
 
 ## TLS and OAuth2.0
 
