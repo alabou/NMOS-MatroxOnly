@@ -16,11 +16,11 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 [RFC-2326][] defines the Real-Time Streaming Protocol (RTSP) version 1.0. RTSP is an application-layer protocol for the setup and control of the delivery of data with real-time properties. RTSP provides an extensible framework to enable controlled, on-demand delivery of real-time data, such as audio and video. Sources of data can include both live data feeds and stored clips. The RTSP protocol is implemented by many non-NMOS devices to transmit and receive multicast/unicast media streams.
 
-This document presents how RTSP is used in an NMOS environment. One use-case is for NMOS RTSP Senders/Receivers to interoperate with non-NMOS RTSP clients/servers. Another user-case is to use RTSP to enhance the control of unicast streams in 1-to-N scenarios (1 Sender to N Receivers). A last use-case is to allow additional flexibility in the negotiation of various media transport schemes by a single Sender/Receiver (parallel streams over RTP/AVP/UDP, single multiplexed stream over RTP/AVP/UDP, single multiplexed stream over UDP).
+This document presents how RTSP is used in an NMOS environment. One use-case is for NMOS RTSP Senders/Receivers to interoperate with non-NMOS RTSP clients/servers. Another use-case is to use RTSP to enhance the control of unicast streams in 1-to-N scenarios (1 Sender to N Receivers). A last use-case is to allow additional flexibility in the negotiation of various media transport schemes by a single Sender/Receiver (parallel streams over RTP/AVP/UDP, single multiplexed stream over RTP/AVP/UDP, single multiplexed stream over UDP).
 
-RTSP is used as a specific NMOS transport protocol `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` for both RTSP Senders and Receivers. This transport is available for RTSP Receivers of format `urn:x-nmos:format:mux` and RTSP Senders attached to a Flow of format `urn:x-nmos:format:mux`. The RTSP transport can deliver a multiplexed stream that combines audio, video, and data sub-streams, which can be either transmitted independently in parallel or aggregated into a single, fully multiplexed stream.
+RTSP is used as a specific NMOS transport protocol `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` for both RTSP Senders and Receivers. This transport is available for RTSP Receivers of format `urn:x-nmos:format:mux` and RTSP Senders attached to a Flow of format `urn:x-nmos:format:mux`. The RTSP transport can deliver a multiplexed stream that combines audio, video, and data sub-Streams, which can be either transmitted independently in parallel or aggregated into a single, fully multiplexed stream.
 
-The `urn:x-matrox:transport:rtsp` transport identifies the `non-interleaved` mode of operation and allows the transmission/reception of a) multiple independent RTP/AVP/UDP sub-streams, b) a single aggregated multiplexed RTP/AVP/UDP stream and c) a single aggregated multiplexed UDP stream. The `media_type` associated with the mux Flow/Stream determine the effective transport scheme.
+The `urn:x-matrox:transport:rtsp` transport identifies the `non-interleaved` mode of operation and allows the transmission/reception of a) multiple independent RTP/AVP/UDP sub-Streams, b) a single aggregated multiplexed RTP/AVP/UDP Stream and c) a single aggregated multiplexed UDP Stream. The `media_type` associated with the mux Flow/Stream determine the effective transport scheme.
 
 `urn:x-matrox:transport:rtsp` => media type `application/rtsp` (over RTP/AVP/UDP) or `application/MP2T` (over RTP/AVP/UDP) or `application/AM824` (over RTP/AVP/UDP) or `application/mp2t` (over UDP)
 
@@ -30,15 +30,15 @@ The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mod
 
 > Note: The RTSP interleaved mode is supported by an NMOS device as a specific transport to emphasis the TCP nature of this option. TCP-based interleaving is often necessary for firewall/NAT traversal.
 
-The RTSP control endpoints of RTSP Senders/Receivers support the same security features (rtsp versus rtsps, OAuth2.0 authorizations or not) as the IS-05 control point of the associated Senders/Receivers.
+The RTSP control endpoints of RTSP Senders/Receivers support the same security features (rtsp versus rtsps, OAuth2.0 authorizations or not) as the IS-05 control endpoint of the associated Senders/Receivers.
 
-The media sub-streams of an RTSP session support the same privacy encryption features that non-RTSP streams offer.
+The media Stream and sub-Streams of an RTSP session support the same privacy encryption features that non-RTSP Streams offer.
 
-The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name sub-Flows/sub-Streams according to the `<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregated control of the RTSP mux stream according to the `<group-name> <group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
+The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the mux Flow/Stream and sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name mux Flow/Stream and sub-Flows/sub-Streams according to the `<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregate control of the RTSP mux stream according to the `<group-name> <group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
 
 For a non-NMOS RTSP Sender, the use of aggregate and/or individual controls and the URL path of such controls is out of the scope of this document. An RTSP Receiver adapts, as a best effort, to the non-NMOS RTSP Sender.
 
-The SDP transport file of an RTSP Sender using the `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` transports is only about how to access, through TCP, the RTSP server of such Sender. The client uses the `DESCRIBE` method to obtain information about the media streams available and uses the `SETUP` method to select/configure sub-streams transport parameters.
+The SDP transport file of an RTSP Sender using the `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` transports is only about how to access, through TCP, the RTSP server control endpoint of such Sender. The client uses the `DESCRIBE` method to obtain information about the media streams available and uses the `SETUP` method to select/configure stream/sub-streams transport parameters.
 
 ## Use of Normative Language
 
@@ -49,17 +49,21 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of an RTSP stream produced by a Sender.
+A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of an RTSP Stream produced by a Sender.
 
-A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of an RTSP stream consumed by a Receiver.
+A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of an RTSP Stream consumed by a Receiver.
 
 A non-NMOS RTSP Sender is an RTSP sender device that is not an NMOS Node and as such not part of an NMOS system.
 
 A non-NMOS RTSP Receiver is an RTSP receiver device that is not an NMOS Node and as such not part of an NMOS system.
 
+An RTSP Stream is a multiplexed Stream transporting RTSP sub-Streams. When the RTSP sub-Streams are transmitted in parallel, the RTSP Stream is virtual and does not physically exist, otherwise it is real and embed the RTSP sub-Streams.
+
+An RTSP sub-Stream is a sub-Stream that is transmitted within an RTSP Stream.
+
 ## RTSP IS-04 Sources, Flows and Senders
 
-Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting RTSP mux streams, MUST have Source, Flow and Sender resources in the IS-04 Node API.
+Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting RTSP Streams/sub-Streams, MUST have Source, Flow and Sender resources in the IS-04 Node API.
 
 ### Sources
 
@@ -77,13 +81,15 @@ A mux Flow resource MUST indicate one of `application/rtsp`, `application/MP2T`,
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for RTSP.
 
-A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an RTSP stream. A non-mux Flow MUST NOT have such attributes. The RTSP Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
+A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an RTSP Stream. A non-mux Flow MUST NOT have such attributes. The RTSP Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
 
-A mux Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an RTSP stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
+> Note: When the `media_type` is one of `application/MP2T`, `application/AM824` or `application/mp2t` the "RTSP Stream" is defined as the associated multiplexed Stream being transmitted. When the `media_type` is `application/rtsp` there is no multiplexed Stream per-say and multiple sub-Streams are being transmitted in parallel.
 
-A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an RTSP stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
+A mux Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an RTSP Stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
-A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an RTSP stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
+A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an RTSP Stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
+
+A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an RTSP Stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
 Examples Flow resources are provided in [Examples](../examples/).
 
@@ -91,28 +97,28 @@ Examples Flow resources are provided in [Examples](../examples/).
 
 An RTSP Sender resource MUST indicate `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` for the `transport` attribute.
 
-A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and each sub-Flow making an RTSP stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
+A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and each sub-Flow making an RTSP Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
 
-A mux Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the RTSP stream and that it cannot be constrained as no sub-Flows are exposed.
+A mux Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the RTSP Stream and that it cannot be constrained as no sub-Flows are exposed.
 
-The mux Sender MUST express its limitations or preferences regarding the RTSP streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's streams and sub-streams capabilities. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The mux Sender MUST express its limitations or preferences regarding the RTSP Streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's Streams and sub-Streams capabilities. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on the mux stream:
+The following parameter constraints can be used to express limits or preferences on the mux Stream:
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
-  Indicate the minimum and maximum audio layers supported in the RTSP stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
+  Indicate the minimum and maximum audio layers supported in the RTSP Stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 - [video_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#video_layers)  
-  Indicate the minimum and maximum video layers supported in the RTSP stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
+  Indicate the minimum and maximum video layers supported in the RTSP Stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 - [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
-  Indicate the minimum and maximum data layers supported in the RTSP stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
+  Indicate the minimum and maximum data layers supported in the RTSP Stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
-A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
+A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-Streams.
 
-A coded format specification MAY define Sender's attributes and associated transport capabilities that, for the corresponding audio, video or data sub-stream, MUST be assumed as having their default value.
+A coded format specification MAY define Sender's attributes and associated transport capabilities that, for the corresponding audio, video or data sub-Stream, MUST be assumed as having their default value.
 
 Note: The Sender's attributes and associated transport capabilities of a coded format specification are assumed to exist for each sub-Stream, each having their default values. For example the `parameter_sets_flow_mode` and `parameter_sets_transport_mode` associated with some coded format specification are assumed as having their default value of `dynamic` and `in_band` respectively.
 
@@ -120,9 +126,9 @@ An example Sender resource is provided in the [Examples](../examples/).
 
 #### SDP format-specific parameters
 
-The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provides the information about the RTSP control endpoint. The SDP transport file describing the sub-Streams of an RTSP Sender MUST be provided as the response of a `DESCRIBE` request.
+The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provides the information about the RTSP control endpoint. The SDP transport file describing the RTSP Stream and sub-Streams of an RTSP Sender MUST be provided as the response of a `DESCRIBE` request.
 
-When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file MUST provides the `a=privacy:` attributeand the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
+When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provides the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
 
 ##### Sender's SDP transport file
 
@@ -144,17 +150,17 @@ An example SDP file is provided in the [Examples](../examples/).
 
 ##### DESCRIBE SDP transport files
 
-An RTSP Sender MUST respond to a `DESCRIBE` request for an aggregate stream control URL with an `application/sdp` SDP transport file describing all the media sub-Streams of the associated group `<group-name><group-index>`, including redundant sub-Streams if redundancy is used. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session attribute MUST indicate the URL to use for aggregate control. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` or `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>/<mid>` media attribute MUST indicate for each sub-Stream the URL to use for individual sub-Stream control. When redundancy is used the control attribute terminates by the identifier from the `a=mid:` attribute. 
+An RTSP Sender MUST respond to a `DESCRIBE` request for an aggregate RTSP Stream control URL with an `application/sdp` SDP transport file describing the RTSP Stream or the RTSP sub-Streams of the associated group `<group-name><group-index>`, including redundant Streams/sub-Streams if redundancy is used. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session attribute MUST indicate the URL to use for aggregate control. A `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` or `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>/<mid>` media attribute MUST indicate for each Stream/sub-Stream the URL to use for individual control. When redundancy is used the control attribute terminates by the identifier from the `a=mid:` attribute. 
 
 > Note: The `<role-in-group> <role-index>` are separated by a '/' in the rtsp URL, while a space is used for the grouphint.
 
-An RTSP Sender MUST respond to a `DESCRIBE` request for an individual sub-Stream control URL with an `application/sdp` SDP transport file describing a specific media sub-Stream of the associated group `<group-name><group-index>:<role-in-group><role-index>`. An RTSP Sender MUST respond to a `DESCRIBE` request for an URL `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>/<mid>` as if the URL is `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` and describe the two legs of a duplication group. See the "Redundancy" section for more details. 
+An RTSP Sender MUST respond to a `DESCRIBE` request for an individual RTSP Stream/sub-Stream control URL with an `application/sdp` SDP transport file describing a specific  Stream/sub-Stream of the associated group `<group-name><group-index>:<role-in-group><role-index>`. An RTSP Sender MUST respond to a `DESCRIBE` request for an URL `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>/<mid>` as if the URL is `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>/<role-in-group>/<role-index>` and describe the two legs of a duplication group. See the "Redundancy" section for more details. 
 
 ## RTSP IS-04 Receivers
 
 An RTSP Receiver resource MUST indicate `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` for the `transport` attribute.
 
-Nodes implementing IS-04 v1.3 or higher that are capable of receiving RTSP streams MUST have Receiver resources in the IS-04 Node API.
+Nodes implementing IS-04 v1.3 or higher that are capable of receiving RTSP Streams/Sub-Streams MUST have Receiver resources in the IS-04 Node API.
 
 A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and each sub-Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
 
@@ -191,7 +197,9 @@ If the Receiver is not capable of consuming the stream described by a `PATCH` on
 
 An RTSP Receiver MAY connect to a non-NMOS RTSP Sender. IS-05 is then used only on the Receiver side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Sender. Such RTSP Receiver SHOULD as a best effort interoperate with the non-NMOS RTSP Sender.
 
-An RTSP Receiver MUST use the `GET_PARAMETER` method with no entity body ping the RTSP server and keep the connection alive. The RTSP Receiver SHOULD NOT send a ping before half the session `timeout` period, from the last `SETUP` response, is reached.
+An RTSP Receiver MUST use the `GET_PARAMETER` method with no entity body ping the RTSP server and SHOULD keep the connection alive. The RTSP Receiver SHOULD NOT send a ping before half the session `timeout` period, from the last `SETUP` response, is reached.
+
+An RTSP Receiver SHOULD monitor and adapt to changes in the sub-Streams parameters from SDP transport files received through the `DESCRIBE` method. Such changes MAY be communicated by the RTSP server to the client using an error code response, using the `ANNOUNCE` method, by closing unicast sub-Streams or by pausing multicast sub-Streams.
 
 ### Senders
 
@@ -200,6 +208,10 @@ An RTSP Sender MAY, unless constrained by IS-11, produce any RTSP stream that is
 A non-NMOS RTSP Receiver MAY connect to an RTSP Sender. IS-05 is then used only on the Sender side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Receiver. Such RTSP Sender MUST behave as if an RTSP Receiver was connecting.
 
 An RTSP Sender MUST support all the required method of [RFC-2326][] and additionally it MUST support the `DESCRIBE` and `GET_PARAMETER` methods. The `GET_PARAMETER` method with no entity body MUST be used by an RTSP Receiver or non-NMOS RTSP Receiver to ping the RTSP server and keep the connection alive.
+
+An RTPS Sender server MUST NOT respond to RTSP requests prior to the Sender's active `master_enable` attribute becomes true. An RTPS Sender server MUST NOT respond to RTSP requests after to the Sender's active `master_enable` attribute becomes false. An RTPS Sender server SHOULD NOT persist states outside the activation period of the associated Sender.
+
+> Note: as a consequence of the above, and similar to the SDP transport file availability rules of IS-05, the `DESCRIBE` method is not available prior to activation of the Sender and as such the SDP transport files are also not available prior to activation.
 
 ## RTSP IS-11 Senders and Receivers
 
