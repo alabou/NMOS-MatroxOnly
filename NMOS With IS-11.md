@@ -57,7 +57,7 @@ A Controller should use the `connected` and `status` properties to get informati
 
 If more than one Output is associated with a Receiver the current IS-11 API does not provide further insights about the relationship (topology) between the essence consumed by the Receiver and the Outputs.
 
-The Output resource is not part of the Registry. A controller MAY observe changes of the Output resource through the associated Receivers resource `version` attribute.
+The Output resource is not part of the Registry. A controller MAY observe changes of the Output resource through the associated Device resource `version` attribute.
 
 A Device SHOULD use descriptive labels on the Output resources to associate a physical connector with the Output.
 
@@ -89,7 +89,7 @@ A Controller should use the `connected` and `status` properties to get informati
 
 If more than one Input is associated with a Sender the current IS-11 API does not provide further insights about the relationship (topology) between the essence produced by the Sender and the Inputs.
 
-The Input resource is not part of the Registry. A controller MAY observe changes of the Input resource through the associated Senders resource `version` attribute. A 
+The Input resource is not part of the Registry. A controller MAY observe changes of the Input resource through the associated Device resource `version` attribute. 
 
 A Device SHOULD use descriptive labels on the Input resources to associate a physical connector with the Input.
 
