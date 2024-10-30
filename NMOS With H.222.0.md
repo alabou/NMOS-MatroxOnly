@@ -57,7 +57,7 @@ Examples Source resources are provided in [Examples](../examples/).
 
 A mux Flow resource MUST indicate `application/MP2T` or `application/mp2t` in the `media_type` attribute and `urn:x-nmos:format:mux` for the `format` attribute. A mux Flow MUST have a `source_id` attribute referencing a Source of the same `format`. A sub-Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data`, MUST be a member of said mux Flow's `parents` attribute.
 
-When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport, the `media_type` MUST be `application/MP2T`. Otherwise for other transports the `media_type` MUST be `application/mp2t`.
+When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp` transport or one of its subclassifications, the `media_type` MUST be `application/MP2T`. Otherwise for other transports the `media_type` MUST be `application/mp2t`.
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for H.222.0.
 
