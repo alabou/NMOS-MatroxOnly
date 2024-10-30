@@ -107,11 +107,15 @@ For Senders in general, their capabilities MAY change as a result of a configura
 
 Sender capabilities SHOULD NOT change when a Sender is active (active `master_enable` is true). A controller MAY ignore cahnges of Sender capabilities change while a Sender is active and reconsider the latest Sender capabilities when the Sender is to be deactivated / re-activated.
 
+### Active Constraints
+
+The active constraints applied to a Sender MUST be within the capabilities of the Sender. Constraints cannot enhance capabilities.
+
 ### Propagating the preferred capabilities
 
-For a Sender associated with an Input, the application of active constraints to a Sender propagate to the EDID of the Input as a preferred mode, indicating to the connected HDMI device the preferred mode (config) for the HDMI signal. The device processes the active constraints and extract a preffered mode from them. If the constraints are strict then the resulting preferred mode is obvious. Otherwise it is up to the device to produce a preferred mode out of the various possibilities.
+For a Sender associated with an Input, the application of active constraints to a Sender propagate to the EDID of the Input as a preferred mode, indicating to the connected HDMI device the preferred mode (config) for the HDMI signal. The device processes the active constraints and extract a preffered mode from them. If the constraints are strict then the resulting preferred mode is obvious. Otherwise it is up to the device to produce a preferred mode out of the various possibilities. The propagation of a preferred mode to the EDID MUST be performed such that it is within the capabilities of the effective EDID.
 
-For a Sender that is not associated with an Input but instead is associated with a Receiver, the application of active constraints to a Sender propagate to the capabilities of the Receiver as a preferred constraint set for the Stream or sub-Streams, indicating to a Controller the preferred constraint set for the Stream and sub-Streams. The device processes the active constraints and extract a preffered constraint set from them. If the constraints are strict then the resulting preferred constraint set is obvious. Otherwise it is up to the device to produce a preferred constraint set out of the various possibilities.
+For a Sender that is not associated with an Input but instead is associated with a Receiver, the application of active constraints to a Sender propagate to the capabilities of the Receiver as a preferred constraint set for the Stream or sub-Streams, indicating to a Controller the preferred constraint set for the Stream and sub-Streams. The device processes the active constraints and extract a preffered constraint set from them. If the constraints are strict then the resulting preferred constraint set is obvious. Otherwise it is up to the device to produce a preferred constraint set out of the various possibilities. The propagation of a preferred constraint set to the Receiver MUST be performed such that it is within the capabilities of the Receiver.
 
 ## Peer-to-Peer HDMI use-case
 
