@@ -49,7 +49,7 @@ In addition to those attributes defined in IS-04 for all mux Sources, the follow
 
 A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
 
-Examples Source resources are provided in [Examples](../examples/).
+Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Flows
 
@@ -83,7 +83,7 @@ A sub-Flow having the `media_type` atribute set to `video/H264` or `video/H265` 
 
 A sub-Flow having the `media_type` atribute set to `audio/mpeg4-generic` enters and emerges from the NDI transport as `audio/mpeg4-generic`. It is transported as-is by NDI.
 
-Examples Flow resources are provided in [Examples](../examples/).
+Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Senders
 
@@ -114,7 +114,7 @@ A coded format specification MAY define Sender's attributes and associated trans
 
 Note: The Sender's attributes and associated transport capabilities of a coded format specification are assumed to exist for each sub-Stream, each having their default values. For example the `parameter_sets_flow_mode` and `parameter_sets_transport_mode` associated with some coded format specification are assumed as having their default value of `dynamic` and `in_band` respectively.
 
-An example Sender resource is provided in the [Examples](../examples/).
+An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ##### SDP format-specific parameters
 
@@ -147,7 +147,7 @@ The following parameter constraints can be used to express limits or preferences
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
-An example Receiver resource is provided in the [Examples](../examples/).
+An example Receiver resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ## NDI IS-05 Senders and Receivers
 
