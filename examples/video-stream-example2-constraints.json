@@ -1,0 +1,24 @@
+{
+    "constraint_sets": [
+        {
+            "urn:x-nmos:cap:meta:label": "JPEG-XS constraints",
+            "urn:x-nmos:cap:meta:enabled": true,
+            "urn:x-nmos:cap:meta:preference": 100,
+            "urn:x-nmos:cap:format:transfer_characteristic": {
+                "enum": [
+                    "SDR"
+                ]
+            },
+            "urn:x-nmos:cap:format:media_type": {
+                "enum": [
+                    "video/jxsv"
+                ]
+            },
+            "urn:x-nmos:cap:format:interlace_mode": {
+                "enum": [
+                    "progressive"
+                ]
+            }
+        }
+    ]
+}

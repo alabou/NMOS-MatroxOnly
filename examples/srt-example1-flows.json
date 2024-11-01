@@ -1,0 +1,222 @@
+[
+    {
+        "id": "c989e0de-0400-4000-ab00-4d5458005077",
+        "version": "1730486375:183597908",
+        "label": "Flow Video 0 from MPEG2-TS 0",
+        "description": "This is the Flow Video 0 from MPEG2-TS 0",
+        "tags": {},
+        "source_id": "7ba7a8b5-0500-4000-ab00-4d5458005077",
+        "device_id": "00000000-0100-4000-ab00-4d5458005077",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 60,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:video",
+        "media_type": "video/H264",
+        "frame_width": 1920,
+        "frame_height": 1080,
+        "colorspace": "BT709",
+        "interlace_mode": "progressive",
+        "transfer_characteristic": "SDR",
+        "components": [
+            {
+                "name": "Y",
+                "width": 1920,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cb",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cr",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            }
+        ],
+        "profile": "High-422",
+        "level": "4",
+        "bit_rate": 40000,
+        "urn:x-matrox:constant_bit_rate": false
+    },
+    {
+        "id": "ca89e0de-0401-4000-ab00-4d5458005077",
+        "version": "1730486375:184220697",
+        "label": "Flow Audio 0 from MPEG2-TS 0",
+        "description": "This is the Flow Audio 0 from MPEG2-TS 0",
+        "tags": {},
+        "source_id": "7ca7a8b5-0501-4000-ab00-4d5458005077",
+        "device_id": "00000000-0100-4000-ab00-4d5458005077",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/mpeg4-generic",
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "profile": "AAC",
+        "level": "2",
+        "bit_rate": 128,
+        "urn:x-matrox:constant_bit_rate": true
+    },
+    {
+        "id": "cb89e0de-0402-4000-ab00-4d5458005077",
+        "version": "1730486375:184539596",
+        "label": "Flow Audio 1 from MPEG2-TS 0",
+        "description": "This is the Flow Audio 1 from MPEG2-TS 0",
+        "tags": {},
+        "source_id": "7da7a8b5-0502-4000-ab00-4d5458005077",
+        "device_id": "00000000-0100-4000-ab00-4d5458005077",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/mpeg4-generic",
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "profile": "AAC",
+        "level": "2",
+        "bit_rate": 128,
+        "urn:x-matrox:constant_bit_rate": true
+    },
+    {
+        "id": "cc89e0de-0403-4000-ab00-4d5458005077",
+        "version": "1730486375:185625514",
+        "label": "Flow Video 0 from Net Stream 0",
+        "description": "This is the Flow Video 0 from Net Stream 0",
+        "tags": {},
+        "source_id": "7ea7a8b5-0503-4000-ab00-4d5458005077",
+        "device_id": "00000000-0100-4000-ab00-4d5458005077",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 60,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 0,
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:video",
+        "media_type": "video/H264",
+        "frame_width": 1920,
+        "frame_height": 1080,
+        "colorspace": "BT709",
+        "interlace_mode": "progressive",
+        "transfer_characteristic": "SDR",
+        "components": [
+            {
+                "name": "Y",
+                "width": 1920,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cb",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cr",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            }
+        ],
+        "profile": "High-422",
+        "level": "4",
+        "bit_rate": 40000,
+        "urn:x-matrox:constant_bit_rate": false
+    },
+    {
+        "id": "cd89e0de-0404-4000-ab00-4d5458005077",
+        "version": "1730486375:185670376",
+        "label": "Flow Audio 0 from Net Stream 0",
+        "description": "This is the Flow Audio 0 from Net Stream 0",
+        "tags": {},
+        "source_id": "7fa7a8b5-0504-4000-ab00-4d5458005077",
+        "device_id": "00000000-0100-4000-ab00-4d5458005077",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 0,
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/MP4A-ADTS",
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "profile": "AAC",
+        "level": "2",
+        "bit_rate": 128,
+        "urn:x-matrox:constant_bit_rate": true
+    },
+    {
+        "id": "ce89e0de-0405-4000-ab00-4d5458005077",
+        "version": "1730486375:185690923",
+        "label": "Flow Audio 1 from Net Stream 0",
+        "description": "This is the Flow Audio 1 from Net Stream 0",
+        "tags": {},
+        "source_id": "80a7a8b5-0505-4000-ab00-4d5458005077",
+        "device_id": "00000000-0100-4000-ab00-4d5458005077",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 1,
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/MP4A-ADTS",
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "profile": "AAC",
+        "level": "2",
+        "bit_rate": 128,
+        "urn:x-matrox:constant_bit_rate": true
+    },
+    {
+        "id": "cf89e0de-0406-4000-ab00-4d5458005077",
+        "version": "1730486375:185721675",
+        "label": "Flow MPEG2-TS 0 from Net Stream 0",
+        "description": "This is the Flow MPEG2-TS 0 from Net Stream 0",
+        "tags": {},
+        "source_id": "81a7a8b5-0506-4000-ab00-4d5458005077",
+        "device_id": "00000000-0100-4000-ab00-4d5458005077",
+        "parents": [
+            "cc89e0de-0403-4000-ab00-4d5458005077",
+            "cd89e0de-0404-4000-ab00-4d5458005077",
+            "ce89e0de-0405-4000-ab00-4d5458005077"
+        ],
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:mux",
+        "media_type": "application/mp2t",
+        "urn:x-matrox:video_layers": 1,
+        "urn:x-matrox:audio_layers": 2,
+        "urn:x-matrox:data_layers": 0
+    }
+]

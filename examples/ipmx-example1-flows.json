@@ -1,0 +1,142 @@
+[
+    {
+        "id": "96868503-0400-4000-ab00-4d5458005010",
+        "version": "1730488387:366848636",
+        "label": "Flow Video 0 from INPUT 0",
+        "description": "This is the Flow Video 0 from INPUT 0",
+        "tags": {},
+        "source_id": "b8f030e8-0500-4000-ab00-4d5458005010",
+        "device_id": "00000000-0100-4000-ab00-4d5458005010",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 60,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:video",
+        "media_type": "video/H264",
+        "frame_width": 1920,
+        "frame_height": 1080,
+        "colorspace": "BT709",
+        "interlace_mode": "progressive",
+        "transfer_characteristic": "SDR",
+        "components": [
+            {
+                "name": "Y",
+                "width": 1920,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cb",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cr",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            }
+        ],
+        "profile": "High-422",
+        "level": "4",
+        "bit_rate": 40000,
+        "urn:x-matrox:constant_bit_rate": false
+    },
+    {
+        "id": "97868503-0401-4000-ab00-4d5458005010",
+        "version": "1730488387:367545524",
+        "label": "Flow Audio 0 from INPUT 0 (opaque)",
+        "description": "This is the Flow Audio 0 from INPUT 0 (opaque)",
+        "tags": {},
+        "source_id": "b9f030e8-0501-4000-ab00-4d5458005010",
+        "device_id": "00000000-0100-4000-ab00-4d5458005010",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/AM824",
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        }
+    },
+    {
+        "id": "98868503-0402-4000-ab00-4d5458005010",
+        "version": "1730488387:367936345",
+        "label": "Flow Audio 0 from INPUT 0 (fully described)",
+        "description": "This is the Flow Audio 0 from INPUT 0 (fully described)",
+        "tags": {},
+        "source_id": "baf030e8-0502-4000-ab00-4d5458005010",
+        "device_id": "00000000-0100-4000-ab00-4d5458005010",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 0,
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/L24",
+        "bit_depth": 24,
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        }
+    },
+    {
+        "id": "99868503-0403-4000-ab00-4d5458005010",
+        "version": "1730488387:367960820",
+        "label": "Flow Audio 1 from INPUT 0 (fully described)",
+        "description": "This is the Flow Audio 1 from INPUT 0 (fully described)",
+        "tags": {},
+        "source_id": "bbf030e8-0503-4000-ab00-4d5458005010",
+        "device_id": "00000000-0100-4000-ab00-4d5458005010",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 1,
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/L24",
+        "bit_depth": 24,
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        }
+    },
+    {
+        "id": "9a868503-0404-4000-ab00-4d5458005010",
+        "version": "1730488387:367990436",
+        "label": "Flow RTP 0 from INPUT 0 (fully described)",
+        "description": "This is the Flow RTP 0 from INPUT 0 (fully described)",
+        "tags": {},
+        "source_id": "bcf030e8-0504-4000-ab00-4d5458005010",
+        "device_id": "00000000-0100-4000-ab00-4d5458005010",
+        "parents": [
+            "98868503-0402-4000-ab00-4d5458005010",
+            "99868503-0403-4000-ab00-4d5458005010"
+        ],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:mux",
+        "media_type": "application/AM824",
+        "urn:x-matrox:video_layers": 0,
+        "urn:x-matrox:audio_layers": 2,
+        "urn:x-matrox:data_layers": 0
+    }
+]

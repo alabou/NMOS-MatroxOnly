@@ -1,0 +1,1384 @@
+[
+    {
+        "id": "00000000-0300-4000-ab00-4d5458005056",
+        "version": "1730485958:299768986",
+        "label": "Net Stream NDI 0",
+        "description": "This is the Net Stream NDI 0",
+        "tags": {
+            "urn:x-nmos:tag:grouphint/v1.0": [
+                "NDI 0:MUX 0"
+            ],
+            "urn:x-nmos:tag:wallhint/v1.0": [
+                "WALL 0"
+            ]
+        },
+        "transport": "urn:x-matrox:transport:ndi",
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "interface_bindings": [
+            "lo"
+        ],
+        "subscription": {
+            "sender_id": null,
+            "active": false
+        },
+        "format": "urn:x-nmos:format:mux",
+        "caps": {
+            "media_types": [
+                "application/ndi"
+            ],
+            "version": "1730485958:299670843",
+            "constraint_sets": [
+                {
+                    "urn:x-nmos:cap:meta:label": "Native Mux constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 100,
+                    "urn:x-matrox:cap:format:data_layers": {
+                        "minimum": 0,
+                        "maximum": 0
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "application/ndi"
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:video_layers": {
+                        "minimum": 1,
+                        "maximum": 1
+                    },
+                    "urn:x-matrox:cap:format:audio_layers": {
+                        "minimum": 1,
+                        "maximum": 1
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "Mux constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 1,
+                    "urn:x-matrox:cap:format:audio_layers": {
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "urn:x-matrox:cap:format:data_layers": {
+                        "minimum": 0,
+                        "maximum": 0
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "application/ndi"
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:video_layers": {
+                        "minimum": 1,
+                        "maximum": 1
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "Native Video sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        1
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 100,
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:0"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "4"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "enum": [
+                            40000
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            1920
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            1080
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT709"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "High"
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/H264"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "Native Audio sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        1
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 100,
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/mpeg4-generic"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "AAC"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "enum": [
+                            128
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            true
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "H.264 sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        1
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 1,
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 24,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 6000,
+                                "denominator": 1001
+                            },
+                            {
+                                "numerator": 30,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 3000,
+                                "denominator": 1001
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:0"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT709",
+                            "BT2020"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "High10",
+                            "High10Intra"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "3",
+                            "3.1",
+                            "3.2",
+                            "4",
+                            "4.1",
+                            "4.2",
+                            "5",
+                            "5.1",
+                            "5.2",
+                            "6",
+                            "6.1",
+                            "6.2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "minimum": 30000,
+                        "maximum": 2400000
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/H264"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            640,
+                            1280,
+                            1920
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            360,
+                            720,
+                            1080
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "H.265 sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        1
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:0",
+                            "YCbCr-4:4:4"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT709",
+                            "BT2020"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8,
+                            10
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "Main10",
+                            "Main10-444",
+                            "Main10Intra",
+                            "Main10Intra-444"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/H265"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            640,
+                            1280,
+                            1920
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "Main-3",
+                            "Main-3.1",
+                            "Main-4",
+                            "High-4",
+                            "Main-4.1",
+                            "High-4.1",
+                            "Main-5",
+                            "High-5",
+                            "Main-5.1",
+                            "High-5.1",
+                            "Main-5.2",
+                            "High-5.2",
+                            "Main-6",
+                            "High-6",
+                            "Main-6.1",
+                            "High-6.1",
+                            "Main-6.2",
+                            "High-6.2"
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 24,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 6000,
+                                "denominator": 1001
+                            },
+                            {
+                                "numerator": 30,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 3000,
+                                "denominator": 1001
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            360,
+                            720,
+                            1080
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "minimum": 6000,
+                        "maximum": 4000000
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "RAW sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        0
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/raw"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            480,
+                            720,
+                            1080,
+                            2160
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT601",
+                            "BT709",
+                            "BT2020"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 24,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 30,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 3000,
+                                "denominator": 1001
+                            },
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 6000,
+                                "denominator": 1001
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            720,
+                            1280,
+                            1920,
+                            3840
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "AAC stereo sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        1
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 1,
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/mpeg4-generic"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "Main",
+                            "Natural",
+                            "LowDelayAAC",
+                            "LowDelayAACv2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "1"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "maximum": 576
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "AAC multi-channels sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        1
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2,
+                            6
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "HighQuality",
+                            "AAC",
+                            "HighEfficiencyAAC",
+                            "HighEfficiencyAACv2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "4"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "maximum": 1728
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/mpeg4-generic"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "PCM sub-constraints",
+                    "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
+                    "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_compatibility_groups": [
+                        0
+                    ],
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/L16",
+                            "audio/L24"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2,
+                            6,
+                            8
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_depth": {
+                        "enum": [
+                            16,
+                            24
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "id": "00000000-0301-4000-ab00-4d5458005056",
+        "version": "1730485958:300986775",
+        "label": "Net Stream 0 Video 0",
+        "description": "This is the Net Stream 0 Video 0",
+        "tags": {
+            "urn:x-nmos:tag:grouphint/v1.0": [
+                "RTP 0:VIDEO 0"
+            ],
+            "urn:x-nmos:tag:wallhint/v1.0": [
+                "WALL 0"
+            ]
+        },
+        "transport": "urn:x-nmos:transport:rtp.mcast",
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "interface_bindings": [
+            "lo"
+        ],
+        "subscription": {
+            "sender_id": null,
+            "active": false
+        },
+        "format": "urn:x-nmos:format:video",
+        "caps": {
+            "media_types": [
+                "video/raw",
+                "video/H264",
+                "video/H265",
+                "video/jxsv"
+            ],
+            "version": "1730485958:300957034",
+            "constraint_sets": [
+                {
+                    "urn:x-nmos:cap:meta:label": "Native Video constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 100,
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:0"
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            1920
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            1080
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "High"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "4"
+                        ]
+                    },
+                    "urn:x-nmos:cap:transport:packet_transmission_mode": {
+                        "enum": [
+                            "non_interleaved_nal_units"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_transport_mode": {
+                        "enum": [
+                            "in_and_out_of_band",
+                            "in_band",
+                            "out_of_band"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_flow_mode": {
+                        "enum": [
+                            "strict"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/H264"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT709"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "enum": [
+                            40000
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "H.264 constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 1,
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/H264"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            640,
+                            1280,
+                            1920
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            360,
+                            720,
+                            1080
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 24,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 6000,
+                                "denominator": 1001
+                            },
+                            {
+                                "numerator": 30,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 3000,
+                                "denominator": 1001
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    },
+                    "urn:x-nmos:cap:transport:packet_transmission_mode": {
+                        "enum": [
+                            "non_interleaved_nal_units",
+                            "single_nal_unit"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "High10",
+                            "High10Intra"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_flow_mode": {
+                        "enum": [
+                            "strict"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:0"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT709",
+                            "BT2020"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "3",
+                            "3.1",
+                            "3.2",
+                            "4",
+                            "4.1",
+                            "4.2",
+                            "5",
+                            "5.1",
+                            "5.2",
+                            "6",
+                            "6.1",
+                            "6.2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "minimum": 30000,
+                        "maximum": 2400000
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_transport_mode": {
+                        "enum": [
+                            "in_and_out_of_band",
+                            "in_band",
+                            "out_of_band"
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "H.265 constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/H265"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            640,
+                            1280,
+                            1920
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "Main-3",
+                            "Main-3.1",
+                            "Main-4",
+                            "High-4",
+                            "Main-4.1",
+                            "High-4.1",
+                            "Main-5",
+                            "High-5",
+                            "Main-5.1",
+                            "High-5.1",
+                            "Main-5.2",
+                            "High-5.2",
+                            "Main-6",
+                            "High-6",
+                            "Main-6.1",
+                            "High-6.1",
+                            "Main-6.2",
+                            "High-6.2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "minimum": 6000,
+                        "maximum": 4000000
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_flow_mode": {
+                        "enum": [
+                            "strict"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_transport_mode": {
+                        "enum": [
+                            "in_and_out_of_band",
+                            "in_band",
+                            "out_of_band"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            360,
+                            720,
+                            1080
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:0",
+                            "YCbCr-4:4:4"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8,
+                            10
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 24,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 6000,
+                                "denominator": 1001
+                            },
+                            {
+                                "numerator": 30,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 3000,
+                                "denominator": 1001
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT709",
+                            "BT2020"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "Main10",
+                            "Main10-444",
+                            "Main10Intra",
+                            "Main10Intra-444"
+                        ]
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    },
+                    "urn:x-nmos:cap:transport:packet_transmission_mode": {
+                        "enum": [
+                            "non_interleaved_nal_units"
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "RAW constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:format:component_depth": {
+                        "enum": [
+                            8,
+                            10
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "video/raw"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:interlace_mode": {
+                        "enum": [
+                            "progressive"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:colorspace": {
+                        "enum": [
+                            "BT601",
+                            "BT709",
+                            "BT2020"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:color_sampling": {
+                        "enum": [
+                            "YCbCr-4:2:0",
+                            "YCbCr-4:2:2",
+                            "YCbCr-4:4:4"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:grain_rate": {
+                        "enum": [
+                            {
+                                "numerator": 24,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 30,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 3000,
+                                "denominator": 1001
+                            },
+                            {
+                                "numerator": 60,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 6000,
+                                "denominator": 1001
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_width": {
+                        "enum": [
+                            720,
+                            1280,
+                            1920,
+                            3840
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:frame_height": {
+                        "enum": [
+                            480,
+                            720,
+                            1080,
+                            2160
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:transfer_characteristic": {
+                        "enum": [
+                            "SDR"
+                        ]
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "id": "00000000-0302-4000-ab00-4d5458005056",
+        "version": "1730485958:301208996",
+        "label": "Net Stream 0 Audio 0",
+        "description": "This is the Net Stream 0 Audio 0",
+        "tags": {
+            "urn:x-nmos:tag:grouphint/v1.0": [
+                "RTP 0:AUDIO 0"
+            ],
+            "urn:x-nmos:tag:wallhint/v1.0": [
+                "WALL 0"
+            ]
+        },
+        "transport": "urn:x-nmos:transport:rtp.mcast",
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "interface_bindings": [
+            "lo"
+        ],
+        "subscription": {
+            "sender_id": null,
+            "active": false
+        },
+        "format": "urn:x-nmos:format:audio",
+        "caps": {
+            "media_types": [
+                "audio/L16",
+                "audio/L20",
+                "audio/L24",
+                "audio/mpeg4-generic",
+                "audio/MP4A-LATM"
+            ],
+            "version": "1730485958:301188706",
+            "constraint_sets": [
+                {
+                    "urn:x-nmos:cap:meta:label": "Native Audio constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 100,
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            true
+                        ]
+                    },
+                    "urn:x-nmos:cap:transport:packet_transmission_mode": {
+                        "enum": [
+                            "non_interleaved_access_units"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_transport_mode": {
+                        "enum": [
+                            "out_of_band"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/mpeg4-generic"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "enum": [
+                            128
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "AAC"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "2"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_flow_mode": {
+                        "enum": [
+                            "strict"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "AAC multi-channels constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 1,
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2,
+                            6
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "HighQuality",
+                            "AAC",
+                            "HighEfficiencyAAC",
+                            "HighEfficiencyAACv2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:transport:packet_transmission_mode": {
+                        "enum": [
+                            "non_interleaved_access_units"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_transport_mode": {
+                        "enum": [
+                            "out_of_band"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_flow_mode": {
+                        "enum": [
+                            "strict"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/mpeg4-generic"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "4"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "maximum": 1728
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            }
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "AAC stereo constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:transport:packet_transmission_mode": {
+                        "enum": [
+                            "non_interleaved_access_units"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/mpeg4-generic"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:bit_rate": {
+                        "maximum": 576
+                    },
+                    "urn:x-matrox:cap:format:constant_bit_rate": {
+                        "enum": [
+                            false,
+                            true
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_flow_mode": {
+                        "enum": [
+                            "strict"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            }
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:profile": {
+                        "enum": [
+                            "Main",
+                            "Natural",
+                            "LowDelayAAC",
+                            "LowDelayAACv2"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:level": {
+                        "enum": [
+                            "1"
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:parameter_sets_transport_mode": {
+                        "enum": [
+                            "out_of_band"
+                        ]
+                    }
+                },
+                {
+                    "urn:x-nmos:cap:meta:label": "PCM constraints",
+                    "urn:x-nmos:cap:meta:enabled": true,
+                    "urn:x-nmos:cap:meta:preference": 0,
+                    "urn:x-nmos:cap:format:media_type": {
+                        "enum": [
+                            "audio/L16",
+                            "audio/L24"
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:channel_count": {
+                        "enum": [
+                            2,
+                            6,
+                            8
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_depth": {
+                        "enum": [
+                            16,
+                            24
+                        ]
+                    },
+                    "urn:x-nmos:cap:format:sample_rate": {
+                        "enum": [
+                            {
+                                "numerator": 48000,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 96000,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 44100,
+                                "denominator": 1
+                            },
+                            {
+                                "numerator": 88200,
+                                "denominator": 1
+                            }
+                        ]
+                    },
+                    "urn:x-matrox:cap:transport:channel_order": {
+                        "enum": [
+                            "SMPTE2110.(ST)",
+                            "SMPTE2110.(51)",
+                            "SMPTE2110.(71)"
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+]

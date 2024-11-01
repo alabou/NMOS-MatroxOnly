@@ -1,0 +1,83 @@
+[
+    {
+        "id": "51085614-0400-4000-ab00-4d5458005079",
+        "version": "1730487165:671066332",
+        "label": "Flow Video 0 from HDMI 0",
+        "description": "This is the Flow Video 0 from HDMI 0",
+        "tags": {},
+        "source_id": "c0e814ac-0500-4000-ab00-4d5458005079",
+        "device_id": "00000000-0100-4000-ab00-4d5458005079",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 60,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:video",
+        "media_type": "video/H264",
+        "frame_width": 1920,
+        "frame_height": 1080,
+        "colorspace": "BT709",
+        "interlace_mode": "progressive",
+        "transfer_characteristic": "SDR",
+        "components": [
+            {
+                "name": "Y",
+                "width": 1920,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cb",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            },
+            {
+                "name": "Cr",
+                "width": 960,
+                "height": 1080,
+                "bit_depth": 10
+            }
+        ],
+        "profile": "High-422",
+        "level": "4",
+        "bit_rate": 40000,
+        "urn:x-matrox:constant_bit_rate": false
+    },
+    {
+        "id": "52085614-0401-4000-ab00-4d5458005079",
+        "version": "1730487165:671740169",
+        "label": "Flow Audio 0 from HDMI 0",
+        "description": "This is the Flow Audio 0 from HDMI 0",
+        "tags": {},
+        "source_id": "c1e814ac-0501-4000-ab00-4d5458005079",
+        "device_id": "00000000-0100-4000-ab00-4d5458005079",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/mpeg4-generic",
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "profile": "AAC",
+        "level": "2",
+        "bit_rate": 128,
+        "urn:x-matrox:constant_bit_rate": true
+    },
+    {
+        "id": "53085614-0402-4000-ab00-4d5458005079",
+        "version": "1730487165:672776987",
+        "label": "Flow USB 0",
+        "description": "This is the Flow USB 0",
+        "tags": {},
+        "source_id": "c2e814ac-0502-4000-ab00-4d5458005079",
+        "device_id": "00000000-0100-4000-ab00-4d5458005079",
+        "parents": [],
+        "format": "urn:x-nmos:format:data",
+        "media_type": "application/usb"
+    }
+]

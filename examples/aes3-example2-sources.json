@@ -1,0 +1,107 @@
+[
+    {
+        "id": "dcc84f27-0502-4000-ab00-4d5458005159",
+        "version": "1730487576:341397543",
+        "label": "Source Audio 1 from HDMI 0",
+        "description": "This is the Source Audio 1 from HDMI 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:audio",
+        "channels": [
+            {
+                "label": "left",
+                "symbol": "L"
+            },
+            {
+                "label": "right",
+                "symbol": "R"
+            }
+        ]
+    },
+    {
+        "id": "dbc84f27-0503-4000-ab00-4d5458005159",
+        "version": "1730487576:341399354",
+        "label": "Source Mux 0 from HDMI 0 (fully described)",
+        "description": "This is the Source Mux 0 from HDMI 0 (fully described)",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [
+            "d9c84f27-0501-4000-ab00-4d5458005159",
+            "dcc84f27-0502-4000-ab00-4d5458005159"
+        ],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:mux"
+    },
+    {
+        "id": "d8c84f27-0500-4000-ab00-4d5458005159",
+        "version": "1730487368:217234194",
+        "label": "Source Audio 0 from HDMI 0 (opaque)",
+        "description": "This is the Source Audio 0 from HDMI 0 (opaque)",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:audio",
+        "channels": [
+            {
+                "label": "left",
+                "symbol": "L"
+            },
+            {
+                "label": "right",
+                "symbol": "R"
+            }
+        ]
+    },
+    {
+        "id": "d9c84f27-0501-4000-ab00-4d5458005159",
+        "version": "1730487368:217997089",
+        "label": "Source Audio 0 from HDMI 0",
+        "description": "This is the Source Audio 0 from HDMI 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:audio",
+        "channels": [
+            {
+                "label": "left",
+                "symbol": "L"
+            },
+            {
+                "label": "right",
+                "symbol": "R"
+            }
+        ]
+    }
+]

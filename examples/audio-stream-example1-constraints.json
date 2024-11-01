@@ -1,0 +1,47 @@
+{
+    "constraint_sets": [
+        {
+            "urn:x-nmos:cap:meta:label": "Native Audio constraints",
+            "urn:x-nmos:cap:meta:enabled": true,
+            "urn:x-nmos:cap:meta:preference": 100,
+            "urn:x-nmos:cap:format:channel_count": {
+                "enum": [
+                    2
+                ]
+            },
+            "urn:x-nmos:cap:format:level": {
+                "enum": [
+                    "2"
+                ]
+            },
+            "urn:x-nmos:cap:format:media_type": {
+                "enum": [
+                    "audio/mpeg4-generic"
+                ]
+            },
+            "urn:x-nmos:cap:format:profile": {
+                "enum": [
+                    "AAC"
+                ]
+            },
+            "urn:x-nmos:cap:format:bit_rate": {
+                "enum": [
+                    128
+                ]
+            },
+            "urn:x-nmos:cap:format:sample_rate": {
+                "enum": [
+                    {
+                        "numerator": 48000,
+                        "denominator": 1
+                    }
+                ]
+            },
+            "urn:x-matrox:cap:format:constant_bit_rate": {
+                "enum": [
+                    true
+                ]
+            }
+        }
+    ]
+}
