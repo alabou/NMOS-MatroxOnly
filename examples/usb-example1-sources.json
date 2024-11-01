@@ -1,0 +1,61 @@
+[
+    {
+        "id": "c0e814ac-0500-4000-ab00-4d5458005079",
+        "version": "1730487165:671002831",
+        "label": "Source Video 0 from HDMI 0",
+        "description": "This is the Source Video 0 from HDMI 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005079",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 60,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:video"
+    },
+    {
+        "id": "c1e814ac-0501-4000-ab00-4d5458005079",
+        "version": "1730487165:671716531",
+        "label": "Source Audio 0 from HDMI 0",
+        "description": "This is the Source Audio 0 from HDMI 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005079",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:audio",
+        "channels": [
+            {
+                "label": "left",
+                "symbol": "L"
+            },
+            {
+                "label": "right",
+                "symbol": "R"
+            }
+        ]
+    },
+    {
+        "id": "c2e814ac-0502-4000-ab00-4d5458005079",
+        "version": "1730487165:672763755",
+        "label": "Source USB 0",
+        "description": "This is the Source USB 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005079",
+        "parents": [],
+        "clock_name": "clk0",
+        "format": "urn:x-nmos:format:data"
+    }
+]

@@ -1,0 +1,27 @@
+{
+    "constraint_sets": [
+        {
+            "urn:x-nmos:cap:meta:label": "AM824 constraints",
+            "urn:x-nmos:cap:meta:enabled": true,
+            "urn:x-nmos:cap:meta:preference": 100,
+            "urn:x-nmos:cap:format:media_type": {
+                "enum": [
+                    "audio/AM824"
+                ]
+            },
+            "urn:x-nmos:cap:format:sample_rate": {
+                "enum": [
+                    {
+                        "numerator": 48000,
+                        "denominator": 1
+                    }
+                ]
+            },
+            "urn:x-nmos:cap:format:channel_count": {
+                "enum": [
+                    10
+                ]
+            }
+        }
+    ]
+}

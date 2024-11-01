@@ -1,0 +1,112 @@
+[
+    {
+        "id": "1e71170e-0500-4000-ab00-4d5458005056",
+        "version": "1730485958:300139269",
+        "label": "Source Video 0 from NDI 0",
+        "description": "This is the Source Video 0 from NDI 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": "00000000-0300-4000-ab00-4d5458005056",
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 60,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 0,
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:video"
+    },
+    {
+        "id": "1f71170e-0501-4000-ab00-4d5458005056",
+        "version": "1730485958:300630341",
+        "label": "Source Audio 0 from NDI 0",
+        "description": "This is the Source Audio 0 from NDI 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": "00000000-0300-4000-ab00-4d5458005056",
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 0,
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:audio",
+        "channels": [
+            {
+                "label": "left",
+                "symbol": "L"
+            },
+            {
+                "label": "right",
+                "symbol": "R"
+            }
+        ]
+    },
+    {
+        "id": "2071170e-0502-4000-ab00-4d5458005056",
+        "version": "1730485958:301386743",
+        "label": "Source Video 0 from Net Stream 0",
+        "description": "This is the Source Video 0 from Net Stream 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": "00000000-0301-4000-ab00-4d5458005056",
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 60,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:video"
+    },
+    {
+        "id": "2371170e-0503-4000-ab00-4d5458005056",
+        "version": "1730486241:330189916",
+        "label": "Source Audio 0 from Net Stream 0",
+        "description": "This is the Source Audio 0 from Net Stream 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": "00000000-0302-4000-ab00-4d5458005056",
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "parents": [],
+        "clock_name": "clk0",
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:synchronous_media": true,
+        "format": "urn:x-nmos:format:audio",
+        "channels": [
+            {
+                "label": "left",
+                "symbol": "L"
+            },
+            {
+                "label": "right",
+                "symbol": "R"
+            }
+        ]
+    },
+    {
+        "id": "2271170e-0504-4000-ab00-4d5458005056",
+        "version": "1730486241:330193315",
+        "label": "Source Mux 0 from Net Stream 0",
+        "description": "This is the Source Mux 0 from Net Stream 0",
+        "tags": {},
+        "caps": {},
+        "receiver_id": null,
+        "device_id": "00000000-0100-4000-ab00-4d5458005056",
+        "parents": [
+            "2071170e-0502-4000-ab00-4d5458005056",
+            "2371170e-0503-4000-ab00-4d5458005056"
+        ],
+        "clock_name": "clk0",
+        "format": "urn:x-nmos:format:mux"
+    }
+]

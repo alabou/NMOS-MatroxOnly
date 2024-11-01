@@ -1,0 +1,97 @@
+[
+    {
+        "id": "95fd9441-0400-4000-ab00-4d5458005159",
+        "version": "1730487368:217294044",
+        "label": "Flow Audio 0 from HDMI 0 (opaque)",
+        "description": "This is the Flow Audio 0 from HDMI 0 (opaque)",
+        "tags": {},
+        "source_id": "d8c84f27-0500-4000-ab00-4d5458005159",
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/AM824",
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        }
+    },
+    {
+        "id": "96fd9441-0401-4000-ab00-4d5458005159",
+        "version": "1730487368:218065441",
+        "label": "Flow Audio 0 from HDMI 0 (fully described)",
+        "description": "This is the Flow Audio 0 from HDMI 0 (fully described)",
+        "tags": {},
+        "source_id": "d9c84f27-0501-4000-ab00-4d5458005159",
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 0,
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/L24",
+        "bit_depth": 24,
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        }
+    },
+    {
+        "id": "97fd9441-0402-4000-ab00-4d5458005159",
+        "version": "1730487368:218097673",
+        "label": "Flow Audio 1 from HDMI 0 (fully described)",
+        "description": "This is the Flow Audio 1 from HDMI 0 (fully described)",
+        "tags": {},
+        "source_id": "dac84f27-0502-4000-ab00-4d5458005159",
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer": 1,
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:audio",
+        "media_type": "audio/L24",
+        "bit_depth": 24,
+        "sample_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        }
+    },
+    {
+        "id": "98fd9441-0403-4000-ab00-4d5458005159",
+        "version": "1730487368:218125738",
+        "label": "Flow RTP 1 from HDMI 0 (fully described)",
+        "description": "This is the Flow RTP 1 from HDMI 0 (fully described)",
+        "tags": {},
+        "source_id": "dbc84f27-0503-4000-ab00-4d5458005159",
+        "device_id": "00000000-0100-4000-ab00-4d5458005159",
+        "parents": [
+            "96fd9441-0401-4000-ab00-4d5458005159",
+            "97fd9441-0402-4000-ab00-4d5458005159"
+        ],
+        "grain_rate": {
+            "numerator": 48000,
+            "denominator": 1
+        },
+        "urn:x-matrox:layer_compatibility_groups": [
+            0
+        ],
+        "format": "urn:x-nmos:format:mux",
+        "media_type": "application/AM824",
+        "urn:x-matrox:video_layers": 0,
+        "urn:x-matrox:audio_layers": 2,
+        "urn:x-matrox:data_layers": 0
+    }
+]
