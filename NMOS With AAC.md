@@ -119,7 +119,7 @@ Informative note: The RFC 3640 standard does not define a bitrate SDP transport 
 
 The AAC encoder associated with the Flow MUST produce an AAC bitstream that is compliant with the `profile` and `level` attributes.
 
-Examples Flow resources are provided in [Examples](../examples/).
+Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Senders
 
