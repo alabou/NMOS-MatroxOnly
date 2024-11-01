@@ -63,7 +63,7 @@ In addition to those attributes defined in IS-04 for audio and data Sources, the
 
 A Source of format `urn:x-nmos:format:audio` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
 
-Examples Source resources are provided in [Examples](../examples/).
+Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Flows
 
@@ -81,7 +81,7 @@ A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow w
 
 A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an AM824 Stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
-Examples Flow resources are provided in [Examples](../examples/).
+Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Senders
 
@@ -126,7 +126,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 For Nodes transmitting AM824 Streams using the RTP payload mapping defined by ST 2110-31, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
 
-An example Sender resource is provided in the [Examples](../examples/).
+An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ##### SDP format-specific parameters
 
@@ -136,7 +136,7 @@ The SDP file at the `manifest_href` MUST comply with the requirements of ST 2110
 
 The SDP transport file associated with an AM824 Stream MUST have `channel-order` parameter to indicate the grouping of channels in AM824 Stream. The `channel-order` parameter MUST use the ST 2110-30 channel grouping symbols for linear PCM AES3 Streamsand the ST 2110-31 channel grouping symbol `AES3` for non-linear AES Streams. Such layout MUST indicate the number of audio layers multiplexed in the AM824 Stream. This requirement applies to both opaque and fully described AM824 Streams.
 
-An example SDP file is provided in the [Examples](../examples/).
+An example SDP file is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 #### Other transports
 
@@ -183,7 +183,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 A Receiver MUST be able to consume compliant AES3 Streams.
 
-An example Receiver resource is provided in the [Examples](../examples/).
+An example Receiver resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### RTP transport based on ST 2110-31
 

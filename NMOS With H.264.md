@@ -127,7 +127,7 @@ A Sender MUST declare its compliance to ST 2110-22 with the SSN parameter of the
 
 The H.264 encoder associated with the Flow MUST produce an H.264 bitstream that is compliant with the `profile` and `level` attributes.
 
-Examples Flow resources are provided in [Examples](../examples/).
+Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Senders
 
@@ -166,7 +166,7 @@ In addition to those attributes defined in IS-04 for Senders, the following attr
 - [Parameter Sets Transport Mode](https://specs.amwa.tv/nmos-parameter-registers/branches/main/sender-attributes/#parameter-sets-transport-mode)  
   A Sender operating with out-of-band parameter sets MUST set the `parameter_sets_transport_mode` attribute to either `out_of_band` or `in_and_out_of_band`. Otherwise it MAY omit or set the `parameter_sets_transport_mode` attribute to `in_band`. If unspecified the default value is `in_band`. See the [Parameter Sets](#parameter-sets) section for more details.
 
-An example Sender resource is provided in the [Examples](../examples/).
+An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ##### SDP format-specific parameters
 
@@ -192,7 +192,7 @@ Informative note: ST 2110-22 does not require the `sampling` or `depth` SDP para
 
 If the Sender meets the traffic shaping and delivery timing requirements specified for IPMX, the SDP transport file MUST also comply with the provisions of IPMX.
 
-An example SDP file is provided in the [Examples](../examples/).
+An example SDP file is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 #### Other transports
 
@@ -254,7 +254,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 - [Transfer Characteristic](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#transfer-characteristic)
 - [ST 2110-21 Sender Type](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#st-2110-21-sender-type)
 
-An example Receiver resource is provided in the [Examples](../examples/).
+An example Receiver resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### RTP transport based on RFC 6184
 

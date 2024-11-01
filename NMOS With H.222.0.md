@@ -51,7 +51,7 @@ In addition to those attributes defined in IS-04 for audio, video and data Sourc
 
 A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
 
-Examples Source resources are provided in [Examples](../examples/).
+Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Flows
 
@@ -75,7 +75,7 @@ A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/AM824` M
 
 Note: Linear PCM Flows and opaque AM824 Flows are implicitely embedded in the MPEG2-TS stream as per [ST 302M][]. Coded audio Flows are embedded according to their format as per [H.222.0][]. A fully described AM824 Flow cannot be a sub-Flow of an H.222.0 mux Flow.
 
-Examples Flow resources are provided in [Examples](../examples/).
+Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Senders
 
@@ -108,13 +108,13 @@ Note: The Sender's attributes and associated transport capabilities of a coded f
 
 For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
 
-An example Sender resource is provided in the [Examples](../examples/).
+An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ##### SDP format-specific parameters
 
 The SDP file at the `manifest_href` MUST comply with the requirements of RFC 2250 and RFC 3551.
 
-An example SDP file is provided in the [Examples](../examples/).
+An example SDP file is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 #### Other transports
 
@@ -149,7 +149,7 @@ The following parameter constraints can be used to express limits or preferences
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
-An example Receiver resource is provided in the [Examples](../examples/).
+An example Receiver resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### RTP transport based on RFC 2250 and RFC 3551
 

@@ -157,7 +157,7 @@ In addition to those attributes defined in IS-04 for Senders, the following attr
 
   Informative note: From ISO/IEC 14496-3 "The header streams are transported via MPEG-4 systems. These streams contain configuration information, which is necessary for the decoding process and parsing of the raw data streams. However, an update is only necessary if there are changes in the configuration." AudioSpecificConfig is part of the header streams.
 
-An example Sender resource is provided in the [Examples](../examples/).
+An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 The AAC encoder of a Sender MUST produces an AAC bitstream that is compliant with the `profile-level-id` explicitely declared in the stream's associated SDP transport file or the MPEG-4_audio_profile_and_level of the MPEG-4_audio_descriptor of an MPEG2-TS transport stream.
 
@@ -187,7 +187,7 @@ Therefore:
 
 Informative note: The Flow bit_rate information is assumed to be conveyed according to the rules of the standards being implemented by the device. In some scenarios the encoding is not declared out-of-band through the SDP transport file but in-band through the coded stream.
 
-Examples of SDP transport file are provided in the [Examples](../examples/).
+Examples of SDP transport file are provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 #### Other transports
 
@@ -247,7 +247,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 - [Format Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-bit-rate)
 - [Format Constant Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-constant-bit-rate)
 
-An example Receiver resource is provided in the [Examples](../examples/).
+An example Receiver resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ## RTP transport based on RFC 3640 or RFC 6416
 
