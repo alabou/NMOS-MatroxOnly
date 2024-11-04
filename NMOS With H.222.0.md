@@ -189,9 +189,9 @@ If the Receiver is not capable of consuming the stream described by a `PATCH` on
 
 A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
-A Sender MUST populate the Program Map Table (PMT), for a given format (audio, video, data), in increasing order of `layer` number. The PID value of `layer` i for a given format MUST be lower than the PID value of `layer` i+1 of the same format.
+"A Sender MUST populate the Program Map Table (PMT) for a given sub-Stream format (audio, video, data) in ascending order of the `layer` number. The PID value of `layer` i for a given sub-Stream format MUST be lower than the PID value of `layer` i+1 for that same format.
 
-> Note: This requirement is in the spirit of [VSF_TR-07][] that mandate the following: "The order of the streams, as listed in the PMT, shall constitute the ordering of the streams presented to the user in any user presentation or selection mechanism."
+Note: This requirement aligns with [VSF_TR-07][], which mandates "The order of the streams, as listed in the PMT, shall constitute the ordering of the streams presented to the user in any user presentation or selection mechanism."
 
 ### [VSF_TR-07][] compatibility
 
