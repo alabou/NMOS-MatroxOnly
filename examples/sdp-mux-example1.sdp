@@ -1,0 +1,13 @@
+v=0
+o=- 1730740715 1730740715 IN IP4 127.0.0.1
+s=Device [MTX05057] - Net Stream MPEG2-TS 0
+t=0 0
+m=video 27506 RTP/AVP 96
+c=IN IP4 239.3.0.1/128
+a=rtpmap:96 MP2T/90000
+a=fmtp:96
+a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00:00
+a=mediaclk:direct=0
+a=source-filter: incl IN IP4 239.3.0.1 127.0.0.1
+a=privacy:protocol=RTP; mode=AES-128-CTR; iv=9757092d8be93362; key_generator=fb2df5c786cbc0c2215d58425edbe04b; key_version=84e3882c; key_id=0001020304050607
+a=rtcp:27507

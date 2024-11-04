@@ -1,0 +1,11 @@
+v=0
+o=- 1730741140 1730741140 IN IP4 127.0.0.1
+s=Device [MTX05055] - Net Stream RTSP 0
+t=0 0
+m=application 27503 TCP rtsp
+c=IN IP4 127.0.0.1/128
+a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00:00
+a=mediaclk:direct=0
+a=control:rtsp://127.0.0.1:27503/x-nmos/RTSP/0
+a=privacy:protocol=RTSP; mode=AES-128-CTR; iv=e26b7f427bbedb6d; key_generator=fa01d5c12dcf34d82bf13ccbf7dfe481; key_version=6fd15ca1; key_id=0001020304050607
+a=setup:passive

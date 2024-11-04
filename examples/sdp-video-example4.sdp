@@ -1,0 +1,14 @@
+v=0
+o=- 1730740324 1730740324 IN IP4 127.0.0.1
+s=Device [MTX05058] - Net Stream 0 Video 0
+t=0 0
+m=video 27500 RTP/AVP 96
+c=IN IP4 239.0.0.1/128
+b=AS:86400
+a=rtpmap:96 H264/90000
+a=fmtp:96 width=1920; height=1080; depth=10; exactframerate=60; sampling=YCbCr-4:2:2; colorimetry=BT709; TP=2110TPW; TCS=SDR; RANGE=NARROW; profile-level-id=7A0028; packetization-mode=1
+a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00:00
+a=mediaclk:direct=0
+a=source-filter: incl IN IP4 239.0.0.1 127.0.0.1
+a=privacy:protocol=RTP; mode=AES-128-CTR; iv=006f2d5d6b5b5628; key_generator=5cd8338aa02e9a31a35b36899523382c; key_version=7f271d04; key_id=0001020304050607
+a=rtcp:27501

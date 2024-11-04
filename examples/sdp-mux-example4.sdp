@@ -1,0 +1,9 @@
+v=0
+o=- 1730741247 1730741247 IN IP4 127.0.0.1
+s=Device [MTX05077] - Net Stream MPEG2-TS 0
+t=0 0
+m=application 27506 UDP mp2t
+c=IN IP4 127.0.0.1/128
+a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00:00
+a=mediaclk:direct=0
+a=privacy:protocol=SRT; mode=AES-128-CTR; iv=312c054f9e5aeaf7; key_generator=fae4bea5b5e3d34e71baa3255e7f30a5; key_version=8b96996c; key_id=0001020304050607
