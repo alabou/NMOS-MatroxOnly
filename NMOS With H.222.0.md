@@ -191,7 +191,7 @@ A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that
 
 A Sender MUST populate the Program Map Table (PMT) for each sub-Stream format (audio, video, data) in ascending order of `layer` numbers. The PID value assigned to `layer` i for a given sub-Stream format MUST be numerically lower than the PID value assigned to `layer` i+1 for that same format.
 
-Note: This requirement aligns with the [VSF_TR-07][], which mandates: "The order of the streams, as listed in the PMT, shall constitute the ordering of the streams presented to the user in any user presentation or selection mechanism."
+Note: This requirement aligns with the [VSF_TR-07][] and [VSF_TR-01][], which mandate: "The order of the streams, as listed in the PMT, shall constitute the ordering of the streams presented to the user in any user presentation or selection mechanism."
 
 ### [VSF_TR-07][] compatibility
 
@@ -216,6 +216,7 @@ An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a J
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
 [VSF_TR-07]: https://vsf.tv/download/technical_recommendations/VSF_TR-07_2022-04-20.pdf "Transport of JPEG XS Video in MPEG-2 Transport Stream over IP"
+[VSF_TR-01]: https://vsf.tv/download/technical_recommendations/VSF_TR-01_2018-06-05.pdf "Transport of JPEG 2000 Broadcast Profile video in MPEG-2 TS over IP"
 [ST 337]: https://ieeexplore.ieee.org/document/7291671 "ST 337:2015: Format for Non-PCM Audio and Data in an AES3 Serial Digital Audio Interface"
 [ST 302M]: https://ieeexplore.ieee.org/document/7291632 "SMPTE 302M: Mapping of AES3 Data into MPEG-2 Transport Stream"
 [AES3]: http://tech.ebu.ch/docs/tech/tech3250.pdf "SPECIFICATION OF THE DIGITAL AUDIO INTERFACE (The AES/EBU interface)"
