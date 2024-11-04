@@ -189,6 +189,10 @@ If the Receiver is not capable of consuming the stream described by a `PATCH` on
 
 A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
+A Sender MUST populate the Program Map Table (PMT), for a given format (audio, video, data), in increasing order of `layer` number. The PID value of `layer` i for a given format MUST be lower than the PID value of `layer` i+1 of the same format.
+
+> Note: This requirement is in the spirit of [VSF_TR-07][] that mandate the following: "The order of the streams, as listed in the PMT, shall constitute the ordering of the streams presented to the user in any user presentation or selection mechanism."
+
 ### [VSF_TR-07][] compatibility
 
 An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a JPEG-XS video stream (video/JXSV, VIDEO 0) along with up to 4 audio streams (SMPTE ST 302M embedding, audio/AM824, AUDIO 0-3) and one ancillary data stream (SMPTE ST 2038 embedding, video/smpte291, DATA 0).
