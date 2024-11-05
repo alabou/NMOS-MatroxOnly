@@ -75,6 +75,11 @@ The Sender MUST express its limitations or preferences regarding the USB streams
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
+The following parameter constraints can be used to express limits or preferences for a USB Stream:
+
+[usb_class](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class)
+Indicate the USB classes (array of integers in the 0 to 255 range) supported by the USB transport. See www.usb.org for class codes definitions.
+
 A USB Sender is a TCP/IP server. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-patsh TCP) scheme for redundancy.
 
 An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
@@ -102,6 +107,11 @@ A USB Receiver MUST indicate `urn:x-nmos:format:data` for the `format` attribute
 The Receiver MUST express its limitations or preferences regarding the USB streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available stream. It is not always practical for the constraints to indicate every type of stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
+
+The following parameter constraints can be used to express limits or preferences for a USB Stream:
+
+[usb_class](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class)
+Indicate the USB classes (array of integers in the 0 to 255 range) supported by the USB transport. See www.usb.org for class codes definitions.
 
 A USB Receiver is a TCP/IP client. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-patsh TCP) scheme for redundancy.
 
