@@ -63,7 +63,7 @@ A Receiver MAY support either or both true and false values.
 
 A Controller MUST verify the compliance of the Receiver with a Sender using HDCP encryption from the SDP transport file `hkep` attribute. The presence of such attribute in an SDP transport file indicate that the stream is HDCP protected. Only Receivers supporting HDCP encryption and the HKEP protocol can consume such streams.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encrypted streams are supported. A Sender MAY support either or both true and false values. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as HKEP is a protection mechanism under the control of the Sender.
+A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encrypted streams are supported. A Sender MAY support either or both true and false values. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. A Sender constrained to `false` for such capability MUST NOT be part of an HDCP topology and MUST NOT access/produce/stream HDCP protected content.
 
 Informative Note: A Sender indicating both `true` and `false` values in its capabilities describes that it may produce both HDCP and non-HDCP streams according to some internal criteria at activation time. 
 
