@@ -192,3 +192,10 @@ constraints_supported.json
   - **Type:** array of integer (Media Info Block type identifiers)
   - **Target:** (a) `transport_file` activation attribute of the Receiver.
 - **Applicability:** AMWA IS-04 v1.3, AMWA IS-05 v1.1
+
+### usb_class
+- **Name:** `urn:x-matrox:cap:transport:usb_class`
+- **Description:** Indicates the USB classes (array of integers in the 0 to 255 range) supported by the USB transport. See [www.usb.org](https://www.usb.org/defined-class-codes) for class codes definitions.
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+  - **Type:** array of integer
+- **Applicability:** AMWA IS-04 v1.3
