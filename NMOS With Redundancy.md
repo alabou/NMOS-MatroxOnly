@@ -37,7 +37,7 @@ A Sender MAY silently ignore an attempt by a Controller to disable a leg through
 
 A Receiver MAY silently ignore an attempt by a Controller to disable a leg through the IS-05 transport parameters. In that scenario a Receiver MAY silently ignore an attempt by a Controller to set a transport parameter to a value that violate the associated parameter constraints.
 
-A Receiver that is not configured for using redundancy MAY connect to a Sender that is configured for using redundancy and connect or subscribe to media from either path (leg).
+A Receiver that is not configured for using redundancy MAY connect to a Sender that is configured for using redundancy and connect or subscribe to media from either path (leg). The method used by such Receiver for selecting the stream of a redundant pair that is accessible to the Receiver is unspecified.
 
 A Receiver that is configured for using redundancy MAY connect to a Sender that is not configured for using redundancy, and connect or subscribe to media using either path (leg) and disable the other unused paths (legs). A device MAY disallow disabling redundancy paths (legs) and in this case the Receiver SHOULD NOT be allowed to connect to a Sender not configured for using redundancy.
 
