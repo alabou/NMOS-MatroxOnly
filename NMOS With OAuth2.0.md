@@ -65,7 +65,7 @@ An NMOS Node MUST use TLS v1.2 or v1.3 when fetching / updating Public Keys from
 
 #### Lifetime
 
-Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for an immediate need for a complete work day. An OAuth2.0 Bearer token MUST have a minimum expiration time (`exp1` claim) of 1 hours and a maximum of 24 hours from its creation time (`iat` claim).
+Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for an immediate need for a complete work day. An OAuth2.0 Bearer token MUST have a minimum expiration time (`exp` claim) of 1 hours and a maximum of 24 hours from its creation time (`iat` claim).
 
 ### Type and Algorithms
 
