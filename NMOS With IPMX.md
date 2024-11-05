@@ -41,7 +41,7 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capab
 
 A Receiver MAY support either or both clock reference types.
 
-A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file and check for the a=mediaclk attribute. It MAY also verify the compliance using the Sender's associated Source `synchronous_media` attribute.
+A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file and check for the a=mediaclk attribute. It MAY also verify the compliance using the Sender's associated Source `urn:x-matrox:synchronous_media` attribute.
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate the media synchronisation that it supports. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers.
 
