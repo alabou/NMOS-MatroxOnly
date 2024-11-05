@@ -69,7 +69,7 @@ Examples Flow resources are provided in [Examples](https://github.com/alabou/NMO
 
 An USB Sender resource MUST indicate `urn:x-matrox:transport:usb` for the `transport` attribute.
 
-A Sender associated with a USB Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the data Flow.
+A Sender associated with a USB Flow through the `flow_id` attribute SHOULD provide Sender's Capabilities for the data Flow.
 
 The Sender MUST express its limitations or preferences regarding the USB streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's stream capabilities. It is not always practical for the constraints to indicate every type of stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
@@ -102,7 +102,7 @@ Nodes implementing IS-04 v1.3 or higher that are capable of receiving USB data s
 
 A USB Receiver resource MUST indicate `urn:x-matrox:transport:usb` for the `transport` attribute.
 
-A USB Receiver MUST indicate `urn:x-nmos:format:data` for the `format` attribute and MUST provide Receiver's Capabilities for the data Stream.
+A USB Receiver MUST indicate `urn:x-nmos:format:data` for the `format` attribute and SHOULD provide Receiver's Capabilities for the data Stream.
 
 The Receiver MUST express its limitations or preferences regarding the USB streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available stream. It is not always practical for the constraints to indicate every type of stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
