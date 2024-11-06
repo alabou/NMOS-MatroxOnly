@@ -46,9 +46,8 @@ A USB Flow resource MUST indicate `application/usb` in the `media_type` attribut
 Let define a `usb_device` object as
 ```
 {
-    "bus": integer,          // bus number
-    "device": integer,       // device number
-    "class": integer,        // class of device
+    "unique_id": integer,    // IPMX USB IP unique id
+    "class": []integer,      // classes of device
     "vendor": integer,       // vendor id
     "product": integer,      // product id
     "serial": string,        // serial number
