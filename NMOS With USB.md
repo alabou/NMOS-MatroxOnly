@@ -46,11 +46,11 @@ A USB Flow resource MUST indicate `application/usb` in the `media_type` attribut
 Let define a `usb_device` object as
 ```
 {
-    "unique_id": integer,    // IPMX USB IP unique id
-    "class": []integer,      // classes of device
-    "vendor": integer,       // vendor id
-    "product": integer,      // product id
-    "serial": string,        // serial number
+    "ipmx_bus_id": [64]integer, // IPMX USB IP UTF8 BUSID 64 byte value (integers in the range 0 to 255)
+    "class": []integer,         // class of a device or classes if a composite device
+    "vendor": integer,          // vendor id
+    "product": integer,         // product id
+    "serial": string,           // serial number
 }
 ```
 A USB Flow MAY have an optional attribute `usb_devices` of type, array of `usb_device` objects, describing the USB devices that are accessible to a Receiver through the USB `data` stream. This information is optional. The information contained in usb_devices, such as serial numbers and vendor/product IDs, can be sensitive. Security policies MAY classify this data as confidential to prevent potential exploitation or misuse. As a result, such policies MAY disallow the publication of USB device information in Flow descriptions to protect privacy and network integrity. Under other security policies, the `usb_devices` information MAY enhance an organization's security by enabling the tracing of USB devices connected to the network. The availability of such information SHOULD be established based on the security policies of the organization where the devices are deployed.
