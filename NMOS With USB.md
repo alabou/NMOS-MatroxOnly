@@ -43,21 +43,22 @@ Examples Source resources are provided in [Examples](https://github.com/alabou/N
 
 A USB Flow resource MUST indicate `application/usb` in the `media_type` attribute and `urn:x-nmos:format:data` for the `format` attribute. A USB Flow MUST have a `source_id` attribute referencing a Source of the same `format`.
 
-Let define a usb_device object as
+Let define a `usb_device` object as
+```
 {
     "bus": integer,          // bus number
     "device": integer,       // device number
+    "class": integer,        // class of device
     "vendor": integer,       // vendor id
     "product": integer,      // product id
     "serial": string,        // serial number
-    "class": integer,        // class of device
 }
-
+```
 A USB Flow MAY have an optional attribute `usb_devices` of type, array of `usb_device` objects, describing the USB devices that are accessible to a Receiver through the USB `data` stream. This information is optional. The information contained in usb_devices, such as serial numbers and vendor/product IDs, can be sensitive. Security policies MAY classify this data as confidential to prevent potential exploitation or misuse. As a result, such policies MAY disallow the publication of USB device information in Flow descriptions to protect privacy and network integrity. Under other security policies, the `usb_devices` information MAY enhance an organization's security by enabling the tracing of USB devices connected to the network. The availability of such information SHOULD be established based on the security policies of the organization where the devices are deployed.
 
 A USB Flow MAY include an optional attribute, `usb_devices`, which is an array of `usb_device` objects describing the USB devices accessible to a Receiver through the USB data stream. This attribute is optional.
 
-The information contained in `usb_devices`, such as serial numbers and vendor/product IDs, can be sensitive. Security policies MAY classify this data as confidential to prevent potential misuse or exploitation. Consequently, such policies MAY restrict the publication of USB device information in Flow descriptions to protect privacy and maintain network integrity.
+The information contained in `usb_devices`, such as serial numbers and vendor/product IDs, can be sensitive. Security policies MAY classify this data as confidential to prevent potential misuse or exploitation. Consequently, such policies MAY restrict the publication of USB device information in Flow descriptions to protect privacy.
 
 Conversely, under different security policies, `usb_devices` information MAY be used to enhance an organization’s security by enabling the tracing and monitoring of USB devices connected to the network. This data can support device tracking, user accountability, and anomaly detection.
 
