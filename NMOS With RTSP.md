@@ -205,6 +205,8 @@ An RTSP Receiver SHOULD monitor and adapt to changes in the RTSP Stream/sub-Stre
 
 An RTSP Sender MAY, unless constrained by IS-11, produce any RTSP Stream/sub-Streams that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
+An RTSP Sender MUST assign multicast IP addresses and respond to a Stream/sub-Streams `SETUP` request with a multicast a IP address allocated by the Sender. An RTSP Sender MUST NOT allow a client to select a multicast IP address.
+
 A non-NMOS RTSP Receiver MAY connect to an RTSP Sender. IS-05 is then used only on the Sender side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Receiver. Such RTSP Sender MUST behave as if an RTSP Receiver was connecting.
 
 An RTSP Sender MUST support all the required method of [RFC-2326][] and additionally it MUST support the `DESCRIBE` and `GET_PARAMETER` methods. The `GET_PARAMETER` method with no entity body MUST be used by an RTSP Receiver or non-NMOS RTSP Receiver to ping the RTSP server and keep the connection alive.
