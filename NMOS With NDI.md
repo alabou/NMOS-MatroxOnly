@@ -65,7 +65,7 @@ A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow w
 
 A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an NDI stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
-The sub-Flows of an NDI multiplexed stream MUST wither all be uncompressed sub-streams or all be compressed streams.
+The sub-Flows of an NDI multiplexed stream MUST either all be uncompressed sub-streams or all be compressed streams.
 
 #### Uncompressed video and audio
 
