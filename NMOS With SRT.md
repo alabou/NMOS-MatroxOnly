@@ -105,6 +105,8 @@ An SRT Receiver MAY indicate that it does not support the Stream ID feature by u
 
 > Note: In an NMOS system the Stream ID feature is used for resource identification by SRT Senders and SRT Receivers. It is the SRT `listener` that define the stream_id value independently of being the source or destination. SRT Sender and Receiver in a `caller` role with non-NMOS devices could have additional uses of the Stream ID feature.
 
+An SRT Sender/Receiver acting as a `listener` and supporting the Stream ID feature MUST ignore the `staged` value of the `stream_id` transport parameter and MUST set the `active` value to its "urn:x-nmos:tag:grouphint/v1.0" tag on activation.
+
 The `protocol` transport parameter MUST default to `listener` on an SRT Sender and to `caller` on an SRT Receiver. A Controller MAY use other combinations in specific connection scenarios. Those are a) both Sender and Receiver using the `rendezvous` protocol or b) the Sender is the `caller` while the Receiver is the `listener`. The default `protocol` values provide an NMOS compatible configuration where a Receiver connects to a Sender based on information optionally received from an SDP transport file. Other configurations require that the Controller uses the transport parameters of both the Sender and Receiver to make a connection.
 
 In `rendezvous` mode for both the Sender and Receiver the `source_port` and `destination_port` MUST be equal.
