@@ -77,6 +77,13 @@
         "maximum": 1000
       }
     },
+    "stream_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "SRT Stream ID value.",
+    },    
     "patternProperties": {
       "^ext_[a-zA-Z0-9_]+$": {
         "$ref": "receiver_transport_params_ext.json"
