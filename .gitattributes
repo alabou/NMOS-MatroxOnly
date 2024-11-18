@@ -1,0 +1,5 @@
+# Exclude HTML files from language statistics
+*.html linguist-vendored
+
+# Ensure Markdown files are recognized
+*.md linguist-language=Markdown
