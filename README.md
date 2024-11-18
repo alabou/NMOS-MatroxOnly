@@ -1,4 +1,4 @@
-# NMOS Advanced Streaming Architecture
+# Matrox NMOS Extended Features
 
 This repository describes the extended features of the NMOS Advanced Streaming Architecture developped by Matrox.
 
