@@ -16,7 +16,9 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 [RFC-2326][] defines the Real-Time Streaming Protocol (RTSP) version 1.0. RTSP is an application-layer protocol for the setup and control of the delivery of data with real-time properties. RTSP provides an extensible framework to enable controlled, on-demand delivery of real-time data, such as audio and video. Sources of data can include both live data feeds and stored clips. The RTSP protocol is implemented by many non-NMOS devices to transmit and receive multicast/unicast media streams.
 
-This document presents how RTSP is used in an NMOS environment. One use-case is for NMOS RTSP Senders/Receivers to interoperate with non-NMOS RTSP clients/servers. Another use-case is to use RTSP to enhance the control of unicast streams in 1-to-N scenarios (1 Sender to N Receivers). A last use-case is to allow additional flexibility in the negotiation of various media transport schemes by a single Sender/Receiver (parallel streams over RTP/AVP/UDP, single multiplexed stream over RTP/AVP/UDP, single multiplexed stream over UDP, parallel streams or single multiplexed stream over RTP/RTSP/TCP).
+This document presents how RTSP is used in an NMOS environment. One use-case is for NMOS RTSP Senders/Receivers to interoperate with non-NMOS RTSP clients/servers. Another use-case is to use RTSP to enhance the control of unicast streams in 1-to-N scenarios (1 Sender to N Receivers). A last use-case is to allow additional flexibility in the negotiation of various media transport schemes by a single Sender/Receiver (parallel streams over RTP/AVP/UDP, single multiplexed stream over RTP/AVP/UDP, single multiplexed stream over UDP, parallel streams or single multiplexed stream over RTP/AVP/TCP).
+
+> Note: The `Transport:UDP;` flavor is non-standard (not allowed in the syntax of RFC 2326 but allowed by RFC 7826) and if supported indicate an MPEG2-TS over UDP stream (`Transport:UDP;`) instead of an MPEG2-TS over RTP stream (`Transport:RTP/AVP/UDP;`). A Controller through IS-11 can configure the transport by  applying a constraint on the mux Flow `media_type`.
 
 RTSP is used as a specific NMOS transport protocol `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` for both RTSP Senders and Receivers. This transport is available for RTSP Receivers of format `urn:x-nmos:format:mux` and RTSP Senders attached to a Flow of format `urn:x-nmos:format:mux`. The RTSP transport can deliver a multiplexed stream that combines audio, video, and data sub-Streams, which can be either transmitted independently in parallel or aggregated into a single, fully multiplexed stream.
 
@@ -24,9 +26,9 @@ The `urn:x-matrox:transport:rtsp` transport identifies the `non-interleaved` mod
 
 `urn:x-matrox:transport:rtsp` => media type `application/rtsp` (over RTP/AVP/UDP) or `application/MP2T` (over RTP/AVP/UDP) or `application/AM824` (over RTP/AVP/UDP) or `application/mp2t` (over UDP)
 
-The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mode of operation and allows the transmission/reception of a single aggregated multiplexed RTP/RTSP/TCP stream.
+The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mode of operation and allows the transmission/reception of a single aggregated multiplexed RTP/AVP/TCP stream.
 
-`urn:x-matrox:transport:rtsp.tcp` => media type `application/rtsp` or `application/MP2T` or `application/AM824` (all over RTP/RTSP/TCP).
+`urn:x-matrox:transport:rtsp.tcp` => media type `application/rtsp` or `application/MP2T` or `application/AM824` (all over RTP/AVP/TCP).
 
 > Note: The RTSP interleaved mode is supported by an NMOS device as a specific transport to emphasis the TCP nature of this option. TCP-based interleaving is often necessary for firewall/NAT traversal.
 
