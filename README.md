@@ -8,7 +8,7 @@ This repository describes the extended features of the NMOS Advanced Streaming A
 
 The NMOS Advanced Streaming Architecture redefines IP-based media streaming for the professional AV (proAV) market. Designed to address the growing demand for flexible, secure, and scalable streaming workflows, these specifications extend the NMOS framework with advanced features that enhance configurability, interoperability, security, and resource management in both small-scale and large-scale systems.
 
-**Key objectives include:**
+### Key objectives include:
 
 1. **Unprecedented Configurability**:
    - Enable configuration through IS-11 of independent audio, video, data, and multiplexed (mux) streams, along with per-audio, per-video, and per-data sub-streams within multiplexed streams, allowing fine-grained control of individual media essences.
