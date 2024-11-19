@@ -147,7 +147,7 @@ command-message-reatapi.json
   ]
 }
 ```
-The following schema modifies the IS-12 subscription-message.json schema slightly to allow an object to be specified either as an integer object id as a string role path.
+The following schema modifies the IS-12 subscription-message.json schema slightly to allow an object to be specified either as an integer object id or as a string role path.
 
 subscription-message-restapi.json
 ```
