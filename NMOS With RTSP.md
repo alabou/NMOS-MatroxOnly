@@ -18,8 +18,6 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 This document presents how RTSP is used in an NMOS environment. One use-case is for NMOS RTSP Senders/Receivers to interoperate with non-NMOS RTSP clients/servers. Another use-case is to use RTSP to enhance the control of unicast streams in 1-to-N scenarios (1 Sender to N Receivers). A last use-case is to allow additional flexibility in the negotiation of various media transport schemes by a single Sender/Receiver (parallel streams over RTP/AVP/UDP, single multiplexed stream over RTP/AVP/UDP, single multiplexed stream over UDP, parallel streams or single multiplexed stream over RTP/AVP/TCP).
 
-> Note: The `Transport:UDP;` flavor is non-standard (not allowed in the syntax of RFC 2326 but allowed by RFC 7826) and if supported indicate an MPEG2-TS over UDP stream (`Transport:UDP;`) instead of an MPEG2-TS over RTP stream (`Transport:RTP/AVP/UDP;`). A Controller through IS-11 can configure the transport by  applying a constraint on the mux Flow `media_type`.
-
 RTSP is used as a specific NMOS transport protocol `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` for both RTSP Senders and Receivers. This transport is available for RTSP Receivers of format `urn:x-nmos:format:mux` and RTSP Senders attached to a Flow of format `urn:x-nmos:format:mux`. The RTSP transport can deliver a multiplexed stream that combines audio, video, and data sub-Streams, which can be either transmitted independently in parallel or aggregated into a single, fully multiplexed stream.
 
 The `urn:x-matrox:transport:rtsp` transport identifies the `non-interleaved` mode of operation and allows the transmission/reception of a) multiple independent RTP/AVP/UDP sub-Streams, b) a single aggregated multiplexed RTP/AVP/UDP Stream and c) a single aggregated multiplexed UDP Stream. The `media_type` associated with the mux Flow/Stream determine the effective transport scheme.
@@ -32,6 +30,8 @@ The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mod
 
 > Note: The RTSP interleaved mode is supported by an NMOS device as a specific transport to emphasis the TCP nature of this option. TCP-based interleaving is often necessary for firewall/NAT traversal.
 
+> Note: The `Transport:UDP;` signaling is non-standard (not allowed in the syntax of RFC 2326 but allowed by RFC 7826) and if supported indicate an MPEG2-TS over UDP stream (`Transport:UDP;`) instead of an MPEG2-TS over RTP stream (`Transport:RTP/AVP/UDP;`). A Controller through IS-11 can configure the transport by applying a constraint on the mux Flow `media_type`.
+
 The RTSP control endpoints of RTSP Senders/Receivers support the same security features (rtsp versus rtsps, OAuth2.0 authorizations or not) as the IS-05 control endpoint of the associated Senders/Receivers.
 
 The media Stream and sub-Streams of an RTSP session support the same privacy encryption features that non-RTSP Streams offer.
@@ -40,7 +40,7 @@ The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the 
 
 For a non-NMOS RTSP Sender, the use of aggregate and/or individual controls and the URL path of such controls is out of the scope of this document. An RTSP Receiver adapts, as a best effort, to the non-NMOS RTSP Sender.
 
-The SDP transport file of an RTSP Sender using the `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` transports is only about how to access, through TCP, the RTSP server control endpoint of such Sender. The client uses the `DESCRIBE` method to obtain information about the media streams available and uses the `SETUP` method to select/configure stream/sub-streams transport parameters.
+The SDP transport file of an RTSP Sender using the `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` transports is only about how to access, through TCP, the RTSP server control endpoint of such Sender. The client uses the `DESCRIBE` method to obtain information about the media streams available and uses the `SETUP` method to select/configure stream/sub-streams transport parameters such as the use of multicast or unicast.
 
 ## Use of Normative Language
 
@@ -207,7 +207,9 @@ An RTSP Receiver SHOULD monitor and adapt to changes in the RTSP Stream/sub-Stre
 
 An RTSP Sender MAY, unless constrained by IS-11, produce any RTSP Stream/sub-Streams that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
-An RTSP Sender MUST assign multicast IP addresses and respond to a Stream/sub-Streams `SETUP` request with a multicast a IP address allocated by the Sender. An RTSP Sender MUST NOT allow a client to select a multicast IP address.
+An RTSP Sender MUST assign multicast IP addresses and respond to a Stream/sub-Streams `SETUP` request with a multicast IP address allocated by the Sender. An RTSP Sender MUST NOT allow a client to select a multicast IP address through the SETUP method. An RTSP Sender SHOULD NOT assign unicast IP addresses and respond to a Stream/sub-Streams `SETUP` request with a unicast IP address and port allocated by the client. An RTSP Sender SHOULD NOT prevent a client to select an unicast IP address and port through the SETUP method. An RTSP Sender MUST assign a transport protocol and respond to a Stream/sub-Streams `SETUP` request with transport protocol allocated by the Sender. An RTSP Sender MUST NOT allow a client to select a transport protocol through the SETUP method.
+
+> Note: A Controller through IS-11 can configure the transport protocol by applying a constraint on the mux Flow `media_type`.
 
 A non-NMOS RTSP Receiver MAY connect to an RTSP Sender. IS-05 is then used only on the Sender side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Receiver. Such RTSP Sender MUST behave as if an RTSP Receiver was connecting.
 
