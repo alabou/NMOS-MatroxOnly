@@ -205,7 +205,7 @@ Example: The `object` "/AlertManager" identifies Matrox MvAlertManager object wh
 
 Example: The `object` "/00000000-0300-4000-ab00-4d5458005058" identifies a Matrox NcReceiverMonitor object or a Matrox specific object deriving from the NcReceiverMonitor class. This object is part of the root block and have a role `00000000-0300-4000-ab00-4d5458005058`. 
 
-> Informative Note: Sender/Receiver GUID in the root block of Matrox devices identify NcSenderMonitor/NcReceiverMonitor objects or objects derived from those classes. These objects have been placed in the root block for ease of use. Other classes of objects identified by a GUID that are not monitors would be located in a specific block grouping all such objects.
+> Informative Note: Sender/Receiver GUID in the root block of Matrox devices identify NcSenderMonitor/NcReceiverMonitor objects or objects derived from those classes. These objects have been placed in the root block for ease of use. Other classes of objects identified by a GUID that are not monitors could be located in a specific block grouping all such objects or be located in the root block.
 
 ### Object method name
 The `method` attribute of a command MUST identify an object's method either with a class path made of class names separated by "::" and terminated by the method name or with the method name alone. In the later case it identifies the method of the most derived class.
