@@ -11,8 +11,8 @@ The NMOS Advanced Streaming Architecture extends and defines IP-based media stre
 ### Key objectives include:
 
 1. **Unprecedented Configurability**:
-   - Enable configuration through IS-11 of independent audio, video, data, and multiplexed (mux) streams, along with per-audio, per-video, and per-data sub-streams within multiplexed streams, allowing fine-grained control of individual media essences.
-   - Leverage streams and sub-streams, sender and receiver capabilities, to dynamically adapt stream parameters such as resolution, bitrate, and format to match receiver and infrastructure requirements in real time.
+   - Leverage the power of IS-11 to configure independent audio, video, data, and multiplexed (mux) streams, including fine-grained per-audio, per-video, and per-data sub-stream configuration within multiplexed streams. This enables precise control over individual media essences, perfectly tailored to suit complex workflows.
+   - Leverage stream and sub-stream capabilities on both the sender and receiver sides to dynamically adapt stream parameters such as resolution, bitrate, and format in real time. This ensures seamless compatibility with receiver requirements and infrastructure constraints.
 
 2. **Unified Management**:
    - Unify the handling of both independent and multiplexed streams, streamlining configuration and simplifying operation in complex systems.
