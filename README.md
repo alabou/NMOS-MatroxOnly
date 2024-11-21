@@ -15,7 +15,7 @@ The NMOS Advanced Streaming Architecture extends and defines IP-based media stre
    - Leverage stream and sub-stream capabilities on both the sender and receiver sides to dynamically adapt stream parameters such as resolution, bitrate, and format in real time. This ensures seamless compatibility with receiver requirements and infrastructure constraints.
 
 2. **Unified Management**:
-   - Unify the handling of both independent and multiplexed streams, streamlining configuration and simplifying operation in complex systems.
+   - Establish a unified, adaptable framework for managing independent and multiplexed streams under a single, extensible model, enabling consistent configuration, seamless interoperability, comprehensive configurability, and operational efficiency across diverse protocols, transport layers, media types, and system scales.
 
 3. **Comprehensive Protocol and Media Support**:
    - Provide extensive compatibility with industry-standard transport protocols, including RTP, SRT, NDI, RTSP, MPEG2-TS over UDP, USB, and IPMX.
