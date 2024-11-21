@@ -80,7 +80,7 @@
             "string",
             "null"
           ],
-          "description": "SRT Stream ID value.",
+          "description": "SRT Stream ID value."
       }
     },
     "patternProperties": {
