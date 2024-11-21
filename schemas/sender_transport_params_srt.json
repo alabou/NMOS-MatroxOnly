@@ -74,15 +74,15 @@
         "description": "SRT target latency in milliseconds. The value 0 indicate to automatically set the latency",
         "minimum": 0,
         "maximum": 1000
+      },
+      "stream_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "SRT Stream ID value.",
       }
     },
-    "stream_id": {
-        "type": [
-          "string",
-          "null"
-        ],
-        "description": "SRT Stream ID value.",
-    },    
     "patternProperties": {
       "^ext_[a-zA-Z0-9_]+$": {
         "$ref": "sender_transport_params_ext.json"
