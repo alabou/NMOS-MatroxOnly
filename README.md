@@ -19,11 +19,13 @@ The NMOS Advanced Streaming Architecture extends and defines IP-based media stre
 
 3. **Comprehensive Protocol and Media Support**:
    - Provide extensive compatibility with industry-standard transport protocols, including RTP, SRT, NDI, RTSP, MPEG2-TS over UDP, USB, and IPMX.
-   - Ensure support for a wide range of media formats, including compressed (JPEG-XS, H.264, H.265, AAC), uncompressed (raw video, PCM audio), and multiplexed (MPEG2-TS, NDI, RTSP, AES3, AM824) streams.
+   - Provide support for a wide range of media formats, including compressed (JPEG-XS, H.264, H.265, AAC), uncompressed (raw video, PCM audio), and multiplexed (MPEG2-TS, NDI, RTSP, AES3, AM824) streams.
 
 4. **Enhanced Security**:
-   - Integrate advanced security measures, including the IPMX Privacy Encryption Protocol (PEP) extended to non-IPMX flows, OAuth2.0-based authorization, and Node Reservation protocols.
-   - Provide advanced HDCP support for baseband HDMI and HDCP over IP workflows with the IPMX HDCP Key Exchange Protocol (HKEP).
+   - Integrate robust security protocols to protect content and workflows across all supported transports, including the integration of the IPMX Privacy Encryption Protocol (PEP) extended to secure non-IPMX flows.
+   - Strengthen access control with OAuth2.0-based authorizations, ensuring secure authentication and granular permission management for devices and workflows.
+   - Safeguard system resources with the Node Reservation protocol, mitigating conflicts and optimizing resource allocation in complex deployments.
+   - Enable comprehensive content protection with advanced HDCP support, covering both baseband HDMI and HDCP-over-IP workflows via the IPMX HDCP Key Exchange Protocol (HKEP), ensuring compatibility with protected media workflows.
 
 ---
 
