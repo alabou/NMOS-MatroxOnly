@@ -26,8 +26,6 @@ This specification also defines a new `version` attribute to indicate when chang
 
 The `constraints_set` and `version` attributes are listed in the Capabilities parameter register in the [NMOS Parameter Registers][].
 
-In the following text the `constraints_set` and `version` attributes will be referred to as `constraints_set` and `version` respectively.
-
 ## Use of Normative Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
