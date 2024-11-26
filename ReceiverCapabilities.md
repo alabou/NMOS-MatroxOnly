@@ -236,7 +236,7 @@ However, this specification may not be sufficiently expressive to indicate every
 
 A Receiver SHOULD not consume a stream or sub-Stream that is incompatible with the advertised Receiver Capabilities.
 
-The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][]and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
+The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
 The Receiver MUST reflect any change in its capabilities by updating the `caps` object as appropriate and modifying the [`version` attribute](#capabilities-version) of that object as well as the core resource `version`.
 
