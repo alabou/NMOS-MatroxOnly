@@ -14,19 +14,19 @@ In [IS-04][], a Sender resource expresses the capabilities of a Sender through a
 
 The Sender `caps` object is provided as an extensible mechanism to define fine-grained capabilities.
 
-This specification defines a `urn:x-matrox:constraint_sets` attribute for the Sender `caps` object, its value is an array of alternatives; this constraint is satisfied when **any of** its enumerated Constraint Sets are satisfied.
+This specification defines a new `constraint_sets` attribute for the Sender `caps` object, its value is an array of alternatives; this constraint is satisfied when **any of** its enumerated Constraint Sets are satisfied.
 
-When evaluating constraints for sub-Flows/sub-Streams, only the Constraint Sets alternatives of matching `format` and `urn:x-matrox:layer` are to be considered. The remaining Constraints Sets of the `urn:x-matrox:constraint_sets` are ignored.
+When evaluating constraints for sub-Flows/sub-Streams, only the Constraint Sets alternatives of matching `format` and `urn:x-matrox:layer` are to be considered. The remaining Constraints Sets of the `constraint_sets` are ignored.
 
 This specification defines a generic JSON syntax to express Constraint Sets made up of individual Parameter Constraints. The Constraint Set is satisfied if **all of** its Parameter Constraints are satisfied.
 
 The representation of individual Parameter Constraints resembles the mechanism defined by [IS-05][] to constrain Sender and Receiver transport parameters at the **/constraints** endpoints, which Nodes and Controllers may also support.
 
-This specification also defines a `urn:x-matrox:version` attribute to indicate when changes to the `caps` object took place.
+This specification also defines a new `version` attribute to indicate when changes to the `caps` object took place.
 
-The `urn:x-matrox:constraints_set` and `urn:x-matrox:version` attributes are listed in the Capabilities parameter register in the [NMOS Parameter Registers][].
+The `constraints_set` and `version` attributes are listed in the Capabilities parameter register in the [NMOS Parameter Registers][].
 
-In the following text the `urn:x-matrox:constraints_set` and `urn:x-matrox:version` attributes will be referred to as `constraints_set` and `version` respectively.
+In the following text the `constraints_set` and `version` attributes will be referred to as `constraints_set` and `version` respectively.
 
 ## Use of Normative Language
 
@@ -192,7 +192,7 @@ A mux Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute mat
 
 A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute matching or subseting the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer_compatibility_groups` meta attribute. A mux Flow or sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. The intersection of the `urn:x-matrox:layer_compatibility_groups` attribute of a mux Flow and all the sub-Flows associated with the mux Flow MUST not be empty.
 
-Informative Note: The value of an `urn:x-matrox:layer_compatibility_groups` attribute of a mux Flow ror sub-Flow result from the application of IS-11 active contraints or dynamic mux Flow or sub-Flow reconfiguration.
+Informative Note: The value of an `urn:x-matrox:layer_compatibility_groups` attribute of a mux Flow or sub-Flow result from the application of IS-11 active contraints or dynamic mux Flow or sub-Flow reconfiguration.
 
 A sub-Stream/sub-Flow Constraint Set MUST NOT use transport Receiver/Sender Capabilities. Such Capabilities use the `urn:x-nmos:cap:transport:` or `urn:x-matrox:cap:transport:` prefix and apply only to a Stream/Flow.
 
