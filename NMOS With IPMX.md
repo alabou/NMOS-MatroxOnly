@@ -55,6 +55,8 @@ When media stream attributes associated with a Sender change, a Controller MAY l
 
 A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to indicate the media info block types that it generates. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender. It is not allowed to constrain a Sender for such capability as info block are a required feature of IPMX.
 
+> Note: VSF_TR-10-0 "Media Info block Type" section presents the various IPMX info block types.
+
 ## HKEP
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:hkep` capability to indicate its support for IPMX Senders HDCP encryption and the HKEP protocol. The capability value `true` indicates the support of HDCP encryption and the HKEP protocol. The capability value `false` indicates that HDCP encryption and the HKEP protocol are not supported.
