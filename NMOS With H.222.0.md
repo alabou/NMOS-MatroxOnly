@@ -195,7 +195,7 @@ Note: This requirement aligns with the [VSF_TR-07][] and [VSF_TR-01][], which ma
 
 ### [VSF_TR-07][] compatibility
 
-An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a JPEG-XS video stream (video/JXSV, VIDEO 0) along with up to 4 audio streams (SMPTE ST 302M embedding, audio/AM824, AUDIO 0-3) and one ancillary data stream (SMPTE ST 2038 embedding, video/smpte291, DATA 0).
+An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a JPEG-XS video stream (video/JXSV, VIDEO 0) along with 0 to 4 audio streams (SMPTE ST 302M embedding, audio/AM824, AUDIO 0-3) and 0 to 1 ancillary data stream (SMPTE ST 2038 embedding, video/smpte291, DATA 0).
 
 ## H.222.0 IS-11 Senders and Receivers
 
