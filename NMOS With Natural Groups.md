@@ -31,9 +31,10 @@ A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:
 
 ## Group Hint
 
-The "urn:x-nmos:tag:grouphint/v1.0" tag array MUST comprise a single string formatted as follow:
+The "urn:x-nmos:tag:grouphint/v1.0" tag array MUST comprise a single string formatted as one of the following options:
 
 `"<group-name> <group-index>:<role-in-group> <role-index>"`
+`"<group-name> <group-index>:<role-in-group>"`
 
 The `<group-name>`, `<group-index>`, `<role-in-group>`, `<role-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<group-name>` MUST be a sequence of the letters [a-zA-Z]. The `<group-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<group-name>` and `<group-index>` sequences MUST be separated by a single space. The `<role-in-group>` MUST be a sequence of the letters [a-zA-Z]. The `<role-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<role-in-group>` and `<role-index>` sequences MUST be separated by a single space. The `<group-index>` and `<role-in-group>` MUST be separated by a colon ':'.
 
@@ -47,11 +48,11 @@ For the base transports `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:mqtt`,
 
 ## Format
 
-A `<role-in-group>` is associated with the format of a Sender or Receiver. For the formats `urn:x-nmos:format:video`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:data` and `urn:x-nmos:format:mux` the `<role-in-group>` MUST be "VIDEO", "AUDIO", "DATA" and "MUX" respectively.
+A `<role-in-group>` is associated with the format of a Sender or Receiver. For the formats `urn:x-nmos:format:video`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:data`, and `urn:x-nmos:format:mux`, the `<role-in-group>` MUST be "VIDEO", "AUDIO", "DATA", and "MUX" respectively. Alternatively, "ANC" MAY be used instead of "DATA" when the data is ancillary data. Any variation in capitalization is permitted, as `<role-in-group>` MUST always be compared using a case-insensitive comparison.
 
 ## Layer
 
-The `<role-index>` is associated with the concept of "layer" of sub-Flows/sub-Streams. For independent Senders/Receivers it describes an ordering of the independent Senders/Receivers for a given role/format. The `<role-index>` MUST start at 0 and increment for each succesive layer of the same format. The `<role-index>` values MUST be consecutive integer values starting at 0.
+The `<role-index>` is associated with the concept of "layer" of sub-Flows/sub-Streams. For independent Senders/Receivers it describes an ordering of the independent Senders/Receivers for a given role/format. The `<role-index>` MUST start at 0 and increment for each succesive layer of the same format. The `<role-index>` values MUST be consecutive integer values starting at 0. When `<role-index>` is not present it MUST be assumed as being 0.
 
 ## Senders
 
