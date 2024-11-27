@@ -33,7 +33,7 @@ A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:
 
 The "urn:x-nmos:tag:grouphint/v1.0" tag array MUST comprise a single string formatted as one of the following options:
 
-`"<group-name> <group-index>:<role-in-group> <role-index>"`
+`"<group-name> <group-index>:<role-in-group> <role-index>"`  
 `"<group-name> <group-index>:<role-in-group>"`
 
 The `<group-name>`, `<group-index>`, `<role-in-group>`, `<role-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<group-name>` MUST be a sequence of the letters [a-zA-Z]. The `<group-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<group-name>` and `<group-index>` sequences MUST be separated by a single space. The `<role-in-group>` MUST be a sequence of the letters [a-zA-Z]. The `<role-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<role-in-group>` and `<role-index>` sequences MUST be separated by a single space. The `<group-index>` and `<role-in-group>` MUST be separated by a colon ':'.
