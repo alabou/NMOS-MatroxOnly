@@ -37,12 +37,6 @@ Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting USB da
 
 A USB Source resource MUST indicate `urn:x-nmos:format:data` for the `format` attribute and it MUST be associated with a Flow of the same `format` through the `source_id` attribute of the Flow. 
 
-Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
-
-### Flows
-
-A USB Flow resource MUST indicate `application/usb` in the `media_type` attribute and `urn:x-nmos:format:data` for the `format` attribute. A USB Flow MUST have a `source_id` attribute referencing a Source of the same `format`.
-
 Let define a `usb_device` object as
 ```
 {
@@ -53,15 +47,19 @@ Let define a `usb_device` object as
     "serial": string,           // serial number
 }
 ```
-A USB Flow MAY have an optional attribute `usb_devices` of type, array of `usb_device` objects, describing the USB devices that are accessible to a Receiver through the USB `data` stream. This information is optional. The information contained in usb_devices, such as serial numbers and vendor/product IDs, can be sensitive. Security policies MAY classify this data as confidential to prevent potential exploitation or misuse. As a result, such policies MAY disallow the publication of USB device information in Flow descriptions to protect privacy and network integrity. Under other security policies, the `usb_devices` information MAY enhance an organization's security by enabling the tracing of USB devices connected to the network. The availability of such information SHOULD be established based on the security policies of the organization where the devices are deployed.
+A USB Source MAY include an optional `usb_devices` attribute, which is an array of `usb_device` objects. This attribute describes the USB devices accessible to a Receiver via the USB data stream. The inclusion of this information is optional.
 
-A USB Flow MAY include an optional attribute, `usb_devices`, which is an array of `usb_device` objects describing the USB devices accessible to a Receiver through the USB data stream. This attribute is optional.
+The information in `usb_devices`, such as serial numbers and vendor/product IDs, could be sensitive. Security policies MAY classify this data as confidential to mitigate potential exploitation or misuse. Consequently, such policies MAY prohibit the publication of USB device information in a USB Source to preserve privacy and network integrity.
 
-The information contained in `usb_devices`, such as serial numbers and vendor/product IDs, can be sensitive. Security policies MAY classify this data as confidential to prevent potential misuse or exploitation. Consequently, such policies MAY restrict the publication of USB device information in Flow descriptions to protect privacy.
+Conversely, under alternative security policies, `usb_devices` information could enhance organizational security by enabling tracing and monitoring of USB devices on the network. This data supports device tracking, user accountability, and anomaly detection.
 
-Conversely, under different security policies, `usb_devices` information MAY be used to enhance an organization’s security by enabling the tracing and monitoring of USB devices connected to the network. This data can support device tracking, user accountability, and anomaly detection.
+The decision to include or exclude the `usb_devices` attribute SHOULD be guided by the organization’s security policies, striking a balance between security benefits and privacy/data protection considerations.
 
-The decision to include or exclude usb_devices information SHOULD be guided by the security policies of the organization where the devices are deployed, balancing security benefits with privacy and data protection considerations.
+Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
+
+### Flows
+
+A USB Flow resource MUST indicate `application/usb` in the `media_type` attribute and `urn:x-nmos:format:data` for the `format` attribute. A USB Flow MUST have a `source_id` attribute referencing a Source of the same `format`.
 
 Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
