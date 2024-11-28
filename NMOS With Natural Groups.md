@@ -57,11 +57,11 @@ The `<role-index>` is associated with the concept of "layer" of sub-Flows/sub-St
 
 ## Senders
 
-The `<group-index>` value for a Sender "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Senders within a Device. The groups of Senders SHOULD be considered independent of the groups of Receivers within a Device. Identical `<group-name> <group-index>` groups for Senders and Receivers have no special meaning and are allowed.
+The `<group-name> <group-index>` value for a Sender "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Senders within a Device. The groups of Senders SHOULD be considered independent of the groups of Receivers within a Device. Identical `<group-name> <group-index>` groups for Senders and Receivers have no special meaning and are allowed.
 
 ## Receivers
 
-The `<group-index>` value for a Receiver "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Receivers within a Device. The groups of Receivers SHOULD be considered independent of the groups of Senders within a Device. Identical `<group-name> <group-index>` groups for Senders and Receivers have no special meaning and are allowed.
+The `<group-name> <group-index>` value for a Receiver "urn:x-nmos:tag:grouphint/v1.0" tag MUST be unique among the various groups of Receivers within a Device. The groups of Receivers SHOULD be considered independent of the groups of Senders within a Device. Identical `<group-name> <group-index>` groups for Senders and Receivers have no special meaning and are allowed.
 
 ## Controllers
 
