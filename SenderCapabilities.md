@@ -1,22 +1,10 @@
-# AMWA BCP-004-01s: Matrox NMOS Sender Capabilities
-  
-Copyright 2023, Matrox Graphics Inc.
+# AMWA BCP-004-02: NMOS Sender Capabilities
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-  
----
-  
-In [IS-04][], a Sender resource expresses the capabilities of a Sender through attributes that identify constraints on streams and sub-Streams that are compatible with the Sender. Such Sender can be constrained to operate at an operating point within the Sender Capabilities using the [IS-11][] API.
+In [IS-04][], a Sender resource expresses the capabilities of a Sender through attributes that identify constraints on streams that are compatible with the Sender. Such Sender can be constrained to operate at an operating point within the Sender Capabilities using the [IS-11][] API.
 
 The Sender `caps` object is provided as an extensible mechanism to define fine-grained capabilities.
 
 This specification defines a new `constraint_sets` attribute for the Sender `caps` object, its value is an array of alternatives; this constraint is satisfied when **any of** its enumerated Constraint Sets are satisfied.
-
-When evaluating constraints for sub-Flows/sub-Streams, only the Constraint Sets alternatives of matching `format` and `urn:x-matrox:layer` are to be considered. The remaining Constraints Sets of the `constraint_sets` are ignored.
 
 This specification defines a generic JSON syntax to express Constraint Sets made up of individual Parameter Constraints. The Constraint Set is satisfied if **all of** its Parameter Constraints are satisfied.
 
@@ -168,39 +156,11 @@ A Controller MUST NOT take into consideration a Constraint Set that has this att
 
 If a Constraint Set is enabled or the Sender does not support offline capabilities then this attribute MAY be omitted.
 
-#### Constraint Set Format, Layer and Layer Compatibility Groups
-
-A sub-Flow is defined as a member of a multiplexed flow produced by a Flow of format `urn:x-nmos:format:mux`. A sub-Flow MUST be a member of the `parents` attribute of a mux Flow.
-
-A sub-Stream is defined as a member of a multiplexed stream consumed by a Receiver of format `urn:x-nmos:format:mux`.
-
-The metadata attribute `urn:x-matrox:cap:meta:format` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, applies to a specific format. The format MAY be one of `urn:x-nmos:format:video`, `urn:x-nmos:format:audio` or `urn:x-nmos:format:data`.
-
-The metadata attribute `urn:x-matrox:cap:meta:layer` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, applies to a specific layer of a given format. The layer must be an unsigned integer in the range 0 to N-1 where N the total number of layers of a given format.
-
-The metadata `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` attributes MUST be used to filter the Constraint Sets for a target sub-Flow/sub-Stream or a target mux Flow/Stream.
-
-A sub-Flow MUST have a `urn:x-matrox:layer` attribute matching the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer` meta attribute. The sub-Flow `format` attribute MUST match the associated Sender Constraint Set `urn:x-matrox:cap:meta:format` meta attribute.
-
-A Source associated with a Receiver sub-Stream MUST have a `urn:x-matrox:layer` attribute matching the associated Receiver Constraint Set `urn:x-matrox:cap:meta:layer` meta attribute. The Source `format` attribute MUST match the associated Receiver Constraint Set `urn:x-matrox:cap:meta:format` meta attribute.
-
-The metadata attribute `urn:x-matrox:cap:meta:layer_compatibility_groups` MAY be used on a mux Flow/Stream or sub-Flow/sub-Stream to indicate that a Constraint Set applies to a number of layer compatibility groups. The layer compatibility groups must be an array of unsigned integer in the range 0 to 63. A Constraint Set MAY apply to multiple compatibility groups. A Constraint Set without a `urn:x-matrox:cap:meta:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. Only Constraint Sets that are members of a common group are compatibles. A Controller SHOULD process Constraint Sets according to their compatibility group.
-
-A mux Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute matching or subseting the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer_compatibility_groups` meta attribute. A mux Flow or sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. The intersection of the `urn:x-matrox:layer_compatibility_groups` attribute of a mux Flow and all the sub-Flows associated with the mux Flow MUST not be empty.
-
-A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute matching or subseting the associated Sender Constraint Set `urn:x-matrox:cap:meta:layer_compatibility_groups` meta attribute. A mux Flow or sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. The intersection of the `urn:x-matrox:layer_compatibility_groups` attribute of a mux Flow and all the sub-Flows associated with the mux Flow MUST not be empty.
-
-Informative Note: The value of an `urn:x-matrox:layer_compatibility_groups` attribute of a mux Flow or sub-Flow result from the application of IS-11 active contraints or dynamic mux Flow or sub-Flow reconfiguration.
-
-A sub-Stream/sub-Flow Constraint Set MUST NOT use transport Receiver/Sender Capabilities. Such Capabilities use the `urn:x-nmos:cap:transport:` or `urn:x-matrox:cap:transport:` prefix and apply only to a Stream/Flow.
-
 ### Listing Constraint Sets
 
 The Sender advertises a list of Constraint Sets as a JSON array of these objects, using the key `constraint_sets` in the `caps` object.
 
-The `constraint_sets` as a whole is satisfied if **any of** the listed Constraint Sets of matching `format` and `urn:x-matrox:layer` are satisfied. For the purpose of filtering the list of Constraint Sets, the absence of the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes provides the list of Constraint Sets that are not associated with sub-Flows/sub-Streams. The evaluation of the `constraint_sets` targets a Flow/Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data`, `urn:x-nmos:format:mux` in which the Constraint Sets do not have the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes, or the evaluation of the `constraint_sets` targets a sub-Flow/sub-Stream of one of the formats `urn:x-nmos:format:audio`, `urn:x-nmos:format:video`, `urn:x-nmos:format:data` in which the Constraint Sets have the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes.
-
-When the list is empty, or none of the Constraint Sets are satisfied, the `constraint_sets` as a whole is thus not satisfied.
+The `constraint_sets` as a whole is satisfied if **any of** the listed Constraint Sets are satisfied. When the list is empty, or none of the Constraint Sets are satisfied, the `constraint_sets` as a whole is thus not satisfied.
 
 Several worked examples are provided in the [Examples](Examples.md) section.
 
@@ -222,10 +182,9 @@ This specification therefore defines a `version` attribute for the `caps` object
 
 In order to use the finer-grained constraints mechanism defined by this specification, Senders MUST include both the `constraint_sets` and `version` attributes in the `caps` object.
 
-Senders SHOULD express their capabilities as precisely as possible, using the relevant Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
-However, this specification may not be sufficiently expressive to indicate every type of stream or sub-Stream that a Sender can or cannot produce successfully. It is entirely possible that a Sender may fail to produce a stream or sub-Stream even if the Sender's advertised Constraint Sets indicate that it can.
+Senders SHOULD express their capabilities as precisely as possible, using the relevant Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][]. However, this specification may not be sufficiently expressive to indicate every type of stream that a Sender can or cannot produce successfully. It is entirely possible that a Sender may fail to produce a stream even if the Sender's advertised Constraint Sets indicate that it can.
 
-A Sender MUST not produce a stream or sub-Stream that is incompatible with the advertised Sender Capabilities.
+A Sender MUST not produce a stream that is incompatible with the advertised Sender Capabilities.
 
 The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
@@ -255,22 +214,4 @@ Controllers MAY use the `version` attribute of the `caps` object to avoid unnece
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs to Indicate Requirement Levels"
 
 [SDP]: https://tools.ietf.org/html/rfc4566 "SDP: Session Description Protocol"
-
-  ---
-  
-  ***This document modifies the original document BCP-004-01 from AMWA.***
-  
-   Copyright 2021 AMWA
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-   
+ 
