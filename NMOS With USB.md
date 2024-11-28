@@ -47,13 +47,13 @@ Let define a `usb_device` object as
     "serial": string,           // serial number
 }
 ```
-A USB Source MAY include an optional `usb_devices` attribute, which is an array of `usb_device` objects. This attribute describes the USB devices accessible to a Receiver via the USB data stream. The inclusion of this information is optional.
+A USB Source MAY include an optional `urn:x-matrox:usb_devices` attribute, which is an array of `usb_device` objects. This attribute describes the USB devices accessible to a Receiver via the USB data stream. The inclusion of this information is optional.
 
-The information in `usb_devices`, such as serial numbers and vendor/product IDs, could be sensitive. Security policies MAY classify this data as confidential to mitigate potential exploitation or misuse. Consequently, such policies MAY prohibit the publication of USB device information in a USB Source to preserve privacy and network integrity.
+The information in `urn:x-matrox:usb_devices`, such as serial numbers and vendor/product IDs, could be sensitive. Security policies MAY classify this data as confidential to mitigate potential exploitation or misuse. Consequently, such policies MAY prohibit the publication of USB device information in a USB Source to preserve privacy and network integrity.
 
-Conversely, under alternative security policies, `usb_devices` information could enhance organizational security by enabling tracing and monitoring of USB devices on the network. This data supports device tracking, user accountability, and anomaly detection.
+Conversely, under alternative security policies, `urn:x-matrox:usb_devices` information could enhance organizational security by enabling tracing and monitoring of USB devices on the network. This data supports device tracking, user accountability, and anomaly detection.
 
-The decision to include or exclude the `usb_devices` attribute SHOULD be guided by the organization’s security policies, striking a balance between security benefits and privacy/data protection considerations.
+The decision to include or exclude the `urn:x-matrox:usb_devices` attribute SHOULD be guided by the organization’s security policies, striking a balance between security benefits and privacy/data protection considerations.
 
 Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
