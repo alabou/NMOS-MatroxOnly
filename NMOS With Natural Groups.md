@@ -30,6 +30,7 @@ A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nm
 A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of a MPEG2-TS Stream consumed by a Receiver.
 
 ## Group Hint
+Senders and Receivers MUST declare a "urn:x-nmos:tag:grouphint/v1.0" tag in their `tags` attribute.
 
 The "urn:x-nmos:tag:grouphint/v1.0" tag array MUST comprise a single string formatted as one of the following options:
 
