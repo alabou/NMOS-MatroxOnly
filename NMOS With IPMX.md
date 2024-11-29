@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This document presents the various aspects of using IPMX compliant Senders and Receivers in an NMOS environment and complements the IPMX technical recommendations, most specifically the [TR-10-8][] (NMOS Requirements), [TR-10-5][] (HDCP Key Exchange Protocol - HKEP), [TR-10-13][] (Privacy Encryption Protocol - PEP), [TR-10-1][] (System Timing and Definitions) technical recommendations. Some of the aspects presented in this document are not specific to IPMX compliant devices and apply to the larger family of ST 2110 compliant devices.
+This document presents the various aspects of using IPMX compliant Senders and Receivers in an NMOS environment and complements the IPMX technical recommendations, most specifically the [TR-10-8][] (NMOS Requirements), [TR-10-5][] (HDCP Key Exchange Protocol - HKEP), [TR-10-13][] (Privacy Encryption Protocol - PEP), [TR-10-1][] (System Timing and Definitions) technical recommendations. Some of the aspects presented in this document are not specific to IPMX compliant devices and apply to the larger family of SMPTE ST 2110 compliant devices.
 
 ## Use of Normative Language
 
@@ -30,6 +30,8 @@ A Controller MUST verify the compliance of Receivers with an active Sender using
 A Sender MAY provide a `urn:x-nmos:cap:transport:clock_ref_type` capability to indicate the reference clocks that it supports. A Controller MAY use Sender capabilities, if supported, to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-nmos:cap:transport:clock_ref_type` capability in its [IS-11][] `constraints/supported` endpoint.
 
 The application of a constraint using IS-11 on a Sender's `urn:x-nmos:cap:transport:clock_ref_type` capability, if allowed, MUST NOT change the value of the `clocks` attribute of the associated Node.
+
+> Note: An IPMX unconstrained Sender follows the [TR-10-1][] technical recommendation and uses a `ptp` common reference clock if one is available, otherwise it falls back to using an `internal` reference clock. A non-IPMX unconstrained Sender in a ST 2110 environment follows the SMPTE ST 2110-10 specification and usually uses a `ptp` common reference clock.
 
 ## Asynchronous/Synchronous Media
 

@@ -108,7 +108,7 @@ A Controller MAY connect a USB Receiver not supporting redundancy to either leg 
 
 If the IS-04 Sender `manifest_href` attribute is not `null`, the SDP transport file at the **/transportfile** endpoint MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-A Sender MAY, unless constrained by [IS-11][], produce any USB stream that is compliant with the associated Flow.
+A Sender MAY, unless constrained by [IS-11][], produce any USB stream that is compliant with the associated [TR-10-14][] Flow.
 
 ## Controllers
 
