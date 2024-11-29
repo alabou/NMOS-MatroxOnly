@@ -65,6 +65,8 @@ The operation fail with a status `BadRequest` if the posted JSON is invalid. The
 
 The client receiving a `Locked` status MUST use an exponential back-off mechanism when retrying to obtain an exclusive session. Such a mechanism MUST consider the lifetime of 60 minutes and alivetime of 60 seconds of an exclusive session.
 
+An Implementation of the Node Reservation API MAY return a HTTP `Link` response header along with a `Locked` status to provide a mean of contacting the owner of the exclusive session through some unspecified protocol. The `Link` header MUST be `Link: <https://owner>` with the `owner` string corresponding to the percent-encoded `owner` string provided to `Acquire` by the owner of the exclusive session. In the absence of a `Link` response header the identity / information about the `owner` of the exclusive session is confidential.
+
 ```
 POST /x-manufacturer/exclusive/acquire
 
@@ -132,7 +134,7 @@ Unless there is no currently active session or stated otherwise, a client MUST u
 
 An `Unauthorized` status is returned if a) the session associated with a bearer token is expired or b) if a bearer token is not used and there is an alive session, and the verb is one of PUT, POST, PATCH, DELETE and the operation may change the state of the Node.
 
-Nodes reservation SHOULD be used in environments where multiple Controllers and/or entities compete for using the Nodes. The Node's exclusivity extend to the exclusive privacy of the streaming. Knowlege of the PEP Pre-Shared Key (PSK) and all the related parameters is not enough for accessing the content. The session exclusive key used in the privacy key derivation process ensures that only the owner of the exclusive session can access the content, providing further privacy in 1-to-N scenarios (note: peer-to-peer ECDH provides a similar exclusivity in a 1-to-1 scenario).
+Nodes reservation SHOULD be used in environments where multiple Controllers and/or entities compete for using the Nodes. The Node's exclusivity extend to the exclusive privacy of the streaming. Knowlege of the PEP Pre-Shared Key (PSK) and all the related parameters is not enough for accessing the content. The session exclusive key used in the privacy key derivation process ensures that only the owner of the exclusive session having knowledge of the session exclusive key can access the content, providing further privacy in 1-to-N scenarios (note: peer-to-peer ECDH provides a similar exclusivity in a 1-to-1 scenario).
 
 ## Verifying Ownership
 
