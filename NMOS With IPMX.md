@@ -77,7 +77,7 @@ Refer to the Privacy section "RTP Payload Header" for the detailed definition of
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:privacy` capability to indicate its support for IPMX Senders privacy encryption and the PEP protocol. The capability value `true` indicates the support of privacy encryption and the PEP protocol. The capability value `false` indicates that privacy encryption and the PEP protocol are not supported.
 
-A Receiver MAY support either or both true and false values.
+A Receiver MAY support either true or false values.
 
 A Controller MUST verify the compliance of the Receiver with a Sender using privacy encryption from the SDP transport file `privacy` attribute. The presence of such attribute in an SDP transport file indicate that the stream is privacy protected. Only Receivers supporting privacy encryption and the PEP protocol can consume such streams. The fine grained Receiver privacy capabilities are provided as part of the associated Receiver's transport parameters constraints.
 
