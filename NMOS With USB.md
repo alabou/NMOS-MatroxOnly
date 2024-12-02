@@ -14,16 +14,17 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-The VSF/IPMX [TR-10-14][] technical recommendation defines the transport of USB multiplexed streams over TCP/IP. It allows the transport of multiplexed keyboard, mouse, data, audio and video sub-streams over TCP/IP. Senders and Receivers using the USB transport have their `format` attribute set to `urn:x-nmos:format:data` and their `transport` attribute set to  `urn:x-matrox:transport:usb`. The `media_type` attribute of an USB Receiver is `application/usb`. The `media_type` of a data Flow connected with an USB Sender is `application/usb`.
+The VSF/IPMX [TR-10-14][] technical recommendation defines the transport of a USB stream over TCP/IP. It allows the transport of multiplexed keyboard, mouse, data, audio and video sub-streams over TCP/IP. Senders and Receivers using the USB transport have their `format` attribute set to `urn:x-nmos:format:data` and their `transport` attribute set to  `urn:x-nmos:transport:usb`. The `media_type` attribute of a USB Receiver is `application/usb`. The `media_type` of a data Flow connected with an USB Sender is `application/usb`.
 
-The content of a USB stream is not exposed at the NMOS level and as such a USB stream is not exposed as a multiplexed stream but as an opaque data stream. A USB Receiver connecting to a USB Sender is granted access to the various USB devices accessible at the Sender. For each device there is a corresponding multiplexed data sub-stream. Such devices may be plugged and unplugged dynamically without impacting the connection of a Receiver to the Sender, without impacting the associated Source, Flow and Sender resources unless the Source imnplements the `urn:x-matrox:usb_devices` attribute, in which case the list of devices gets updated.
+The content of a USB stream is not exposed at the NMOS level and is exposed as an opaque data stream. A USB Receiver connecting to a USB Sender is granted access to the various USB devices accessible at the Sender. For each device there is a corresponding multiplexed data sub-stream. Such devices may be plugged and unplugged dynamically without impacting the connection of a Receiver to the Sender, without impacting the associated Source, Flow and Sender resources.
 
-Using USB Senders and Receivers may be counter intuitive at first because of the location of such Senders and Receivers in actual devices. For example, let consider a KVM device facing a User, connected to a remote computer through the network. The remote computer provides video and audio signals and as such the audio and video Senders reside on the remote computer side. The KVM device provides keyboard, mouse and storage devices and as such the USB Sender resides on the KVM device side. The USB Receiver resides on the remote computer side. In this example the KVM side would have audio and video Receivers for the displays and speakers connected to the KVM device.
+Using USB Senders and Receivers may be counter intuitive at first because of the location of such Senders and Receivers in the actual devices. For example, let consider a KVM device facing a User, connected to a remote computer through the network. The remote computer provides video and audio signals and as such the audio and video Senders reside on the remote computer side. The audio and video Receivers reside on the KVM device side. The KVM device provides keyboard, mouse and storage devices and as such the USB Sender resides on the KVM device side. The USB Receiver resides on the remote computer side.
+
+KVM systems are typically sensitive to security and privacy concerns. The [TR-10-14][] technical recommendation defines a protocol with built-in privacy encryption. Because USB streams are unlikely to be used without privacy encryption, the authors of the [TR-10-14][] technical recommendation chose to retain the privacy encryption components of the protocol, even when encryption is not enabled. For more details on privacy-encrypted USB streams, refer to the NMOS With Privacy Encryption document.
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -73,10 +74,7 @@ The Sender MUST express its limitations or preferences regarding the USB streams
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences for a USB Stream:
-
-[usb_class](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class)
-Indicate the USB classes (array of integers in the 0 to 255 range) supported by the USB transport. See www.usb.org for class codes definitions.
+A Sender SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (array of integers in the range 0 to 255) that are supported by the Sender. See [USB][https://www.usb.org] for class codes definitions.
 
 A USB Sender is a TCP/IP server. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-patsh TCP) scheme for redundancy.
 
@@ -92,7 +90,7 @@ The `manifest_href` attribute of the Sender MUST provide the URL to an SDP trans
 
 - The attribute `a=setup:passive` MUST be specifified.
 
-- If redundancy is used at most two paths MUST be specified using two media descriptors. The <connection-address> of each media descriptor specify a different path for reaching the TCP server of the Sender. A `a=group:DUP` session attribute MUST specify the two media paths identified using the `a=mid:` media attribute. The first identifier of the `a=group:DUP` session attribute MUST specify the first leg (path) and the other identifier the second leg. The first leg corresponds to entry 0 of the IS-05 transport parameters array while the second leg corresponds to entry 1.
+- If redundancy is used at most two paths (legs) MUST be specified using two media descriptors. The <connection-address> of each media descriptor specify a different path for reaching the TCP server of the Sender. A `a=group:DUP` session attribute MUST specify the two media paths identified using the `a=mid:` media attribute. The first identifier of the `a=group:DUP` session attribute MUST specify the first leg (path) and the other identifier the second leg. The first leg corresponds to entry 0 of the IS-05 transport parameters array while the second leg corresponds to entry 1.
 
 ## USB IS-04 Receivers
 
@@ -106,41 +104,40 @@ The Receiver MUST express its limitations or preferences regarding the USB strea
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences for a USB Stream:
-
-[usb_class](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class)
-Indicate the USB classes (array of integers in the 0 to 255 range) supported by the USB transport. See www.usb.org for class codes definitions.
+A USB Receiver SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (array of integers in the range 0 to 255) supported by the USB Receiver. See [USB][https://www.usb.org] for class codes definitions.
 
 A USB Receiver is a TCP/IP client. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-patsh TCP) scheme for redundancy.
 
 An example Receiver resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Grouping of Receivers
-In some scenarios a group of Receivers control the USB sub-system of a Device. 
+In some scenarios a group of USB Receivers control the USB sub-system of a Device. 
 
-The grouping scheme described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md) MUST be used. All those Receivers MUST be in the same `<group-name> <group-index>` group and each MUST use a different `<role-index>` in the `DATA` role.
+The grouping scheme described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md) MUST be used. All those USB Receivers MUST be in the same `<group-name> <group-index>` group and each MUST use a different `<role-index>` in the `DATA` role.
 
-With this grouping convention a Controller can identify the number of Senders that can simultaneously control the USB sub-system of a Device. 
+With this grouping convention a Controller can identify the number of USB Senders that can simultaneously control the USB sub-system of a Device. 
 
 ## USB IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the USB specific transport parameters defined in [USB Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_usb.json) and [USB Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_usb.json).
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the USB specific transport parameters defined in [USB Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_usb.json) and [USB Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_usb.json). The `source_ip` and `source_port` transport parameters MUST be present in the IS-05 active, staged and constraints endpoints of a USB Sender. The `source_ip`, `source_port` and `interface_ip` transport parameters MUST be present in the IS-05 active, staged and constraints endpoints of a USB Receiver.
 
 Redundancy MUST be implemented using MPTCP. At most two sets of transport parameters MUST be specified for Senders and Receivers supporting redundancy with the `urn:x-nmos:transport:usb` transport. The transport parameters of the first leg are provided as entry 0 of the transport parameters array while those of the second leg are provided as entry 1.
+
+For security reasons, USB streams are usually encrypted using the IPMX [TR-10-5][] Privacy Encryption Protocol and additional `ext_privacy` extended transport parameters are present at the IS-05 active, staged and constraints endpoints of USB Senders and USB Receivers. See "NMOS With Privacy Encryption" for more details.
 
 ### Receivers
 
 A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a USB stream is expected to comply with IPMX [TR-10-14][]. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the USB Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
-A Controller MAY connect a Receiver not supporting redundancy to either leg of a Sender supporting redundancy. A Controller MUST set the `source_ip` and `source_port` attributes of the second leg of a Receiver supporting redundancy to `null` when connecting to a Sender not supporting redundancy.
+A Controller MAY connect a USB Receiver not supporting redundancy to either leg of a Sender supporting redundancy. A Controller MUST set the `source_ip` and `source_port` attributes of the unused leg of a Receiver supporting redundancy to `null` when connecting to a Sender not supporting redundancy.
 
 ### Senders
 
 If the IS-04 Sender `manifest_href` attribute is not `null`, the SDP transport file at the **/transportfile** endpoint MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-A Sender MAY, unless constrained by IS-11, produce any USB stream that is compliant with the associated Flow.
+A Sender MAY, unless constrained by [IS-11][], produce any USB stream that is compliant with the associated [TR-10-14][] Flow.
 
 ## USB IS-11 Senders and Receivers
 
@@ -150,12 +147,16 @@ A Sender MAY, unless constrained by IS-11, produce any USB stream that is compli
 
 ## Controllers
 
+A Controller SHOULD use a Sender's `urn:x-matrox:cap:transport:usb_class` capability to verify Receivers compliance with the Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates its support for being constrained for this capability by enumerating the `urn:x-nmos:cap:transport:usb_class` capability in its [IS-11][] `constraints/supported` endpoint.
+
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
+[IS-11]: https://specs.amwa.tv/is-11/ "AMWA IS-11 NMOS Stream Compatibility Management Specification"
 [NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
+[TR-10-5]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-5_2024-02-23.pdf "HDCP Key Exchange Protocol - HKEP"
 [TR-10-8]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-8_2023-04-14.pdf "NMOS Requirements"
 [TR-10-14]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-14_2024-09-24.pdf "IPMX	USB"
