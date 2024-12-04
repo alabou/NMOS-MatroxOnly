@@ -150,11 +150,13 @@ As per ST 2110-31 there is no RTP Payload Header defined. The complete RTP Paylo
 
 ## Channel Order
 
-A Receiver SHOULD provide a `urn:x-nmos:cap:transport:channel_order` capability for opaque AM824 multiplexed audio streams to indicate its support for the channels characteristics within an ST 2110-31 stream produced by an IPMX Sender. The capability MUST follow the ST 2110 `channel-order` convention. The `channel_order` capability allows a Receiver to describe the number of audio sub-streams that it supports and, for each one, the channel configuration and whether it is linear PCM or non-PCM data.
+A Receiver SHOULD provide a `urn:x-nmos:cap:transport:channel_order` capability for opaque AM824 multiplexed audio streams and PCM audio streams to indicate its support for the channels characteristics within an ST 2110-30 or ST 2110-31 stream produced by an IPMX Sender. The capability MUST follow the ST 2110 `channel-order` convention. The `channel_order` capability allows a Receiver to describe the number of audio sub-streams that it supports and, for each one, the channel configuration and whether it is linear PCM or non-PCM data.
 
 A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the format-specific `channel-order` parameter.
 
-A Sender MAY provide a `urn:x-nmos:cap:transport:channel_order` capability to indicate the channel ordering that it supports. A Controller MAY use a Sender's `urn:x-nmos:cap:transport:channel_order` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-nmos:cap:transport:channel_order` capability in its [IS-11][] `constraints/supported` endpoint.
+A Sender MAY provide a `urn:x-nmos:cap:transport:channel_order` capability to indicate the channel ordering that it supports. A Controller MAY use a Sender's `urn:x-nmos:cap:transport:channel_order` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-nmos:cap:transport:channel_order` capability in its [IS-11][] `constraints/supported` endpoint. A Receiver MAY constrain a Sender's `urn:x-nmos:cap:format:channel_count` capability instead of `urn:x-nmos:cap:transport:channel_order`, selecting the required number of channel corresponding to the `channel_order`. A Sender is required as per IS-11 to support being constrained by the `urn:x-nmos:cap:channel_count` capability. If multiple `channel_order` have the same number of channels the Sender MAY select anyone matching the number of channels.
+
+> Note: The `urn:x-nmos:cap:transport:channel_order` and `urn:x-nmos:cap:format:channel_count` are competing capabilities expressing/constraining the same entity. It is advised to constrain only one of them and let the other unconstrained.
 
 ## Group Hint
 
