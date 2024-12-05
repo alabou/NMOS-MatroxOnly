@@ -115,6 +115,8 @@ The active constraints applied to a Sender MUST be within the capabilities of th
 
 If the Sender capabilities change while there are active constraints, the Sender MUST only consider the intersection the new Sender capabilities with the active constraints, ignoring the space of active constraints outside the new Sender capabilities.
 
+A Controller MUST NOT assume that active constraints within the capabilities of an IS-11 Sender are guaranteed to prevent an "active_constraints_violation" `state` on the Sender. The ability of a Sender to comply with the active constraints depend on various factors, some of which are out of the control of the Sender.
+
 ### Propagating the preferred capabilities
 
 For a Sender associated with an Input, the application of active constraints to a Sender propagate to the EDID of the Input as a preferred mode, indicating to the connected HDMI device the preferred mode for the HDMI signal. The device processes the active constraints and extract a preferred mode from them. If the constraints are strict then the resulting preferred mode is obvious. Otherwise it is up to the device to produce a preferred mode out of the various possibilities. The propagation of a preferred mode to the EDID MUST be performed such that it is within the capabilities of the effective EDID.
