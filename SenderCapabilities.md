@@ -31,7 +31,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Defining Parameter Constraints
 
-A specification for each Parameter Constraint is strongly RECOMMENDED to be listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md). Each specification defines a unique identifier, the constraint type, and the target parameter, as follows.
+A specification for each Parameter Constraint is strongly RECOMMENDED to be listed in the Capabilities register in the [NMOS Parameter Registers][]. Each specification defines a unique identifier, the constraint type, and the target parameter, as follows.
 
 ### Parameter Constraint Identifiers
 
@@ -128,7 +128,7 @@ The Constraint Set is represented as a JSON object with attributes that are the 
 
 ### Constraint Set Metadata
 
-Additional metadata about each Constraint Set MAY be included, using the metadata attributes listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md) with the following unique identifiers:
+Additional metadata about each Constraint Set MAY be included, using the metadata attributes listed in the Capabilities register in the [NMOS Parameter Registers][] with the following unique identifiers:
 ```
 urn:x-nmos:cap:meta:<attribute>
 ```
@@ -179,7 +179,7 @@ Several worked examples are provided in the [Examples](Examples.md) section.
 
 This specification includes a JSON Schema for each [Parameter Constraint Type](#parameter-constraint-types) and for Constraint Sets and the `constraint_sets` attribute as a whole, in the [APIs/schemas](../APIs/schemas) directory.
 
-The Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md) include a supplementary schema that validates the specific requirements for every Parameter Constraint listed in the register.
+The Capabilities register in the [NMOS Parameter Registers][] include a supplementary schema that validates the specific requirements for every Parameter Constraint listed in the register.
 
 ## Capabilities Version
 
@@ -197,13 +197,13 @@ Senders SHOULD express their capabilities as precisely as possible, using the re
 
 A Sender MUST not produce a stream that is incompatible with the advertised Sender Capabilities.
 
-The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
+The value of the `constraint_sets` attribute MUST be valid according to this specification. The value of all the Constraint Set attributes MUST be valid according to the relevant specification in the Capabilities register in the [NMOS Parameter Registers][].
 
 The Sender MUST reflect any change in its capabilities by updating the `caps` object as appropriate and modifying the [`version` attribute](#capabilities-version) of that object as well as the core resource `version`.
 
 ## Behaviour: Controllers
 
-Controllers are strongly RECOMMENDED to support all Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md) that are applicable for the kinds of Sender with which they interact.
+Controllers are strongly RECOMMENDED to support all Parameter Constraints listed in the Capabilities register in the [NMOS Parameter Registers][] that are applicable for the kinds of Sender with which they interact.
 However, Controllers MAY ignore individual Parameter Constraints whose unique identifiers they do not recognize.
 Some Parameter Constraints are only relevant to specific `transport` and `format` values or to particular IANA media types.
 When a Controller cannot evaluate any of the Parameter Constraints in a Constraint Set it SHOULD distinguish this case to a user.
