@@ -225,25 +225,25 @@ With ECDH a Controller MUST exchange the Sender and Receiver public keys to acti
 
 ## RTP transport adaptation
 
-This `protocol` is used for `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:rtp.mcast`, `urn:x-nmos:transport:rtp.ucast` and `urn:x-matrox:transport:rtp.tcp`.
+This `protocol` is used for `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:rtp.mcast` and `urn:x-nmos:transport:rtp.ucast`.
 
-This `protocol` MAY also be used for `urn:x-matrox:transport:srt.rtp`. In this scenario the privacy encryption is performed on the RTP stream prior to transmission with the SRT protocol. The SRT encryption is not used or enabled. This scenario allows to use this `protocol` adaptation with the reliable UDP transport protocol SRT.
+This `protocol` MAY also be used for `urn:x-nmox:transport:srt.rtp`. In this scenario the privacy encryption is performed on the RTP stream prior to transmission with the SRT protocol. The SRT encryption is not used or enabled. This scenario allows to use this `protocol` adaptation with the reliable UDP transport protocol SRT.
 
 See the [TR-10-13][] technical recommendation for the details.
 
-See the [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md) document for a detailed definition of the RTP Payload Header of various media types.
+See the [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/AMWA/NMOS%20With%20IPMX.md) document for a detailed definition of the RTP Payload Header of various media types.
 
 > Note: When the `urn:x-nmos:transport:rtp.tcp` transport is used the packets are transmitted as `RTP/AVP` and hence the protocol is either "RTP" or "RTP_KV".
 
 ## USB-IP transport adaptation
 
-This `protocol` is used for `urn:x-matrox:transport:usb`.
+This `protocol` is used for `urn:x-nmos:transport:usb`.
 
 See the [TR-10-14][] technical recommendation for the details.
 
 ## SRT transport adaptation
 
-This `protocol` is used for `urn:x-matrox:transport:srt`, `urn:x-matrox:transport:srt.mp2t` and `urn:x-matrox:transport:srt.rtp`.
+This `protocol` is used for `urn:x-nmos:transport:srt`, `urn:x-nmos:transport:srt.mp2t` and `urn:x-nmos:transport:srt.rtp`.
 
 The `protocol` MUST be "SRT".
 
@@ -253,9 +253,9 @@ The SRT `passphrase` MUST correspond to the `privacy_key` defined in the Privacy
 
 ## UDP transport adaptation
 
-This `protocol` is used for `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:udp.mcast`, `urn:x-matrox:transport:udp.ucast`, `urn:x-matrox:transport:udp.mp2t`, `urn:x-matrox:transport:udp.mp2t.mcast` and `urn:x-matrox:transport:udp.mp2t.ucast`.
+This `protocol` is used for `urn:x-nmos:transport:udp`, `urn:x-nmos:transport:udp.mcast`, `urn:x-nmos:transport:udp.ucast`, `urn:x-nmos:transport:udp.mp2t`, `urn:x-nmos:transport:udp.mp2t.mcast` and `urn:x-nmos:transport:udp.mp2t.ucast`.
 
-This `protocol` MAY also be used for `urn:x-matrox:transport:srt` and `urn:x-matrox:transport:srt.mp2t`. In this scenario the privacy encryption is performed on the MPEG2-TS stream prior to transmission with the SRT protocol. The SRT encryption is not used or enabled. This scenario allows to use this `protocol` adaptation with the reliable UDP transport protocol SRT.
+This `protocol` MAY also be used for `urn:x-nmos:transport:srt` and `urn:x-nmos:transport:srt.mp2t`. In this scenario the privacy encryption is performed on the MPEG2-TS stream prior to transmission with the SRT protocol. The SRT encryption is not used or enabled. This scenario allows to use this `protocol` adaptation with the reliable UDP transport protocol SRT.
 
 The `protocol` MUST be "UDP" or "UDP_KV".
 
