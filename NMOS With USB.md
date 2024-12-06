@@ -37,13 +37,13 @@ Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting USB da
 
 A USB Source resource MUST indicate `urn:x-nmos:format:data` for the `format` attribute and it MUST be associated with a Flow of the same `format` through the `source_id` attribute of the Flow. 
 
-Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
+Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/AMWA/examples).
 
 ### Flows
 
 A USB Flow resource MUST indicate `application/usb` in the `media_type` attribute and `urn:x-nmos:format:data` for the `format` attribute. A USB Flow MUST have a `source_id` attribute referencing a Source of the same `format`.
 
-Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
+Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/AMWA/examples).
 
 ### Senders
 
