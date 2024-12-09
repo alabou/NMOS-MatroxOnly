@@ -145,7 +145,7 @@ constraints_supported.json
   - **Type:** boolean
   - **Target:** (a) SDP attribute `a=privacy:` parameter (b) IS-05 `ext_privacy` transport parameters
 - **Applicability:** AMWA IS-04 v1.3
-- 
+
 ### Channel Order
 - **Name:** `urn:x-matrox:cap:transport:channel_order`
 - **Description:** Provides the ordering of channels into groups as per ST 2110-30 and ST 2110-31 channel grouping symbols for PCM streams and opaque AM824 streams. This capability should not be used for fully described AM824 streams as the sub-streams capabilities are much more expressive. The SMPTE2110 channel-order convention is used as in the following example "SMPTE2110.(51,ST)" having two groups for a total of 8 channels.
