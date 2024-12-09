@@ -75,21 +75,21 @@ constraints_supported.json
 ```
 
 ## Constraint Set Metadata
-### format
+### Format
 - **Name:** `urn:x-matrox:cap:meta:format`
 - **Description:** Indicates the format associated with the Constraint Set
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
   - **Type:** string
 - **Applicability:** AMWA IS-04 v1.3
 
-### layer
+### Layer
 - **Name:** `urn:x-matrox:cap:meta:layer`
 - **Description:** Indicates the layer associated with the Constraint Set
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
   - **Type:** integer
 - **Applicability:** AMWA IS-04 v1.3
 
-### layer_compatibility_groups
+### Layer Compatibility Groups
 - **Name:** `urn:x-matrox:cap:meta:layer_compatibility_groups`
 - **Description:** Indicates the layer compatibility groups associated with the Constraint Set. A Constraint Set without a `urn:x-matrox:cap:meta:layer_compatibility_groups` attribute is assumed as being part of all groups.
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
