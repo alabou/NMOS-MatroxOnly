@@ -30,7 +30,7 @@ This document describes additional Flow attributes and their permitted values wh
 - **Permitted Values:**
   - The layer_compatibility_groups value matching a sub-Flow Constraint Set of the Sender's Capabilities. It corresponds to an array of unsigned integers in the range 0 to 63 inclusively.
 
-### audio_layers, video_layers, data_layers
+### Audio Layers, Video Layers, Data Layers
 - **Name:** `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers`, `urn:x-matrox:data_layers`
 - **Description:** This attributes identifies how many sub-Flows of a given format are providing essences to a multiplexed Sender. It is valid and allowed only for Flow of format `urn:x-nmos:format:mux`. The mux Flow is associated with a Sender providing Sender Capabilities.
 - **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3), [Matrox Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md)
