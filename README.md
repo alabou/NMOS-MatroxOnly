@@ -68,4 +68,6 @@ These specifications represent a significant evolution in NMOS technology, offer
 
 ## Testing
 
-The nmos-testing branch [MatroxOnly](https://github.com/alabou/nmos-testing/tree/MatroxOnly) provides the Matrox-Transports and Matrox-Capabilities test suites for testing the extended transports and capabilities.
+The `nmos-testing` branch [MatroxOnly](https://github.com/alabou/nmos-testing/tree/MatroxOnly) provides the Matrox-Transports and Matrox-Capabilities test suites for testing the extended transports and capabilities.
+
+The `nmos-parameter-registers` branch [MatroxOnly](https://github.com/alabou/nmos-parameter-registers/tree/MatroxOnly) provides the parameter registers for the NMOS Advanced Streaming Architecture.
