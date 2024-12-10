@@ -170,11 +170,11 @@ A Sender MAY provide a `urn:x-matrox:cap:transport:channel_order` capability to 
 
 ## Audio layers
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:audio_layers` capability for fully described AM824 multiplexed audio streams to indicate its support for the channels characteristics within an ST 2110-31 stream produced by a Sender. The `audio_layers` capability allows a Receiver to describe the number of audio sub-streams that it supports. A Receiver SHOULD also provide sub-streams capabilities for each audio layer to indicate what audio sub-streams it supports.
+A Receiver SHOULD provide a `urn:x-matrox:cap:format:audio_layers` capability for fully described AM824 multiplexed audio streams to indicate its support for the channels characteristics within an ST 2110-31 stream produced by a Sender. The `urn:x-matrox:cap:format:audio_layers` capability allows a Receiver to describe the number of audio sub-streams that it supports. A Receiver SHOULD also provide sub-streams capabilities for each audio layer to indicate what audio sub-streams it supports.
 
 A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file format specific `channel-order` parameter and the Sender's mux Flow atributes and parent sub-Flows attributes.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:audio_layers` capability to indicate the number of audio layers that are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. Only the number of audio layers MAY be constrained.
+A Sender MAY provide a `urn:x-matrox:cap:fromat:audio_layers` capability to indicate the number of audio layers that are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. Only the number of audio layers MAY be constrained.
 
 A Controller MAY use IS-11 to constrain the Sender's sub-Flows to make them compliant with the Receiver.
 
