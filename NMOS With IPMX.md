@@ -27,7 +27,11 @@ The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are 
 
 ## IS-11 Active Constraints
 
-The application of active constraints to `urn:x-nmos:cap:transport:` capabilities MUST NOT be allowed when the IS-05 `master_enable` active attribute of a Sender is `true`. An IS-11 `PUT` request to the `constraints/active` endpoint MUST return the `Locked` status (423) in that case.
+The application of active constraints to `urn:x-nmos:cap:transport:` and  `urn:x-matrox:cap:transport:` capabilities MUST NOT be allowed when the IS-05 `master_enable` active attribute of a Sender is `true`. An IS-11 `PUT` request to the `constraints/active` endpoint MUST return the `Locked` status (423) in that case.
+
+## Transport Capabilities
+
+The `urn:x-nmos:cap:transport:` and  `urn:x-matrox:cap:transport:` capabilities MUST NOT be associated with sub-Flows/sub-Streams. For a multiplexed Flow/Stream, the scope of `transport` capabilities is the `mux` Sender/Receiver. For a non-multiplexed Flow/Stream, the scope of `transport` capabilities is the `audio` or `video` or `data` Sender/Receiver.
 
 ## Common Reference Clock
 
