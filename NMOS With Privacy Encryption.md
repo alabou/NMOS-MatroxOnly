@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 {:toc}  
 
-# Introduction
+## Introduction
 
 The Privacy Encryption Protocol (PEP) is defined by the [VSF][] technical recommendation [TR-10-13][]. It describes a method to generate keying material for the encryption, decryption and authentication of media content over multicast and unicast networks. It is designed to support multiple types of transport protocol adaptations. The default adaptation defined in [TR-10-13][] technical recommendation describes privacy encryption of media streams having an RTP payload format. The [VSF][] technical recommendation [TR-10-14][] provides the adaptation for the USB-IP protocol. This document provides additional adaptations for the SRT and UDP protocols.
 
