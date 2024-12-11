@@ -39,7 +39,7 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:clock_ref_type` capabili
 
 A Receiver MAY support either or both clock reference types.
 
-A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the `a=ts-refclk` attribute. It MAY also verify compliance by using the Sender's associated Source's clock_name attribute and checking the ref_type attribute of the clock. For a `mux` Source, the parents Sources `clock_name` attribute MUST match with the `mux` Source's `clock_name` attribute.
+A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the `a=ts-refclk` attribute or using the Sender's associated Source's clock_name attribute and checking the ref_type attribute of the clock. For a `mux` Source, the parents Sources `clock_name` attribute MUST match with the `mux` Source's `clock_name` attribute.
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate the reference clocks that it supports. A Controller MAY use Sender capabilities, if supported, to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:clock_ref_type` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained).
 
@@ -53,7 +53,7 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capab
 
 A Receiver MAY support either or both media types.
 
-A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the `a=mediaclk` attribute. It MAY also verify compliance by using the Sender's associated Source's `urn:x-matrox:synchronous_media` attribute. For a `mux` Source, the parents Sources `urn:x-matrox:synchronous_media` attribute MUST match with the `mux` Source's `urn:x-matrox:synchronous_media` attribute.
+A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the `a=mediaclk` attribute or by checking the Sender's associated Source's `urn:x-matrox:synchronous_media` attribute, if any. For a `mux` Source, the parents Sources `urn:x-matrox:synchronous_media` attribute MUST match with the `mux` Source's `urn:x-matrox:synchronous_media` attribute.
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate the media synchronization that it supports. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:synchronous_media` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:synchronous_media` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained).
 
@@ -176,9 +176,9 @@ A Sender MAY provide a `urn:x-matrox:cap:transport:channel_order` capability to 
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:format:audio_layers` capability for fully described AM824 multiplexed audio streams to indicate its support for the channels characteristics within an ST 2110-31 stream produced by a Sender. The `urn:x-matrox:cap:format:audio_layers` capability allows a Receiver to describe the number of audio sub-streams that it supports. A Receiver SHOULD also provide sub-streams capabilities for each audio layer to indicate what audio sub-streams it supports.
 
-A Controller MAY verify the compliance of the Receiver with a Sender using the Sender's SDP transport file format specific `channel-order` parameter and the Sender's mux Flow atributes and parent sub-Flows attributes.
+A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the format-specific `channel-order` parameter or by checking the Sender's mux Flow `urn:x-matrox:cap:format:audio_layers` atribute and parent sub-Flows attributes.
 
-A Sender MAY provide a `urn:x-matrox:cap:fromat:audio_layers` capability to indicate the number of audio layers that are supported. A controller MAY use Sender capabilities, if supported, to verify the compliance of a Receiver with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. Only the number of audio layers MAY be constrained.
+A Sender MAY provide a `urn:x-matrox:cap:format:audio_layers` capability to indicate the number of audio layers that are supported. A Controller MAY use the Sender's capabilities to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. Only the number of audio layers MAY be constrained. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:format:audio_layers` capability in its [IS-11][] `constraints/supported` endpoint.
 
 A Controller MAY use IS-11 to constrain the Sender's sub-Flows to make them compliant with the Receiver.
 
