@@ -79,6 +79,6 @@ Informative Note: An opaque MPEG2-TS stream scenario is still possible using a F
 
 ## Testing
 
-The previous transports, along with the `urn:x-matrox:transport:rtp` transport can be tested using the forked [nmos-testing repository](https://github.com/alabou/nmos-testing.git) with the `MatroxOnly` branch. The `Matrox-Transports` testsuite provides the tests for the various transports.
+The previous transports, along with the `urn:x-nmos:transport:rtp` transport can be tested using the forked [nmos-testing repository](https://github.com/alabou/nmos-testing.git) with the `MatroxOnly` branch. The `Matrox-Transports` testsuite provides the tests for the various transports.
 
-Note: Currently the testsuite does not activate the Senders and Receivers to perform live/activation testing.
+Note: Currently the testsuite does not automatically activate the Senders and Receivers to perform live/activation testing. A manual activation may be required to perform additional testing.
