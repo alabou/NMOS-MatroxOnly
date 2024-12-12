@@ -49,13 +49,15 @@ The application of a constraint using IS-11 on a Sender's `urn:x-matrox:cap:tran
 
 ## Asynchronous/Synchronous Media
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for IPMX Senders that produce media that is not synchronous to the Sender's reference clock. The capability value `true` indicates support for synchronous media, while the value `false` indicates support for asynchronous media.
+A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for IPMX Senders that produce media that is not synchronous with the Sender's reference clock. The capability value `true` indicates support for synchronous media, while the value `false` indicates support for asynchronous media.
 
 A Receiver MAY support either or both media types.
 
 A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the `a=mediaclk` attribute or by checking the Sender's associated Source's `urn:x-matrox:synchronous_media` attribute, if any. For a `mux` Source, the parents Sources `urn:x-matrox:synchronous_media` attribute MUST match with the `mux` Source's `urn:x-matrox:synchronous_media` attribute.
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate the media synchronization that it supports. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:synchronous_media` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:synchronous_media` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained).
+
+A Sender producing media that is synchronous with the Sender's reference clock MUST include an `urn:x-matrox:synchronous_media` attribute in its associated Source. A Sender producing media that is not synchronous with the Sender's reference clock MAY omit this attribute, which defaults to false.
 
 ## Info Block
 
