@@ -31,7 +31,6 @@ and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119]
 
 **Immutable resource:** A resource where a resource ID is associated with a fixed and immutable set of attributes. Neither the values of these attributes nor the set of attributes itself can change after the resource is created. 
 
-
 **Mutable resource:**  A resource where a resource ID is associated with a mutable set of attributes. Both the values of these attributes and the set of attributes itself can change after the resource is created.
 
 ## Immutable Sources and Flows
@@ -101,6 +100,22 @@ According to the [Data Model: Identifier Mapping](https://specs.amwa.tv/is-04/re
 This indicates that Controllers MUST be prepared for Flow IDs to change under these circumstances, acknowledging that Flows are not entirely static. Therefore, Controllers should not assume permanent Flows and must handle scenarios where new Flow IDs are generated due to changes in codec types.
 
 Controllers prepared for such scenarios would already be compliant with the approach of using immutable Flows and very likely to also handle properly immutable Sources.
+
+## Compliance with MS-04
+
+The approach described in this document is compliant with [MS-04][] [Basic Media Operations](https://specs.amwa.tv/ms-04/releases/v1.0.0/docs/3.1._Basic_Media_Operations.html) section.
+
+For example, assume a device captures an SDI input video signal and transmits an associated uncompressed video stream over RTP. The NMOS resource model would have a Source (representing the SDI-captured signal), a Flow associated with that Source, and a Sender associated with that Flow. The Source has an ID value of 's0', the Flow an ID value of 'f0', and the Sender an ID value of 'snd0'. The SDI video signal is 1080p60, which is represented at the Source with a `grain_rate` of 60 Hz, and at the Flow with a frame width and height of 1920 and 1080, and a `grain_rate` of 60 Hz.
+
+Now assume that the device also has a Flow 'f1' scaling up the incoming video signal to 2160p60. According to [MS-04][], the Flow with ID 'f1' would be associated with the same Source with ID 's0'. The Sender 'snd0' could be associated with either Flow to stream a 1080p60 version of the Source or a 2160p60 version of it. A Controller MUST track the `flow_id` used by Sender 'snd0' to determine whether the stream produced by Sender 'snd0' is 1080p60 or 2160p60.
+
+[MS-04][] does not specify whether Flow 'f1' is created at the same time as Flow 'f0', or at some later time. It is safe to assume that Flow 'f1' can be created after Flow 'f0', such as when a User configures the device to stream a 2160p60 signal over IP. At this point, Flow 'f1' would be created and associated with Sender 'snd0'.
+
+The immutable Flow approach described in this document goes beyond the [MS-04][] transform/process requirement by treating all Flow attributes as immutable, without impacting the required behavior of Controllers. 
+
+The same conclusion applies to Source resources that are created when the content is fundamentally modified. Stopping and starting the capture of a signal fundamentally alter the content as it create time discontinuities and could also result in changing other characteristics of the captured signal. A Controller MUST be ready at any time to have a different Flows and Sources associated with a Sender.
+
+
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
