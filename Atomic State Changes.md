@@ -117,3 +117,4 @@ The same conclusion applies to Source resources that are created when the conten
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [BCP-006-01]: https://specs.amwa.tv/bcp-006-01/releases/v1.0.0/docs/NMOS_With_JPEG_XS.html "NMOS With JPEG XS"
+[MS-04]: https://specs.amwa.tv/ms-04/ "NMOS Identity and Timing Model"
