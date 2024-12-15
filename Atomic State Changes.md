@@ -79,25 +79,24 @@ MUST change if:
   - Format URN changes between video, audio, data and mux variants
   - Configuration parameters associated with the Source are changed, such as its operating resolution or bitrate
   - Labels, descriptions or other metadata associated with the Source resource are modified
-  - Anything of an immutable Source changes
+  - The values of the Source's attributes or the set of attributes itself change after the Source is created
 
 ### Flow ID
 Owned by:
-  Source ID
+  Device ID (v1.3)
 
 MUST Change if:
   - Source ID changes
   - Format URN changes between video, audio, data and mux variants (including between two codec types)
   - Configuration parameters associated with the Flow are changed, such as its operating resolution or bitrate
   - Labels, descriptions or other metadata associated with the Flow resource are modified
-  - Anything of an immutable Flow changes
+  - The values of the Flow's attributes or the set of attributes itself change after the Flow is created
 
-According to the [Data Model: Identifier Mapping](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/Data_Model_-_Identifier_Mapping.html) section, a Flow ID **SHOULD** change if:
-
+According to the [Data Model: Identifier Mapping](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/Data_Model_-_Identifier_Mapping.html) section, a Flow ID **SHOULD** change if:  
 - The Source ID changes.  
 - The Format URN changes between video, audio, data, and mux variants (including between two codec types).  
 
-This indicates that Controllers MUST be prepared for Flow IDs to change under these circumstances, acknowledging that Flows are not entirely static. Therefore, Controllers should not assume permanent Flows and must handle scenarios where new Flow IDs are generated due to changes in codec types.
+The "including between two codec types" indicates that Controllers MUST be prepared for Flow IDs to change under these circumstances, acknowledging that Flows are not entirely static. Therefore, Controllers should not assume permanent Flows and must handle scenarios where new Flow IDs are generated due to changes in codec types.
 
 Controllers prepared for such scenarios would already be compliant with the approach of using immutable Flows and very likely to also handle properly immutable Sources.
 
@@ -113,9 +112,7 @@ Now assume that the device also has a Flow 'f1' scaling up the incoming video si
 
 The immutable Flow approach described in this document goes beyond the [MS-04][] transform/process requirement by treating all Flow attributes as immutable, without impacting the required behavior of Controllers. 
 
-The same conclusion applies to Source resources that are created when the content is fundamentally modified. Stopping and starting the capture of a signal fundamentally alter the content as it create time discontinuities and could also result in changing other characteristics of the captured signal. A Controller MUST be ready at any time to have a different Flows and Sources associated with a Sender.
-
-
+The same conclusion applies to Source resources that are created when the content is fundamentally modified. Stopping and starting the capture of a signal fundamentally alter the content as it create time discontinuities, change in timing characteristics and could also result in changing other characteristics of the captured signal resulting in a change of the Source ID. A change of Source ID also implies a change of Flows associated with the new Source. A Controller MUST be ready at any time to have a different Flows and Sources associated with a Sender.
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
