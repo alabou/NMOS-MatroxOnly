@@ -98,7 +98,9 @@ According to the [Data Model: Identifier Mapping](https://specs.amwa.tv/is-04/re
 
 The "including between two codec types" indicates that Controllers MUST be prepared for Flow IDs to change under these circumstances, acknowledging that Flows are not entirely static. Therefore, Controllers should not assume permanent Flows and must handle scenarios where new Flow IDs are generated due to changes in codec types.
 
-Controllers prepared for such scenarios would already be compliant with the approach of using immutable Flows and very likely to also handle properly immutable Sources.
+Controllers prepared for such scenarios would already be compliant with the approach of using immutable Flows and very likely to also handle properly immutable Sources. 
+
+Controllers MUST support scenarios where IS-04 implementations deviate from the SHOULD/SHOULD NOT clauses. The stricter immutability approach of this proposal simplifies Controller design and eliminates ambiguity, without imposing non-compliant behavior. Instead, it complements IS-04 by ensuring robust resource management while remaining backward-compatible with implementations that follow the existing recommendations more loosely.
 
 ## Compliance with MS-04
 
