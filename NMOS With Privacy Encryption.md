@@ -93,7 +93,7 @@ ext_privacy_ecdh_curve | string | - | r/w | r/w
 
 ### IS-05 Transport Parameters
 
-A Sender/Receiver implementing [TR-10-13][] MUST provide the following IS-05 extended transport parameters in the active, staged and constraints endpoints: `ext_privacy_protocol`, `ext_privacy_mode`, `ext_privacy_iv`, `ext_privacy_key_generator`, `ext_privacy_key_version`, `read-only` and `ext_privacy_key_id`.
+A Sender/Receiver implementing [TR-10-13][] MUST provide the following IS-05 extended transport parameters in the active, staged and constraints endpoints: `ext_privacy_protocol`, `ext_privacy_mode`, `ext_privacy_iv`, `ext_privacy_key_generator`, `ext_privacy_key_version` and `ext_privacy_key_id`.
 
 A Sender/Receiver implementing [TR-10-13][] and supporting the ECDH mode MUST also provide the following IS-05 extended transport parameters in the active, staged and constraints endpoints: `ext_privacy_ecdh_sender_public_key`, `ext_privacy_ecdh_receiver_public_key` and `ext_privacy_ecdh_curve`.
 
