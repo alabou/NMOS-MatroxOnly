@@ -99,7 +99,7 @@ The Flow's `profile` and `level` attributes map to the `profile-level-id` parame
 
 The Flow's `profile` and `level` attributes map to the member MPEG-4_audio_profile_and_level of the MPEG-4_audio_descriptor of an MPEG2-TS transport stream. See the [RTP transport based on RFC 2250](#rtp-transport-based-on-rfc-2250) section.
 
-Informative note: The Flow's `profile` and `level` attributes are always required. The `profile-level-id` parameter of the SDP transport file is REQUIRED according to RFC 3640, OPTIONAL according to RFC 6416 is REQUIRED by this specification. There is no default value defied by RFC 3640 or RFC 6416.
+Informative note: The Flow's `profile` and `level` attributes are always required. The `profile-level-id` parameter of the SDP transport file is REQUIRED according to RFC 3640, OPTIONAL according to RFC 6416 is REQUIRED by this specification. There is no default value defined by RFC 3640 or RFC 6416.
 
 - [Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/flow-attributes/#bit-rate)  
   The Flow resource MUST indicate the target encoding bit rate (kilobits/second) of the AAC bitstream. The stream's active config MUST be compliant with the `bit_rate` attribute of the Flow. The `bit_rate` integer value is expressed in units of 1000 bits per second, rounding up.
@@ -131,7 +131,7 @@ For multiplexed AAC Flows, the Sender MUST conform to the behaviour dictated by 
 
 Sender resources provide no indication of media type or format, since this is described by the associated Flow resource.
 
-#### RTP transport based on RFC3640 or RFC 6416
+#### RTP transport based on RFC 3640 or RFC 6416
 
 For Nodes transmitting AAC using the RTP payload mapping defined by RFC 3640 or RFC 6416, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
 
@@ -177,7 +177,7 @@ Therefore:
 
 - The `streamType` format-specific parameter MUST be included with the value 5 for RFC 3640. Actually only the `audio` stream type is supported.
 
-- The `maxDisplacement`, `constantDuration` and `de-interleaveBufferSize` format-specific parameters SHOULD be included with the correct value for RFC 3640 if the `packetization-mode` equals one of the interleaved modes.
+- The `maxDisplacement`, `constantDuration` and `de-interleaveBufferSize` format-specific parameters SHOULD be included with the correct value for RFC 3640 if access units are interleaved and `packet_transmission_mode` attribute is set to `interleaved_access_units`.
 
 - The `constantDuration` format-specific parameters MUST be included with the correct value for RFC 3640.
 
@@ -365,7 +365,7 @@ An AAC stream using LATM or ADTS MAY transport in-band configs to update or dupl
 
 Informative note: Using RFC 3640, there will never be in-band configs.
 
-The `config` parameter MAY be used by the Receiver to assert the `parameter_sets_transport_mode` in use by the Sender. The in-and-out-of-band mode is signaled if `config` is present and not empty, and terminates by a comma ','. The terminating colon ',' indicates that more configs will be received in-band, indicating the in-and-out-of-band mode. The out-of-band mode is signaled when `config` is present and not empty and not terminated by a comma ','. The in-band mode is signaled when `config` is not present or empty. A Sender MUST terminate the `conifig` parameter by a comma ',' if it operates in in-and-out-of-band mode and MUST not terminate it by a comma ',' in out-of-band mode.
+The `config` parameter MAY be used by the Receiver to assert the `parameter_sets_transport_mode` in use by the Sender. The in-and-out-of-band mode is signaled if `config` is present and not empty, and terminates by a comma ','. The terminating colon ',' indicates that more configs will be received in-band, indicating the in-and-out-of-band mode. The out-of-band mode is signaled when `config` is present and not empty and not terminated by a comma ','. The in-band mode is signaled when `config` is not present or empty. A Sender MUST terminate the `config` parameter by a comma ',' if it operates in in-and-out-of-band mode and MUST not terminate it by a comma ',' in out-of-band mode.
 
 Informative note: It results that an AAC Sender operating in in-and-out-of-band mode that is not sending parameter sets out-of-band will set the  `config` parameter to a single comma ',' value.
 
