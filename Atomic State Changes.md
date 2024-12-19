@@ -116,7 +116,17 @@ The immutable Flow approach described in this document goes beyond the [MS-04][]
 
 The same conclusion applies to Source resources that are created when the content is fundamentally modified. Stopping and starting the capture of a signal fundamentally alter the content as it create time discontinuities, change in timing characteristics and could also result in changing other characteristics of the captured signal resulting in a change of the Source ID. A change of Source ID also implies a change of Flows associated with the new Source. A Controller MUST be ready at any time to have a different Flows and Sources associated with a Sender.
 
+## Compliance with JT-NM TR-1001-1
+
+[JT-NM TR-1001-1][] defines a "Media Node" as a "physical or logical entity comprising zero or more Senders and Receivers, represented as a single Node under AMWA IS-04". This definition explicitly excludes Flows and Sources from the concept of a "Media Node".
+
+[JT-NM TR-1001-1][] mandates the following regarding resource UUIDs:
+"Media Nodes, Senders, and Receivers shall expose unique, immutable, and consistent UUIDs in the IS-04 registry over the life of the product, including consistency over reboots, power cycles, and software upgrades."
+
+Flows and Sources are not subject to this requirement. Therefore, the immutable design of Flows and Sources described in this document is fully compliant with JT-NM TR-1001-1 and reflects an implementation choice that enhances system robustness beyond the normative requirements.
+
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [BCP-006-01]: https://specs.amwa.tv/bcp-006-01/releases/v1.0.0/docs/NMOS_With_JPEG_XS.html "NMOS With JPEG XS"
 [MS-04]: https://specs.amwa.tv/ms-04/ "NMOS Identity and Timing Model"
+[JT-NM TR-1001-1]: https://static.jt-nm.org/documents/JT-NM_TR-1001-1_2020_v1.1.pdf ""
