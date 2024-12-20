@@ -139,11 +139,11 @@ A Controller MAY activate and configure Senders' and Receivers' privacy encrypti
 
 ### Consistency
 
-If the `urn:x-matrox:cap:transport:privacy` capability only allows the value `true` then the Sender's associated SDP transport file MUST have an `privacy` attribute and the IS-05 `ext_privacy_protocol` and `ext_privacy_mode` transport parameters MUST have a value that is not `NULL`.
+If the `urn:x-matrox:cap:transport:privacy` capability only allows the value `true` then the Sender's associated SDP transport file MUST have a `privacy` attribute and the IS-05 `ext_privacy_protocol` and `ext_privacy_mode` transport parameters MUST have a value that is not `NULL`.
 
-If the `urn:x-matrox:cap:transport:privacy` capability only allows the value `false` then the Sender's associated SDP transport file MUST NOT have an `privacy` attribute and the IS-05 `ext_privacy_protocol` and `ext_privacy_mode` transport parameters, if present, MUST have a `NULL` value.
+If the `urn:x-matrox:cap:transport:privacy` capability only allows the value `false` then the Sender's associated SDP transport file MUST NOT have a `privacy` attribute and the IS-05 `ext_privacy_protocol` and `ext_privacy_mode` transport parameters, if present, MUST have a `NULL` value.
 
-If the `urn:x-matrox:cap:transport:privacy` capability MUST NOT allow both `true` and `false` values.
+The `urn:x-matrox:cap:transport:privacy` capability MUST NOT allow both `true` and `false` values.
 
 ### RTP Payload Header
 

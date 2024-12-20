@@ -103,10 +103,14 @@ The `ext_privacy` transport parameters MAY be used with any transport supporting
 
 Each `ext_privacy` transport parameter MUST have an associated constraint that indicates either that the parameter is unconstrained, allowing any valid value, or that it is constrained to a specific set of allowable values. A parameter identified as `read-only` in the parameter definitions table MUST always be constrained to a single value. A Sender/Receiver MUST fail an activation if any IS-05 `ext_privacy` transport parameter violates its defined constraints.
 
+The constraints endpoint of parameters `ext_privacy_protocol`, `ext_privacy_mode` of Senders and Receivers MUST list all the supported protocols and modes.
+
+Sender/Receiver constraints associated with parameters `ext_privacy_protocol` and `ext_privacy_mode` MUST declare all the supported protocols and modes. These parameters MUST NOT be unconstrained.
+
 ### Protocol
 The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "USB", "USB_KV", "SRT", "RTSP", "RTSP_KV", "NULL"
 
-> Note: The "NULL" protocol value is used in PEP extended transport parameters to indicate that privacy encryption is not available / disabled.
+If privacy encryption is disabled or not supported by a Sender/Receiver and the `ext_privacy` transport parameters are present, the "NULL" protocol MUST be used for the active and staged `ext_privacy_protocol` extended transport parameters to indicate that privacy encryption is not available / disabled. The associated constraints MUST allow only the "NULL" protocol when an active or staged `ext_privacy_protocol` value is "NULL".
 
 The `protocol` "RTP" MUST be supported by all devices implementing [TR-10-13][] for the `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:rtp.mcast` and `urn:x-nmos:transport:rtp.ucast` transports.
 
@@ -116,7 +120,7 @@ The `protocol` "RTP_KV" MAY be supported by devices supporting the "RTP" `protoc
 
 The `protocol` "UDP" MUST be supported by all devices implementing [TR-10-13][] for the `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:udp.mcast` and `urn:x-matrox:transport:udp.ucast` transports.
 
-The `protocol` "UDP" MAY be supported by devices implementing [TR-10-13][] for the `urn:x-matrox:transport:srt` transports.
+The `protocol` "UDP" MAY be supported by devices implementing [TR-10-13][] for the `urn:x-matrox:transport:srt` and `urn:x-matrox:transport:mp2t` transports.
 
 The `protocol` "UDP_KV" MAY be supported by devices supporting the "UDP" `protocol`.
 
@@ -124,9 +128,12 @@ The `protocol` "USB_KV" MUST be supported by all devices implementing [TR-10-13]
 
 The `protocol` "USB" MAY be supported by devices supporting the "USB_KV" `protocol`.
 
-The `protocol` "SRT" MUST be supported by all devices implementing [TR-10-13][] for the `urn:x-matrox:transport:srt` transport.
+The `protocol` "SRT" MUST be supported by all devices implementing [TR-10-13][] for the `urn:x-matrox:transport:srt`, `urn:x-matrox:transport:srt.rtp` and `urn:x-matrox:transport:srt.mp2t` transports.
 
 ### Mode
+
+If privacy encryption is disabled or not supported by a Sender/Receiver and the `ext_privacy` transport parameters are present, the "NULL" mode MUST be used for the active and staged `ext_privacy_mode` extended transport parameters to indicate that privacy encryption is not available / disabled. The associated constraints MUST allow only the "NULL" mode when an active or staged `ext_privacy_mode` parameter is "NULL".
+
 #### For protocols "RTP" and "RTP_KV"
 The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "AES-128-CTR_CMAC-64", "AES-256-CTR_CMAC-64", "AES-128-CTR_CMAC-64-AAD", "AES-256-CTR_CMAC-64-AAD", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR", "ECDH_AES-128-CTR_CMAC-64", "ECDH_AES-256-CTR_CMAC-64", "ECDH_AES-128-CTR_CMAC-64-AAD", "ECDH_AES-256-CTR_CMAC-64-AAD".
 
@@ -139,6 +146,8 @@ A Sender configured by an Administrator to use a 256 or 512 bit PSK MUST support
 A Receiver configured by an Administrator to allow the use a 256 or 512 bit PSK MUST support modes based on AES-256. A Receiver configured to allow the  use of a 128 bit PSK MUST support modes based on AES-128. A Receiver MAY simultaneously support modes based on AES-128 and AES-256. A Receiver MUST fail activation if a `key_id` associated with a 256 or 512 bit PSK is used along with a `mode` that is not based on AES-256.
 
 > Note: if the IS-05 `ext_privacy_mode` transport parameter constraints of a Receiver only allow modes based on AES-128, it indicates that only PSK of 128 bit are allowed.
+
+The PEP "urn:ietf:params:rtp-hdrext:PEP-Full-IV-Counter" and "urn:ietf:params:rtphdrext:PEP-Short-IV-Counter" RTP Extension Headers MUST be declared in the SDP transport file. The declaration MUST be performed as per RFC8285 using the "sendonly" direction.
 
 #### For protocol "UDP" and "UDP_KV"
 The `mode` parameter MUST be one of: "AES-128-CTR", "AES-256-CTR", "ECDH_AES-128-CTR", "ECDH_AES-256-CTR".
@@ -159,9 +168,13 @@ The `mode` "AES-128-CTR" MUST be supported by all devices implementing the "SRT"
 
 The ECDH mode allows Perfect Forward Secrecy.
 
-The `ecdh_curve` parameter MUST be one of: "secp256r1", "secp521r1", "25519", "448" or "NULL" if the ECDH mode is not available/supported.
+The `ecdh_curve` parameter MUST be one of: "secp256r1", "secp521r1", "25519", "448" or "NULL".
+
+If the ECDH mode is not supported by a Sender/Receiver and the `ext_privacy_ecdh` transport parameters are present, the "NULL" curve MUST be used for the active and staged `ext_privacy_ecdh_curve` extended transport parameters to indicate that the ECDH mode is not available. The associated constraints MUST allow only the "NULL" protocol when an active or staged `ext_privacy_ecdh_curve` parameter is "NULL".
 
 The `ecdh_curve` “secp256r1" MUST be supported by all devices implementing the ECDH mode.
+
+Sender/Receiver constraints associated with parameter `ext_privacy_ecdh_curve`  MUST declare all the supported curves. This parameter MUST NOT be unconstrained.
 
 The ECDH functionality is available through the IS-05 extended transport parameters only. There are no ECDH parameters in the `privacy` attribute of an SDP transport file. The ECDH modes of operation are optional and none of those modes are required to be supported by an implementation conforming with [TR-10-13], [TR-10-14][] or other VSF/IPMX technical recommendations.
 
@@ -200,7 +213,7 @@ The values of the parameters of the `privacy` attribute of the SDP transport fil
 
 The ECDH mode is possible only in peer-to-peer mode where one Receiver connect/subscribe to one Sender.
 
-The activation of a Sender with `master_enable` set to `false` regenerate the value of the `ext_privacy_ecdh_sender_public_key` transport parameter if the ECDH mode is supported.
+The activation of a Sender with `master_enable` set to `false` MUST regenerate the value of the active and staged `ext_privacy_ecdh_sender_public_key` transport parameter if the ECDH mode is supported.
 
 A Controller MUST read the value of the `ext_privacy_ecdh_sender_public_key` transport parameter after the activation of the Sender with `master_enable` set to `true`.
 
@@ -216,7 +229,7 @@ For transports supporting an SDP transport file, if the ECDH mode is not used, t
 
 The ECDH mode is possible only in peer-to-peer mode where one Receiver connect/subscribe to one Sender.
 
-The activation of a Receiver with `master_enable` set to `false` regenerate the value of the `ext_privacy_ecdh_receiver_public_key` transport parameter if the ECDH mode is supported. To change the value of the `ext_privacy_ecdh_curve` transport parameter of a Receiver, a Controller MUST set `master_enable` to false during an activation in order to regenerate a new value for the `ext_privacy_ecdh_receiver_public_key` transport parameter.
+The activation of a Receiver with `master_enable` set to `false` MUST regenerate the value of the active and staged `ext_privacy_ecdh_receiver_public_key` transport parameter if the ECDH mode is supported. To change the value of the `ext_privacy_ecdh_curve` transport parameter of a Receiver, a Controller MUST set `master_enable` to false during an activation in order to regenerate a new value for the `ext_privacy_ecdh_receiver_public_key` transport parameter.
 
 Once a Controller reads the `ext_privacy_ecdh_receiver_public_key` transport parameters of a Receiver to provide its value to a Sender it MUST NOT perform any other activation of the Receiver with `master_enable` set to `false` as otherwise the value of `ext_privacy_ecdh_receiver_public_key` would change.
 
@@ -346,6 +359,8 @@ Note: Bidirectional streams are not supported by the "UDP" and "UDP_KV" protocol
 This `protocol` is used for `urn:x-matrox:transport:rtsp`, `urn:x-matrox:transport:rtsp.tcp`.
 
 This protocol indicates that the effective transport adaptation of the media streams is based upon the negotiation between the client and server for the transmission protocol. For "RTSP" the possibilities are "RTP" or "UDP" while for "RTSP_KV" the possibilities are "RTP_KV" or "UDP_KV". 
+
+The constraints on the `ext_privacy_mode` parameter MAY describe a combination of modes supported for RTP base adaptations and UDP based adaptations. A Sender/Receiver MUST fail activation if the selected `mode` is not compliant with the transmission protocol negotiated between the RTSP client and server.
 
 > Note: When the `urn:x-matrox:transport:rtsp.tcp` transport is used the packets are transmitted as `RTP/AVP` and hence the protocol is either "RTP" or "RTP_KV".
 
