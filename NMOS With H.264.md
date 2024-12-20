@@ -141,7 +141,7 @@ Sender resources provide no indication of media type or format, since this is de
 
 #### RTP transport based on RFC 6184
 
-For Nodes transmitting H.264 using the RTP payload mapping defined by RFC 6184, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting H.264 using the RTP payload mapping defined by RFC 6184, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 For Nodes implementing IS-04 v1.3 or higher, the following additional requirements on the Sender resource apply.
 
@@ -258,7 +258,7 @@ An example Receiver resource is provided in the [Examples](https://github.com/al
 
 ### RTP transport based on RFC 6184
 
-For Nodes consuming H.264 using the RTP payload mapping defined by RFC 6184, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes consuming H.264 using the RTP payload mapping defined by RFC 6184, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 The following parameter constraints can be used to express limits or preferences specifically defined for H.264 decoders:
 
@@ -281,7 +281,7 @@ The following parameter constraints can be used to express limits or preferences
 
 ### RTP transport based on RFC 2250
 
-For Nodes consuming H.264 using the RTP payload mapping defined by RFC 2250, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes consuming H.264 using the RTP payload mapping defined by RFC 2250, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 The following parameter constraints can be used to express limits or preferences specifically defined for H.264 decoders:
 

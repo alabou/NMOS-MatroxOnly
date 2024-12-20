@@ -106,7 +106,7 @@ Note: The Sender's attributes and associated transport capabilities of a coded f
 
 #### RTP transport based on RFC 2250 and RFC 3551
 
-For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -153,7 +153,7 @@ An example Receiver resource is provided in the [Examples](https://github.com/al
 
 ### RTP transport based on RFC 2250 and RFC 3551
 
-For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute and MUST indicate `application/MP2T` as the `media_type`.
+For Nodes consuming H.222.0 using the RTP payload mapping defined by RFC 2250 and RFC 3551, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute and MUST indicate `application/MP2T` as the `media_type`.
 
 Note: A Controller can connect a fully-described MPEG2-TS Receiver to an opaque Sender, matching the Receiver `application/MP2T` media type with the Sender `video/MP2T` media type.
 

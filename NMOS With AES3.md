@@ -124,7 +124,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 #### RTP transport based on ST 2110-31
 
-For Nodes transmitting AM824 Streams using the RTP payload mapping defined by ST 2110-31, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting AM824 Streams using the RTP payload mapping defined by ST 2110-31, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -187,7 +187,7 @@ An example Receiver resource is provided in the [Examples](https://github.com/al
 
 ### RTP transport based on ST 2110-31
 
-For Nodes consuming AM824 Streams using the RTP payload mapping defined by ST 2110-31, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute and MUST indicate `audio/AM824` or `application/AM824` as the `media_type`.
+For Nodes consuming AM824 Streams using the RTP payload mapping defined by ST 2110-31, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute and MUST indicate `audio/AM824` or `application/AM824` as the `media_type`.
 
 ### Other transports
 

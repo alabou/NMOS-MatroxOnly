@@ -133,7 +133,7 @@ Sender resources provide no indication of media type or format, since this is de
 
 #### RTP transport based on RFC 3640 or RFC 6416
 
-For Nodes transmitting AAC using the RTP payload mapping defined by RFC 3640 or RFC 6416, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes transmitting AAC using the RTP payload mapping defined by RFC 3640 or RFC 6416, the Sender resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 For Nodes implementing IS-04 v1.3 or higher, the following additional requirements on the Sender resource apply.
 
@@ -251,7 +251,7 @@ An example Receiver resource is provided in the [Examples](https://github.com/al
 
 ## RTP transport based on RFC 3640 or RFC 6416
 
-For Nodes consuming AAC using the RTP payload mapping defined by RFC 3640 or RFC 6416, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes consuming AAC using the RTP payload mapping defined by RFC 3640 or RFC 6416, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 The following parameter constraints can be used to express limits or preferences specifically defined for AAC decoders:
 
@@ -281,7 +281,7 @@ Other existing parameter constraints, such as the following, are also appropriat
 
 ## RTP transport based on RFC 2250
 
-For Nodes consuming AAC using the RTP payload mapping defined by RFC 2250, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications for the `transport` attribute.
+For Nodes consuming AAC using the RTP payload mapping defined by RFC 2250, the Receiver resource MUST indicate `urn:x-nmos:transport:rtp` or one of its subclassifications or `urn:x-matrox:transport:srt.rtp` for the `transport` attribute.
 
 The following parameter constraints can be used to express limits or preferences specifically defined for AAC decoders:
 
