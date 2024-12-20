@@ -85,6 +85,12 @@ A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate 
 
 > Note: A Sender indicating both `true` and `false` values in its capabilities describes that it may produce both HDCP and non-HDCP streams according to some internal criteria evaluated at activation time. 
 
+### SDP Transport File
+
+The `hkep` attribute of [TR-10-5][] is not yet registered with IANA. If it would, the definition would indicate "Usage Level: session, media" indicating that a session-level `hkep` attribute represents the default value for a media-level `hkep` attribute that is not specified. The SDP transport file may provide the `hkep` information either at the session-level and media-level.
+
+The HKEP specification uses the expression "hkep session attribute" not define the usage level of the `hkep` attribute but simply refers to it at its most generic level, which is the session level.
+
 ### Activation
 
 A Controller MAY activate and configure a Receiver's HDCP encryption and the HKEP protocol using the SDP transport file from a Sender, including `hkep` attributes.
@@ -120,6 +126,12 @@ A Controller MUST verify the compliance of Receivers with an active Sender using
 A Sender MAY provide a `urn:x-matrox:cap:transport:privacy` capability to indicate that privacy encryption and the PEP protocol are supported. A Sender MAY support either `true` or `false` values. A Sender implementing privacy encryption and the PEP protocol MUST provide IS-05 `ext_privacy` extended transport parameters and constraints that specify the extent of support for the features defined in [TR-10-13][]. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:privacy` capability and the IS-05 `ext_privacy` transport parameters constraints to verify Receivers compliance with a Sender and if necessary constrain the Sender to make it compliant with the Receivers. It is not allowed to constrain a Sender for the `urn:x-matrox:cap:transport:privacy` capability as privacy encryption is a protection mechanism under the control of the Sender only. However, a Controller MAY select the value of IS-05 `ext_privacy` parameters within the limits of the associated constraints.
 
 > Note: A Sender is configured by an administrator to produce either privacy encrypted streams or non-encrypted streams. The Sender  `urn:x-matrox:cap:transport:privacy` capability indicates the current configuration.
+
+### SDP Transport File
+
+The `privacy` attribute of [TR-10-13][] is not yet registered with IANA. If it would, the definition would indicate "Usage Level: session, media" indicating that a session-level `privacy` attribute represents the default value for a media-level `privacy` attribute that is not specified. The SDP transport file may provide the `privacy` information either at the session-level and media-level.
+
+The PEP specification uses the expression "a privacy session attribute or a number of privacy media attributes" to clearly indicate the "Usage Level: session, media" usage.
 
 ### Activation
 
