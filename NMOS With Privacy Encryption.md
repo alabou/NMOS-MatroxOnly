@@ -103,9 +103,7 @@ The `ext_privacy` transport parameters MAY be used with any transport supporting
 
 Each `ext_privacy` transport parameter MUST have an associated constraint that indicates either that the parameter is unconstrained, allowing any valid value, or that it is constrained to a specific set of allowable values. A parameter identified as `read-only` in the parameter definitions table MUST always be constrained to a single value. A Sender/Receiver MUST fail an activation if any IS-05 `ext_privacy` transport parameter violates its defined constraints.
 
-The `constraints` endpoint of parameters `ext_privacy_protocol`, `ext_privacy_mode` of Senders and Receivers MUST declare all the supported protocols and modes. These parameters MUST NOT be unconstrained.
-
-The `ext_privacy` transport parameters constraints MUST NOT change when `master_enable` attribute of a Sender/Receiver `active` endpoint is `true`.
+The `constraints` endpoint of parameters `ext_privacy_protocol`, `ext_privacy_mode` of Senders and Receivers MUST declare all the supported protocols and modes. These parameters MUST NOT be unconstrained. The constraints of these parameters MUST NOT change when `master_enable` attribute of a Sender/Receiver `active` endpoint is `true`.
 
 ### Protocol
 The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "USB", "USB_KV", "SRT", "RTSP", "RTSP_KV", "NULL"
