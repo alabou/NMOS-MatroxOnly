@@ -103,9 +103,9 @@ The `ext_privacy` transport parameters MAY be used with any transport supporting
 
 Each `ext_privacy` transport parameter MUST have an associated constraint that indicates either that the parameter is unconstrained, allowing any valid value, or that it is constrained to a specific set of allowable values. A parameter identified as `read-only` in the parameter definitions table MUST always be constrained to a single value. A Sender/Receiver MUST fail an activation if any IS-05 `ext_privacy` transport parameter violates its defined constraints.
 
-The `constraints` endpoint of parameters `ext_privacy_protocol`, `ext_privacy_mode` of Senders and Receivers MUST list all the supported protocols and modes.
+The `constraints` endpoint of parameters `ext_privacy_protocol`, `ext_privacy_mode` of Senders and Receivers MUST declare all the supported protocols and modes. These parameters MUST NOT be unconstrained.
 
-Sender/Receiver constraints associated with parameters `ext_privacy_protocol` and `ext_privacy_mode` MUST declare all the supported protocols and modes. These parameters MUST NOT be unconstrained.
+The `ext_privacy` transport parameters constraints MUST NOT change when `master_enable` attribute of a Sender/Receiver `active` endpoint is `true`.
 
 ### Protocol
 The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "USB", "USB_KV", "SRT", "RTSP", "RTSP_KV", "NULL"
@@ -184,7 +184,6 @@ The ECDH functionality is available through the IS-05 extended transport paramet
 
 A Sender supporting privacy encryption MUST follow the requirements of the "Privacy" section of the "NMOS With IPMX" specification regarding IS-04 Sender Capabilities, IS-05 transport parameter constraints and IS-11 supported constraints.
 
-
 ## IS-04, IS-05 Receivers
 
 A Receiver supporting privacy encryption MUST follow the requirements of the "Privacy" section of the "NMOS With IPMX" specification regarding IS-04 Receiver Capabilities and IS-05 transport parameter constraints.
@@ -227,6 +226,8 @@ The ECDH mode is possible only in peer-to-peer mode where one Receiver connect/s
 
 The activation of a Sender with `master_enable` set to `false` MUST regenerate the value of the active and staged `ext_privacy_ecdh_sender_public_key` transport parameter if the ECDH mode is supported.
 
+At activation (`master_enable` becomes or remains false) a Sender MUST update the `ext_privacy_ecdh_sender_public_key`, at the `staged`, `active` and `constraints` endpoints prior to completing the activation.
+
 A Controller MUST read the value of the `ext_privacy_ecdh_sender_public_key` transport parameter after the activation of the Sender with `master_enable` set to `true`.
 
 A Controller MUST provide the value of the peer Receiver's `ext_privacy_ecdh_receiver_public_key` transport parameter to the Sender at activation with `master_enable` set to `true`.
@@ -247,13 +248,15 @@ The [TR-10-13][] expression "become inactive" in other contexts MUST be interpre
 
 In a "re-activation" a Receiver MAY change all the privacy encryption parameter but the Receier's ECDH privat/public keys pair.
 
-At activation (`master_enable` becomes true) and re-activation (`mater_enable` remains true) a Receiver MUST update the `ext_privacy` transport parameters at the `staged`, `active` and `constraints` endpoints prior to completing the activation.
+At activation (`master_enable` becomes true) and re-activation (`mater_enable` remains true) a Receiver MUST update the `ext_privacy` transport parameters, with the exception of `ext_privacy_ecdh_sender_public_key`, at the `staged`, `active` and `constraints` endpoints prior to completing the activation.
 
 #### With ECDH
 
 The ECDH mode is possible only in peer-to-peer mode where one Receiver connect/subscribe to one Sender.
 
 The activation of a Receiver with `master_enable` set to `false` MUST regenerate the value of the active and staged `ext_privacy_ecdh_receiver_public_key` transport parameter if the ECDH mode is supported. To change the value of the `ext_privacy_ecdh_curve` transport parameter of a Receiver, a Controller MUST set `master_enable` to false during an activation in order to regenerate a new value for the `ext_privacy_ecdh_receiver_public_key` transport parameter.
+
+At activation (`master_enable` becomes or remains false) a Receiver MUST update the `ext_privacy_ecdh_receiver_public_key`, at the `staged`, `active` and `constraints` endpoints prior to completing the activation.
 
 Once a Controller reads the `ext_privacy_ecdh_receiver_public_key` transport parameters of a Receiver to provide its value to a Sender it MUST NOT perform any other activation of the Receiver with `master_enable` set to `false` as otherwise the value of `ext_privacy_ecdh_receiver_public_key` would change.
 
