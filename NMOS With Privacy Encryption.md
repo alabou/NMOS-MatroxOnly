@@ -93,9 +93,9 @@ ext_privacy_ecdh_curve | string | - | r/w | r/w
 
 ### IS-05 Transport Parameters
 
-A Sender/Receiver implementing [TR-10-13][] MUST provide the following IS-05 extended transport parameters in the active, staged and constraints endpoints: `ext_privacy_protocol`, `ext_privacy_mode`, `ext_privacy_iv`, `ext_privacy_key_generator`, `ext_privacy_key_version` and `ext_privacy_key_id`.
+A Sender/Receiver implementing [TR-10-13][] MUST provide the following IS-05 extended transport parameters in the `active`, `staged` and `constraints` endpoints: `ext_privacy_protocol`, `ext_privacy_mode`, `ext_privacy_iv`, `ext_privacy_key_generator`, `ext_privacy_key_version` and `ext_privacy_key_id`.
 
-A Sender/Receiver implementing [TR-10-13][] and supporting the ECDH mode MUST also provide the following IS-05 extended transport parameters in the active, staged and constraints endpoints: `ext_privacy_ecdh_sender_public_key`, `ext_privacy_ecdh_receiver_public_key` and `ext_privacy_ecdh_curve`.
+A Sender/Receiver implementing [TR-10-13][] and supporting the ECDH mode MUST also provide the following IS-05 extended transport parameters in the `active`, `staged` and `constraints` endpoints: `ext_privacy_ecdh_sender_public_key`, `ext_privacy_ecdh_receiver_public_key` and `ext_privacy_ecdh_curve`.
 
 The `ext_privacy` transport parameters MAY be used with any transport supporting privacy encryption and having a protocol adaptation specified in either one of [TR-10-13], [TR-10-14], other VSF/IPMX technical recommendations or this specification.
 
@@ -103,7 +103,7 @@ The `ext_privacy` transport parameters MAY be used with any transport supporting
 
 Each `ext_privacy` transport parameter MUST have an associated constraint that indicates either that the parameter is unconstrained, allowing any valid value, or that it is constrained to a specific set of allowable values. A parameter identified as `read-only` in the parameter definitions table MUST always be constrained to a single value. A Sender/Receiver MUST fail an activation if any IS-05 `ext_privacy` transport parameter violates its defined constraints.
 
-The constraints endpoint of parameters `ext_privacy_protocol`, `ext_privacy_mode` of Senders and Receivers MUST list all the supported protocols and modes.
+The `constraints` endpoint of parameters `ext_privacy_protocol`, `ext_privacy_mode` of Senders and Receivers MUST list all the supported protocols and modes.
 
 Sender/Receiver constraints associated with parameters `ext_privacy_protocol` and `ext_privacy_mode` MUST declare all the supported protocols and modes. These parameters MUST NOT be unconstrained.
 
@@ -205,7 +205,7 @@ If a mismatch is detected in `protocol`, `mode`, or `ecdh_curve` parameters, or 
 
 ### IS-05 Sender Activation
 
-The effective values of the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file of a Sender are not fixed until the activation of the Sender and `master_enable` becomes `true` at the active endpoint. A Controller MUST NOT assume final values for the IS-05 `ext_privacy` transport parameters of a Sender prior to activation. A Controller MUST NOT assume final values for the SDP transport file `privacy` attribute parameters of a Sender prior to activation.
+The effective values of the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file of a Sender are not fixed until the activation of the Sender and `master_enable` becomes `true` at the `active` endpoint. A Controller MUST NOT assume final values for the IS-05 `ext_privacy` transport parameters of a Sender prior to activation. A Controller MUST NOT assume final values for the SDP transport file `privacy` attribute parameters of a Sender prior to activation.
 
 The values of the parameters of the `privacy` attribute of the SDP transport file of an active Sender MUST match the values of the active `ext_privacy` transport parameters of such an active Sender.
 
@@ -213,7 +213,13 @@ It is important to consider this requirement of [IS-05][] [Re-Activating Senders
 
 > "If an explicit activation is performed against a Sender or Receiver, the API MUST request a re-application of settings to the underlying Sender or Receiver implementation whether the settings have changed or not. For example, in the case of multicast Receivers, it is suggested that this involves an explicit IGMP leave and join. For a Sender, this might involve stopping and re-starting the stream."
 
-The [TR-10-13][] expression "become inactive" MUST be interpreted as `master_enable` becomes `false` at the active endpoint of a Sender and as such the Sender MUST NOT change the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file during "re-activation" because `master_enable` remains `true` at the active endpoint of the Sender. The privacy encryption parameters of a Sender MUST remain unchanged during "re-activation".
+The [TR-10-13][] expression "becomes inactive" in the context of the ECDH private/public keys pair MUST be interpreted as an activation with `master_enable` set to `false` resulting in `master_enable` remaining or becoming `false` at the `active` endpoint of a Sender.
+
+The [TR-10-13][] expression "become inactive" in other contexts MUST be interpreted as either internally becoming momentarily inactive during an activation with `master_enable` set to `true` resulting in `master_enable` remaining `true` at the `active` endpoint of a Sender, or becoming inactive during activation with `master_enable` set to `false` resulting in `master_enable` remaining or becoming `false` at the `active` endpoint of a Sender.
+
+In a "re-activation" a Sender MAY change all the privacy encryption parameter but the Sender's ECDH privat/public keys pair.
+
+At activation (`master_enable` becomes true) and re-activation (`mater_enable` remains true) a Sender MUST update the `ext_privacy` transport parameters at the `staged`, `active` and `constraints` endpoints and the `privacy` attribute parameters of the SDP transport file at the `transportfile` endpoint prior to completing the activation.
 
 #### With ECDH
 
@@ -235,7 +241,13 @@ It is important to consider this requirement of [IS-05][] [Re-Activating Senders
 
 > "If an explicit activation is performed against a Sender or Receiver, the API MUST request a re-application of settings to the underlying Sender or Receiver implementation whether the settings have changed or not. For example, in the case of multicast Receivers, it is suggested that this involves an explicit IGMP leave and join. For a Sender, this might involve stopping and re-starting the stream."
 
-The [TR-10-13][] expression "become inactive" MUST be interpreted as `master_enable` becomes `false` at the active endpoint of a Receiver and as such the Receiver MUST NOT change the IS-05 `ext_privacy` transport parameters during "re-activation" because `master_enable` remains `true` at the active endpoint of the Receiver. The privacy encryption parameters of a Receiver MUST remain unchanged during "re-activation".
+The [TR-10-13][] expression "becomes inactive" in the context of the ECDH private/public keys pair MUST be interpreted as an activation with `master_enable` set to `false` resulting in `master_enable` remaining or becoming `false` at the `active` endpoint of a Receiver.
+
+The [TR-10-13][] expression "become inactive" in other contexts MUST be interpreted as either internally becoming momentarily inactive during an activation with `master_enable` set to `true` resulting in `master_enable` remaining `true` at the `active` endpoint of a Receiver, or becoming inactive during activation with `master_enable` set to `false` resulting in `master_enable` remaining or becoming `false` at the `active` endpoint of a Receiver.
+
+In a "re-activation" a Receiver MAY change all the privacy encryption parameter but the Receier's ECDH privat/public keys pair.
+
+At activation (`master_enable` becomes true) and re-activation (`mater_enable` remains true) a Receiver MUST update the `ext_privacy` transport parameters at the `staged`, `active` and `constraints` endpoints prior to completing the activation.
 
 #### With ECDH
 
