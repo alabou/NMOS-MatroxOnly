@@ -203,11 +203,17 @@ If a mismatch is detected in `protocol`, `mode`, or `ecdh_curve` parameters, or 
 
 > Note: IS-11 operates at the IS-04 capabilities/constraints level and cannot be used to constrain privacy encryption, which must be managed using IS-05.
 
-### IS-05 Sender activation
+### IS-05 Sender Activation
 
 The effective values of the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file of a Sender are not fixed until the activation of the Sender and `master_enable` becomes `true` at the active endpoint. A Controller MUST NOT assume final values for the IS-05 `ext_privacy` transport parameters of a Sender prior to activation. A Controller MUST NOT assume final values for the SDP transport file `privacy` attribute parameters of a Sender prior to activation.
 
-The values of the parameters of the `privacy` attribute of the SDP transport file of an active Sender MUST match the values of the active `ext_privacy` transport parameters of such active Sender.
+The values of the parameters of the `privacy` attribute of the SDP transport file of an active Sender MUST match the values of the active `ext_privacy` transport parameters of such an active Sender.
+
+It is important to consider this requirement of [IS-05][] [Re-Activating Senders & Receivers](https://specs.amwa.tv/is-05/releases/v1.1.2/docs/Behaviour.html#re-activating-senders--receivers) that states:
+
+> "If an explicit activation is performed against a Sender or Receiver, the API MUST request a re-application of settings to the underlying Sender or Receiver implementation whether the settings have changed or not. For example, in the case of multicast Receivers, it is suggested that this involves an explicit IGMP leave and join. For a Sender, this might involve stopping and re-starting the stream."
+
+This requirement implies that the privacy encryption implementation MUST behave as if `master_enable` becomes `true` at the active endpoint. The effective values of the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file of a Sender MAY change, and new parameters specific to this activation become effective. If the parameters are exactly the same, a Sender MAY seamlessly continue streaming without interruption.
 
 #### With ECDH
 
@@ -224,6 +230,12 @@ With ECDH a Controller MUST exchange the Sender and Receiver public keys to acti
 ### IS-05 Receiver activation
 
 For transports supporting an SDP transport file, if the ECDH mode is not used, the process of activating a Receiver is the same with and without privacy encryption. A Controller SHOULD get the SDP transport file of a Sender and provide it to the Receivers at activation. The privacy encryption parameters of the Sender are automatically taken from the SDP transport file.
+
+It is important to consider this requirement of [IS-05][] [Re-Activating Senders & Receivers](https://specs.amwa.tv/is-05/releases/v1.1.2/docs/Behaviour.html#re-activating-senders--receivers) that states:
+
+> "If an explicit activation is performed against a Sender or Receiver, the API MUST request a re-application of settings to the underlying Sender or Receiver implementation whether the settings have changed or not. For example, in the case of multicast Receivers, it is suggested that this involves an explicit IGMP leave and join. For a Sender, this might involve stopping and re-starting the stream."
+
+This requirement implies that the privacy encryption implementation MUST behave as if `master_enable` becomes `true` at the active endpoint. The values of the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file of a Receiver MAY change, and new parameters specific to this activation become effective. If the parameters are exactly the same, a Receiver MAY seamlessly continue streaming without interruption.
 
 #### With ECDH
 
