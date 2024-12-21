@@ -172,7 +172,7 @@ If the ECDH mode is not supported by a Sender/Receiver and the `ext_privacy_ecdh
 
 The `ecdh_curve` “secp256r1" MUST be supported by all devices implementing the ECDH mode.
 
-Sender/Receiver constraints associated with parameter `ext_privacy_ecdh_curve`  MUST declare all the supported curves. This parameter MUST NOT be unconstrained.
+Sender/Receiver constraints associated with parameter `ext_privacy_ecdh_curve` MUST declare all the supported curves. This parameter MUST NOT be unconstrained. The constraints of this parameter MUST NOT change when `master_enable` attribute of a Sender/Receiver `active` endpoint is `true`.
 
 The ECDH functionality is available through the IS-05 extended transport parameters only. There are no ECDH parameters in the `privacy` attribute of an SDP transport file. The ECDH modes of operation are optional and none of those modes are required to be supported by an implementation conforming with [TR-10-13], [TR-10-14][] or other VSF/IPMX technical recommendations.
 
