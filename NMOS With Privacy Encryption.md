@@ -213,7 +213,7 @@ It is important to consider this requirement of [IS-05][] [Re-Activating Senders
 
 > "If an explicit activation is performed against a Sender or Receiver, the API MUST request a re-application of settings to the underlying Sender or Receiver implementation whether the settings have changed or not. For example, in the case of multicast Receivers, it is suggested that this involves an explicit IGMP leave and join. For a Sender, this might involve stopping and re-starting the stream."
 
-This requirement implies that the privacy encryption implementation MUST behave as if `master_enable` becomes `true` at the active endpoint and the Sender MUST assume momentarily becoming inactive prior to re-activation even if `master_enable` remains `true`. The effective values of the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file of a Sender MAY change, and new parameters specific to this activation become effective. If the parameters are exactly the same, a Sender MAY seamlessly continue streaming without interruption.
+The [TR-10-13][] expression "become inactive" MUST be interpreted as `master_enable` becomes `false` at the active endpoint of a Sender and as such the Sender MUST NOT change the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file during "re-activation" because `master_enable` remains `true` at the active endpoint of the Sender. The privacy encryption parameters of a Sender MUST remain unchanged during "re-activation".
 
 #### With ECDH
 
@@ -235,7 +235,7 @@ It is important to consider this requirement of [IS-05][] [Re-Activating Senders
 
 > "If an explicit activation is performed against a Sender or Receiver, the API MUST request a re-application of settings to the underlying Sender or Receiver implementation whether the settings have changed or not. For example, in the case of multicast Receivers, it is suggested that this involves an explicit IGMP leave and join. For a Sender, this might involve stopping and re-starting the stream."
 
-This requirement implies that the privacy encryption implementation MUST behave as if `master_enable` becomes `true` at the active endpoint and the Receiver MUST assume momentarily becoming inactive prior to re-activation even if `master_enable` remains `true`. The values of the IS-05 `ext_privacy` transport parameters and the `privacy` attribute parameters of the SDP transport file of a Receiver MAY change, and new parameters specific to this activation become effective. If the parameters are exactly the same, a Receiver MAY seamlessly continue streaming without interruption.
+The [TR-10-13][] expression "become inactive" MUST be interpreted as `master_enable` becomes `false` at the active endpoint of a Receiver and as such the Receiver MUST NOT change the IS-05 `ext_privacy` transport parameters during "re-activation" because `master_enable` remains `true` at the active endpoint of the Receiver. The privacy encryption parameters of a Receiver MUST remain unchanged during "re-activation".
 
 #### With ECDH
 
