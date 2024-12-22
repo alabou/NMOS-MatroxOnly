@@ -68,6 +68,6 @@ These specifications represent a significant evolution in NMOS technology, offer
 
 ## Testing
 
-The `nmos-testing` branch [MatroxOnly](https://github.com/alabou/nmos-testing/tree/MatroxOnly) provides the Matrox-Transports and Matrox-Capabilities test suites for testing the extended transports and capabilities.
+The `nmos-testing` branch [MatroxOnly](https://github.com/alabou/nmos-testing/tree/MatroxOnly) provides the Matrox-Transports, Matrox-Capabilities, Matrox-Privacy, Matrox-AAC, Matrox-H264, Matrox-H265 test suites for testing the extended transports, capabilities, privacy encryption and AAC audio, H.264 video, H.265 video formats.
 
 The `nmos-parameter-registers` branch [MatroxOnly](https://github.com/alabou/nmos-parameter-registers/tree/MatroxOnly) provides the parameter registers for the NMOS Advanced Streaming Architecture.
