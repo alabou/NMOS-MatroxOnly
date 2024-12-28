@@ -84,13 +84,13 @@ An example Sender resource is provided in the [Examples](https://github.com/alab
 
 The `manifest_href` attribute of the Sender MUST provide the URL to an SDP transport file compliant with the requirements of [TR-10-14][] and the following:
 
-- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have <media> set to `application`, <proto> set to `TCP` and <fmt> set to `usb` to express that the `media_type` is `application/usb` and the TCP protocol is used by the `urn:x-nmos:transport:usb` transport.
+- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have `<media>`set to `application`, `<proto>` set to `TCP` and `<fmt>` set to `usb` to express that the `media_type` is `application/usb` and the TCP protocol is used by the `urn:x-nmos:transport:usb` transport.
 
-- The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have <connection-address> set to the IP address of the Sender's TCP server.
+- The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have `<connection-address>` set to the IP address of the Sender's TCP server.
 
 - The attribute `a=setup:passive` MUST be specifified.
 
-- If redundancy is used at most two paths (legs) MUST be specified using two media descriptors. The <connection-address> of each media descriptor specify a different path for reaching the TCP server of the Sender. A `a=group:DUP` session attribute MUST specify the two media paths identified using the `a=mid:` media attribute. The first identifier of the `a=group:DUP` session attribute MUST specify the first leg (path) and the other identifier the second leg. The first leg corresponds to entry 0 of the IS-05 transport parameters array while the second leg corresponds to entry 1.
+- If redundancy is used at most two paths (legs) MUST be specified using two media descriptors. The `<connection-address>` of each media descriptor specify a different path for reaching the TCP server of the Sender. A `a=group:DUP` session attribute MUST specify the two media paths identified using the `a=mid:` media attribute. The first identifier of the `a=group:DUP` session attribute MUST specify the first leg (path) and the other identifier the second leg. The first leg corresponds to entry 0 of the IS-05 transport parameters array while the second leg corresponds to entry 1.
 
 ## USB IS-04 Receivers
 
