@@ -42,9 +42,9 @@ Let define a `usb_device` object as
 ```
 {
     "ipmx_bus_id": [64]integer, // IPMX USB IP UTF8 BUSID 64 byte value (integers in the range 0 to 255)
-    "class": []integer,         // class of a device or classes if a composite device
-    "vendor": integer,          // vendor id
-    "product": integer,         // product id
+    "class": []integer,         // class of a device or classes if a composite device (integers in the range 0 to 255)
+    "vendor": integer,          // vendor id (integer in the range 0 to 65535)
+    "product": integer,         // product id (integer in the range 0 to 65535)
     "serial": string,           // serial number
 }
 ```
