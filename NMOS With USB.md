@@ -74,7 +74,7 @@ The Sender MUST express its limitations or preferences regarding the USB streams
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-A Sender SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (array of integers in the range 0 to 255) that are supported by the Sender. See [USB][https://www.usb.org] for class codes definitions.
+A Sender SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (integers in the range 0 to 255) that are supported by the Sender. See [USB][https://www.usb.org] for class codes definitions.
 
 A USB Sender is a TCP/IP server. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-patsh TCP) scheme for redundancy.
 
@@ -104,7 +104,7 @@ The Receiver MUST express its limitations or preferences regarding the USB strea
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-A USB Receiver SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (array of integers in the range 0 to 255) supported by the USB Receiver. See [USB][https://www.usb.org] for class codes definitions.
+A USB Receiver SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (integers in the range 0 to 255) supported by the USB Receiver. See [USB][https://www.usb.org] for class codes definitions.
 
 A USB Receiver is a TCP/IP client. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-patsh TCP) scheme for redundancy.
 
