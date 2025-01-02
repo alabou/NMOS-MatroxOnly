@@ -41,7 +41,7 @@ A Controller may manage as independent Streams, no longer part of a group, those
 
 ![Independent STreams](images/Diapositive7.PNG)
 
-A Controller may allow a User to shuffle the attachment for each format the active Streams/sub-Streams. Such Controller has the responsibility to perform the same shuffle for the assocaited Receiver Capabilities. The Receivers are unaware that such shuffling is performed. Such management is totally under the control of a Controller. Such remapping is allowed also for a mux Receiver. The `audio_layers_mapping`, `video_layers_mapping` and `data_layers_mapping` transport attributes provides the necessary mechanism for a Controller to shuffle the attachment of the sub-Streams of a mux Receiver. This operation is analogue to what a Controller does with independent Streams, here at the sub-Stream level. Again the Receiver is responsible for shuffling the Receiver Capabilities the same way.
+A Controller may allow a User to shuffle the attachment for each format the active Streams/sub-Streams. Such Controller has the responsibility to perform the same shuffle for the associated Receiver Capabilities. The Receivers are unaware that such shuffling is performed. Such management is totally under the control of a Controller. Such remapping is allowed also for a mux Receiver. The `audio_layers_mapping`, `video_layers_mapping` and `data_layers_mapping` transport attributes provides the necessary mechanism for a Controller to shuffle the attachment of the sub-Streams of a mux Receiver. This operation is analogue to what a Controller does with independent Streams, here at the sub-Stream level. Again the Receiver is responsible for shuffling the Receiver Capabilities the same way.
 
 ![Independent STreams](images/Diapositive8.PNG)
 
