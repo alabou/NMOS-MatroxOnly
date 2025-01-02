@@ -17,7 +17,7 @@ This document describes a model for configuring and controling with IS-11, using
 
 In our Model a group of Streams configured and transmitted independently is analogous to a multiplexed Stream transmitted as a single Stream where each sub-Stream is configured independently.
 
-From a User point of view audio, video and data Streams/sub-Streams are nominated based on a format (audio, video, data) and an index/layer. For a User it is not necessary to know if `audio 0` refers to a Stream transmitted independently or a sub-Stream multiplexed and transmitted as part of a mux Stream. The implementation details differ. The former has multiple Senders that must each be controlled independently with IS-11 and IS-05. The later has a single Sender that is controlled with IS-05 as the mux level and IS-11 at the mux level and also at each sub-Stream level.
+From a User point of view audio, video and data Streams/sub-Streams are nominated based on a format (audio, video, data) and an index/layer. For a User it is not necessary to know if `audio 0` refers to a Stream transmitted independently or a sub-Stream multiplexed and transmitted as part of a mux Stream. The implementation details differ. The former has multiple Senders that must each be controlled independently with IS-11 and IS-05. The later has a single Sender that is controlled with IS-05 at the mux level and IS-11 at the mux level and also at each sub-Stream level.
 
 # Vendor specific configuration of the topology
 
