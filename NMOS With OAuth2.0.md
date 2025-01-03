@@ -121,6 +121,8 @@ An NMOS Node SHOULD increment a status counter a) when a ReadOnly access is deni
 
 An NMOS Node SHOULD provide endpoints for getting a WebSocket upgrade that are specific for ReadOnly access and ReadWrite access. If a ReadOnly access endpoint (having the suffix "Guest") is not provided, the endpoint is qualified as having ReadWrite access and causing side-effects on the state of the NMOS Node. So although a `GET` verb is used to get an upgrade to a WebSocket, the request cannot be qualified as ReadOnly unless explicitly qualified.
 
+Subscribing to notification messages MUST be considered a read-only operation even if registering a websocket for receiving notification messages from objects causes side-effects on the state of the NMOS Node.
+
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [BCP-002-02]: https://specs.amwa.tv/bcp-002-02/ "AMWA BCP-002-02: NMOS Asset Distinguishing Information"
