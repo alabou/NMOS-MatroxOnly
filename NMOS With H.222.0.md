@@ -69,9 +69,9 @@ A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow w
 
 A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an MPEG2-TS stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
-A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/L16`, `audio/L20` or `audio/L24` MUST be embedded in the MPEG2-TS stream as per [ST 302M][]. The sub-Flow MUST have an odd number of channels that will produce (channels/2) linear PCM AES3 streams.
+A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/L16`, `audio/L20` or `audio/L24` MUST be embedded in the MPEG2-TS stream as per [ST 302M][]. The sub-Flow MUST have an even number of channels that will produce (channels/2) linear PCM AES3 streams.
 
-A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/AM824` MUST be embedded in the MPEG2-TS stream as per [ST 302M][]. Such sub-Flow MUST be an opaque AM824 Flow as per [NMOS with AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md). Such sub-Flow MAY contain linear PCM and non-linear data. The sub-Flow MUST have an odd number of channels that will produce (channels/2) AES3 streams.
+A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/AM824` MUST be embedded in the MPEG2-TS stream as per [ST 302M][]. Such sub-Flow MUST be an opaque AM824 Flow as per [NMOS with AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md). Such sub-Flow MAY contain linear PCM and non-linear data. The sub-Flow MUST have an even number of channels that will produce (channels/2) AES3 streams.
 
 Note: Linear PCM Flows and opaque AM824 Flows are implicitely embedded in the MPEG2-TS stream as per [ST 302M][]. Coded audio Flows are embedded according to their format as per [H.222.0][]. A fully described AM824 Flow cannot be a sub-Flow of an H.222.0 mux Flow.
 
