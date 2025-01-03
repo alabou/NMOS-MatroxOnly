@@ -241,7 +241,7 @@ MvMethodResultEventCounters is a sequence of MvEventCounter
 This method returns the sequence of detailed counters associated with the alert descriptor identified by `alertDescriptorIndex`.
 
 #### ClearActiveAlert(NcUint16 alertDescriptorIndex)
-This method clear the alert associated with the alert descriptor identifies by `alertDescriptorIndex`.
+This method clear the alert associated with the alert descriptor identified by `alertDescriptorIndex`.
 
 ### Notifications
 Notifications about alerts are obtained by subscribing to the MvAlertManager object and monitoring events on the `alert` property.
