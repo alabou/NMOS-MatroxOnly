@@ -187,6 +187,10 @@ If the Receiver is not capable of consuming the stream described by a `PATCH` on
 
 ### Receivers
 
+A Receiver MAY support the extended [layers maping transport attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/TransportAttributes.md#audio_layers_mapping-video_layers_mapping-data_layers_mapping). This enables a Controller to select among the sub-Streams provided by a Sender, those that are mapped as the layers of a mux Receiver.
+
+A Controller utilizing the `ext_audio_layers_mapping`, `ext_video_layers_mapping`, `ext_data_layers_mapping` transport attributes MUST remap the Receiver's capabilities to correspond with the mapped Sender's layers. It MUST present these remapped capabilities to the User and utilize them in its operations. The remapping operation of the Receiver's capabilities MUST exclusively update the `urn:x-matrox:cap:meta:layer` constraint set attribute, leaving all other attributes unchanged. The remapped Receiver's capabilities MAY exclude constraint sets corresponding to layers in the multiplexed stream that are unused by the Receiver.
+
 ### Senders
 
 A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
