@@ -36,7 +36,7 @@ An NMOS Registry MUST NOT enable OAuth2.0 authorizations on its registration API
 ## Scope
 The scope of an OAuth2.0 authorization is usually the name of the NMOS API used in the path to access the API. For example accessing the IS-05 ConnectionAPI at http://api.example.com/x-nmos/connection/{version} implies the "connection" scope. For IS-04 NodeAPI, QueryAPI, RegistrationAPI, IS-05 ConnectionAPI, IS-08 ChannelMappingAPI and IS-11 StreamCompatibilityManagementAPI the scope MUST be "node", "query", registration", "connection", "channelmapping" and "streamcompatibility" respectively. For IS-12 the scope for accessing MS-05-02 API / Objects MUST use the "nc" scope. For accessing an "x-manufacturer" based API the scope MUST be "manufacturer".
 
-Matrox IS-12 RestAPI is accessible through the IS-12 endpoint and MUST use the "nc" scope as the IS-12 WebSocket accesses.
+Matrox IS-12 RestAPI is accessible through the IS-12 endpoint and MUST use the "nc" scope as for the IS-12 WebSocket accesses.
 
 ## Paths
 
