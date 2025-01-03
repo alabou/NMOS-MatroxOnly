@@ -136,7 +136,9 @@ The mux Receiver MUST express its limitations or preferences regarding the H.222
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers are ignored.
+The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers MUST be ignored.
+
+> Note: The maximum number of sub-Streams (layers) supported by a Receiver is an indication of the processing capabilities of a Receiver. It does not prevent a mux stream from including more that the Receiver's maximum number of layers.
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
   Indicate the minimum and maximum audio layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
