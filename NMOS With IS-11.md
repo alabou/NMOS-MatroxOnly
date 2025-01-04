@@ -75,6 +75,12 @@ The capabilities of a Receiver MAY change as a result of a configuration change 
 
 For a Receiver with HDMI Outputs supporting EDID, the information from the EDID of the device connected to the HDMI Output MAY influence the capabilities of the Receiver. For example a connected monitor suporting a maximum resolution of 1080p could change the maximum resolution supported by the associated Receiver to max 1080p. 
 
+#### Preference
+
+A Receiver SHOULD express its capabilities using a `urn:x-nmos:cap:meta:preference` value of 100 for the preferred configuration and other values for alternate configurations. A Receiver MUST express its capabilities using the `urn:x-nmos:cap:meta:preference` meta attribute considering that capabilities are first sorted from high to low values of `urn:x-nmos:cap:meta:preference` prior to be processed by Controllers and Senders.
+
+The preferred configuration SHOULD allow a single possible value for capabilities that are not unconstrained.
+
 ## Senders
 
 Initialy a Controller MUST verify if the IS-11 API is supported for a given Sender by a `GET` to `/x-nmos/streamcompatibility/v1.0/senders/{senderId}/status`. If the response status is 200 the Sender supports the IS-11 API, otherwise it does not support the IS-11 API.
@@ -109,6 +115,12 @@ The capabilities of a Sender MAY change as a result of a configuration change fr
 
 Sender capabilities SHOULD NOT change when a Sender is active (active `master_enable` is true) as this could make the active constraints invalid and/or the current Flow/sub-Flows non-compliant.
 
+#### Preference
+
+A Sender SHOULD express its capabilities using a `urn:x-nmos:cap:meta:preference` value of 100 for the preferred configuration and other values for alternate configurations. A Sender MUST express its capabilities using the `urn:x-nmos:cap:meta:preference` meta attribute considering that capabilities are first sorted from high to low values of `urn:x-nmos:cap:meta:preference` prior to be processed by Controllers and Senders.
+
+The preferred configuration SHOULD allow a single possible value for capabilities that are not unconstrained.
+
 ### Active Constraints
 
 The active constraints applied to a Sender MUST be within the capabilities of the Sender and a Sender SHOULD return a 422 (UnprocessableEntity) response status. Constraints cannot enhance the Sender capabilities.
@@ -116,6 +128,10 @@ The active constraints applied to a Sender MUST be within the capabilities of th
 If the Sender capabilities change while there are active constraints, the Sender MUST only consider the intersection the new Sender capabilities with the active constraints, ignoring the space of active constraints outside the new Sender capabilities.
 
 A Controller MUST NOT assume that active constraints within the capabilities of an IS-11 Sender are guaranteed to prevent an "active_constraints_violation" `state` on the Sender. The ability of a Sender to comply with the active constraints depend on various factors, some of which are out of the control of the Sender.
+
+#### Preference
+
+A Controller SHOULD express its active constraints using a `urn:x-nmos:cap:meta:preference` value of 100 for the preferred configuration and other values for alternate configurations. A Controller MUST express its active constraints using the `urn:x-nmos:cap:meta:preference` meta attribute considering that active constraints are first sorted from high to low values of `urn:x-nmos:cap:meta:preference` prior to be processed by Senders.
 
 ### Propagating the preferred capabilities
 
