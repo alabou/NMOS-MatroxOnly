@@ -123,9 +123,13 @@ The preferred configuration SHOULD allow a single possible value for capabilitie
 
 ### Active Constraints
 
-The active constraints applied to a Sender MUST be within the capabilities of the Sender and a Sender SHOULD return a 422 (UnprocessableEntity) response status. Constraints cannot enhance the Sender capabilities.
+The active constraints applied to a Sender MUST be within the capabilities of the Sender as active constraints cannot enhance the Sender capabilities.
 
 If the Sender capabilities change while there are active constraints, the Sender MUST only consider the intersection the new Sender capabilities with the active constraints, ignoring the space of active constraints outside the new Sender capabilities.
+
+A Controller SHOULD monitor the version and caps.version attributes of Senders resources in the Registry to assess if the Sender capabilities have changed and then re-evaluate the Sender's active constraints based on the latest information.
+
+> Note: The active constraints of a Sender are possibly invalid after a change of Sender capabilities. This is why the Sender is required to consider/use only the intersection of the active constraints and its own capabilities.
 
 A Controller MUST NOT assume that active constraints within the capabilities of an IS-11 Sender are guaranteed to prevent an "active_constraints_violation" `state` on the Sender. The ability of a Sender to comply with the active constraints depend on various factors, some of which are out of the control of the Sender.
 
