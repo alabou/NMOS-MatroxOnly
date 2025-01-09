@@ -253,8 +253,6 @@ The base domain events are defined for the domain event counter (having an id co
 
 #### link (1000)
 #### linkDown (1001)
-This is the SRF link down event.
-
 This event indicates that the associated network interface transitionned from the UP to the DOWN state. A network interface that is denied access to the network MUST not report a `linkDown` event because the interface is still UP and "partially" working. If the network interface becomes DOWN because the associated sub-system detected either a disconnect from the network connector, a signal integrity issue or a protocol issue, the severity state MUST be `inactive`. The interface became DOWN because of an external issue. If the network interface becomes DOWN because the associated sub-system detected an internal error the severity state MUST be `malfunction`. The interface became DOWN because of an internal issue. Textual information MAY be provided along withthe event to describe the circumstances of the network interface transitionning to the DOWN state.
 
 #### linkOk (1002)
@@ -262,14 +260,8 @@ This event is used to notify the recovery state of a link domain after a non-Ok 
 
 #### transport (2000)
 #### transportPacketLost (2001)
-This is the SRF packet lost event.
-
 #### transportPacketLate (2002)
-This is the SRF packet late event.
-
 #### transportStreamError (2003)
-This is the SRF stream invalid event when detected at the transport level.
-
 #### transportPacketRecovered (2004)
 This event indicate that a packet has been recovered using a redundancy or FEC mechanism.
 
@@ -278,8 +270,6 @@ This event is used to notify the recovery state of a transport domain after a no
 
 #### essence (3000)
 #### essenceStreamError (3001)
-This is the SRF stream invalid event when detected at the essence level.
-
 #### essenceOk (3002)
 This event is used to notify the recovery state of an essence domain after a non-Ok event.
 
@@ -290,11 +280,7 @@ This event is used to notify the recovery state of an application domain after a
 
 #### clock (5000)
 #### clockSourceChange (5001)
-This is the SRF PTP leader change event.
-
 #### clockUnlock (5002)
-This is the SRF PTP unlock event.
-
 #### clockOk (5003)
 This event is used to notify the recovery state of an clock domain after a non-Ok event.
 
