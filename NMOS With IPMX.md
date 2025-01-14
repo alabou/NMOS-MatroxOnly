@@ -33,6 +33,10 @@ The application of active constraints to `urn:x-nmos:cap:transport:` and  `urn:x
 
 The `urn:x-nmos:cap:transport:` and  `urn:x-matrox:cap:transport:` capabilities MUST NOT be associated with sub-Flows/sub-Streams. For a multiplexed Flow/Stream, the scope of `transport` capabilities is the `mux` Sender/Receiver. For a non-multiplexed Flow/Stream, the scope of `transport` capabilities is the `audio` or `video` or `data` Sender/Receiver.
 
+## Unsupported / Unconstrained Capabilities
+
+Receivers and Senders MAY choose not to support certain capabilities described in this document. Similarly, they MAY indicate that they are unconstrained for specific capabilities outlined herein.
+
 ## Common Reference Clock
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate its support for IPMX Senders that do not use a common reference clock (PTP). The capability value `ptp` indicates support for a common reference clock (PTP), while the value `internal` indicates support for an internal clock (not PTP).
