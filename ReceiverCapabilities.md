@@ -115,6 +115,8 @@ The following attributes are additionally allowed for `integer` and `number` con
 * `minimum`, inclusive minimum, an integer or number as appropriate
 * `maximum`, inclusive maximum, an integer or number as appropriate
 
+`minimum` MUST be less than or equal to `maximum`. Empty ranges are not permitted, consistent with the rule that enumerations cannot be empty."
+
 ### Boolean Constraint Keywords
 
 Nothing additional
@@ -125,6 +127,8 @@ The following attributes are additionally allowed for `rational` constraints:
 
 * `minimum`, inclusive minimum, a `rational` value
 * `maximum`, inclusive maximum, a `rational` value
+
+`minimum` MUST be less than or equal to `maximum`. Empty ranges are not permitted, consistent with the rule that enumerations cannot be empty."
 
 Note that comparison between two rational values, _n<sub>1</sub> / d<sub>1</sub>_ and _n<sub>2</sub> / d<sub>2</sub>_, SHOULD be performed by cross-multiplication and comparison of the products, _n<sub>1</sub> * d<sub>2</sub>_ and _n<sub>2</sub> * d<sub>1</sub>_, taking account of negative denominators.
 
