@@ -122,7 +122,7 @@ For Nodes transmitting H.222.0 using other transports, the Sender resource MUST 
 
 The `manifest_href` attribute MAY be `null` if an SDP transport file is not supported by the transport. Otherwise the SDP transport file MUST comply with the transport specific requirements. There is no SDP format-specific parameters requirements for transports other than RTP.
 
-If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream and the transport is UDP, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
+If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream and the transport adaptation is UDP, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
 
 ## H.222.0 IS-04 Receivers
 
