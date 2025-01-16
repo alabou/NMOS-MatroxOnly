@@ -61,11 +61,11 @@ The `manifest_href` attribute of the Sender MUST provide the URL to an SDP trans
 
 ### RTP
 
-Senders having the `transport` attribute set to `urn:x-matrox:transport:srt.rtp` MAY be associated with a Flow through the `flow_id` attribute having  a `format` attribute set to any of `urn:x-nmos:format:mux`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` and `urn:x-nmos:format:data` and MUST implement the requirements of the `urn:x-nmos:transaport:rtp` transport and related subclassifications.
+Senders having the `transport` attribute set to `urn:x-matrox:transport:srt.rtp` MAY be associated with a Flow through the `flow_id` attribute having  a `format` attribute set to any of `urn:x-nmos:format:mux`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` and `urn:x-nmos:format:data` and MUST implement the requirements of the `urn:x-nmos:transport:rtp` transport and related subclassifications.
 
 #### SDP format-specific parameters
 
-The `manifest_href` attribute of the Sender MUST provide the URL to an SDP transport file compliant with the requirements of transport `urn:x-nmos:transaport:rtp` or one of its subclassifications and the following:
+The `manifest_href` attribute of the Sender MUST provide the URL to an SDP transport file compliant with the requirements of transport `urn:x-nmos:transport:rtp` or one of its subclassifications and the following:
 
 - The media description line `m=<media> <port> <proto> <fmt> ...` MUST have `<media>` set to `application`, `<proto>` set to `UDP` and `<fmt>` set to `mp2t` to express that the `media_type` is `application/mp2t` and the UDP protocol is used by the `urn:x-nmos:transport:srt.rtp` transport. The `<port>` MUST be set to the UDP port of the SRT Sender listener.
 
@@ -85,7 +85,7 @@ The [NMOS with H.222.0](https://github.com/alabou/NMOS-MatroxOnly/blob/other-tra
 
 ### RTP
 
-Receivers having the `transport` attribute set to `urn:x-matrox:transport:srt.rtp` MAY have a `format` attribute set to any of `urn:x-nmos:format:mux`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` and `urn:x-nmos:format:data` and MUST implement the requirements of the `urn:x-nmos:transaport:rtp` transport and related subclassifications.
+Receivers having the `transport` attribute set to `urn:x-matrox:transport:srt.rtp` MAY have a `format` attribute set to any of `urn:x-nmos:format:mux`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` and `urn:x-nmos:format:data` and MUST implement the requirements of the `urn:x-nmos:transport:rtp` transport and related subclassifications.
   
 ## SRT IS-05 Senders and Receivers
 
