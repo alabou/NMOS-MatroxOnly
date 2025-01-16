@@ -73,7 +73,7 @@ The `manifest_href` attribute of the Sender MUST provide the URL to an SDP trans
 
 - When multi-paths redundancy is used there MUST be one media descriptor per path. There SHOULD be two paths.
 
-- An SRT connection may be suported for the RTCP channel in addition to the media channel.
+- There is currently no support for the RTCP channel when using RTP over SRT.
 
 ## SRT IS-04 Receivers
 
