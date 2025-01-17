@@ -35,7 +35,7 @@
           "string",
           "null"
         ],
-        "description": "SRT Destination IP address (IP address of the Receiver). If the parameter is set to 'auto' the Sender should establish for itself which address it should use, based on its own internal configuration. A null value indicates that the Sender has not yet been configured or is configured in listener mode. This address is used in caller and rendezvous mode to connect to the Receiver.",
+        "description": "SRT Destination IP address (IP address of the Receiver). If the parameter is set to 'auto' the Sender should establish for itself which address it should use, based on its own internal configuration. A null value indicates that the Sender has not yet been configured or is configured in listener mode (without RTCP). This address is used in caller and rendezvous mode to connect to the Receiver. It can also be used, to indicate the RTCP destination address for RTP over SRT transport independently of the mode of operation.",
         "anyOf": [{
             "pattern": "^auto$"
           },
