@@ -114,6 +114,8 @@ An example Sender resource is provided in the [Examples](https://github.com/alab
 
 The SDP file at the `manifest_href` MUST comply with the requirements of RFC 2250 and RFC 3551.
 
+The `media_type` declared in the SDP transport file MUST be `video/MP2T` differing from the `media_type` used in NMOS which is `application/MP2T`.
+
 An example SDP file is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 #### Other transports
@@ -121,6 +123,8 @@ An example SDP file is provided in the [Examples](https://github.com/alabou/NMOS
 For Nodes transmitting H.222.0 using other transports, the Sender resource MUST indicate the associated `urn:x-nmos:transport:` or `urn:x-matrox:transport:` label of the transport or one of its subclassifications for the `transport` attribute.
 
 The `manifest_href` attribute MAY be `null` if an SDP transport file is not supported by the transport. Otherwise the SDP transport file MUST comply with the transport specific requirements. There is no SDP format-specific parameters requirements for transports other than RTP.
+
+The `media_type` declared in the SDP transport file MUST be `application/mp2t` matching the `media_type` used in NMOS which is also `application/mp2t`.
 
 If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream and the transport adaptation is UDP, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
 
