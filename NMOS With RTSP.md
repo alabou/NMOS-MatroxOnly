@@ -164,7 +164,7 @@ An RTSP Receiver resource MUST indicate `urn:x-matrox:transport:rtsp` or `urn:x-
 
 Nodes implementing IS-04 v1.3 or higher that are capable of receiving RTSP Streams/Sub-Streams MUST have Receiver resources in the IS-04 Node API.
 
-A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and each sub-Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
+A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute, MUST list `application/rtsp`, `application/MP2T`, `application/mp2t` or `application/AM824` in the `media_types` array within the `caps` object and MUST provide Receiver's Capabilities for the mux Stream and if fully described, for each sub-Stream making the RTSP stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
 
 A mux Receiver not exposing the sub-Streams MAY omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the RTSP stream.
 
