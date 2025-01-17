@@ -73,7 +73,7 @@ The `manifest_href` attribute of the Sender MUST provide the URL to an SDP trans
 
 - When multi-paths redundancy is used there MUST be one media descriptor per path. There SHOULD be two paths.
 
-- There is currently no support for the RTCP channel when using RTP over SRT.
+- When using RTP over SRT only the media channel is transmitted using SRT, the RTCP channel is routed according to the `a=rtcp` attribute, destination address and port as per [RFC-3605][]. The RTCP destination address corresponds to the Sender's `destination_ip` transport parameter or is established by the Sender if `auto`.
 
 ## SRT IS-04 Receivers
 
@@ -138,3 +138,4 @@ The SRT stream MAY further be encrypted using the [Privacy Encrption Protocol (P
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
+[RFC-3605]: https://datatracker.ietf.org/doc/html/rfc3605 "Real Time Control Protocol (RTCP) attribute in Session Description Protocol (SDP)"
