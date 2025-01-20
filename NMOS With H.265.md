@@ -35,8 +35,7 @@ AMWA IS-04 and IS-05 have support for various transport protocols and can signal
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -71,7 +70,7 @@ These attributes provide information for Controllers and Users to evaluate strea
   The Flow resource MUST indicate the color (sub-)sampling, width, height and depth of the associated uncompressed picture using the `components` attribute. The `components` array values MUST correspond to the stream's active parameter sets. A Flow MUST track the stream's current active parameter sets.
 
 - [Profile](https://specs.amwa.tv/nmos-parameter-registers/branches/main/flow-attributes/#profile)  
-  The Flow resource MUST indicate the H.265 profile, which defines algorithmic features and limits that MUST be supported by all decoders conforming to that profile. The stream's active parameter sets MUST be compliant with the `profile` attribute of the Flow. The permitted `profile` values are strings, defined as per Rec. ITU-T H.265 Annex A
+  The Flow resource MUST indicate the H.265 profile, which defines algorithmic features and limits that MUST be supported by all decoders conforming to that profile. The stream's active parameter sets MUST be compliant with the `profile` attribute of the Flow. The permitted `profile` values are strings, defined as per Rec. ITU-T H.265 Annex A.
 
   - "Main", "Main-444"
   - "MainStillPicture", "MainStillPicture-444"
@@ -106,7 +105,7 @@ These attributes provide information for Controllers and Users to evaluate strea
   The Flow's `profile` attribute maps to the members profile_space, profile_idc, profile_compatibility_indication, progressive_source_flag, interlaced_source_flag, non_packed_constraint_flag, frame_only_constraint_flag and copied_44bits and  of the HEVC_video_descriptor of an MPEG2-TS transport stream. See the [RTP transport based on RFC 2250](#rtp-transport-based-on-rfc-2250) section.
 
 - [Level](https://specs.amwa.tv/nmos-parameter-registers/branches/main/flow-attributes/#level)  
-  The Flow resource MUST indicate the H.265 level, which defines a set of limits on the values that may be taken by the syntax elements of an H.265 bitstream. The stream's active parameter sets MUST be compliant with the `level` attribute of the Flow. The permitted `level` values are strings, defined as per Rec. ITU-T H.265 Annex A
+  The Flow resource MUST indicate the H.265 level, which defines a set of limits on the values that may be taken by the syntax elements of an H.265 bitstream. The stream's active parameter sets MUST be compliant with the `level` attribute of the Flow. The permitted `level` values are strings, defined as per Rec. ITU-T H.265 Annex A.
 
   - "Main-1"
   - "Main-2", "Main-2.1"
@@ -239,7 +238,7 @@ This section applies to a Receiver directly or indirectly associated with an H.2
 
 Informative note: When an H.265 stream is directly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:video` and `media_types` of the `caps` attribute contains `video/H265`. When an H.265 stream is part of a multiplexed stream and is indirectly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:mux`, `media_types` of the `caps` attribute does not contains `video/H265` and `constraint_sets` of the `caps` attribute contains `video/H265`.
 
-Informative note: In the following text the word "stream" is used to indicate either an H.265 stream or an H.265 sub-stream depending on the direct verus indiret asssociation with the Receiver.
+Informative note: In the following text the word "stream" is used to indicate either an H.265 stream or an H.265 sub-stream depending on the direct versus indirect association with the Receiver.
 
 For a Receiver directly associated with an H.265 stream, the Receiver resource MUST indicate `urn:x-nmos:format:video` for the `format` attribute and MUST list `video/H265` in the `media_types` array within the `caps` object. This has been permitted since IS-04 v1.1.
 
@@ -362,7 +361,7 @@ If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/
 
 A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.265 stream is expected to comply with RFC 7798 and, if appropriate, ST 2110-22 or IPMX. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
 ### Other transports
 
@@ -370,7 +369,7 @@ Connection Management using IS-05 proceeds in exactly the same manner as for any
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
 ## Parameter Sets
 
@@ -380,7 +379,7 @@ The `sprop-vps`, `sprop-sps` and `sprop-pps` parameters of an SDP transport file
 
 An H.265 stream MAY transport in-band parameter sets to update or duplicate parameter sets received out-of-band, to define additional parameter sets or to update or duplicate parameter sets received in-band. The `parameter_sets_transport_mode` Receiver Capability indicates when set to `in_band` or `in_and_out_of_band` that a Receiver supports getting updated, duplicated or additional parameter sets in-band. When set to `out_of_band` a Receiver only supports getting initial parameter sets from the SDP transport file. In all the cases the Receiver MUST support getting duplicated parameter sets in-band.
 
-The `sprop-vps`, `sprop-sps` and `sprop-pps` parameters MAY be used by the Receiver to assert the `parameter_sets_transport_mode` in use by the Sender. The in-and-out-of-band mode is signaled if `sprop-vps`, `sprop-sps` and `sprop-pps` are present and not empty, and terminate by an empty NAL unit (i.e. an empty byte sequence that is base64 encoded). An `sprop-vps`, `sprop-sps` and `sprop-pps` parameters terminate by an empty NAL unit if it ends by a comma ','. The terminating colon ',' indicates that more parameter sets will be received in-band, indicating the in-and-out-of-band mode. The out-of-band mode is signaled when `sprop-vps`, `sprop-sps` and `sprop-pps` are present and not empty, and not terminated by a comma ','. The in-band mode is signaled when `sprop-vps`, `sprop-sps` and `sprop-pps` are not present or empty. A Sender MUST terminate the `sprop-vps`, `sprop-sps` and `sprop-pps` parameters by a comma ',' if it operates in in-and-out-of-band mode and MUST not terminate it by a comma ',' in out-of-band mode.
+The `sprop-vps`, `sprop-sps` and `sprop-pps` parameters MAY be used by the Receiver to assert the `parameter_sets_transport_mode` in use by the Sender. The in-and-out-of-band mode is signaled if `sprop-vps`, `sprop-sps` and `sprop-pps` are present and not empty, and terminate by an empty NAL unit (i.e. an empty byte sequence that is base64 encoded). An `sprop-vps`, `sprop-sps` and `sprop-pps` parameter terminates by an empty NAL unit if it ends by a comma ','. The terminating colon ',' indicates that more parameter sets will be received in-band, indicating the in-and-out-of-band mode. The out-of-band mode is signaled when `sprop-vps`, `sprop-sps` and `sprop-pps` are present and not empty, and not terminated by a comma ','. The in-band mode is signaled when `sprop-vps`, `sprop-sps` and `sprop-pps` are not present or empty. A Sender MUST terminate the `sprop-vps`, `sprop-sps` and `sprop-pps` parameters by a comma ',' if it operates in in-and-out-of-band mode and MUST not terminate it by a comma ',' in out-of-band mode.
 
 Informative note: It results that an H.265 Sender operating in in-and-out-of-band mode that is not sending parameter sets out-of-band will set the `sprop-vps`, `sprop-sps` and `sprop-pps` parameters to a single comma ',' value.
 

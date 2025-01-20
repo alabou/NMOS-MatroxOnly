@@ -16,7 +16,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 This document describes MvAlertManager IS-12 / MS-05-02 object and the IS-12 and RestAPI methods for accessing it.
 
-The MvAlertManager is a fully IS-12 / MS-05-02 compliant object that can be used to configure alerts from various Interfaces, Senders and Receivers events. The object can be accessed as any IS-12 / MS-05-02 object through a WebSocket interface exposed as the IS-12 standard control endpoint of type "urn:x-nmos:control:ncp/v1.0". The MVAlertManager obejct can also be accessed as a simpler RestAPI at the same endpoint using the POST verb instead of the usual GET upgrading the connection from HTTP(S) to WebSocket. The HTTP(s) RestAPI allows an easier access to the MvAlertManager while still allowing asynchronous alerts to propagate to the RestAPI client through chunked responses.
+The MvAlertManager is a fully IS-12 / MS-05-02 compliant object that can be used to configure alerts from various Interfaces, Senders and Receivers events. The object can be accessed as any IS-12 / MS-05-02 object through a WebSocket interface exposed as the IS-12 standard control endpoint of type "urn:x-nmos:control:ncp/v1.0". The MVAlertManager object can also be accessed as a simpler RestAPI at the same endpoint using the POST verb instead of the usual GET upgrading the connection from HTTP(S) to WebSocket. The HTTP(s) RestAPI allows an easier access to the MvAlertManager while still allowing asynchronous alerts to propagate to the RestAPI client through chunked responses.
 
 The alerts provide statistics, states and events about the network interfaces and the streaming engines of Senders and Receivers. By default the MVAlertManager provide a comprehensible set of pre-configured alerts allowing a client to quickly get monitoring alerts without requiring anything but a subscription to the MvAlertManager. More advanced use of the MvAlertManager allow a client to configure its own alerts or reconfigure the existing ones within the capabilities expressed by the MvAlertManager.
 
@@ -26,8 +26,7 @@ This document describes the implementation and the use of compliant MvAlertManag
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -173,7 +172,7 @@ interface MvAlertCapabilityDescriptor {
 };
 ```
 
-This attribute provides the alerts and events reporting capabilities of the device. Each capability descriptor of the sequence provides information about how a compliant alert decriptor for a given domain can be created and added to the alertDescriptors sequence.
+This attribute provides the alerts and events reporting capabilities of the device. Each capability descriptor of the sequence provides information about how a compliant alert descriptor for a given domain can be created and added to the alertDescriptors sequence.
 
 - An empty `alertScope`, `resourceIds`, `interfaceNames` or `events` sequence indicates that the associated MvAlertDescriptor attribute may be given any value.
 - A sequence of values for those attributes indicates all the possible values that the associated MvAlertDescriptor attribute may be given. All or a subset of the value can be used.
@@ -208,7 +207,7 @@ interface MvAlertEventData {
 	attribute MvEventCounter eventCounter;
 };
 ```
-This attributes is used to propagate alert notifications. IS-12 / MS-05-02 support getting notifications about property changed events from objects. When the MvAlertManager generates an alert, the `alert` property is set to the MvAlertEventData object describing the alert descriptor that triggered the notification. An application subscribing to the MvAlertManager notifications can observe alert notifications coming from the `alert` property. The applicaiton SHOULD not read the value of the `alert` attribute as it continously change every time an alert is triggered. Instead is SHOULD get the active alerts using the GetActiveAlerts() method or get the detailed counter associated with an alert descriptor using the GetEventCounters() method.
+This attributes is used to propagate alert notifications. IS-12 / MS-05-02 support getting notifications about property changed events from objects. When the MvAlertManager generates an alert, the `alert` property is set to the MvAlertEventData object describing the alert descriptor that triggered the notification. An application subscribing to the MvAlertManager notifications can observe alert notifications coming from the `alert` property. The application SHOULD not read the value of the `alert` attribute as it continuously change every time an alert is triggered. Instead is SHOULD get the active alerts using the GetActiveAlerts() method or get the detailed counter associated with an alert descriptor using the GetEventCounters() method.
 
 The `eventCounter` attribute provided with the MvAlertEventData object corresponds to the domain event counter. The GetEventCounters() method MUST be used to retrieve detailed event counters.
 
@@ -253,7 +252,7 @@ The base domain events are defined for the domain event counter (having an id co
 
 #### link (1000)
 #### linkDown (1001)
-This event indicates that the associated network interface transitionned from the UP to the DOWN state. A network interface that is denied access to the network MUST not report a `linkDown` event because the interface is still UP and "partially" working. If the network interface becomes DOWN because the associated sub-system detected either a disconnect from the network connector, a signal integrity issue or a protocol issue, the severity state MUST be `inactive`. The interface became DOWN because of an external issue. If the network interface becomes DOWN because the associated sub-system detected an internal error the severity state MUST be `malfunction`. The interface became DOWN because of an internal issue. Textual information MAY be provided along withthe event to describe the circumstances of the network interface transitionning to the DOWN state.
+This event indicates that the associated network interface transitioned from the UP to the DOWN state. A network interface that is denied access to the network MUST not report a `linkDown` event because the interface is still UP and "partially" working. If the network interface becomes DOWN because the associated sub-system detected either a disconnect from the network connector, a signal integrity issue or a protocol issue, the severity state MUST be `inactive`. The interface became DOWN because of an external issue. If the network interface becomes DOWN because the associated sub-system detected an internal error the severity state MUST be `malfunction`. The interface became DOWN because of an internal issue. Textual information MAY be provided along with the event to describe the circumstances of the network interface transitioning to the DOWN state.
 
 #### linkOk (1002)
 This event is used to notify the recovery state of a link domain after a non-Ok event.

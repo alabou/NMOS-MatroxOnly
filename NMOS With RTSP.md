@@ -44,8 +44,7 @@ The SDP transport file of an RTSP Sender using the `urn:x-matrox:transport:rtsp`
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -73,7 +72,7 @@ A mux Source resource MUST indicate `urn:x-nmos:format:mux` for the `format` att
 
 In addition to those attributes defined in IS-04 for all mux Sources, the following attributes defined in the [Source Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SourceAttributes.md) are used for RTSP.
 
-A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
+A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicating the Receiver's sub-Stream providing the media content to the Source.
 
 Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -103,7 +102,7 @@ A Sender associated with a mux Flow through the `flow_id` attribute MUST provide
 
 A mux Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the RTSP Stream and that it cannot be constrained as no sub-Flows are exposed.
 
-The mux Sender MUST express its limitations or preferences regarding the RTSP Streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's Streams and sub-Streams capabilities. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The mux Sender MUST express its limitations or preferences regarding the RTSP Streams that it supports indicating constraints in accordance with the [Sender Capabilities][] specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's Streams and sub-Streams capabilities. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
@@ -164,15 +163,15 @@ An RTSP Receiver resource MUST indicate `urn:x-matrox:transport:rtsp` or `urn:x-
 
 Nodes implementing IS-04 v1.3 or higher that are capable of receiving RTSP Streams/Sub-Streams MUST have Receiver resources in the IS-04 Node API.
 
-A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute, MUST list `application/rtsp`, `application/MP2T`, `application/mp2t` or `application/AM824` in the `media_types` array within the `caps` object and MUST provide Receiver's Capabilities for the mux Stream and if fully described, for each sub-Stream making the RTSP stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
+A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute, MUST list `application/rtsp`, `application/MP2T`, `application/mp2t` or `application/AM824` in the `media_types` array within the `caps` object and MUST provide Receiver's Capabilities for the mux Stream and if fully described, for each sub-Stream making the RTSP Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams.
 
-A mux Receiver not exposing the sub-Streams MAY omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the RTSP stream.
+A mux Receiver not exposing the sub-Streams MAY omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the RTSP Stream.
 
-The mux Receiver MUST express its limitations or preferences regarding the RTSP streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The mux Receiver MUST express its limitations or preferences regarding the RTSP streams that it supports indicating constraints in accordance with the [Receiver Capabilities][] or [BCP-004-01][] specifications. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers are ignored.
+The following parameter constraints can be used to express limits or preferences on the mux Stream. For a given format, a mux Stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers MUST be ignored.
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
   Indicate the minimum and maximum audio layers supported from the RTSP Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
@@ -195,7 +194,7 @@ RTSP Senders and Receivers MUST be controlled through IS-05 only. The activation
 
 ### Receivers
 
-If the Receiver is not capable of consuming the RTSP Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment. An RTSP Receiver MUST obtain the SDP transport files describing the RTSP Stream/sub-Streams using the `DESCRIBE` method and assess the stream compatibility.
+If the Receiver is not capable of consuming the RTSP Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the Stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone Stream compatibility assessment. An RTSP Receiver MUST obtain the SDP transport files describing the RTSP Stream/sub-Streams using the `DESCRIBE` method and assess the Stream compatibility.
 
 An RTSP Receiver MAY connect to a non-NMOS RTSP Sender. IS-05 is then used only on the Receiver side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Sender. Such RTSP Receiver SHOULD as a best effort interoperate with the non-NMOS RTSP Sender.
 
@@ -230,7 +229,7 @@ An RTPS Sender server MUST NOT respond to RTSP requests prior to the Sender's ac
 
 ## Privacy Encryption
 
-When privacy encryption is used, the SDP transport file of the RTSP control endpoint MUST provide the `a=privacy:` attribute and parameters. The `iv` parameter as described in the [PEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-01-19.pdf) correspond to a base value and a `sub-stream-id` MUST be added modulo 2^64 to obtain the effective sub-stream `iv'` of an independently encrypted sub-stream.
+When privacy encryption is used, the SDP transport file of the RTSP control endpoint MUST provide the `a=privacy:` attribute and parameters. The `iv` parameter as described in the [PEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-01-19.pdf) correspond to a base value and a `sub-stream-id` MUST be added modulo 2^64 to obtain the effective sub-Stream `iv'` of an independently encrypted sub-Stream.
 
 The `sub-stream-id` is defined as follow, using the definitions of [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md):
 
@@ -341,5 +340,7 @@ a=mid:S2b
 [NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
+[Receiver Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md "Matrox NMOS Receiver Capabilities"
+[Sender Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md "Matrox NMOS Sender Capabilities"
 
 

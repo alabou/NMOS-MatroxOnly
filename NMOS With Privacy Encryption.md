@@ -107,7 +107,7 @@ The `constraints` endpoint of the parameters `ext_privacy_protocol`, `ext_privac
 
 The `constraints` endpoint of the parameter `ext_privacy_ecdh_curve` of Senders and Receivers MUST declare all the supported curves. This parameter MUST NOT be unconstrained. The constraints of this parameter MUST NOT change when `master_enable` attribute of a Sender/Receiver `active` endpoint is `true`.
 
-> Note: The constraints on the parameters `ext_privacy_protocol`, `ext_privacy_mode`and `ext_privacy_ecdh_curve` are expected to remain the same unless the device's Privacy Encryption Protocol support is reconfigured by a User through a vendor-specicic mechanism.
+> Note: The constraints on the parameters `ext_privacy_protocol`, `ext_privacy_mode`and `ext_privacy_ecdh_curve` are expected to remain the same unless the device's Privacy Encryption Protocol support is reconfigured by a User through a vendor-specific mechanism.
 
 ### Protocol
 The `protocol` parameter MUST be one of: "RTP", "RTP_KV", "UDP", "UDP_KV", "USB", "USB_KV", "SRT", "RTSP", "RTSP_KV", "NULL"

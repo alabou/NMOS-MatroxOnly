@@ -30,8 +30,7 @@ A Device MAY also declare a "ncWebSocketGuest" control endpoint in addition or i
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -47,9 +46,9 @@ Note: The WebSocket IS-12 `ncp` endpoints uses the same approach for declaring r
 In the following sections of this document we will use one of the following paths to access the IS-12 RestAPI `http://<address>/ncWebSocket/v1.0`, `https://<address>/ncWebSocket/v1.0`, `http://<address>/ncWebSocketGuest/v1.0` and `https://<address>/ncWebSocketGuest/v1.0`. The string "ncWebSocket" MAY be replaced by a vendor specific string.
 
 ## JSON Schemas
-The followign schema modifies the IS-12 command-message.json schema slightly to allow the `object` and `method` attributes instead of the usual `oid` and `methodId` ones.
+The following schema modifies the IS-12 command-message.json schema slightly to allow the `object` and `method` attributes instead of the usual `oid` and `methodId` ones.
 
-command-message-reatapi.json
+command-message-restapi.json
 ```
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
@@ -68,7 +67,7 @@ command-message-reatapi.json
       ],
       "properties": {
         "commands": {
-          "description": "Commands being transmited in this transaction",
+          "description": "Commands being transmitted in this transaction",
           "type": "array",
           "items": {
             "type": "object",
@@ -188,11 +187,11 @@ subscription-message-restapi.json
 ```
 
 ## RestAPI
-The IS-12 ResteAPI MUST be accessible using the `POST` and `OPTIONS` verbs at the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be used for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection and MUST NOT be used for the RestAPI.
+The IS-12 RestAPI MUST be accessible using the `POST` and `OPTIONS` verbs at the `ncp` endpoint using `http` or `https` as the `<protocol>`. The `GET` verb MUST be used for upgrading the HTTP (http/https) connection to a WebSocket (ws/wss) connection and MUST NOT be used for the RestAPI.
 
-The IS-12 RestAPI MUST support the `OPTIONS` verb as sepecified in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors). An `OPTION` request MUST NOT be subject to read-only / read-write constraints.
+The IS-12 RestAPI MUST support the `OPTIONS` verb as specified in the IS-04 specification [IS-04-CORS](https://specs.amwa.tv/is-04/releases/v1.3.2/docs/APIs_-_Server_Side_Implementation_Notes.html#cross-origin-resource-sharing-cors). An `OPTION` request MUST NOT be subject to read-only / read-write constraints.
 
-The body of a `POST` request MUST be one of the following IS-12 schema: command-message-restapi.json, subscription-message-restapi.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed. For a subscription the object MAY be speficied either as an object id or as a role path.
+The body of a `POST` request MUST be one of the following IS-12 schema: command-message-restapi.json, subscription-message-restapi.json. Either the `object` and `method` attributes or the `oid` and `methodId` attributes of a command MUST be used. Those attributes MUST NOT be mixed. For a subscription the object MAY be specified either as an object id or as a role path.
 
 The body of a `POST` response MUST be one of the following IS-12 schema: command-response-message.json, subscription-response-message.json, notification-message.json, error-message.json. The response MUST be sent using the `chunked` `Transfer-Encoding` such that the client may retrieve command-response, subscription-response, notification and error messages independently. Each response message MUST be sent in its own chunk.
 

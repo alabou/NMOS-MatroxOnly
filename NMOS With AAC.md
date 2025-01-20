@@ -17,13 +17,13 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 Advanced Audio Coding (AAC) is a technology standardized in [AAC][AAC] | ISO/IEC 14496-3.
 A companion RTP payload format specification was developed through the IETF Payloads working group, IETF [RFC 3640][RFC-3640]. Another RTP payload format specification IETF [RFC 6416][RFC-6416] also exist and may be used as an alternate method for transporting the audio stream payload in RTP.
 
-> RFC 3640 only support passing configuration information out-of-band while RFC 6416 support both in-band and out-of-band methods. When targetting MPEG2-TS transport the configuration information is provided in-band as per the H.222 specification.
+> RFC 3640 only support passing configuration information out-of-band while RFC 6416 support both in-band and out-of-band methods. When targeting MPEG2-TS transport the configuration information is provided in-band as per the H.222 specification.
 
 > RFC 6416 is used in declarative mode as per RFC 6416 section 7.4.1 "Declarative SDP Usage for MPEG-4 Audio".
 
 AMWA IS-04 and IS-05 already have support for RTP transport and can signal the media type `audio/mpeg4-generic` as defined in RFC 3640 or `audio/MP4A-LATM` as defined in RFC 6416. For MPEG2-TS transport the AAC codec is signaled as `audio/MP4A-ADTS`.
 
-> MPEG4 audio is a synonym for Advanced Audio Coding, corresponding to the AAC codec. The media type `audio/mpeg4-generic` indicates MPEG4 audio, hence the AAC codec. The media type `audio/MP4A-LATM` indicates MPEG4 audio framed using the LATM multiplexor to transport configuration information along with the audio stream. It indicates the AAC codec. The media type `audio/MP4A-ADTS` indicates MPEG4 audio framed using the ADTS multiplexor to transport configuration information along with the audio stream. Once again it indicates the AAC codec.
+> MPEG4 audio is a synonym for Advanced Audio Coding, corresponding to the AAC codec. The media type `audio/mpeg4-generic` indicates MPEG4 audio, hence the AAC codec. The media type `audio/MP4A-LATM` indicates MPEG4 audio framed using the LATM multiplexer to transport configuration information along with the audio stream. It indicates the AAC codec. The media type `audio/MP4A-ADTS` indicates MPEG4 audio framed using the ADTS multiplexer to transport configuration information along with the audio stream. Once again it indicates the AAC codec.
 
 - [ ] TODO: The MP4A-ADTS is not registered to IANA but as it does not appear in any SDP transport file it may not be required.
 
@@ -31,8 +31,7 @@ In this document the concept of parameter sets usually associated with coded vid
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -52,7 +51,7 @@ The Source resource MUST indicate `urn:x-nmos:format:audio` for the `format` att
 ### Flows
 
 The Flow resource MUST indicate `audio/mpeg4-generic` or `audio/MP4A-LATM` or `audio/MP4A-ADTS` in the `media_type` attribute, and `urn:x-nmos:format:audio` for the `format` attribute. This has been permitted since IS-04 v1.1. 
-- AAC Flow resources MAY be associated with many Senders at the same time through the Senders' `flow_id` attributes. The AAC Flow is therefore unaffected by the use of a specific transport.
+- AAC Flow resources MAY be associated with many Senders at the same time through the Senders' `flow_id` attributes. The AAC Flow is therefore unaffected by the use of a specific transport. 
 - AAC Flow resources MAY be associated with many Flows at the same time through the Flows' `parents` attributes. The AAC Flow is therefore unaffected by being the parent of some other Flows.
 
 For Nodes implementing IS-04 v1.3 or higher, the following additional requirements on the Flow resource apply.
@@ -109,9 +108,9 @@ Informative note: The Flow's `profile` and `level` attributes are always require
 - [Constant Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/flow-attributes/#constant-bit-rate)
   The Flow resource MUST indicate if it operates in constant bit rate (CBR) mode or variable bit rate mode (VBR or other). When operating in constant bit rate mode the `bit_rate` corresponds to the constant encoding bit rate. Otherwise it corresponds to the maximum encoding bit rate. Since the default value of this attribute is `false`, a Flow MAY omit this attribute when using a variable bit rate mode.
 
-Informative note: The maximum bit rate information relates to the codec profile / level limits and the Bit Reservoir buffering model. It corredponds to the maximum bitrate in any time window of one second duration as per ISO/IEC 14496-1. The CBR versus VBR mode of operation of the encoder provide essential clues about the coded bitstream produced.
+Informative note: The maximum bit rate information relates to the codec profile / level limits and the Bit Reservoir buffering model. It corresponds to the maximum bitrate in any time window of one second duration as per ISO/IEC 14496-1. The CBR versus VBR mode of operation of the encoder provide essential clues about the coded bitstream produced.
 
-Informative note: The target bitrate is propably more specifically the maximum bitrate that is used to calculate the buffering model between the encoder and the decoder, aka bit reservoir, etc. In variable bitrate mdoes, this would more precisely describe the stream. For constant bitrate it is the target, for variable bitrate it is the maximum.
+Informative note: The target bitrate is probably more specifically the maximum bitrate that is used to calculate the buffering model between the encoder and the decoder, aka bit reservoir, etc. In variable bitrate modes, this would more precisely describe the stream. For constant bitrate it is the target, for variable bitrate it is the maximum.
 
 Informative note: AAC specification indicates: 4.5.3.3 Maximum bit rate: The maximum bitrate depends on the audio sampling rate. It can be calculated based on the minimum input buffer size according to the formula: *** Table 4.126 Maximum bitrate depending on the sampling frequency sampling_frequency maximum bitrate / NCC, 48 kHz => 288 kbit/s, 44.1 kHz => 264.6 kbit/s, 32 kHz => 192 kbit/s
 
@@ -159,7 +158,7 @@ In addition to those attributes defined in IS-04 for Senders, the following attr
 
 An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
-The AAC encoder of a Sender MUST produces an AAC bitstream that is compliant with the `profile-level-id` explicitely declared in the stream's associated SDP transport file or the MPEG-4_audio_profile_and_level of the MPEG-4_audio_descriptor of an MPEG2-TS transport stream.
+The AAC encoder of a Sender MUST produces an AAC bitstream that is compliant with the `profile-level-id` explicitly declared in the stream's associated SDP transport file or the MPEG-4_audio_profile_and_level of the MPEG-4_audio_descriptor of an MPEG2-TS transport stream.
 
 ##### SDP format-specific parameters
 
@@ -213,7 +212,7 @@ This section applies to a Receiver directly or indirectly associated with an AAC
 
 Informative note: When an AAC stream is directly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:audio` and `media_types` of the `caps` attribute contains `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS`. When an AAC stream is part of a multiplexed stream and is indirectly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:mux`, `media_types` of the `caps` attribute does not contains `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS` and `constraint_sets` of the `caps` attribute contains `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS`.
 
-Informative note: In the following text the word "stream" is used to indicate either an AAC stream or an AAC sub-stream depending on the direct verus indiret asssociation with the Receiver.
+Informative note: In the following text the word "stream" is used to indicate either an AAC stream or an AAC sub-stream depending on the direct versus indirect association with the Receiver.
 
 For a Receiver directly associated with an AAC stream, the Receiver resource MUST indicate `urn:x-nmos:format:audio` for the `format` attribute and MUST list `audio/mpeg4-generic`, `audio/MP4A-LATM` or `audio/MP4A-ADTS` in the `media_types` array within the `caps` object. This has been permitted since IS-04 v1.1.
 
@@ -234,7 +233,6 @@ The following parameter constraints can be used to express limits or preferences
   Some AAC levels are superset of other levels. The AAC specification describe the relationship among the levels. From the point of view of the AAC specification, supporting such superset level is required to also be supporting the associated subset levels. To assist a Controller not having knowledge of the AAC levels relationship, the Receiver Capabilities SHOULD enumerate all the subset levels in addition to the superset level.
 
 - [Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-bit-rate)
-
 - [Constant Bit Rate](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/#format-constant-bit-rate)
 
 A Receiver MUST be able to decode bitstreams conforming to the profiles and levels declared in the Receiver Capabilities. A Receiver MAY have preferences and more optimal profiles and levels that MAY be declared through Receiver Capabilities. A preferred constraint set MAY indicate such preferences while another constraint set MAY indicate full support of some profiles and levels. A Receiver MAY further constrain the support of a coded bitstream compliant with a profile and level using other constraints in its Receiver Capabilities.
@@ -317,7 +315,7 @@ For Receivers indicating `urn:x-nmos:format:audio` for the `format` attribute, t
 
   Informative note: The out of band mechanism used to transmit parameter sets is transport specific and out of the scope of this specification.
 
-  The config used by the bitstream MUST be compliant with the profile and level explicitly or implicitly declared using an out-of-band transport specific mechanism. The config MAY be specified in-band through the AAC bitstream, out-of-band using an unspecified mechanism or in-and-out-of-band using both mechanisms. See the [Parameter Sets](#parameter-sets) section for more details.
+  The config used by the bitstream MUST be compliant with the profile and level explicitly or implicitly declared using an out-of-band transport specific mechanism. The config MAY be specified in-band through the AAC bitstream, out-of-band using an unspecified mechanism, or in-and-out-of-band using both mechanisms. See the [Parameter Sets](#parameter-sets) section for more details.
 
   A Receiver supporting `in_and_out_of_band` MUST also support the `in_band` and `out_of_band` modes. Such Receiver SHOULD have all "in_band", "out_of_band" and "in_and_out_of_band" values enumerated in the Receiver Capabilities in order to allow Senders operating in any `parameter_sets_transport_mode`.
 
@@ -353,7 +351,7 @@ Connection Management using IS-05 proceeds in exactly the same manner as for any
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
 ## Parameter Sets
 
@@ -365,7 +363,7 @@ An AAC stream using LATM or ADTS MAY transport in-band configs to update or dupl
 
 Informative note: Using RFC 3640, there will never be in-band configs.
 
-The `config` parameter MAY be used by the Receiver to assert the `parameter_sets_transport_mode` in use by the Sender. The in-and-out-of-band mode is signaled if `config` is present and not empty, and terminates by a comma ','. The terminating colon ',' indicates that more configs will be received in-band, indicating the in-and-out-of-band mode. The out-of-band mode is signaled when `config` is present and not empty and not terminated by a comma ','. The in-band mode is signaled when `config` is not present or empty. A Sender MUST terminate the `config` parameter by a comma ',' if it operates in in-and-out-of-band mode and MUST not terminate it by a comma ',' in out-of-band mode.
+The `config` parameter MAY be used by the Receiver to assert the `parameter_sets_transport_mode` in use by the Sender. The in-and-out-of-band mode is signaled if `config` is present and not empty, and terminates by a comma ','. The terminating colon ',' indicates that more configs will be received in-band, indicating the in-and-out-of-band mode. The out-of-band mode is signaled when `config` is present and not empty, and not terminated by a comma ','. The in-band mode is signaled when `config` is not present or empty. A Sender MUST terminate the `config` parameter by a comma ',' if it operates in in-and-out-of-band mode and MUST not terminate it by a comma ',' in out-of-band mode.
 
 Informative note: It results that an AAC Sender operating in in-and-out-of-band mode that is not sending parameter sets out-of-band will set the  `config` parameter to a single comma ',' value.
 
@@ -375,7 +373,7 @@ Informative note: The in-and-out-of-band mode implies that the Sender can option
 
 A Receiver MUST verify that the active config comply with the Receiver's Capabilities. If a Receiver support only out-of-band config it SHOULD perform the verification when a Controller PATCH the **/staged** endpoint for activation. In this situation, all the out-of-band config MUST be compliant with the Receiver Capabilities. Otherwise if a Receiver supports both out-of-band and in-band configs it SHOULD perform the verification of the out-of-band config when a Controller PATCH the **/staged** endpoint for activation and it MUST perform the verification of the in-band configs just-in-time as it decodes the stream. In this situation, all the out-of-band and in-band configs MUST be compliant with the Receiver Capabilities.
 
-The `parameter_sets_flow_mode` Receiver Capability indicates when set to `dynamic` that a Receiver supports decoding an AAC stream where the active config values associated with Flow properties may changes dynamically. The Flow properties that are allowed to change correspond to the following attributes of a coded audio Flow: `sample_rate`, `format`, `media_type`, `profile`, `level`, `bit_rate`, `constant_bit_rate` and audio Source: `channels`. The "static" mode is more restrictive, requiring active config values associated with Flow attributes to be constant with the exception of the Flow's `bit_rate` attribute that MAY change.The `strict` mode has the further restriction that at most one SPS be used by the coded stream.
+The `parameter_sets_flow_mode` Receiver Capability indicates when set to `dynamic` that a Receiver supports decoding an AAC stream where the active config values associated with Flow attributes may changes dynamically. The Flow attributes that are allowed to change correspond to the following attributes of a coded audio Flow: `sample_rate`, `format`, `media_type`, `profile`, `level`, `bit_rate`, `constant_bit_rate` and audio Source: `channels`. The `static` mode is more restrictive, requiring active config values associated with Flow attributes to be constant, with the exception of the Flow's `bit_rate` attribute that MAY change. The `strict` mode has the further restriction that at most one SPS be used by the coded stream.
 
 Informative note: The Flow bit_rate attribute is not included in the previous criterion to allow adapting to IP usable bandwidth changing conditions in `static` mode. The Source channels is considered part of the information associated with a Flow.
 

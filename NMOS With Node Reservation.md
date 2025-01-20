@@ -14,16 +14,15 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-It is sometime required to reserve the use of a group of NMOS Nodes for a single Controler or entity. This document presents a vendor specific API that is used for reserving the use of a group of NMOS Nodes.
+It is sometime required to reserve the use of a group of NMOS Nodes for a single Controller or entity. This document presents a vendor specific API that is used for reserving the use of a group of NMOS Nodes.
 
-The owner of the Nodes is the only one with the ability change the state of the Node through the NMOS RestAPIs POST, PUT, DELETE and PATCH verbs. Anyone can use the read-only verbs and get informations from the Nodes. The owner of the Nodes provides a 128 bit key that is used to seclude the Nodes in a private group when privacy encryption is used. The owner of the Nodes is responsible for keeping its session alive.
+The owner of the Nodes is the only one with the ability change the state of the Node through the NMOS RestAPIs POST, PUT, DELETE and PATCH verbs. Anyone can use the read-only verbs and get information from the Nodes. The owner of the Nodes provides a 128 bit key that is used to seclude the Nodes in a private group when privacy encryption is used. The owner of the Nodes is responsible for keeping its session alive.
 
 > Note: The POST verb on some RestAPI path MAY be allowed for anyone if such request does not change the state of the Node.
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -43,15 +42,15 @@ In this document, references to the `Authorization` HTTP header MUST be replaced
 
 A session is associated with a lifetime to protect against compromised Bearer tokens. A session is associated with an alivetime to quickly terminate a previous session when no longer used. 
 
-An entity MUST acquire Nodes to exclusively used them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective a a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST remain 60 seconds. The current values have been choosen to allow a wuick turnaround when am entity that reserved Node becomes dead after a malfunction, power down or other reasons.
+An entity MUST acquire Nodes to exclusively used them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective a a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST remain 60 seconds. The current values have been chosen to allow a quick turnaround when am entity that reserved Node becomes dead after a malfunction, power down or other reasons.
 
-The owner of an exclusive regularly Renew its session to obtain a new Bearer token to prevent its session to expire. Between the renewing intervals, the owner of an exclusive session regularly keeps its session alive by calling the KeepAlive endpoint or by using its Bearer token in an access to a Node RestAPI to keeep its session alive.
+The owner of an exclusive regularly Renew its session to obtain a new Bearer token to prevent its session to expire. Between the renewing intervals, the owner of an exclusive session regularly keeps its session alive by calling the KeepAlive endpoint or by using its Bearer token in an access to a Node RestAPI to keep its session alive.
 
 ## Reservation RestAPI
 
 This RestAPI MUST use the HTTPS protocol with TLS v1.2 or TLS v1.3. It is not allowed to use the bare HTTP protocol.
 
-The Reservation RestAPI MUST be publised as a Node service of type `urn:x-matrox:service:exclusive/v1.0`. The service declaration indicate the URL where the service is accessible and if OAuth2.0 authorizations are required to access the service.
+The Reservation RestAPI MUST be published as a Node service of type `urn:x-matrox:service:exclusive/v1.0`. The service declaration indicate the URL where the service is accessible and if OAuth2.0 authorizations are required to access the service.
 
 ### Acquire
 
@@ -59,7 +58,7 @@ The acquire endpoint MAY be protected by either the use of an HTTPS server certi
 
 This operation is atomic on a per Node basis. It is not possible to reserve multiple Nodes simultaneously. 
 
-This operation attemps to acquire an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. The `exclusive_key` is used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key remains valid even if the session expires until a new owner activate a Sender / Receiver. See [PEP](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) for more details about the Privacy Encryption Protocol.
+This operation attempts to acquire an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. The `exclusive_key` is used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key remains valid even if the session expires until a new owner activate a Sender / Receiver. See [PEP](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) for more details about the Privacy Encryption Protocol.
 
 The operation fail with a status `BadRequest` if the posted JSON is invalid. The operation fail with a status `Locked` if there is an active session. Otherwise a status `Ok` and a bearer token are returned. The token MUST be used to access the NMOS RestAPIs that may change the Node state.
 
@@ -85,7 +84,7 @@ The renew endpoint MUST be accessed with an `Authorization` header and a token o
 
 This operation is atomic on a per Node basis. It is not possible to renew multiple Nodes simultaneously. 
 
-This operation attemps to renew an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. 
+This operation attempts to renew an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for 60 seconds after being acquired or used. 
 
 This operation fails with a status `Unauthorized` if the bearer token of an `Authorization` header is invalid or the session has expired.
 
@@ -120,7 +119,7 @@ The keepalive endpoint MUST be accessed with an `Authorization` header and a tok
 
 This operation is atomic on a per Node basis. It is not possible to keepalive multiple Nodes simultaneously. 
 
-This operation attemps to keep alive an exclusive session, updating its alive time. The owner SHOULD call this endpoint before the 60 seconds alive timeout of a session is reached.
+This operation attempts to keep alive an exclusive session, updating its alive time. The owner SHOULD call this endpoint before the 60 seconds alive timeout of a session is reached.
 
 This operation fails with a status `Unauthorized` if the bearer token of an `Authorization` header is invalid or the session has expired.
 
@@ -134,7 +133,7 @@ Unless there is no currently active session or stated otherwise, a client MUST u
 
 An `Unauthorized` status is returned if a) the session associated with a bearer token is expired or b) if a bearer token is not used and there is an alive session, and the verb is one of PUT, POST, PATCH, DELETE and the operation may change the state of the Node.
 
-Nodes reservation SHOULD be used in environments where multiple Controllers and/or entities compete for using the Nodes. The Node's exclusivity extend to the exclusive privacy of the streaming. Knowlege of the PEP Pre-Shared Key (PSK) and all the related parameters is not enough for accessing the content. The session exclusive key used in the privacy key derivation process ensures that only the owner of the exclusive session having knowledge of the session exclusive key can access the content, providing further privacy in 1-to-N scenarios (note: peer-to-peer ECDH provides a similar exclusivity in a 1-to-1 scenario).
+Nodes reservation SHOULD be used in environments where multiple Controllers and/or entities compete for using the Nodes. The Node's exclusivity extend to the exclusive privacy of the streaming. Knowledge of the PEP Pre-Shared Key (PSK) and all the related parameters is not enough for accessing the content. The session exclusive key used in the privacy key derivation process ensures that only the owner of the exclusive session having knowledge of the session exclusive key can access the content, providing further privacy in 1-to-N scenarios (note: peer-to-peer ECDH provides a similar exclusivity in a 1-to-1 scenario).
 
 ## Verifying Ownership
 

@@ -70,7 +70,7 @@ An USB Sender resource MUST indicate `urn:x-matrox:transport:usb` for the `trans
 
 A Sender associated with a USB Flow through the `flow_id` attribute SHOULD provide Sender's Capabilities for the data Flow.
 
-The Sender MUST express its limitations or preferences regarding the USB streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's stream capabilities. It is not always practical for the constraints to indicate every type of stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The Sender MUST express its limitations or preferences regarding the USB streams that it supports indicating constraints in accordance with the [Sender Capabilities][] specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's stream capabilities. It is not always practical for the constraints to indicate every type of stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
@@ -88,7 +88,7 @@ The `manifest_href` attribute of the Sender MUST provide the URL to an SDP trans
 
 - The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have `<connection-address>` set to the IP address of the Sender's TCP server.
 
-- The attribute `a=setup:passive` MUST be specifified.
+- The attribute `a=setup:passive` MUST be specified.
 
 - If redundancy is used at most two paths (legs) MUST be specified using two media descriptors. The `<connection-address>` of each media descriptor specify a different path for reaching the TCP server of the Sender. A `a=group:DUP` session attribute MUST specify the two media paths identified using the `a=mid:` media attribute. The first identifier of the `a=group:DUP` session attribute MUST specify the first leg (path) and the other identifier the second leg. The first leg corresponds to entry 0 of the IS-05 transport parameters array while the second leg corresponds to entry 1.
 
@@ -100,7 +100,7 @@ A USB Receiver resource MUST indicate `urn:x-matrox:transport:usb` for the `tran
 
 A USB Receiver MUST indicate `urn:x-nmos:format:data` for the `format` attribute, MUST list `application/usb` in the media_types array within the caps object and SHOULD provide Receiver's Capabilities for the data Stream.
 
-The Receiver MUST express its limitations or preferences regarding the USB streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available stream. It is not always practical for the constraints to indicate every type of stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The Receiver MUST express its limitations or preferences regarding the USB streams that it supports indicating constraints in accordance with the [Receiver Capabilities][] or [BCP-004-01][] specifications. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams. It is not always practical for the constraints to indicate every type of stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
@@ -129,7 +129,7 @@ For security reasons, USB streams are usually encrypted using the IPMX [TR-10-5]
 
 A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a USB stream is expected to comply with IPMX [TR-10-14][]. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
-If the USB Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the USB Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
 A Controller MAY connect a USB Receiver not supporting redundancy to either leg of a Sender supporting redundancy. A Controller MUST set the `source_ip` and `source_port` attributes of the unused leg of a Receiver supporting redundancy to `null` when connecting to a Sender not supporting redundancy.
 
@@ -157,6 +157,8 @@ A Controller SHOULD use a Sender's `urn:x-matrox:cap:transport:usb_class` capabi
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
+[Receiver Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md "Matrox NMOS Receiver Capabilities"
+[Sender Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md "Matrox NMOS Sender Capabilities"
 [TR-10-5]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-5_2024-02-23.pdf "HDCP Key Exchange Protocol - HKEP"
 [TR-10-8]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-8_2023-04-14.pdf "NMOS Requirements"
 [TR-10-14]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-14_2024-09-24.pdf "IPMX	USB"

@@ -22,8 +22,7 @@ An NMOS Node configured to perform OAuth2.0 Bearer token validation on its NMOS 
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -49,7 +48,7 @@ Access to an endpoint of the `urn:x-nmos:control:ncp` control type MUST use the 
 
 ### Time Synchronization
 
-The requirements on the clock used by Nmos Nodes of the NMOS system is relaxed. An NMOS Node is not required to be capable of synchronizing their clocks to an external source of time. The Node estimation of the true time MUST be within 30 minutes of the true NTP / PTP time used by the OAuth2.0 authorisation server. The time used by the Node to validate the claims of a token MUST comply with this requirement. The time used by the Node to schedule the fetch / update of the OAuth2.0 authorization server public keys MUST comply with this requirement.
+The requirements on the clock used by NMOS Nodes of the NMOS system is relaxed. An NMOS Node is not required to be capable of synchronizing their clocks to an external source of time. The Node estimation of the true time MUST be within 30 minutes of the true NTP / PTP time used by the OAuth2.0 authorization server. The time used by the Node to validate the claims of a token MUST comply with this requirement. The time used by the Node to schedule the fetch / update of the OAuth2.0 authorization server public keys MUST comply with this requirement.
 
 ### Public Keys
 
@@ -115,7 +114,7 @@ If the current API access is having side-effects on the state of the NMOS Node, 
 
 If the current API access is not having side-effects on the state of the NMOS Node, read access MUST be allowed. Otherwise the API request MUST fail with a "WWW-Authenticate" status.
 
-An NMOS Node SHOULD increment a status counter a) when a ReadOnly access is denied: a.1) based on the `sub` claim, a.2) based on the `aud` claim, a.3) based on the `scope` claim, a.4) based on the `x-nmos-*` claim, b) when a ReadWrite access is denied: b.1) based on the `sub` claim, b.2) based on the `aud` claim, b.3) based on the `scope` claim, b.4) based on the `x-nmos-*` claim, c) when an access without an Access Token is performed, d) when an acess with an invalid/corrupted token is performed.
+An NMOS Node SHOULD increment a status counter a) when a ReadOnly access is denied: a.1) based on the `sub` claim, a.2) based on the `aud` claim, a.3) based on the `scope` claim, a.4) based on the `x-nmos-*` claim, b) when a ReadWrite access is denied: b.1) based on the `sub` claim, b.2) based on the `aud` claim, b.3) based on the `scope` claim, b.4) based on the `x-nmos-*` claim, c) when an access without an Access Token is performed, d) when an access with an invalid/corrupted token is performed.
 
 #### WebSocket
 
