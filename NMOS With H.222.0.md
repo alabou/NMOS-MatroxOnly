@@ -28,8 +28,7 @@ This document presents the fully-described `application/MP2T` or `application/mp
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -49,7 +48,7 @@ A mux Source resource MUST indicate `urn:x-nmos:format:mux` for the `format` att
 
 In addition to those attributes defined in IS-04 for audio, video and data Sources, the following attributes defined in the [Source Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SourceAttributes.md) are used for H.222.0.
 
-A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
+A Source of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicating the Receiver's sub-Stream providing the media content to the Source.
 
 Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -61,46 +60,46 @@ When a mux Flow is associated with a Sender using the `urn:x-nmos:transport:rtp`
 
 In addition to those attributes defined in IS-04 for all mux Flows, the following attributes defined in the [Flow Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/FlowAttributes.md) are used for H.222.0.
 
-A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an MPEG2-TS stream. A non-mux Flow MUST NOT have such attributes. The MPEG2-TS Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
+A mux Flow MUST have `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an MPEG2-TS Stream. A non-mux Flow MUST NOT have such attributes. The MPEG2-TS Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
 
-A mux Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an MPEG2-TS stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
+A mux Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an MPEG2-TS Stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
-A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an MPEG2-TS stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
+A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an MPEG2-TS Stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
 
-A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an MPEG2-TS stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
+A sub-Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the sub-Flow compatibility with other sub-Flows making an MPEG2-TS Stream. A sub-Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
-A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/L16`, `audio/L20` or `audio/L24` MUST be embedded in the MPEG2-TS stream as per [ST 302M][]. The sub-Flow MUST have an even number of channels that will produce (channels/2) linear PCM AES3 streams.
+A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/L16`, `audio/L20` or `audio/L24` MUST be embedded in the MPEG2-TS Stream as per [ST 302M][]. The sub-Flow MUST have an even number of channels that will produce (channels/2) linear PCM AES3 streams.
 
-A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/AM824` MUST be embedded in the MPEG2-TS stream as per [ST 302M][]. Such sub-Flow MUST be an opaque AM824 Flow as per [NMOS with AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md). Such sub-Flow MAY contain linear PCM and non-linear data. The sub-Flow MUST have an even number of channels that will produce (channels/2) AES3 streams.
+A sub-Flow of format `urn:x-nmos:format:audio` and of media type `audio/AM824` MUST be embedded in the MPEG2-TS Stream as per [ST 302M][]. Such sub-Flow MUST be an opaque AM824 Flow as per [NMOS with AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md). Such sub-Flow MAY contain linear PCM and non-linear data. The sub-Flow MUST have an even number of channels that will produce (channels/2) AES3 streams.
 
-Note: Linear PCM Flows and opaque AM824 Flows are implicitely embedded in the MPEG2-TS stream as per [ST 302M][]. Coded audio Flows are embedded according to their format as per [H.222.0][]. A fully described AM824 Flow cannot be a sub-Flow of an H.222.0 mux Flow.
+Note: Linear PCM Flows and opaque AM824 Flows are implicitly embedded in the MPEG2-TS Stream as per [ST 302M][]. Coded audio Flows are embedded according to their format as per [H.222.0][]. A fully described AM824 Flow cannot be a sub-Flow of an H.222.0 mux Flow.
 
 Examples Flow resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
 ### Senders
 
-A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and if fully described, for each sub-Flow making an MPEG2-TS stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
+A Sender associated with a mux Flow through the `flow_id` attribute MUST provide Sender's Capabilities for the mux Flow and if fully described, for each sub-Flow making an MPEG2-TS Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Sender's sub-Flows.
 
-A mux Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the MPEG2-TS stream and that it cannot be constrained as no sub-Flows are exposed.
+A mux Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the MPEG2-TS Stream and that it cannot be constrained as no sub-Flows are exposed.
 
-The mux Sender MUST express its limitations or preferences regarding the H.222.0 streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's streams and sub-streams capabilities. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The mux Sender MUST express its limitations or preferences regarding the H.222.0 streams that it supports indicating constraints in accordance with the [Sender Capabilities][] specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's streams and sub-streams capabilities. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on the mux stream:
+The following parameter constraints can be used to express limits or preferences on the mux Stream:
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
-  Indicate the minimum and maximum audio layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
+  Indicate the minimum and maximum audio layers supported in the MPEG2-TS Stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 - [video_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#video_layers)  
-  Indicate the minimum and maximum video layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
+  Indicate the minimum and maximum video layers supported in the MPEG2-TS Stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 - [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
-  Indicate the minimum and maximum data layers supported in the MPEG2-TS stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
+  Indicate the minimum and maximum data layers supported in the MPEG2-TS Stream. The Sender Capabilities MUST provide Constraint Sets for as many as the maximum number of layers.
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
-A coded format specification MAY define Sender's attributes and associated transport capabilities that, for the corresponding audio, video or data sub-stream, MUST be assumed as having their default value.
+A coded format specification MAY define Sender's attributes and associated transport capabilities that, for the corresponding audio, video or data sub-Stream, MUST be assumed as having their default value.
 
 Note: The Sender's attributes and associated transport capabilities of a coded format specification are assumed to exist for each sub-Stream, each having their default values. For example the `parameter_sets_flow_mode` and `parameter_sets_transport_mode` associated with some coded format specification are assumed as having their default value of `dynamic` and `in_band` respectively.
 
@@ -126,32 +125,32 @@ The `manifest_href` attribute MAY be `null` if an SDP transport file is not supp
 
 The `media_type` declared in the SDP transport file MUST be `application/mp2t` matching the `media_type` used in NMOS which is also `application/mp2t`.
 
-If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS stream and the transport adaptation is UDP, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
+If the [Privacy Encryption Protocol](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) is used to encrypt the MPEG2-TS Stream and the transport adaptation is UDP, a Sender MUST NOT use the `private_data_byte` bytes of the MPEG2-TS `adaptation_field()` structure, as signaled by `transport_private_data_flag` and `transport_private_data_length`, for other purpose than sending the CTR Full Header and CTR Short Header.
 
 ## H.222.0 IS-04 Receivers
 
 Nodes implementing IS-04 v1.3 or higher that are capable of receiving H.222.0 multiplexed streams MUST have Receiver resources in the IS-04 Node API.
 
-A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and if fully described, for each sub-Stream making an MPEG2-TS stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams. An MPEG2-TS mux Receiver MUST list `application/MP2T` or `application/mp2t` in the `media_types` array within the `caps` object. An MPEG2-TS mux Receiver MAY also list `video/MP2T` in the `media_types` array within the `caps` object to indicate that it can consume an opaque MPEG2-TS stream.
+A mux Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute and MUST provide Receiver's Capabilities for the mux Stream and if fully described, for each sub-Stream making an MPEG2-TS Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams. An MPEG2-TS mux Receiver MUST list `application/MP2T` or `application/mp2t` in the `media_types` array within the `caps` object. An MPEG2-TS mux Receiver MAY also list `video/MP2T` in the `media_types` array within the `caps` object to indicate that it can consume an opaque MPEG2-TS Stream.
 
-A mux Receiver not exposing the sub-Streams MAY omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the MPEG2-TS stream.
+A mux Receiver not exposing the sub-Streams MAY omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the MPEG2-TS Stream.
 
-The mux Receiver MUST express its limitations or preferences regarding the H.222.0 streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The mux Receiver MUST express its limitations or preferences regarding the H.222.0 streams that it supports indicating constraints in accordance with the [Receiver Capabilities][] or [BCP-004-01][] specifications. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on the mux stream. For a given format, a mux stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers MUST be ignored.
+The following parameter constraints can be used to express limits or preferences on the mux Stream. For a given format, a mux Stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers MUST be ignored.
 
-> Note: The maximum number of sub-Streams (layers) supported by a Receiver is an indication of the processing capabilities of a Receiver. It does not prevent a mux stream from including more that the Receiver's maximum number of layers.
+> Note: The maximum number of sub-Streams (layers) supported by a Receiver is an indication of the processing capabilities of a Receiver. It does not prevent a mux Stream from including more that the Receiver's maximum number of layers.
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
-  Indicate the minimum and maximum audio layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum audio layers supported from the MPEG2-TS Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 - [video_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#video_layers)  
-  Indicate the minimum and maximum video layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum video layers supported from the MPEG2-TS Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 - [data_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#data_layers)  
-  Indicate the minimum and maximum data layers supported from the MPEG2-TS stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
+  Indicate the minimum and maximum data layers supported from the MPEG2-TS Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
 A coded format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio, video and data sub-streams.
 
@@ -173,33 +172,33 @@ Note: In the SDP transport file the media type will always be `video/MP2T` irres
 
 ### RTP transport
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other stream format carried within RTP.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other Stream format carried within RTP.
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.222.0 stream is expected to comply with RFC 2250 and RFC 3551. It need not comply with the additional requirements specified for SDP transport files at Senders.
+A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.222.0 Stream is expected to comply with RFC 2250 and RFC 3551. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the Stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone Stream compatibility assessment.
   
 ### Other transports
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other stream format carried within other transports.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other Stream format carried within other transports.
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the Stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone Stream compatibility assessment.
 
 ### Receivers
 
-A Receiver MAY support the extended [layers maping transport attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/TransportAttributes.md#audio_layers_mapping-video_layers_mapping-data_layers_mapping). This enables a Controller to select among the sub-Streams provided by a Sender, those that are mapped as the layers of a mux Receiver.
+A Receiver MAY support the extended [layers mapping transport attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/TransportAttributes.md#audio_layers_mapping-video_layers_mapping-data_layers_mapping). This enables a Controller to select among the sub-Streams provided by a Sender, those that are mapped as the layers of a mux Receiver.
 
-A Controller utilizing the `ext_audio_layers_mapping`, `ext_video_layers_mapping`, `ext_data_layers_mapping` transport attributes MUST remap the Receiver's capabilities to correspond with the mapped Sender's layers. It MUST present these remapped capabilities to the User and utilize them in its operations. The remapping operation of the Receiver's capabilities MUST exclusively update the `urn:x-matrox:cap:meta:layer` attribute of constraint sets associated with sub-Streams, leaving all other attributes unchanged. The remapped Receiver's capabilities MUST add "unconstrained" constraint sets for layers of the Sender that are unused by the Receiver. The Constroller MUST also update the mux Receiver's `urn:x-matrox:cap:format:audio_layers`, 'urn:x-matrox:cap:format:video_layers` and `urn:x-matrox:cap:format:data_layers` capabilities to match with the maximum number of layers of the Sender.
+A Controller utilizing the `ext_audio_layers_mapping`, `ext_video_layers_mapping`, `ext_data_layers_mapping` transport attributes MUST remap the Receiver's capabilities to correspond with the mapped Sender's layers. It MUST present these remapped capabilities to the User and utilize them in its operations. The remapping operation of the Receiver's capabilities MUST exclusively update the `urn:x-matrox:cap:meta:layer` attribute of constraint sets associated with sub-Streams, leaving all other attributes unchanged. The remapped Receiver's capabilities MUST add "unconstrained" constraint sets for layers of the Sender that are unused by the Receiver. The Controller MUST also update the mux Receiver's `urn:x-matrox:cap:format:audio_layers`, 'urn:x-matrox:cap:format:video_layers` and `urn:x-matrox:cap:format:data_layers` capabilities to match with the maximum number of layers of the Sender.
 
 > Note: The Receiver's sub-Streams mapping from `ext_audio_layers_mapping`, `ext_video_layers_mapping`, `ext_data_layers_mapping` and the Receiver's remapped constraint sets are based on the unconstrained value of the Sender's `urn:x-matrox:cap:format:audio_layers`, 'urn:x-matrox:cap:format:video_layers` and `urn:x-matrox:cap:format:data_layers` capabilities.
 
 ### Senders
 
-A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
+A Sender MAY, unless constrained by IS-11, produce any H.222.0 coded Stream that is compliant with the associated Flow `urn:x-matrox:audio_layers`, `urn:x-matrox:video_layers` and `urn:x-matrox:data_layers`.
 
 A Sender MUST populate the Program Map Table (PMT) for each sub-Stream format (audio, video, data) in ascending order of `layer` numbers. The PID value assigned to `layer` i for a given sub-Stream format MUST be numerically lower than the PID value assigned to `layer` i+1 for that same format.
 
@@ -207,7 +206,7 @@ Note: This requirement aligns with the [VSF_TR-07][] and [VSF_TR-01][], which ma
 
 ### [VSF_TR-07][] compatibility
 
-An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a JPEG-XS video stream (video/JXSV, VIDEO 0) along with 0 to 4 audio streams (SMPTE ST 302M embedding, audio/AM824, AUDIO 0-3) and 0 to 1 ancillary data stream (SMPTE ST 2038 embedding, video/smpte291, DATA 0).
+An MPEG2-TS Stream compatible with [VSF_TR-07][] is achieved by multiplexing a JPEG-XS video Stream (video/JXSV, VIDEO 0) along with 0 to 4 audio streams (SMPTE ST 302M embedding, audio/AM824, AUDIO 0-3) and 0 to 1 ancillary data Stream (SMPTE ST 2038 embedding, video/smpte291, DATA 0).
 
 ## H.222.0 IS-11 Senders and Receivers
 
@@ -227,6 +226,8 @@ An MPEG2-TS stream compatible with [VSF_TR-07][] is achieved by multiplexing a J
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
+[Receiver Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md "Matrox NMOS Receiver Capabilities"
+[Sender Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md "Matrox NMOS Sender Capabilities"
 [VSF_TR-07]: https://vsf.tv/download/technical_recommendations/VSF_TR-07_2022-04-20.pdf "Transport of JPEG XS Video in MPEG-2 Transport Stream over IP"
 [VSF_TR-01]: https://vsf.tv/download/technical_recommendations/VSF_TR-01_2018-06-05.pdf "Transport of JPEG 2000 Broadcast Profile video in MPEG-2 TS over IP"
 [ST 337]: https://ieeexplore.ieee.org/document/7291671 "ST 337:2015: Format for Non-PCM Audio and Data in an AES3 Serial Digital Audio Interface"

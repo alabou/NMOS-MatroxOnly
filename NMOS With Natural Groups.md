@@ -14,12 +14,11 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-[BCP-002-01][] Describes a method for grouping Sender and Receiver resources into natural groups in a very generic way. This specification strengten the requirements and provides a very percise defintion of natural grouping in Matrox products. The objective is to make natural grouping of Senders and Receivers compatible and homogeneous with the concept of sub-Flows/sub-Streams of multiplexed Senders and Receivers. A Controller should be able to process and connect a group of independent Senders/Receivers in the same way it processes a group of multiplexed Flows/Streams.
+[BCP-002-01][] Describes a method for grouping Sender and Receiver resources into natural groups in a very generic way. This specification strengthen the requirements and provides a very precise definition of natural grouping in Matrox products. The objective is to make natural grouping of Senders and Receivers compatible and homogeneous with the concept of sub-Flows/sub-Streams of multiplexed Senders and Receivers. A Controller should be able to process and connect a group of independent Senders/Receivers in the same way it processes a group of multiplexed Flows/Streams.
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -37,7 +36,7 @@ The "urn:x-nmos:tag:grouphint/v1.0" tag array MUST comprise a single string form
 `"<group-name> <group-index>:<role-in-group> <role-index>"`  
 `"<group-name> <group-index>:<role-in-group>"`
 
-The `<group-name>`, `<group-index>`, `<role-in-group>`, `<role-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<group-name>` MUST be a sequence of the letters [a-zA-Z]. The `<group-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<group-name>` and `<group-index>` sequences MUST be separated by a single space. The `<role-in-group>` MUST be a sequence of the letters [a-zA-Z]. The `<role-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<role-in-group>` and `<role-index>` sequences MUST be separated by a single space. The `<group-index>` and `<role-in-group>` MUST be separated by a colon ':'.
+The `<group-name>`, `<group-index>`, `<role-in-group>`, `<role-index>` sequences MUST be replaced with the proper value as defined in the following sections. The `<group-name>` MUST be a sequence of the letters [a-zA-Z]. The `<group-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<group-name>` and `<group-index>` sequences MUST be separated by a single space. The `<role-in-group>` MUST be a sequence of the letters [a-zA-Z]. The `<role-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `<role-in-group>` and `<role-index>` sequences MUST be separated by a single space. The `<group-index>` and `<role-in-group>` MUST be separated by a colon ':'.
 
 The scope is always `device` which is the default value as per [Group Hint](https://specs.amwa.tv/nmos-parameter-registers/branches/main/tags/grouphint.html#group-hint-urn).
 
@@ -53,7 +52,7 @@ A `<role-in-group>` is associated with the format of a Sender or Receiver. For t
 
 ## Layer
 
-The `<role-index>` is associated with the concept of "layer" of sub-Flows/sub-Streams. For independent Senders/Receivers it describes an ordering of the independent Senders/Receivers for a given role/format. The `<role-index>` MUST start at 0 and increment for each succesive layer of the same format. The `<role-index>` values MUST be consecutive integer values starting at 0. When `<role-index>` is not present it MUST be assumed as being 0.
+The `<role-index>` is associated with the concept of "layer" of sub-Flows/sub-Streams. For independent Senders/Receivers it describes an ordering of the independent Senders/Receivers for a given role/format. The `<role-index>` MUST start at 0 and increment for each successive layer of the same format. The `<role-index>` values MUST be consecutive integer values starting at 0. When `<role-index>` is not present it MUST be assumed as being 0.
 
 ## Senders
 
@@ -75,7 +74,7 @@ The "urn:x-nmos:tag:wallhint/v1.0" tag array MUST comprise a single string forma
 
 `"WALL <wall-index>"`
 
-The `<wall-index>` sequences MUST be replaced with the proper value as defined in the followign sections. The `<wall-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `WALL` and `<wall-index>` sequences MUST be separated by a single space.
+The `<wall-index>` sequences MUST be replaced with the proper value as defined in the following sections. The `<wall-index>` MUST be a decimal number where the leftmost digit MUST not be '0' unless the value is zero. The `WALL` and `<wall-index>` sequences MUST be separated by a single space.
 
 The `<wall-index>` MUST correspond to the `<group-index>` of the Receiver summed with a large integer value identifying the wall. Such a large integer value SHOULD be N multiplied by a power of 10 larger than the largest `<group-index>` of all the devices part of an NMOS deployment. N MUST be an integer in the range [1, maxInt] identifying a wall. For example if there are at most 100 groups per Device then a choice for the power of ten could be 100, having walls identified as 100, 200, 300, etc.
 

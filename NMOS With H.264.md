@@ -34,8 +34,7 @@ AMWA IS-04 and IS-05 have support for various transport protocols and can signal
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -218,7 +217,7 @@ This section applies to a Receiver directly or indirectly associated with an H.2
 
 Informative note: When an H.264 stream is directly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:video` and `media_types` of the `caps` attribute contains `video/H264`. When an H.264 stream is part of a multiplexed stream and is indirectly associated with a Receiver, the Receiver has `format` set to `urn:x-nmos:format:mux`, `media_types` of the `caps` attribute does not contains `video/H264` and `constraint_sets` of the `caps` attribute contains `video/H264`.
 
-Informative note: In the following text the word "stream" is used to indicate either an H.264 stream or an H.264 sub-stream depending on the direct verus indiret asssociation with the Receiver.
+Informative note: In the following text the word "stream" is used to indicate either an H.264 stream or an H.264 sub-stream depending on the direct versus indirect association with the Receiver.
 
 For a Receiver directly associated with an H.264 stream, the Receiver resource MUST indicate `urn:x-nmos:format:video` for the `format` attribute and MUST list `video/H264` in the `media_types` array within the `caps` object. This has been permitted since IS-04 v1.1.
 
@@ -341,7 +340,7 @@ If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/
 
 A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a H.264 stream is expected to comply with RFC 6184 and, if appropriate, ST 2110-22 or IPMX. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
   
 ### Other transports
 
@@ -349,7 +348,7 @@ Connection Management using IS-05 proceeds in exactly the same manner as for any
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
 
 ## Parameter Sets
 

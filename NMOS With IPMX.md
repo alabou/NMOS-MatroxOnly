@@ -18,8 +18,7 @@ This document presents the various aspects of using IPMX compliant Senders and R
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -194,7 +193,7 @@ A Sender MAY provide a `urn:x-matrox:cap:transport:channel_order` capability to 
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:format:audio_layers` capability for fully described AM824 multiplexed audio streams to indicate its support for the channels characteristics within an ST 2110-31 stream produced by a Sender. The `urn:x-matrox:cap:format:audio_layers` capability allows a Receiver to describe the number of audio sub-streams that it supports. A Receiver SHOULD also provide sub-streams capabilities for each audio layer to indicate what audio sub-streams it supports.
 
-A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the format-specific `channel-order` parameter or by checking the Sender's mux Flow `urn:x-matrox:cap:format:audio_layers` atribute and parent sub-Flows attributes.
+A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the format-specific `channel-order` parameter or by checking the Sender's mux Flow `urn:x-matrox:cap:format:audio_layers` attribute and parent sub-Flows attributes.
 
 A Sender MAY provide a `urn:x-matrox:cap:format:audio_layers` capability to indicate the number of audio layers that are supported. A Controller MAY use the Sender's capabilities to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. Only the number of audio layers MAY be constrained. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:format:audio_layers` capability in its [IS-11][] `constraints/supported` endpoint.
 

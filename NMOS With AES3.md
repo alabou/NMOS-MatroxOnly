@@ -26,8 +26,7 @@ Note: In the SDP transport file the media type will always be `audio/AM824` irre
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -39,7 +38,7 @@ A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio` or `ur
 
 ## AES3 Stream / AM824 Stream
 
-An AES3 Stream MUST be compliant with the standard implementation of the channel status as per section 7.2.2 of [AES3][] and only byte 0, 1, 2 and 23 MAY have a non-zero value. The AES3 Stream MUST be compliant with [AES/EBU Tech 3250-E][AES3] for the base functionality and PCM audio. Additionally it MUST be compliant with [ST 337] for non-PCM coded audio and data. As per ST 2110-31 or [ST 302M][] many such AES3 Streams can be multiplexed together into an RTP or MPEG2-TS stream. The `channel mode` field of byte 1 of the the channel status SHOULD be one of `mode not indicated`, `two-channel mode` or `stereophonic mode`.
+An AES3 Stream MUST be compliant with the standard implementation of the channel status as per section 7.2.2 of [AES3][] and only byte 0, 1, 2 and 23 MAY have a non-zero value. The AES3 Stream MUST be compliant with [AES/EBU Tech 3250-E][AES3] for the base functionality and PCM audio. Additionally it MUST be compliant with [ST 337] for non-PCM coded audio and data. As per ST 2110-31 or [ST 302M][] many such AES3 Streams can be multiplexed together into an RTP or MPEG2-TS Stream. The `channel mode` field of byte 1 of the the channel status SHOULD be one of `mode not indicated`, `two-channel mode` or `stereophonic mode`.
 
 An opaque AM824 Flow/Stream MUST have an associated `audio/AM824` media type and MAY comprise of a number of AES3 Streams. An opaque AM824 Flow/Stream does not provide information about the embedded AES3 Streams other than their count and common sample rate. 
 
@@ -61,7 +60,7 @@ A Source of format `urn:x-nmos:format:audio` or `urn:x-nmos:format:data`, associ
 
 In addition to those attributes defined in IS-04 for audio and data Sources, the following attributes defined in the [Source Attributes](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SourceAttributes.md) are used for AM824 Flows.
 
-A Source of format `urn:x-nmos:format:audio` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicading the Receiver's sub-Stream providing the media content to the Source.
+A Source of format `urn:x-nmos:format:audio` or `urn:x-nmos:format:data` having a non-null `urn:x-matrox:receiver_id` attribute where the associated Receiver `format` attribute is `urn:x-nmos:format:mux` MUST have a `urn:x-matrox:layer` attribute indicating the Receiver's sub-Stream providing the media content to the Source.
 
 Examples Source resources are provided in [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -75,7 +74,7 @@ In addition to those attributes defined in IS-04 for a coded audio Flow, the fol
 
 A fully described AM824 Flow MUST have `urn:x-matrox:audio_layers` and `urn:x-matrox:data_layers` attributes indicating the number of sub-Flows of each `format` making an AM824 Stream. An opaque AM824 Flow MUST NOT have such attributes. The fully described AM824 Stream MUST NOT have more or less sub-Streams than indicated by those attributes.
 
-A fully described AM824 Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an AM824 stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. An opaque AM824 Flow MUST NOT have such attributes. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
+A fully described AM824 Flow SHOULD have a `urn:x-matrox:layer_compatibility_groups` attribute identifying the mux Flow compatibility with the sub-Flows making an AM824 Stream. A mux Flow without a `urn:x-matrox:layer_compatibility_groups` attribute MUST be assumed as being part of all groups. An opaque AM824 Flow MUST NOT have such attributes. A Flow that is not a sub-Flow or a mux Flow MUST NOT have such attribute.
 
 A sub-Flow MUST have a `urn:x-matrox:layer` attribute identifying the sub-Flow within all the other sub-Flows of the same `format` making an AM824 Stream. A Flow that is not a sub-Flow MUST NOT have such attribute.
 
@@ -89,9 +88,9 @@ A Sender associated with an AM824 Flow through the `flow_id` attribute MUST prov
 
 An opaque AM824 Sender MUST omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the AM824 Stream and that sub-Flows cannot be constrained as they are not exposed.
 
-An AM824 Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the AM824 stream and that it cannot be constrained as no sub-Flows are exposed.
+An AM824 Sender not exposing the sub-Streams MAY omit the Sender's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the AM824 Stream and that it cannot be constrained as no sub-Flows are exposed.
 
-The Sender MUST express its limitations or preferences regarding the AM824 Streams that it supports indicating constraints in accordance with the [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md) Sender Capabilities specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's streams and sub-streams capabilities. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The Sender MUST express its limitations or preferences regarding the AM824 Streams that it supports indicating constraints in accordance with the [Sender Capabilities][] specification. The Sender SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Sender's streams and sub-streams capabilities. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Sender can or cannot produce; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the sender can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
@@ -109,7 +108,7 @@ The following parameter constraints can be used to express limits or preferences
 
 A format specification MAY define additional parameter constraints that can be used to express limits or preferences on the audio and data sub-streams.
 
-A coded format specification MAY define Sender's attributes and associated transport capabilities that, for the corresponding audio or data sub-stream, MUST be assumed as having their default value.
+A coded format specification MAY define Sender's attributes and associated transport capabilities that, for the corresponding audio or data sub-Stream, MUST be assumed as having their default value.
 
 Note: The Sender's attributes and associated transport capabilities of a coded format specification are assumed to exist for each sub-Stream, each having their default values. For example the `parameter_sets_flow_mode` and `parameter_sets_transport_mode` associated with some coded format specification are assumed as having their default value of `dynamic` and `in_band` respectively.
 
@@ -136,7 +135,7 @@ The SDP file at the `manifest_href` MUST comply with the requirements of ST 2110
 
 ###### channel-order
 
-The SDP transport file associated with an AM824 Stream MUST have `channel-order` parameter to indicate the grouping of channels in AM824 Stream. The `channel-order` parameter MUST use the ST 2110-30 channel grouping symbols for linear PCM AES3 Streamsand the ST 2110-31 channel grouping symbol `AES3` for non-linear AES Streams. Such layout MUST indicate the number of audio layers multiplexed in the AM824 Stream. This requirement applies to both opaque and fully described AM824 Streams.
+The SDP transport file associated with an AM824 Stream MUST have `channel-order` parameter to indicate the grouping of channels in AM824 Stream. The `channel-order` parameter MUST use the ST 2110-30 channel grouping symbols for linear PCM AES3 Streams and the ST 2110-31 channel grouping symbol `AES3` for non-linear AES Streams. Such layout MUST indicate the number of audio layers multiplexed in the AM824 Stream. This requirement applies to both opaque and fully described AM824 Streams.
 
 An example SDP file is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -152,15 +151,15 @@ Nodes implementing IS-04 v1.3 or higher that are capable of receiving AM824 Stre
 
 An opaque AM824 Receiver MUST indicate `urn:x-nmos:format:audio` for the `format` attribute, MUST list `audio/AM824` in the `media_types` array within the `caps` object and MUST provide Receiver's Capabilities for the `audio/AM824` Stream. An opaque AM824 Receiver MUST omit the Receiver's Capabilities for the sub-Streams, indicating that it is unconstrained with respect to the individual sub-Streams making the AM824 Stream.
 
-A fully described AM824 Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute, MUST list `application/AM824` in the `media_types` array within the `caps` object and MUST provide Receiver's Capabilities for the `application/AM824` Stream and for each sub-Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams. A fully described AM824 Receiver MAY also list `audio/AM824` in the `media_types` array within the `caps` object to indicate taht it can consume an opaque AM824 stream.
+A fully described AM824 Receiver MUST indicate `urn:x-nmos:format:mux` for the `format` attribute, MUST list `application/AM824` in the `media_types` array within the `caps` object and MUST provide Receiver's Capabilities for the `application/AM824` Stream and for each sub-Stream using the Constraint Set `urn:x-matrox:cap:meta:format`, `urn:x-matrox:cap:meta:layer` and `urn:x-matrox:cap:meta:layer_compatibility_groups` attributes values matching the Receiver's sub-Streams. A fully described AM824 Receiver MAY also list `audio/AM824` in the `media_types` array within the `caps` object to indicate that it can consume an opaque AM824 Stream.
 
 > Note: An opaque Sender is using a Flow indicating `urn:x-nmos:format:audio` for the `format` attribute and `audio/AM824` as the `media_type`. A Receiver indicating `urn:x-nmos:format:mux` for the `format` attribute having `audio/AM824` in the `media_types` array indicates that it can process such Flow of format `urn:x-nmos:format:audio` from the Sender.
 
-The Receiver MUST express its limitations or preferences regarding the AM824 Streams that it supports indicating constraints in accordance with the [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md) Receiver Capabilities specification. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of stream or sub-stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
+The Receiver MUST express its limitations or preferences regarding the AM824 Streams that it supports indicating constraints in accordance with the [Receiver Capabilities][] or [BCP-004-01][] specifications. The Receiver SHOULD express its constraints as precisely as possible, to allow a Controller to determine with a high level of confidence the Receiver's compatibility with the available streams and sub-streams. It is not always practical for the constraints to indicate every type of Stream or sub-Stream that a Receiver can or cannot consume successfully; however, they SHOULD describe as many of its commonly used operating points as practical and any preferences among them.
 
 The `constraint_sets` parameter within the `caps` object MUST be used to describe combinations of parameters which the receiver can support, using the parameter constraints defined in the [Capabilities register](https://specs.amwa.tv/nmos-parameter-registers/branches/main/capabilities/) of the NMOS Parameter Registers and [Matrox Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md).
 
-The following parameter constraints can be used to express limits or preferences on a fully described stream. For a given format, a fully described AM824 Stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers are ignored.
+The following parameter constraints can be used to express limits or preferences on a fully described Stream. For a given format, a fully described AM824 Stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers are ignored.
 
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
   Indicate the minimum and maximum audio layers supported from the AM824 Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
@@ -201,21 +200,21 @@ For Nodes consuming AM824 Streams using other transports, the Receiver resource 
 
 ### RTP transport
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other stream format carried within RTP.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other Stream format carried within RTP.
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
 A `PATCH` request on the **/staged** endpoint of an IS-05 Receiver can contain an SDP transport file in the `transport_file` attribute. The SDP transport file for a AM824 Stream is expected to comply with ST 2110-31. It need not comply with the additional requirements specified for SDP transport files at Senders.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the Stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone Stream compatibility assessment.
   
 ### Other transports
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other stream format carried within other transports.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other Stream format carried within other transports.
 
 If IS-04 Sender `manifest_href` is not `null`, the SDP transport file at the **/transportfile** endpoint on an IS-05 Sender MUST comply with the same requirements described for the SDP transport file at the IS-04 Sender `manifest_href`.
 
-If the Receiver is not capable of consuming the stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the stream compatibility because some parameters are not included `PATCH` request, it MAY accept the request and postpone stream compatibility assessment.
+If the Receiver is not capable of consuming the Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the Stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone Stream compatibility assessment.
 
 ### Receivers
 
@@ -232,7 +231,7 @@ A Sender MAY, unless constrained by IS-11, produce any AM824 Stream that is comp
 ## Controllers
 A Sender exposes either an opaque AM824 Stream (audio format) or an fully described one (mux format). Similarly a Receiver exposes either an opaque AM824 Stream (audio format) or an fully described one (mux format). 
 
-A Controller, under User supervision, SHOULD allow opaque and fully described AM824 Streams to interoperate. In such a case the Controller or the User MAY verify the compatibility of the Receiver with the Sender using the Sender's SDP transport file parameters. At activation time the Receiver MUST use the SDP transport file parameters to verify that the associated stream is compliant with its internal capabilities. The Controller, under User supervision, MAY use IS-11 to constrain the Sender to a specific configuration.
+A Controller, under User supervision, SHOULD allow opaque and fully described AM824 Streams to interoperate. In such a case the Controller or the User MAY verify the compatibility of the Receiver with the Sender using the Sender's SDP transport file parameters. At activation time the Receiver MUST use the SDP transport file parameters to verify that the associated Stream is compliant with its internal capabilities. The Controller, under User supervision, MAY use IS-11 to constrain the Sender to a specific configuration.
 
 ### AM824 fully described Receiver with an opaque Sender
 A Controller attempting to connect a fully described AM824 Receiver to an opaque AM824 Sender SHOULD consider the Receiver as being of format `urn:x-nmos:format:audio` and that the `media_types` attribute of the Receiver contains only `audio/AM824`. The Controller MAY assume the following additional capabilities for the AM824 opaque Receiver.
@@ -266,6 +265,8 @@ The Controller MAY use the `channel-order` parameter of the SDP transport file a
 [VSF]: https://vsf.tv/ "Video Services Forum"
 [SMPTE]: https://www.smpte.org/ "Society of Media Professionals, Technologists and Engineers"
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
+[Receiver Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md "Matrox NMOS Receiver Capabilities"
+[Sender Capabilities]: https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md "Matrox NMOS Sender Capabilities"
 [VSF_TR-10-12]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-12_2023-08-30.pdf "Internet Protocol Media Experience (IPMX): AES3 Transparent Transport"
 [ST 337]: https://ieeexplore.ieee.org/document/7291671 "ST 337:2015: Format for Non-PCM Audio and Data in an AES3 Serial Digital Audio Interface"
 [ST 302M]: https://ieeexplore.ieee.org/document/7291632 "SMPTE 302M: Mapping of AES3 Data into MPEG-2 Transport Stream"

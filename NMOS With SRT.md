@@ -14,18 +14,17 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-SRT (Secure Reliable Transport) is an open source media transport protocol that utilises the UDP protocol and supports packet recovery. The open source project is available at [SRT](https://github.com/Haivision/srt).
+SRT (Secure Reliable Transport) is an open source media transport protocol that utilizes the UDP protocol and supports packet recovery. The open source project is available at [SRT](https://github.com/Haivision/srt).
 
-The SRT protocol provides a reliable transport of anything using the UDP protocol. As such it can be used to transport an MPEG2-TS stream over SRT or an RTP stream over SRT. This specification supports both uses. The former MPEG2-TS mode is the default when using the `urn:x-matrox:transport:srt` transport, more specificatlly identified as `urn:x-matrox:transport:srt.mp2t`. The later RTP mode is identified as `urn:x-matrox:transport:srt.rtp`. Although SRT is well known for the reliable transport of an MPEG2-TS stream, it can also be used for the reliable transport of an RTP stream.
+The SRT protocol provides a reliable transport of anything using the UDP protocol. As such it can be used to transport an MPEG2-TS stream over SRT or an RTP stream over SRT. This specification supports both uses. The former MPEG2-TS mode is the default when using the `urn:x-matrox:transport:srt` transport, more specifically identified as `urn:x-matrox:transport:srt.mp2t`. The later RTP mode is identified as `urn:x-matrox:transport:srt.rtp`. Although SRT is well known for the reliable transport of an MPEG2-TS stream, it can also be used for the reliable transport of an RTP stream.
 
-The SRT protocol provides 3 approaches for connecting SRT Senders and Receivers: Listener, Caller and RendezVous. Although various combinations are supported by this specification, the default configuration is to have an SRT Sender be a Listerer while an SRT Receiver is a Caller. It is this configuration that is most compatible with NMOS Controller model and the only one that will be presented in details.
+The SRT protocol provides 3 approaches for connecting SRT Senders and Receivers: Listener, Caller and RendezVous. Although various combinations are supported by this specification, the default configuration is to have an SRT Sender be a Listener while an SRT Receiver is a Caller. It is this configuration that is most compatible with NMOS Controller model and the only one that will be presented in details.
 
 The multi-paths redundancy (bonding) and the Stream ID features of SRT are supported by this specification as optional features.
 
 ## Use of Normative Language
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY",
-and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
 
@@ -43,11 +42,11 @@ A non-NMOS SRT Receiver is an SRT receiver device that is not an NMOS Node and a
 
 Nodes implementing IS-04 v1.3 or higher, that are capable of transmitting SRT streams, MUST have Source, Flow and Sender resources in the IS-04 Node API.
 
-### MPGE2-TS
+### MPEG2-TS
 
 Senders having the `transport` attribute set to `urn:x-matrox:transport:srt` or `urn:x-matrox:transport:srt.mp2t` MUST be associated with a Flow through the `flow_id` attribute having  a `format` attribute set to `urn:x-nmos:format:mux` and a `media_type` attribute set to `application/mp2t`.
 
-The [NMOS with H.222.0](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20H.222.0.md) specification provides the detailed requirements for the Source, Flow and Senders of such multiplexed stream for non-RTP transports.
+The [NMOS with H.222.0](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20H.222.0.md) specification provides the detailed requirements for the Source, Flow and Senders of such multiplexed Stream for non-RTP transports.
 
 #### SDP format-specific parameters
 
@@ -79,11 +78,11 @@ The `manifest_href` attribute of the Sender MUST provide the URL to an SDP trans
 
 Nodes implementing IS-04 v1.3 or higher that are capable of receiving SRT streams MUST have Receiver resources in the IS-04 Node API.
 
-### MPGE2-TS
+### MPEG2-TS
 
 Receivers having the `transport` attribute set to `urn:x-matrox:transport:srt` or `urn:x-matrox:transport:srt.mp2t` MUST have  a `format` attribute set to `urn:x-nmos:format:mux` and a support streams of `media_type` `application/mp2t`.
 
-The [NMOS with H.222.0](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20H.222.0.md) specification provides the detailed requirements for Receivers of such multiplexed stream.
+The [NMOS with H.222.0](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20H.222.0.md) specification provides the detailed requirements for Receivers of such multiplexed Stream.
 
 ### RTP
 
@@ -119,9 +118,9 @@ When multi-paths redundancy is used the `stream_id`, `protocol` and `latency` tr
 
 ### Encryption
 
-The SRT native stream encryption MAY be controlled using the [Privacy Encrption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the SRT transport adaptation. When using this protocol adaptation the SRT passphrase is derived from the PEP key derivation function.
+The SRT native Stream encryption MAY be controlled using the [Privacy Encryption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the SRT transport adaptation. When using this protocol adaptation the SRT passphrase is derived from the PEP key derivation function.
 
-The SRT stream MAY further be encrypted using the [Privacy Encrption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the UDP transport adaptation when the transport is `urn:x-matrox:transport:srt` or `urn:x-matrox:transport:srt.mp2t` or using the RTP transport adaptation when the transport is `urn:x-matrox:transport:srt.rtp`.
+The SRT Stream MAY further be encrypted using the [Privacy Encryption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the UDP transport adaptation when the transport is `urn:x-matrox:transport:srt` or `urn:x-matrox:transport:srt.mp2t` or using the RTP transport adaptation when the transport is `urn:x-matrox:transport:srt.rtp`.
 
 ## SRT IS-11 Senders and Receivers
 
