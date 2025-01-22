@@ -149,6 +149,8 @@ A Sender MAY, unless constrained by [IS-11][], produce any USB stream that is co
 
 A Controller SHOULD use a Sender's `urn:x-matrox:cap:transport:usb_class` capability to verify Receivers compliance with the Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates its support for being constrained for this capability by enumerating the `urn:x-nmos:cap:transport:usb_class` capability in its [IS-11][] `constraints/supported` endpoint.
 
+> Note: There is no `urn:x-matrox:usb_class` Sender attribute, as usually expected, because a USB stream is composed of multiple sub-Streams, each being associated possibly with multiple classes and the set of classes for such USB stream changing dynamically.
+
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
