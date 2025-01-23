@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-The VSF/IPMX [TR-10-14][] technical recommendation defines the transport of a USB stream over TCP/IP. It allows the transport of multiplexed keyboard, mouse, data, audio and video sub-streams over TCP/IP. Senders and Receivers using the USB transport have their `format` attribute set to `urn:x-nmos:format:data` and their `transport` attribute set to  `urn:x-nmos:transport:usb`. The `media_type` attribute of a USB Receiver is `application/usb`. The `media_type` of a data Flow connected with an USB Sender is `application/usb`.
+The VSF/IPMX [TR-10-14][] technical recommendation defines the transport of a USB stream over TCP/IP. It allows the transport of multiplexed keyboard, mouse, data, audio and video sub-streams over TCP/IP. Senders and Receivers using the USB transport have their `format` attribute set to `urn:x-nmos:format:data` and their `transport` attribute set to  `urn:x-matrox:transport:usb`. The `media_type` attribute of a USB Receiver is `application/usb`. The `media_type` of a data Flow connected with an USB Sender is `application/usb`.
 
 The content of a USB stream is not exposed at the NMOS level and is exposed as an opaque data stream. A USB Receiver connecting to a USB Sender is granted access to the various USB devices accessible at the Sender. For each device there is a corresponding multiplexed data sub-stream. Such devices may be plugged and unplugged dynamically without impacting the connection of a Receiver to the Sender, without impacting the associated Source, Flow and Sender resources.
 
@@ -76,7 +76,7 @@ The `constraint_sets` parameter within the `caps` object MUST be used to describ
 
 A Sender SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (integers in the range 0 to 255) that are supported by the Sender. See [USB][https://www.usb.org] for class codes definitions.
 
-A USB Sender is a TCP/IP server. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-paths TCP) protocol for redundancy.
+A USB Sender is a TCP/IP server. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-matrox:transport:usb` transport is TCP, optionally using the MPTCP (multi-paths TCP) protocol for redundancy.
 
 An example Sender resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -84,7 +84,7 @@ An example Sender resource is provided in the [Examples](https://github.com/alab
 
 The `manifest_href` attribute of the Sender MUST provide the URL to an SDP transport file compliant with the requirements of [TR-10-14][] and the following:
 
-- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have `<media>`set to `application`, `<proto>` set to `TCP` and `<fmt>` set to `usb` to express that the `media_type` is `application/usb` and the TCP protocol is used by the `urn:x-nmos:transport:usb` transport.
+- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have `<media>`set to `application`, `<proto>` set to `TCP` and `<fmt>` set to `usb` to express that the `media_type` is `application/usb` and the TCP protocol is used by the `urn:x-matrox:transport:usb` transport.
 
 - The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have `<connection-address>` set to the IP address of the Sender's TCP server.
 
@@ -106,7 +106,7 @@ The `constraint_sets` parameter within the `caps` object MUST be used to describ
 
 A USB Receiver SHOULD provide a [`urn:x-matrox:cap:transport:usb_class`](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#usb_class) capability to indicate the USB classes (integers in the range 0 to 255) supported by the USB Receiver. See [USB][https://www.usb.org] for class codes definitions.
 
-A USB Receiver is a TCP/IP client. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-nmos:transport:usb` transport is TCP, optionally using the MPTCP (multi-paths TCP) protocol for redundancy.
+A USB Receiver is a TCP/IP client. A USB Sender accept connections from connecting USB Receivers. The underlying protocol used by the `urn:x-matrox:transport:usb` transport is TCP, optionally using the MPTCP (multi-paths TCP) protocol for redundancy.
 
 An example Receiver resource is provided in the [Examples](https://github.com/alabou/NMOS-MatroxOnly/tree/main/examples).
 
@@ -121,7 +121,7 @@ With this grouping convention a Controller can identify the number of USB Sender
 
 Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the USB specific transport parameters defined in [USB Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_usb.json) and [USB Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_usb.json). The `source_ip` and `source_port` transport parameters MUST be present in the IS-05 active, staged and constraints endpoints of a USB Sender. The `source_ip`, `source_port` and `interface_ip` transport parameters MUST be present in the IS-05 active, staged and constraints endpoints of a USB Receiver.
 
-Redundancy MUST be implemented using MPTCP. At most two sets of transport parameters MUST be specified for Senders and Receivers supporting redundancy with the `urn:x-nmos:transport:usb` transport. The transport parameters of the first leg are provided as entry 0 of the transport parameters array while those of the second leg are provided as entry 1.
+Redundancy MUST be implemented using MPTCP. At most two sets of transport parameters MUST be specified for Senders and Receivers supporting redundancy with the `urn:x-matrox:transport:usb` transport. The transport parameters of the first leg are provided as entry 0 of the transport parameters array while those of the second leg are provided as entry 1.
 
 For security reasons, USB streams are usually encrypted using the IPMX [TR-10-5][] Privacy Encryption Protocol and additional `ext_privacy` extended transport parameters are present at the IS-05 active, staged and constraints endpoints of USB Senders and USB Receivers. See "NMOS With Privacy Encryption" for more details.
 
@@ -147,7 +147,7 @@ A Sender MAY, unless constrained by [IS-11][], produce any USB stream that is co
 
 ## Controllers
 
-A Controller SHOULD use a Sender's `urn:x-matrox:cap:transport:usb_class` capability to verify Receivers compliance with the Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates its support for being constrained for this capability by enumerating the `urn:x-nmos:cap:transport:usb_class` capability in its [IS-11][] `constraints/supported` endpoint.
+A Controller SHOULD use a Sender's `urn:x-matrox:cap:transport:usb_class` capability to verify Receivers compliance with the Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates its support for being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:usb_class` capability in its [IS-11][] `constraints/supported` endpoint.
 
 > Note: There is no `urn:x-matrox:usb_class` Sender attribute, as usually expected, because a USB stream is composed of multiple sub-Streams, each being associated possibly with multiple classes and the set of classes for such USB stream changing dynamically.
 
