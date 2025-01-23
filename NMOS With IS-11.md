@@ -74,6 +74,10 @@ The capabilities of a Receiver MAY change as a result of a configuration change 
 
 For a Receiver with HDMI Outputs supporting EDID, the information from the EDID of the device connected to the HDMI Output MAY influence the capabilities of the Receiver. For example a connected monitor supporting a maximum resolution of 1080p could change the maximum resolution supported by the associated Receiver to max 1080p. 
 
+A Controller SHOULD ignore, in its stream compatibility evaluation, the parameters of the Receiver Capabilities that lack a corresponding target in the Source, Flow, or Sender attributes, SDP transport file attributes, or parameters. Additionally, it SHOULD inform the User about such Receiver Capabilities parameters.
+
+A Controller SHOULD ignore, in its stream compatibility evaluation, the parameters of the Receiver Capabilities that lack a corresponding target in the Sender Capabilities. Additionally, it SHOULD inform the User about such Receiver Capabilities parameters.
+
 #### Preference
 
 A Receiver SHOULD express its capabilities using a `urn:x-nmos:cap:meta:preference` value of 100 for the preferred configuration and other values for alternate configurations. A Receiver MUST express its capabilities using the `urn:x-nmos:cap:meta:preference` meta attribute considering that capabilities are first sorted from high to low values of `urn:x-nmos:cap:meta:preference` prior to be processed by Controllers and Senders.
@@ -108,7 +112,7 @@ If a connected Input supports EDID and such Input is the only one associated wit
 
 ### Capabilities
 
-Senders express their capabilities using the formalism of [BCP-004-01][]. Matrox products implement an enhanced version of the [Sender Capabilities][] which is a backward compatible extension of [BCP-004-01][]. Matrox products implement Sender capabilities in addition to the usual Receiver capabilities. Using Sender capabilities allows Matrox products to express to which extents a Sender can be configured and what Flows can be produced by the Sender.
+Senders express their capabilities using the formalism of [BCP-004-01][]. Matrox products implement an enhanced version of the [Sender Capabilities][] which is a backward compatible extension of [BCP-004-01][]. Matrox products implement Sender capabilities in addition to the usual Receiver capabilities. Using Sender capabilities allows Matrox products to express to which extents a Sender can be configured and what Flows can be produced by the Sender. A Sender SHOULD express its Capabilities for all parameters that are relevant to the streams it produces.
 
 The capabilities of a Sender MAY change as a result of a configuration change from vendor specific methods, internal resources usage and various other vendor specific reasons. A Controller SHOULD monitor the `version` and `caps.version` attributes of Senders resources in the Registry to assess if the Sender capabilities have changed and then re-evaluate the Sender state based on the latest information.
 
