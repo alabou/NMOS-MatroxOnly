@@ -96,7 +96,7 @@ A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate 
 
 > Note: A Sender indicating both `true` and `false` values in its capabilities describes that it may produce both HDCP and non-HDCP streams according to some internal criteria evaluated at activation time. 
 
-> Note: HKEP is possible only forRTP based transport protocols, all supporting an SDP transport file.
+> Note: HKEP is possible only for RTP based transport protocols, all supporting an SDP transport file.
 
 ### SDP Transport File
 
