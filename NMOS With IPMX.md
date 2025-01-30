@@ -32,13 +32,13 @@ The application of active constraints to `urn:x-nmos:cap:transport:` and  `urn:x
 
 The `urn:x-nmos:cap:transport:` and  `urn:x-matrox:cap:transport:` capabilities MUST NOT be associated with sub-Flows/sub-Streams. For a multiplexed Flow/Stream, the scope of `transport` capabilities is the `mux` Sender/Receiver. For a non-multiplexed Flow/Stream, the scope of `transport` capabilities is the `audio` or `video` or `data` Sender/Receiver.
 
-## Unsupported / Unconstrained Capabilities
+## Unsupported / Unconstrained Capabilities and Attributes
 
 Receivers and Senders MAY choose not to support certain capabilities and attributes described in this document. Similarly, they MAY indicate that they are unconstrained for specific capabilities outlined herein.
 
 ## Common Reference Clock
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate its support for IPMX Senders that do not use a common reference clock (PTP). The capability value `ptp` indicates support for a common reference clock (PTP), while the value `internal` indicates support for an internal clock (not PTP).
+A Receiver SHOULD provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate its support for Senders that do not use a common reference clock (PTP). The capability value `ptp` indicates support for a common reference clock (PTP), while the value `internal` indicates support for an internal clock (not PTP).
 
 A Receiver MAY support either or both clock reference types.
 
@@ -52,7 +52,7 @@ The application of a constraint using IS-11 on a Sender's `urn:x-matrox:cap:tran
 
 ## Asynchronous/Synchronous Media
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for IPMX Senders that produce media that is not synchronous with the Sender's reference clock. The capability value `true` indicates support for synchronous media, while the value `false` indicates support for asynchronous media.
+A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for Senders that produce media that is not synchronous with the Sender's reference clock. The capability value `true` indicates support for synchronous media, while the value `false` indicates support for asynchronous media.
 
 A Receiver MAY support either or both media types.
 
@@ -82,47 +82,45 @@ A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to 
 
 The `info_block` attribute and capability describe the RTCP stream produced by an IPMX Sender. A Sender that either does not produce media info blocks (non-IPMX) or produces media info blocks (IPMX) that are not supported by a Receiver MUST NOT prevent a Controller from connecting such a Receiver to the Sender. Such non-compliance only affects the Receiver's ability to adapt autonomously to dynamic changes in stream parameters, requiring intervention by the Controller instead.
 
-## HKEP
-
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:hkep` capability to indicate its support for IPMX Senders that use HDCP encryption and the HKEP protocol. A capability value of `true` indicates support for HDCP encryption and the HKEP protocol, while a value of `false` indicates that they are not supported.
+A Receiver SHOULD provide a `urn:x-matrox:cap:transport:hkep` capability to indicate its support for Senders that use HDCP encryption and the HKEP protocol. A capability value of `true` indicates support for HDCP encryption and the HKEP protocol, while a value of `false` indicates that they are not supported.
 
 A Receiver MAY support either or both `true` and `false` values.
 
-A Controller MUST verify the compliance of Receivers with an active Sender using HDCP encryption and the HKEP protocol by referring to the Sender's SDP transport file `hkep` attribute or by checking the Sender's associated `urn:x-matrox:hkep` attribute. The presence of this attribute in an SDP transport file or the value `true` for the associated `urn:x-matrox:hkep` Sender attribute indicates that the stream is HDCP-protected. Only Receivers supporting HDCP encryption and the HKEP protocol MAY consume such streams.
+A Controller MUST verify the compliance of Receivers with an active Sender using HDCP encryption and the HKEP protocol by referring to the Sender's SDP transport file `hkep` attribute or by checking the Sender's associated `urn:x-matrox:hkep` attribute. The presence of the `hkep` attribute in an SDP transport file or a value of `true` for the associated `urn:x-matrox:hkep` Sender attribute indicates that the stream is HDCP-protected. Only Receivers supporting HDCP encryption and the HKEP protocol MAY consume such streams.
 
-A Sender compliant with the "HKEP" section of this document MUST provide a `urn:x-matrox:hkep` Sender attribute to indicate that HDCP encryption and the HKEP protocol are used by the Sender. This attribute MUST be `true` if an `hkep` attribute is present in the Sender's SDP transport file and MUST be `false` if no `hkep` attributes are present. If an SDP transport file is not currently available, because the Sender is inactive, this attribute indicate wether or not such SDP transport file would contain and `hkep` attribute if the Sender was active at this time.
+A Sender compliant with the [HKEP](#hkep) section of this document MUST provide a `urn:x-matrox:hkep` Sender attribute to indicate that HDCP encryption and the HKEP protocol are used by the Sender. This attribute MUST be `true` if an `hkep` attribute is present in the Sender's SDP transport file, and MUST be `false` if no `hkep` attributes are present. If an SDP transport file is not currently available because the Sender is inactive, this attribute indicates whether or not such an SDP transport file would contain an `hkep` attribute if the Sender were active at that time.
 
-> Note: A Sender not providing the `urn:x-matrox:hkep` attribute is either not supporting HDCP encryption and the HKEP protocol or declare itself as not being compatible with the "HKEP" section of this document.
+> Note: A Sender not providing the `urn:x-matrox:hkep` attribute is either not supporting HDCP encryption and the HKEP protocol or declares itself as not being compatible with the [HKEP](#hkep) section of this document.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encryption and the HKEP protocol are supported. A Sender MAY support either or both `true` and `false` values. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:hkep` capability to verify Receivers compliance with the Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender constrained to `false` for this capability MUST NOT be part of an HDCP topology and MUST NOT access, produce, or stream HDCP-protected content. A Sender indicates its support for being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:hkep` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained).
+A Sender MAY provide a `urn:x-matrox:cap:transport:hkep` capability to indicate that HDCP encryption and the HKEP protocol are supported. A Sender MAY support either or both `true` and `false` values. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:hkep` capability to verify Receiver compliance with the Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender constrained to `false` for this capability MUST NOT be part of an HDCP topology and MUST NOT access, produce, or stream HDCP-protected content. A Sender indicates its support for being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:hkep` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained).
 
-> Note: A Sender indicating both `true` and `false` values in its capabilities describes that it may produce both HDCP and non-HDCP streams according to some internal criteria evaluated at activation time. 
+> Note: A Sender indicating both `true` and `false` values in its capabilities describes that it may produce both HDCP and non-HDCP streams according to some internal criteria evaluated at activation time.
 
-> Note: HKEP is possible only for RTP based transport protocols, all supporting an SDP transport file.
+> Note: HKEP is only available for RTP based transport protocols, all of which use an SDP transport file.
 
 ### SDP Transport File
 
-The `hkep` attribute of [TR-10-5][] is not yet registered with IANA. If it would, the definition would indicate "Usage Level: session, media" indicating that a session-level `hkep` attribute represents the default value for a media-level `hkep` attribute that is not specified. The SDP transport file may provide the `hkep` information either at the session-level and media-level.
+The `hkep` attribute defined in [TR-10-5][] is not yet registered with IANA. If it were, the definition would indicate "Usage Level: session, media" meaning that a session-level `hkep` attribute represents the default value for a media-level `hkep` attribute if the latter is not specified. The SDP transport file may therefore provide `hkep` information either at the session level and/or the media level.
 
-The HKEP specification uses the expression "hkep session attribute" not define the usage level of the `hkep` attribute but simply refers to it at its most generic level, which is the session level.
+In the HKEP specification, the use of the expression "hkep session attribute" does not define the usage level of the `hkep` attribute but simply refers to it at its most generic level, which is the session level.
 
 ### Activation
 
-A Controller MAY activate and configure a Receiver's HDCP encryption and the HKEP protocol using the SDP transport file from a Sender, including `hkep` attributes.
+A Controller MAY activate and configure a Receiver's HDCP encryption and the HKEP protocol using the SDP transport file from a Sender that includes `hkep` attributes.
 
 ### Consistency
 
-If the `urn:x-matrox:cap:transport:hkep` capability only allows the value `true` then the Sender's associated SDP transport file MUST have an `hkep` attribute.
+If the `urn:x-matrox:cap:transport:hkep` capability only allows the value `true`, then the Sender's associated SDP transport file MUST have an `hkep` attribute.
 
-If the `urn:x-matrox:cap:transport:hkep` capability only allows the value `false` then the Sender's associated SDP transport file MUST NOT have an `hkep` attribute.
+If the `urn:x-matrox:cap:transport:hkep` capability only allows the value `false`, then the Sender's associated SDP transport file MUST NOT have an `hkep` attribute.
 
-If the `urn:x-matrox:cap:transport:hkep` capability allow both `true` and `false` values then the Sender's associated SDP transport file MUST have an `hkep` attribute when the stream is HDCP-protected and MOST NOT have an `hkep` attribute when the stream is not HDCP-protected.
+If the `urn:x-matrox:cap:transport:hkep` capability allows both `true` and `false` values, then the Sender's associated SDP transport file MUST have an `hkep` attribute when the stream is HDCP-protected and MUST NOT have an `hkep` attribute when the stream is not HDCP-protected.
 
 ### HDCP Content Protection
 
-A Receiver implementing [BCP-008-01][] supporting HDCP encryption and the HKEP protocol MAY notify that the HDCP content protection system prevents the Receiver from accessing or re-transmitting HDCP content using the `streamStatus` and `streamStatusMessage` properties of the Receiver's associated `NcReceiverMonitor`.
+A Receiver implementing [BCP-008-01][] and supporting HDCP encryption and the HKEP protocol MAY notify that the HDCP content protection system prevents the Receiver from accessing or re-transmitting HDCP content using the `streamStatus` and `streamStatusMessage` properties of the Receiver's associated `NcReceiverMonitor`.
 
-A Sender implementing [BCP-008-02][] supporting HDCP encryption and the HKEP protocol MAY notify that the HDCP content protection system prevents the Sender from accessing or re-transmitting HDCP content using the `essenceStatus` and `essenceStatusMessage` properties of the Sender's associated `NcSenderMonitor`.
+A Sender implementing [BCP-008-02][] and supporting HDCP encryption and the HKEP protocol MAY notify that the HDCP content protection system prevents the Sender from accessing or re-transmitting HDCP content using the `essenceStatus` and `essenceStatusMessage` properties of the Sender's associated `NcSenderMonitor`.
 
 ### RTP Payload Header
 
@@ -130,7 +128,7 @@ Refer to the "Privacy" section "RTP Payload Header" sub-section for the detailed
 
 ## Privacy
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:privacy` capability to indicate its support for IPMX Senders that use privacy encryption and the PEP protocol. A capability value of `true` indicates support for privacy encryption and the PEP protocol, while a value of `false` indicates that they are not supported. A Receiver implementing privacy encryption and the PEP protocol MUST provide IS-05 `ext_privacy` extended transport parameters and constraints that specify the extent of support for the features defined in [TR-10-13][].
+A Receiver SHOULD provide a `urn:x-matrox:cap:transport:privacy` capability to indicate its support for Senders that use privacy encryption and the PEP protocol. A capability value of `true` indicates support for privacy encryption and the PEP protocol, while a value of `false` indicates that they are not supported. A Receiver implementing privacy encryption and the PEP protocol MUST provide IS-05 `ext_privacy` extended transport parameters and constraints that specify the extent of support for the features defined in [TR-10-13][].
 
 A Receiver MAY support either `true` or `false` values.
 
