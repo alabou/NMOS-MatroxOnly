@@ -34,7 +34,7 @@ The `urn:x-nmos:cap:transport:` and  `urn:x-matrox:cap:transport:` capabilities 
 
 ## Unsupported / Unconstrained Capabilities
 
-Receivers and Senders MAY choose not to support certain capabilities described in this document. Similarly, they MAY indicate that they are unconstrained for specific capabilities outlined herein.
+Receivers and Senders MAY choose not to support certain capabilities and attributes described in this document. Similarly, they MAY indicate that they are unconstrained for specific capabilities outlined herein.
 
 ## Common Reference Clock
 
