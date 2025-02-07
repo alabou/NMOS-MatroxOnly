@@ -58,10 +58,7 @@ constraints_supported.json
 {
   ...
   {
-    "pattern": "^urn:x-nmos:cap:"
-  },
-  {
-    "pattern": "^urn:x-[a-z]+:cap:"
+    "pattern": "^urn:(x-nmos|x-[a-z]+):cap:"
   }
   ...
 }
