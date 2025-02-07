@@ -30,18 +30,9 @@ constraint-set.json
 {
   ...
    "patternProperties": {
-      "^urn:x-nmos:cap:(?!meta:)": {
+      "^urn:(x-nmos|x-[a-z]+):cap:(?!meta:)": {
         "$ref": "param_constraint.json"
-      }
-  }
-  
-  "patternProperties": {
-      "^urn:x-[a-z]+:cap:(?!meta:)": {
-        "$ref": "param_constraint.json"
-      }
-  }
-
-  "patternProperties": {
+      },
       "^urn:x-[a-z]+:cap:meta:": {
           "oneOf": [
               {
@@ -59,6 +50,8 @@ constraint-set.json
   ...
 }
 ```
+
+Note that because there are already defined meta attributes, the pattern attributes "^urn:x-[a-z]+:cap:meta:" does not include the `x-nmos` namespace as those attributes are well documented and will get a definitive type among those allowed for manufacturer namespaces. A new attribute would surface as a vendor attribute, be validated by the schema and then possibly become an official attribute in the `x-nmos` namespace and then be fully specified in an updated JSON schema.
 
 constraints_supported.json
 ```
