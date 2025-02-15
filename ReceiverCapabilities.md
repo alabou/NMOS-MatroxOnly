@@ -187,6 +187,8 @@ A sub-Flow is defined as a member of a multiplexed flow produced by a Flow of fo
 
 A sub-Stream is defined as a member of a multiplexed stream consumed by a Receiver of format `urn:x-nmos:format:mux`.
 
+The metadata attribute `urn:x-matrox:cap:meta:layer_enabled` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, is enabled and overriding the `urn:x-nmos:cap:meta:enabled` attribute of the Constraint Set. A Constraint Set, associated with a sub-Flow/sub-Stream MUST have `urn:x-nmos:cap:meta:enabled` set to false such that Controllers and Users that are not compatible with this specification ignore it.
+
 The metadata attribute `urn:x-matrox:cap:meta:format` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, applies to a specific format. The format MAY be one of `urn:x-nmos:format:video`, `urn:x-nmos:format:audio` or `urn:x-nmos:format:data`.
 
 The metadata attribute `urn:x-matrox:cap:meta:layer` MUST be used to indicate that a Constraint Set, associated with a sub-Flow/sub-Stream, applies to a specific layer of a given format. The layer must be an unsigned integer in the range 0 to N-1 where N the total number of layers of a given format.

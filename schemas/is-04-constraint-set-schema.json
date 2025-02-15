@@ -18,6 +18,9 @@
         "type": "boolean",
         "default": true
       },
+      "urn:x-matrox:cap:meta:layer_enabled": {
+        "type": "boolean"
+      },
       "urn:x-matrox:cap:meta:format": {
         "type": "string",
         "enum": ["urn:x-nmos:format:video", "urn:x-nmos:format:audio",  "urn:x-nmos:format:data"]

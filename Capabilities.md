@@ -10,7 +10,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   
 ---
   
-This document describes values that may be used to identify a capability, used in the `caps` property of the resources defined in the [AMWA IS-04 NMOS Discovery and Registration Specification](https://specs.amwa.tv/is-04). Note that capabilities are defined from the Receiver Capabilities perspective but are allowed to be used as Sender Capabilities also. When Sender Capabilities are available, they become an alternate target that a Controller MAY use to verifiy compliance with Receiver Capabilities.
+This document describes values that may be used to identify a capability, used in the `caps` property of the resources defined in the [AMWA IS-04 NMOS Discovery and Registration Specification](https://specs.amwa.tv/is-04). Note that capabilities are defined from the Receiver Capabilities perspective but are allowed to be used as Sender Capabilities also. When Sender Capabilities are available, they become an alternate target that a Controller MAY use to verify compliance with Receiver Capabilities.
 
 {:toc}
 
@@ -77,6 +77,13 @@ constraints_supported.json
 - **Description:** Indicates the layer associated with the Constraint Set
 - **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
   - **Type:** integer
+- **Applicability:** AMWA IS-04 v1.3
+
+### LayerEnabled
+- **Name:** `urn:x-matrox:cap:meta:layer_enabled`
+- **Description:** Indicates that the Constraint Set associated with a layer is enabled and override the `urn:x-nmos:cap:meta:enabled` attribute.
+- **Specification:** [Sender Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/SenderCapabilities.md), [Receiver Capabilities](https://github.com/alabou/NMOS-MatroxOnly/blob/main/ReceiverCapabilities.md)
+  - **Type:** boolean
 - **Applicability:** AMWA IS-04 v1.3
 
 ### Layer Compatibility Groups
