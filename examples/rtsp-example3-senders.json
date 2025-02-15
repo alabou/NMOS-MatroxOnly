@@ -336,11 +336,12 @@
                     "urn:x-nmos:cap:meta:label": "Native Video sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 100,
                     "urn:x-matrox:cap:format:constant_bit_rate": {
                         "enum": [
@@ -415,11 +416,12 @@
                     "urn:x-nmos:cap:meta:label": "Native Audio sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 100,
                     "urn:x-nmos:cap:format:level": {
                         "enum": [
@@ -464,11 +466,12 @@
                     "urn:x-nmos:cap:meta:label": "Native Audio sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 1,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 100,
                     "urn:x-nmos:cap:format:sample_rate": {
                         "enum": [
@@ -563,11 +566,12 @@
                     "urn:x-nmos:cap:meta:label": "AAC multi-channels sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 1,
                     "urn:x-nmos:cap:format:channel_count": {
                         "enum": [
@@ -640,11 +644,12 @@
                     "urn:x-nmos:cap:meta:label": "H.264 sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 1,
                     "urn:x-nmos:cap:format:grain_rate": {
                         "enum": [
@@ -757,11 +762,12 @@
                     "urn:x-nmos:cap:meta:label": "AAC multi-channels sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 1,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 1,
                     "urn:x-nmos:cap:format:profile": {
                         "enum": [
@@ -809,11 +815,12 @@
                     "urn:x-nmos:cap:meta:label": "JPEG-XS sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-nmos:cap:format:media_type": {
                         "enum": [
@@ -926,11 +933,12 @@
                     "urn:x-nmos:cap:meta:label": "AAC stereo sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-nmos:cap:format:level": {
                         "enum": [
@@ -977,11 +985,12 @@
                     "urn:x-nmos:cap:meta:label": "AM824 sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-nmos:cap:format:media_type": {
                         "enum": [
@@ -1009,11 +1018,12 @@
                     "urn:x-nmos:cap:meta:label": "PCM sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-nmos:cap:format:media_type": {
                         "enum": [
@@ -1049,11 +1059,12 @@
                     "urn:x-nmos:cap:meta:label": "H.265 sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:video",
                     "urn:x-matrox:cap:meta:layer": 0,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-nmos:cap:format:grain_rate": {
                         "enum": [
@@ -1175,11 +1186,12 @@
                     "urn:x-nmos:cap:meta:label": "AAC stereo sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 1,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-matrox:cap:format:constant_bit_rate": {
                         "enum": [
@@ -1226,11 +1238,12 @@
                     "urn:x-nmos:cap:meta:label": "AM824 sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 1,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-nmos:cap:format:media_type": {
                         "enum": [
@@ -1258,11 +1271,12 @@
                     "urn:x-nmos:cap:meta:label": "PCM sub-constraints",
                     "urn:x-matrox:cap:meta:format": "urn:x-nmos:format:audio",
                     "urn:x-matrox:cap:meta:layer": 1,
+                    "urn:x-matrox:cap:meta:layer_enabled": true,
+                    "urn:x-nmos:cap:meta:enabled": false,
                     "urn:x-matrox:cap:meta:layer_compatibility_groups": [
                         0,
                         1
                     ],
-                    "urn:x-nmos:cap:meta:enabled": true,
                     "urn:x-nmos:cap:meta:preference": 0,
                     "urn:x-nmos:cap:format:media_type": {
                         "enum": [
