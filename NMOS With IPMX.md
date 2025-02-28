@@ -82,6 +82,10 @@ A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to 
 
 The `info_block` attribute and capability describe the RTCP stream produced by an IPMX Sender. A Sender that either does not produce media info blocks (non-IPMX) or produces media info blocks (IPMX) that are not supported by a Receiver MUST NOT prevent a Controller from connecting such a Receiver to the Sender. Such non-compliance only affects the Receiver's ability to adapt autonomously to dynamic changes in stream parameters, requiring intervention by the Controller instead.
 
+## HKEP
+
+As HDCP encryption applies only to audio and video streams using an RTP transport, any Receiver whose Flow `format` is neither `urn:x-nmos:format:audio` nor `urn:x-nmos:format:video`, or whose `transport` is neither `urn:x-nmos:transport:rtp` nor one of its subclassifications, and any Sender whose Flow `format` is neither `urn:x-nmos:format:audio` nor `urn:x-nmos:format:video`, or whose `transport` is neither `urn:x-nmos:transport:rtp` nor one of its subclassifications, MUST NOT implement the [HKEP](#hkep) section of this document.
+
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:hkep` capability to indicate its support for Senders that use HDCP encryption and the HKEP protocol. A capability value of `true` indicates support for HDCP encryption and the HKEP protocol, while a value of `false` indicates that they are not supported.
 
 A Receiver MAY support either or both `true` and `false` values.
@@ -125,6 +129,10 @@ A Sender implementing [BCP-008-02][] and supporting HDCP encryption and the HKEP
 ### RTP Payload Header
 
 Refer to the "Privacy" section "RTP Payload Header" sub-section for the detailed definition of an RTP Payload Header for various audio and video media types. Those definitions MUST be used to determine the parts of the RTP Payload that is HDCP encrypted.
+
+### IS-11
+
+For an Input shared by multiple IS-11 Senders that support being constrained for the `urn:x-matrox:cap:transport:hkep` capability to either `true` or `false`, all such Senders MUST be constrained to `false` in order for that Input to become non-HDCP protected. Consequently, if any of these Senders is not constrained to `false`, then those Senders that are constrained to `false` MUST enter the IS-11 `active_constraints_violation` state, because the essence remains HDCP-protected until all relevant Senders are set to false.
 
 ## Privacy
 
