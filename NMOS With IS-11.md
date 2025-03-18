@@ -136,6 +136,10 @@ A Controller SHOULD monitor the version and caps.version attributes of Senders r
 
 A Controller MUST NOT assume that active constraints within the capabilities of an IS-11 Sender are guaranteed to prevent an "active_constraints_violation" `state` on the Sender. The ability of a Sender to comply with the active constraints depend on various factors, some of which are out of the control of the Sender.
 
+The application of active constraints to `urn:x-nmos:cap:transport:` and  `urn:x-matrox:cap:transport:` capabilities MUST NOT be allowed when the IS-05 `master_enable` active attribute of a Sender is `true`. An IS-11 `PUT` request to the `constraints/active` endpoint MUST return the `Locked` status (423) in that case.
+
+A Sender MAY ignore `urn:x-nmos:cap:transport:` and `urn:x-matrox:cap:transport:` constraints that are not listed as supported in the IS-11 `constraints/supported` endpoint.
+
 #### Preference
 
 A Controller SHOULD express its active constraints using a `urn:x-nmos:cap:meta:preference` value of 100 for the preferred configuration and other values for alternate configurations. A Controller MUST express its active constraints using the `urn:x-nmos:cap:meta:preference` meta attribute considering that active constraints are first sorted from high to low values of `urn:x-nmos:cap:meta:preference` prior to be processed by Senders.
