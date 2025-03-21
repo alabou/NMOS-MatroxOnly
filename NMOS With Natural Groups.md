@@ -46,6 +46,8 @@ A `<group-name>` is associated with a transport and describes a grouping over IP
 
 For the base transports `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:mqtt`, `urn:x-nmos:transport:websocket`, `urn:x-matrox:transport:ndi`, `urn:x-matrox:transport:srt`, `urn:x-matrox:transport:usb`, `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:tcp` the `<group-name>` MUST be "RTP", "MQTT", "WS", "NDI","SRT", "USB", "UDP" and "TCP" respectively.
 
+A generic "IP" transport `<group-name>` MAY be used instead of a more specific transport name.
+
 ## Format
 
 A `<role-in-group>` is associated with the format of a Sender or Receiver. For the formats `urn:x-nmos:format:video`, `urn:x-nmos:format:audio`, `urn:x-nmos:format:data`, and `urn:x-nmos:format:mux`, the `<role-in-group>` MUST be "VIDEO", "AUDIO", "DATA", and "MUX" respectively. Alternatively, "ANC" MAY be used instead of "DATA" when the data is ancillary data. Any variation in capitalization is permitted, as `<role-in-group>` MUST always be compared using a case-insensitive comparison.
