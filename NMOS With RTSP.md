@@ -175,6 +175,8 @@ The `constraint_sets` parameter within the `caps` object MUST be used to describ
 
 The following parameter constraints can be used to express limits or preferences on the mux Stream. For a given format, a mux Stream MUST provide at least the minimum number of layers supported by the Receiver. Sub-Streams that are not mapped to the Receiver's layers MUST be ignored.
 
+> Note: The maximum number of sub-Streams (layers) supported by a Receiver is an indication of the processing capabilities of a Receiver. It does not prevent a mux Stream from including more that the Receiver's maximum number of layers.
+
 - [audio_layers](https://github.com/alabou/NMOS-MatroxOnly/blob/main/Capabilities.md#audio_layers)  
   Indicate the minimum and maximum audio layers supported from the RTSP Stream. The Receiver Capabilities MUST provide Constraint Sets for as many as the maximum layers.
 
