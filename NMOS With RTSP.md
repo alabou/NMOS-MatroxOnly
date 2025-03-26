@@ -34,7 +34,7 @@ The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mod
 
 The RTSP control endpoints of RTSP Senders/Receivers support the same security features (rtsp versus rtsps, OAuth2.0 authorizations or not) as the IS-05 control endpoint of the associated Senders/Receivers.
 
-The media Stream and sub-Streams of an RTSP session support the same privacy encryption features that non-RTSP Streams offer.
+The media Stream and sub-Streams of an RTSP session support the same privacy encryption and HDCP features that non-RTSP Streams offer.
 
 The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the mux Flow/Stream and sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name mux Flow/Stream and sub-Flows/sub-Streams according to the `<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregate control of the RTSP mux stream according to the `<group-name> <group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
 
@@ -130,6 +130,8 @@ An example Sender resource is provided in the [Examples](https://github.com/alab
 The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provides the information about the RTSP control endpoint. The SDP transport file describing the RTSP Stream and sub-Streams of an RTSP Sender MUST be provided as the response of a `DESCRIBE` request.
 
 When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provides the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
+
+When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at the `manifest_href` MUST provides the `a=hkep:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=hkep:` attribute. The sub-Streams MUST all come from the same input port identified by the `port-id` parameter of the `a=hkep:` attribute.
 
 ##### Sender's SDP transport file
 
