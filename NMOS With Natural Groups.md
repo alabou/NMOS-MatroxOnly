@@ -46,7 +46,7 @@ A `<group-name>` is associated with a transport and describes a grouping over IP
 
 For the base transports `urn:x-nmos:transport:rtp`, `urn:x-nmos:transport:mqtt`, `urn:x-nmos:transport:websocket`, `urn:x-matrox:transport:ndi`, `urn:x-matrox:transport:srt`, `urn:x-matrox:transport:usb`, `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:tcp` the `<group-name>` MUST be "RTP", "MQTT", "WS", "NDI","SRT", "USB", "UDP" and "TCP" respectively.
 
-A generic "IP" transport `<group-name>` MAY be used instead of a more specific transport name.
+A generic "IP", "IPMX", "ST2110" transports `<group-name>` MAY be used instead of a more specific transport name.
 
 ## Format
 
