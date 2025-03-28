@@ -140,6 +140,8 @@ The application of active constraints to `urn:x-nmos:cap:transport:` and  `urn:x
 
 A Sender MAY ignore `urn:x-nmos:cap:transport:` and `urn:x-matrox:cap:transport:` constraints that are not listed as supported in the IS-11 `constraints/supported` endpoint.
 
+A Controller MUST verify the list of parameters that support being constrained from the IS-11 `constraints/supported` endpoint of a Sender. The Controller MAY have to revert to verifying compliance, for the parameters that are not supported by active constraints, using the actual state of the Sender, Flows and Sources.
+
 #### Preference
 
 A Controller SHOULD express its active constraints using a `urn:x-nmos:cap:meta:preference` value of 100 for the preferred configuration and other values for alternate configurations. A Controller MUST express its active constraints using the `urn:x-nmos:cap:meta:preference` meta attribute considering that active constraints are first sorted from high to low values of `urn:x-nmos:cap:meta:preference` prior to be processed by Senders.
