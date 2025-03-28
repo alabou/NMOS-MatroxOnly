@@ -112,7 +112,8 @@ In the HKEP specification, the use of the expression "hkep session attribute" do
 
 ### Activation
 
-A Controller MAY activate a Receiver and configure HDCP encryption and the HKEP protocol using the SDP transport file from a Sender that includes `hkep` attributes.
+A Controller MAY activate a Receiver and configure HDCP encryption and the HKEP protocol using the SDP transport file from a Sender that includes `hkep` attributes. A Controller MUST use an SDP transport file to provide the `hkep` parameters of a stream to the Receiver.
+> Note: The `hkep` parameters are only available in an SDP transport file. There is not equivalent transport parameters.
 
 ### Consistency
 
@@ -123,7 +124,7 @@ If the `urn:x-matrox:cap:transport:hkep` capability only allows the value `false
 If the `urn:x-matrox:cap:transport:hkep` capability allows both `true` and `false` values, then the Sender's associated SDP transport file MUST have an `hkep` attribute when the stream is HDCP-protected and MUST NOT have an `hkep` attribute when the stream is not HDCP-protected.
 
 ### HDCP Content Protection Notifications
-The base notification method is not strictly required but is highly recommended. However, if a device implements notifications through BCP-008-01 or BCP-008-02, it is mandatory to also implement the base notification method.
+The base notification method is not strictly required but is highly recommended. However, if a device implements notifications through BCP-008-01 or BCP-008-02, it MUST also implement the base notification method.
 
 #### Base notification method
 A Sender implementing [IS-11][] and supporting HDCP encryption and the HKEP protocol SHOULD notify that HDCP content protection system prevents the Sender from accessing or re-transmitting HDCP content using the IS-11 status objects. A message SHOULD be registered in the `debug` attribute of the IS-11 Sender's `status` object when the `state` of the Sender becomes `no_essence` or in the `debug` attribute of the IS-11 Input's `status` object when the `state` of the Input becomes `no_signal`.
@@ -141,7 +142,8 @@ Refer to the "Privacy" section "RTP Payload Header" sub-section for the detailed
 
 ### IS-11
 
-For an Input shared by multiple IS-11 Senders that support being constrained for the `urn:x-matrox:cap:transport:hkep` capability to either `true` or `false`, all such Senders MUST be constrained to `false` in order for that Input to become non-HDCP protected. Consequently, if any of these Senders is not constrained to `false`, then those Senders that are constrained to `false` MUST enter the IS-11 `active_constraints_violation` state, because the essence remains HDCP-protected until all relevant Senders are set to false.
+For an Input shared by multiple [IS-11][] Senders that support being constrained for the `urn:x-matrox:cap:transport:hkep` capability to either `true` or `false`, any Senders constrained to `false` MUST cause that Input to become non-HDCP protected. Consequently, any of these Senders  constrained to `true` MUST enter the IS-11 `active_constraints_violation` state, because the essence is no longer HDCP-protected until the `urn:x-matrox:cap:transport:hkep` capability of all relevant Senders is set to `true`.
+
 
 ## Privacy
 
