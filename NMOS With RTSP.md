@@ -133,7 +133,7 @@ When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Enc
 
 When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at the `manifest_href` MUST provides the `a=hkep:` attributes and the SDP transport files received from `DESCRIBE` MAY contain the `a=hkep:` attributes if the `port-id` parameter is different from the SDP transport file at `manifest_href`. The sub-Streams MAY come from different input ports when SDP transport files from `DESCRIBE` provide `a=hkep:` attributes at the media level for each media stream.
 
-The `a=hkep:` attributes of an SDP transport file obtained from `DESCRIBE` MUST be identical to those present in the SDP transport file at `manifest_href`, with the exception of the `port-id` parameter which is allowed to differ.
+The media level `a=hkep:` attributes of an SDP transport file obtained from `DESCRIBE` MUST be identical to those present in the SDP transport file at `manifest_href`, with the exception of the `port-id` parameter which is allowed to differ for each media. Redundant legs MUST use the same `a=hkep:` attributes as required by VSF TR-10-5.
 
 ##### Sender's SDP transport file
 
