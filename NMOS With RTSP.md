@@ -131,7 +131,9 @@ The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the 
 
 When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provides the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
 
-When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at the `manifest_href` MUST provides the `a=hkep:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=hkep:` attribute. The sub-Streams MUST all come from the same input port identified by the `port-id` parameter of the `a=hkep:` attribute.
+When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at the `manifest_href` MUST provides the `a=hkep:` attributes and the SDP transport files received from `DESCRIBE` MAY contain the `a=hkep:` attributes if the `port-id` parameter is different from the SDP transport file at `manifest_href`. The sub-Streams MAY come from different input ports when SDP transport files from `DESCRIBE` provide `a=hkep:` attributes.
+
+The `a=hkep:` attributes of an SDP transport file obtained from `DESCRIBE` MUST be identical to those present in the SDP transport file at `manifest_href`, with the exception of the `port-id` parameter which is allowed to differ.
 
 ##### Sender's SDP transport file
 
