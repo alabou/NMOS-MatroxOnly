@@ -6,7 +6,7 @@ This repository describes the extended features of the NMOS Advanced Streaming A
 
 ## Purpose
 
-The NMOS Advanced Streaming Architecture extends and defines IP-based media streaming for the professional AV (proAV) market. Designed to address the growing demand for flexible, secure, and scalable streaming workflows, these specifications extend the NMOS framework with advanced features that enhance configurability, interoperability, security, and resource management in both small-scale and large-scale systems.
+The NMOS Advanced Streaming Architecture extends and defines IP-based media streaming for the professional AV (ProAV) market. Designed to address the growing demand for flexible, secure, and scalable streaming workflows, these specifications extend the NMOS framework with advanced features that enhance configurability, interoperability, security, and resource management in both small-scale and large-scale systems.
 
 ### Key objectives include:
 
@@ -62,7 +62,7 @@ The NMOS Advanced Streaming Architecture extends and defines IP-based media stre
 
 ## Setting Expectations
 
-These specifications represent a significant evolution in NMOS technology, offering unmatched configurability, interoperability, security, and resource management for proAV workflows. By enabling configuration of independent streams and per-sub-stream configuration within multiplexed flows, leveraging sender and receiver capabilities, and integrating advanced security protocols, they provide a state-of-the-art framework for the professional AV market. Whether managing small-scale systems or large distributed networks, these specifications ensure efficiency, reliability, and future-proof operation.
+These specifications represent a significant evolution in NMOS technology, offering unmatched configurability, interoperability, security, and resource management for ProAV workflows. By enabling configuration of independent streams and per-sub-stream configuration within multiplexed flows, leveraging sender and receiver capabilities, and integrating advanced security protocols, they provide a state-of-the-art framework for the professional AV market. Whether managing small-scale systems or large distributed networks, these specifications ensure efficiency, reliability, and future-proof operation.
 
 ---
 
