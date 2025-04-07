@@ -192,10 +192,7 @@ m=video 5000 RTP/AVP 103
 c=IN IP4 233.252.0.1/127
 a=rtpmap:103 raw/90000
 a=source-filter: incl IN IP4 233.252.0.1 198.51.100.1
-m=video 5000 RTP/AVP 103
-c=IN IP4 233.252.0.2/127
-a=rtpmap:103 raw/90000
-a=source-filter: incl IN IP4 233.252.0.2 198.51.100.1
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/VIDEO/0
 ```
 
 ### Example: `DESCRIBE` rtsp://matrox.com/x-nmos/RTSP/0/AUDIO/0
@@ -208,6 +205,7 @@ m=audio 5004 RTP/AVP 96
 c=IN IP4 233.252.0.1/127
 a=rtpmap:96 L24/48000/2
 a=source-filter: incl IN IP4 233.252.0.1 198.51.100.1
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/AUDIO/0
 ```
 
 ## RTSP IS-04 Receivers
@@ -361,11 +359,13 @@ c=IN IP4 233.252.0.1/127
 a=rtpmap:103 raw/90000
 a=source-filter: incl IN IP4 233.252.0.1 198.51.100.1
 a=mid:S1a
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/VIDEO/0/S1a
 m=video 5000 RTP/AVP 103
 c=IN IP4 233.252.0.2/127
 a=rtpmap:103 raw/90000
 a=source-filter: incl IN IP4 233.252.0.2 198.51.100.1
 a=mid:S1b
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/VIDEO/0/S1b
 ```
 
 ### Example: `DESCRIBE` rtsp://matrox.com/x-nmos/RTSP/0/AUDIO/0
@@ -380,11 +380,13 @@ c=IN IP4 233.252.0.1/127
 a=rtpmap:96 L24/48000/2
 a=source-filter: incl IN IP4 233.252.0.1 198.51.100.1
 a=mid:S2a
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/VIDEO/0/S2a
 m=audio 5004 RTP/AVP 96
 c=IN IP4 233.252.0.2/127
 a=rtpmap:96 L24/48000/2
 a=source-filter: incl IN IP4 233.252.0.2 198.51.100.1
 a=mid:S2b
+a=control:rtsp://matrox.com/x-nmos/RTSP/0/VIDEO/0/S2b
 ```
 
 [RFC-2326]: https://datatracker.ietf.org/doc/html/rfc2326 "Real Time Streaming Protocol (RTSP)"
