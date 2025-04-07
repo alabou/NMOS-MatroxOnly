@@ -1,6 +1,6 @@
 # Matrox NMOS Advanced Streaming Architecture
 
-This repository describes the extended features of the NMOS Advanced Streaming Architecture developped by Matrox.
+This repository describes the extended features of the NMOS Advanced Streaming Architecture developed by Matrox.
 
 # Purpose and Key Features
 
