@@ -17,11 +17,11 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 Advanced Audio Coding (AAC) is a technology standardized in [AAC][AAC] | ISO/IEC 14496-3.
 A companion RTP payload format specification was developed through the IETF Payloads working group, IETF [RFC 3640][RFC-3640]. Another RTP payload format specification IETF [RFC 6416][RFC-6416] also exist and may be used as an alternate method for transporting the audio stream payload in RTP.
 
-> RFC 3640 only support passing configuration information out-of-band while RFC 6416 support both in-band and out-of-band methods. When targeting MPEG2-TS transport the configuration information is provided in-band as per the H.222 specification.
+> RFC 3640 only support passing configuration information out-of-band while RFC 6416 support both in-band and out-of-band methods. When targeting MPEG2-TS transport the configuration information is provided in-band as per the [H.222.0] specification. When targeting an AES3 transport the configuration information is provided in-band as per [NMOS With AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md).
 
 > RFC 6416 is used in declarative mode as per RFC 6416 section 7.4.1 "Declarative SDP Usage for MPEG-4 Audio".
 
-AMWA IS-04 and IS-05 already have support for RTP transport and can signal the media type `audio/mpeg4-generic` as defined in RFC 3640 or `audio/MP4A-LATM` as defined in RFC 6416. For MPEG2-TS transport the AAC codec is signaled as `audio/MP4A-ADTS`.
+AMWA IS-04 and IS-05 already have support for RTP transport and can signal the media type `audio/mpeg4-generic` as defined in RFC 3640 or `audio/MP4A-LATM` as defined in RFC 6416. For MPEG2-TS and AES3 transports the AAC codec is signaled as `audio/MP4A-ADTS`.
 
 > MPEG4 audio is a synonym for Advanced Audio Coding, corresponding to the AAC codec. The media type `audio/mpeg4-generic` indicates MPEG4 audio, hence the AAC codec. The media type `audio/MP4A-LATM` indicates MPEG4 audio framed using the LATM multiplexer to transport configuration information along with the audio stream. It indicates the AAC codec. The media type `audio/MP4A-ADTS` indicates MPEG4 audio framed using the ADTS multiplexer to transport configuration information along with the audio stream. Once again it indicates the AAC codec.
 
@@ -391,7 +391,7 @@ A Sender MAY, unless constrained by IS-11, produce any AAC coded stream that is 
 
 For the purpose of not changing the SDP transport file, a Sender MAY keep an SDP transport file `b=` bitrate attribute unchanged if the actual value is lower than the one published in the SDP transport file. Similarly a Sender MAY keep the SDP transport file format parameter `profile-level-id` unchanged if the actual value is a subset of the one published in the SDP transport file.
 
-A Sender MUST transport configs `in_band` when the AAC stream is transmitted over an MPEG2-TS based transport as per the [H.222] specification.
+A Sender MUST transport configs `in_band` when the AAC stream is transmitted over an MPEG2-TS based transport as per the [H.222.0] specification. A Sender MUST transport configs `in_band` when the AAC stream is transmitted over an AES3 based transport as per [NMOS With AES3](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20AES3.md).
 
 A Sender operating with `parameter_sets_flow_mode` set to `strict` MUST produce a coded bitstream using at most one config associated with at most one Flow. The config MUST be defined once in-band or out-of-band and MAY be refreshed by in-band duplicates.
 
