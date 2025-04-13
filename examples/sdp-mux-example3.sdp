@@ -3,7 +3,7 @@ o=- 1730741140 1730741140 IN IP4 127.0.0.1
 s=Device [MTX05055] - Net Stream RTSP 0
 t=0 0
 m=application 27503 TCP rtsp
-c=IN IP4 127.0.0.1/128
+c=IN IP4 127.0.0.1
 a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00:00
 a=mediaclk:direct=0
 a=control:rtsp://127.0.0.1:27503/x-nmos/RTSP/0
