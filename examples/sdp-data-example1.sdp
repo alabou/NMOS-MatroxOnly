@@ -3,7 +3,7 @@ o=- 1730740959 1730740959 IN IP4 127.0.0.1
 s=Device [MTX05079] - Net Stream 1 USB 0
 t=0 0
 m=application 27502 TCP usb
-c=IN IP4 127.0.0.1/128
+c=IN IP4 127.0.0.1
 a=ts-refclk:ptp=IEEE1588-2008:00-00-00-00-00-00-00-00:00
 a=mediaclk:direct=0
 a=privacy:protocol=USB_KV; mode=AES-128-CTR_CMAC-64-AAD; iv=e06d9bcdb3eb4e5e; key_generator=3318ce76a8858bee4176030390185dd8; key_version=e2cb4299; key_id=0001020304050607
