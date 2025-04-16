@@ -122,7 +122,7 @@ The `protocol` "RTP_KV" MAY be supported by devices supporting the "RTP" `protoc
 
 The `protocol` "UDP" MUST be supported by all devices implementing [TR-10-13][] for the `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:udp.mcast` and `urn:x-matrox:transport:udp.ucast` transports.
 
-The `protocol` "UDP" MAY be supported by devices implementing [TR-10-13][] for the `urn:x-matrox:transport:srt` and `urn:x-matrox:transport:mp2t` transports.
+The `protocol` "UDP" MAY be supported by devices implementing [TR-10-13][] for the `urn:x-matrox:transport:srt` and `urn:x-matrox:transport:srt.mp2t` transports.
 
 The `protocol` "UDP_KV" MAY be supported by devices supporting the "UDP" `protocol`.
 
