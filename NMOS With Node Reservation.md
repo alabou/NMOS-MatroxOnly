@@ -32,6 +32,8 @@ The 'Session Lifetime' determines the amount of time, after being acquired or re
 
 The 'Session AliveTime' determines the amount of time, after being used, that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired if an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. By default the alivetime of a session is 60 seconds.
 
+> Note: it is possible to change, based on a global enterprise policy, the default alivetime of 60 seconds to 120 seconds. No other values are allowed.
+
 ## Using Reservation along with OAuth2.0 authorizations
 
 If accesses to the NMOS APIs are authorized by OAuth2.0, the OAuth2.0 Bearer token MUST be stored in the `Authorization` HTTP header and the exclusive session Bearer token MUST be store in the `PEP-Exclusive-Authorization` HTTP header. Otherwise when OAuth2.0 authorizations are not used, the exclusive session Bearer token MUST be stored in the `Authorization` HTTP header.
