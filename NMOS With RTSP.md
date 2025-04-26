@@ -127,7 +127,7 @@ An example Sender resource is provided in the [Examples](https://github.com/alab
 
 #### SDP format-specific parameters
 
-The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provides the information about the RTSP control endpoint. The SDP transport file describing the RTSP Stream and sub-Streams of an RTSP Sender MUST be provided as the response of a `DESCRIBE` request.
+The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provide information about the RTSP control endpoint. The SDP transport file describing the RTSP Stream and sub-Streams of an RTSP Sender MUST be provided as the response to a `DESCRIBE` request. An RTSP Sender MUST produce SDP transport files with absolute `control` URLs, making the `Content-Base` header optional.
 
 When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provides the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
 
