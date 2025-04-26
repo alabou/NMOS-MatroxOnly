@@ -34,7 +34,7 @@ The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mod
 
 The RTSP control endpoints of RTSP Senders/Receivers support the same security features (rtsp versus rtsps, OAuth2.0 authorizations or not) as the IS-05 control endpoint of the associated Senders/Receivers.
 
-The media Stream and sub-Streams of an RTSP session support the same privacy encryption and HDCP features that non-RTSP Streams offer.
+The media Stream and sub-Streams of an RTSP session support the same privacy encryption and HDCP features as non-RTSP Streams. Unless privacy encryption is used, RTSP transports are assumed to be unencrypted. The SRTP protocol and its associated key exchange mechanisms are not supported by NMOS Senders and Receivers.
 
 The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the mux Flow/Stream and sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name individual sub-Flows/sub-Streams according to the `<group-name> <group-index>:<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregate control of the RTSP mux stream according to the `<group-name> <group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
 
@@ -129,9 +129,9 @@ An example Sender resource is provided in the [Examples](https://github.com/alab
 
 The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provide information about the RTSP control endpoint. The SDP transport file describing the RTSP Stream and sub-Streams of an RTSP Sender MUST be provided as the response to a `DESCRIBE` request. An RTSP Sender MUST produce SDP transport files with absolute `control` URLs, making the `Content-Base` header optional.
 
-When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provides the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
+When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provide the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
 
-When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at the `manifest_href` MUST provides the `a=hkep:` attributes and the SDP transport files received from `DESCRIBE` MAY contain the `a=hkep:` attributes if the `port-id` parameter is different from the SDP transport file at `manifest_href`. The sub-Streams MAY come from different input ports when SDP transport files from `DESCRIBE` provide `a=hkep:` attributes at the media level for each media stream.
+When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at the `manifest_href` MUST provide the `a=hkep:` attributes and the SDP transport files received from `DESCRIBE` MAY contain the `a=hkep:` attributes if the `port-id` parameter is different from the SDP transport file at `manifest_href`. The sub-Streams MAY come from different input ports when SDP transport files from `DESCRIBE` provide `a=hkep:` attributes at the media level for each media stream.
 
 The media level `a=hkep:` attributes of an SDP transport file obtained from `DESCRIBE` MUST be identical to those present in the SDP transport file at `manifest_href`, with the exception of the `port-id` parameter which is allowed to differ for each media. Redundant legs MUST use the same `a=hkep:` attributes as required by VSF TR-10-5.
 
@@ -141,7 +141,7 @@ The SDP transport file from the RTSP Sender MUST contain an `a=control:rtsp://<h
 
 > Note: The `<group-name> <group-index>` are separated by a '/' in the rtsp URL, while a space is used for the grouphint.
 
-The media type MUST be “application/rtsp” for both `urn:x-matrox:transport:rtsp` and `urn:x-matrox:transport:rtsp.tcp` transports.
+The media type MUST be `application/rtsp` for both `urn:x-matrox:transport:rtsp` and `urn:x-matrox:transport:rtsp.tcp` transports.
 
 `m=application <port> TCP rtsp`
 
