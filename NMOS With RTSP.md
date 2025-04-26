@@ -241,7 +241,7 @@ An example Receiver resource is provided in the [Examples](https://github.com/al
 
 ## RTSP IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the RTSP specific transport parameters defined in [TCP Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_tcp.json) and [TCP Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json). Because of the one Sender to N Receivers relationship of the RTSP transport the `receiver_id` attribute of the RTSP Sender's activation MUST be `null`. The `sender_id` attribute of the RTSP Receiver's activation MUST be set to the id of an RTSP Sender or `null` if connecting to a non-NMOS RTSP Sender.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the RTSP specific transport parameters defined in [TCP Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_tcp.json) and [TCP Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_tcp.json). Because of the one Sender to N Receivers relationship of the RTSP transport the `receiver_id` attribute of the RTSP Sender's activation MUST be `null`. The `sender_id` attribute of the RTSP Receiver's activation MUST be set to the id of an RTSP Sender or `null` if connecting to a non-NMOS RTSP Sender.
 
 RTSP Senders and Receivers MUST be controlled through IS-05 only. The activation of a Sender / Receiver and the associated transport parameters MUST be under the control of IS-05 only.
 
@@ -250,6 +250,10 @@ RTSP Senders and Receivers MUST be controlled through IS-05 only. The activation
 If the Receiver is not capable of consuming the RTSP Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the Stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone Stream compatibility assessment. An RTSP Receiver MUST obtain the SDP transport files describing the RTSP Stream/sub-Streams using the `DESCRIBE` method and assess the Stream compatibility.
 
 An RTSP Receiver MAY connect to a non-NMOS RTSP Sender. IS-05 is then used only on the Receiver side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Sender. Such RTSP Receiver SHOULD as a best effort interoperate with the non-NMOS RTSP Sender.
+
+An RTSP Receiver MAY support an `ext_rtsp_session_control` transport parameter to simplify connections to non-NMOS RTSP Senders, using only the IS-05 Receiver's transport parameters to establish the connection. The `ext_rtsp_session_control` parameter corresponds to the `a=control` session attribute of an SDP transport file. The `source_ip` transport parameter MUST match with the resolved IP address of the `host` parameter of the `ext_rtsp_session_control` URL. The `source_port` transport parameter MUST match with the `port` parameters of the `ext_rtsp_session_control` URL. The optional `ext_rtsp_session_control` transport parameter is not a replacement of the required `source_ip` and `source_port` parameters of the [TCP Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_tcp.json) schema.
+
+> Note: The following strings are examples of aggregate session controls: "a=control:rtsp://matrox.com/movie", "a=control:rtsps://matrox.com/movie".
 
 An RTSP Receiver MUST use the `GET_PARAMETER` method with no entity body ping the RTSP server and SHOULD keep the connection alive. The RTSP Receiver SHOULD NOT send a ping before half the session `timeout` period, from the last `SETUP` response, is reached.
 
