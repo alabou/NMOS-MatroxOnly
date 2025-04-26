@@ -42,6 +42,13 @@ For a non-NMOS RTSP Sender, the use of aggregate and/or individual controls and 
 
 The SDP transport file of an RTSP Sender using the `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` transports is only about how to access, through TCP, the RTSP server control endpoint of such Sender. The client uses the `DESCRIBE` method to obtain information about the media streams available and uses the `SETUP` method to select/configure stream/sub-streams transport parameters such as the use of multicast or unicast.
 
+### Transports Capabilities Summary
+
+| Transport URN | Underlying Protocols | Media Types Supported | Encryption |
+|:--------------|:----------------------|:-----------------------|:-----------|
+| `urn:x-matrox:transport:rtsp` | RTP over UDP, UDP | - `application/MP2T` (MPEG2-TS over RTP)<br>- `application/mp2t` (MPEG2-TS over UDP)<br>- `application/AM824` (ST 2110-31 audio)<br>- `application/rtsp` (Independent streams over RTP) | Optional IPMX PEP (default unencrypted) |
+| `urn:x-matrox:transport:rtsp.tcp` | RTP over TCP | - `application/MP2T` (MPEG2-TS over RTP)<br>- `application/AM824` (ST 2110-31 audio)<br>- `application/rtsp` (Independent  streams over RTP) | Optional IPMX PEP (default unencrypted) |
+
 ## Use of Normative Language
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
