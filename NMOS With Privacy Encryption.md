@@ -25,11 +25,12 @@ Although the Privacy Encryption Protocol (PEP) is specified for an IPMX streamin
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][RFC-2119].
 
 ## Definitions
-
-PSK             A Pre-Shared Key used as the root secret in a privacy encryption key derivation process.  
-PEP             Privacy Encryption Protocol documented in IPMX [TR-10-13][] technical recommendation  
-ECDH            Elliptic Curve Diffie-Hellman  
-Administrator   An individual or entity with administrative authority and responsibility for managing devices deployed within a network, ensuring compliance with security policies, configuration requirements, and operational standards under a specified administrative domain.  
+| Term ||
+|:--------------|:---------|
+| PSK           | A Pre-Shared Key used as the root secret in a privacy encryption key derivation process |
+| PEP           | Privacy Encryption Protocol documented in IPMX [TR-10-13][] technical recommendation |
+| ECDH          | Elliptic Curve Diffie-Hellman |
+| Administrator | An individual or entity with administrative authority and responsibility for managing devices deployed within a network, ensuring compliance with security policies, configuration requirements, and operational standards under a specified administrative domain. |
 
 ## Compliance
 
