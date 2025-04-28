@@ -34,7 +34,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Compliance
 
-An implementation MUST be compliant with the strict requirements of [TR-10-13][] that are introduced by a `shall` clause. Some of these requirements are repeated in this specification to emphasis their importance, without impacting their original normative scope. This specification MAY document additional `protocol`, `mode` and `ecdh_curve` in addition to those specified in [TR-10-13][], [TR-10-14] or other VSF/IPMX technical recommendations. The inclusion of  additional values for these parameters MUST NOT be interpreted as a violation of any `shall` clause within the referenced technical recommendations.
+An implementation MUST be compliant with the strict requirements of [TR-10-13][] that are introduced by a `shall` clause. Some of these requirements are repeated in this specification to emphasize their importance, without impacting their original normative scope. This specification MAY document additional `protocol`, `mode` and `ecdh_curve` in addition to those specified in [TR-10-13][], [TR-10-14] or other VSF/IPMX technical recommendations. The inclusion of  additional values for these parameters MUST NOT be interpreted as a violation of any `shall` clause within the referenced technical recommendations.
 
 An implementation MUST be compliant with the non-strict requirements of [TR-10-13][] that are introduced by `should` and `may` clauses when these requirements are explicily elevated to strict requirements in this specification through a `MUST` clause.
 
