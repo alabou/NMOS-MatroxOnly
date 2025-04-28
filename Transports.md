@@ -63,7 +63,7 @@ This document summarize the various transports available.
 - **Specification:** [AMWA IS-04 v1.3](https://specs.amwa.tv/is-04/v1.3)
 - **Applicability:** AMWA IS-04 since v1.3, IS-05 since v1.1
 
-- The `rtp.tcp` transport is the RTP transport protocol over TCP instead of UDP.
+- The `rtp.tcp` transport is the RTP transport protocol over TCP instead of UDP. [RFC-4571][] describes the framing of RTP and RTCP packets for the `TCP/RTP/AVP` protocol.
 
 ### RTSP
 - **Name:** `urn:x-matrox:transport:rtsp`, `urn:x-matrox:transport:rtsp.tcp`
@@ -82,3 +82,5 @@ Informative Note: An opaque MPEG2-TS stream scenario is still possible using a F
 The previous transports, along with the `urn:x-nmos:transport:rtp` transport can be tested using the forked [nmos-testing repository](https://github.com/alabou/nmos-testing.git) with the `MatroxOnly` branch. The `Matrox-Transports` testsuite provides the tests for the various transports.
 
 Note: Currently the testsuite does not automatically activate the Senders and Receivers to perform live/activation testing. A manual activation may be required to perform additional testing.
+
+[RFC-4571]: https://www.rfc-editor.org/rfc/rfc4571 "Framing Real-time Transport Protocol (RTP) and RTP Control Protocol (RTCP) Packets over Connection-Oriented Transport"
