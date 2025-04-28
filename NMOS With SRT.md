@@ -122,6 +122,10 @@ The SRT native Stream encryption MAY be controlled using the [Privacy Encryption
 
 The SRT Stream MAY further be encrypted using the [Privacy Encryption Protocol (PEP)](https://github.com/alabou/NMOS-MatroxOnly/blob/other-transports/NMOS%20With%20Privacy%20Encryption.md) using the UDP transport adaptation when the transport is `urn:x-matrox:transport:srt` or `urn:x-matrox:transport:srt.mp2t` or using the RTP transport adaptation when the transport is `urn:x-matrox:transport:srt.rtp`.
 
+### SRT Sender as a Caller
+
+When an SRT Sender is configured as a `caller`, the `destination_ip`, `destination_port`, and the optional `stream_id` transport parameters of the Sender MUST be set to match the corresponding SRT Receiver transport parameters, prior to the activation of the Sender. The Sender MUST provide an SDP transport file at activation, which is used by a Controller to activate the corresponding SRT Receiver. Since the Sender becomes active prior to the Receiver, the initial connection attempts from the Sender will not succeed immediately and SHOULD NOT be registered as transport failures unless a vendor-specific timeout is reached.
+
 ## SRT IS-11 Senders and Receivers
 
 ### MPEG2-TS
