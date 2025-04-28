@@ -292,6 +292,14 @@ The `mode` parameter MUST be one of "AES-128-CTR", "AES-256-CTR", "ECDH_AES-128-
 
 The SRT `passphrase` MUST correspond to the `privacy_key` defined in the Privacy Key Derivation section of [TR-10-13][]. The SRT `passphrase` will be used by the SRT protocol to derive the encryption key. The SRT encryption takes control of the `iv'_ctr` value of the cipher and performs its own key management (renewal, derivation). The PEP `iv` parameter is not used with SRT and SHOULD be 0.
 
+### Native SRT devices
+
+An SRT Sender MAY provide a vendor-specific mechanism for an administrator to retrieve the `passphrase` controlling the SRT Sender encryption. When such a mechanism is used, the `mode` parameter MUST NOT be "ECDH_AES-128-CTR", "ECDH_AES-256-CTR", "ECDH_AES-128-GMAC-128", or "ECDH_AES-256-GMAC-128". Also, the Privacy Key Derivation  process of [TR-10-13][] generating the `passphrase` MUST ignore the `key_xcl` keying material. The PSK from which the `passphrase` is derived and exposed through the vendor specific mechanism MUST NOT be used by other non-SRT Senders or Receivers and SHOULD NOT be used by SRT Senders or Receivers that are not exposing their `passphrase`. The `passphrase` MUST be safely provided to the Native SRT Receiver subscribing to the associated SRT Sender. 
+
+An SRT Receiver MAY provide a vendor-specific mechanism for an administrator to retrieve the `passphrase` controlling the SRT Receiver encryption. When such a mechanism is used, the `mode` parameter MUST NOT be "ECDH_AES-128-CTR", "ECDH_AES-256-CTR", "ECDH_AES-128-GMAC-128", or "ECDH_AES-256-GMAC-128". Also, the Privacy Key Derivation  process of [TR-10-13][] generating the `passphrase` MUST ignore the `key_xcl` keying material. The PSK from which the `passphrase` is derived and exposed through the vendor specific mechanism MUST NOT be used by other non-SRT Senders or Receivers and SHOULD NOT be used by SRT Senders or Receivers that are not exposing their `passphrase`. The `passphrase` MUST be safely provided to the Native SRT Sender transmitting to the associated SRT Receiver. 
+
+SRT Senders and Receivers exposing their `passphrase` SHOULD persist the `passphrase` and the associated PEP parameters until an administrator explicitly requests a new `passphrase`. 
+
 ## UDP transport adaptation
 
 This `protocol` is used for `urn:x-matrox:transport:udp`, `urn:x-matrox:transport:udp.mcast`, `urn:x-matrox:transport:udp.ucast`, `urn:x-matrox:transport:udp.mp2t`, `urn:x-matrox:transport:udp.mp2t.mcast` and `urn:x-matrox:transport:udp.mp2t.ucast`.
