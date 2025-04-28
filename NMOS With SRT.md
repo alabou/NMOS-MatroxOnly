@@ -66,7 +66,7 @@ Senders having the `transport` attribute set to `urn:x-matrox:transport:srt.rtp`
 
 The `manifest_href` attribute of the Sender MUST provide the URL to an SDP transport file compliant with the requirements of transport `urn:x-nmos:transport:rtp` or one of its subclassifications and the following:
 
-- The media description line `m=<media> <port> <proto> <fmt> ...` MUST have `<port>` MUST be set to the UDP port of the SRT Sender listener.
+- In the media description line `m=<media> <port> <proto> <fmt> ...`, the `<port>` field MUST be set to the UDP port of the SRT Sender listener, and the `<media>`, `<proto>`, and `<fmt>` fields MUST correspond to an RTP-based transport.
 
 - The connection information lines `c=<nettype> <addrtype> <connection-address>` MUST have `<connection-address>` set to the IP address of the SRT Sender listener.
 
