@@ -26,10 +26,10 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## Definitions
 
-PSK             A Pre-Shared Key used as the root secret in a privacy encryption key derivation process. 
-PEP             Privacy Encryption Protocol documented in IPMX [TR-10-13][] technical recommendation 
-ECDH            Elliptic Curve Diffie-Hellman 
-Administrator   An individual or entity with administrative authority and responsibility for managing devices deployed within a network, ensuring compliance with security policies, configuration requirements, and operational standards under a specified administrative domain. 
+PSK             A Pre-Shared Key used as the root secret in a privacy encryption key derivation process.  
+PEP             Privacy Encryption Protocol documented in IPMX [TR-10-13][] technical recommendation  
+ECDH            Elliptic Curve Diffie-Hellman  
+Administrator   An individual or entity with administrative authority and responsibility for managing devices deployed within a network, ensuring compliance with security policies, configuration requirements, and operational standards under a specified administrative domain.  
 
 ## Compliance
 
