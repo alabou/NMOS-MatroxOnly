@@ -33,7 +33,7 @@ Administrator   An individual or entity with administrative authority and respon
 
 ## Compliance
 
-An implementation MUST be compliant with the strict requirements of [TR-10-13][] that are introduced by a `shall` clause. Those requirements could be repeated in this specification to emphasis their importance without impacting their original normative scope. This specification MAY document additional `protocol`, `mode` and `ecdh_curve` in addition to those specified in [TR-10-13][], [TR-10-14] or other VSF/IPMX technical recommendations. Allowing additional values for those parameters MUST be interpreted as a violation of a `shall` clause of those technical recommendations.
+An implementation MUST be compliant with the strict requirements of [TR-10-13][] that are introduced by a `shall` clause. Those requirements could be repeated in this specification to emphasis their importance without impacting their original normative scope. This specification MAY document additional `protocol`, `mode` and `ecdh_curve` in addition to those specified in [TR-10-13][], [TR-10-14] or other VSF/IPMX technical recommendations. Allowing additional values for those parameters MUST NOT be interpreted as a violation of a `shall` clause of those technical recommendations.
 
 An implementation MUST be compliant with the non-strict requirements of [TR-10-13][] that are introduced by `should` and `may` clauses and that are elevated to strict requirements in this specification by a `MUST` clause.
 
