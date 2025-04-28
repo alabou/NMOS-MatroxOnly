@@ -397,7 +397,7 @@ This protocol indicates that the effective transport adaptation of the media str
 
 The constraints on the `ext_privacy_mode` parameter MAY describe a combination of modes supported for RTP base adaptations and UDP based adaptations. A Sender/Receiver MUST fail activation if the selected `mode` is not compliant with the transmission protocol negotiated between the RTSP client and server.
 
-> Note: When the `urn:x-matrox:transport:rtsp.tcp` transport is used the packets are transmitted as `RTP/AVP` and hence the protocol is either "RTP" or "RTP_KV".
+> Note: When the `urn:x-matrox:transport:rtsp.tcp` transport is used the packets are transmitted as `RTP/AVP/TCP` and hence the protocol is either "RTP" or "RTP_KV". The framing of `RTP/AVP/TCP` described in [RFC-2326][] is different from the framing of `TCP/RTP/AVP` described in [RFC-4571][] 
 
 ## Node Reservation
 
@@ -427,3 +427,4 @@ The `key_xcl` MUST be the 128 bit `exclusive_key` of the exclusive session, acqu
 [BCP-004-01]: https://specs.amwa.tv/bcp-004-01/ "AMWA BCP-004-01 NMOS Receiver Capabilities"
 [TR-10-13]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-01-19.pdf "Internet Protocol Media Experience (IPMX): Privacy Encryption Protocol (PEP)"
 [TR-10-14]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-14_2024-09-24.pdf "Internet	Protocol Media Experience (IPMX): IPMX USB"
+[RFC-2326]: https://www.rfc-editor.org/rfc/rfc2326.html "Real Time Streaming Protocol (RTSP)"
