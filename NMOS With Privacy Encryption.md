@@ -185,7 +185,7 @@ The ECDH functionality is available through the IS-05 extended transport paramet
 
 A Sender supporting privacy encryption MUST follow the requirements defined in the "Privacy" section of the "NMOS With IPMX" specification regarding IS-04 Sender Capabilities, IS-05 transport parameter constraints, and IS-11 supported constraints.
 
-## IS-04, IS-05 Receivers
+## IS-04, IS-05, IS-11 Receivers
 
 A Receiver supporting privacy encryption MUST follow the requirements defined in the "Privacy" section of the "NMOS With IPMX" specification regarding IS-04 Receiver Capabilities, and IS-05 transport parameter constraints.
 
