@@ -429,3 +429,4 @@ The `key_xcl` MUST be the 128 bit `exclusive_key` of the exclusive session, acqu
 [TR-10-13]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-01-19.pdf "Internet Protocol Media Experience (IPMX): Privacy Encryption Protocol (PEP)"
 [TR-10-14]: https://vsf.tv/download/technical_recommendations/VSF_TR-10-14_2024-09-24.pdf "Internet	Protocol Media Experience (IPMX): IPMX USB"
 [RFC-2326]: https://www.rfc-editor.org/rfc/rfc2326.html "Real Time Streaming Protocol (RTSP)"
+[RFC-4571]: https://datatracker.ietf.org/doc/html/rfc4571 "Framing Real-time Transport Protocol (RTP) and RTP Control Protocol (RTCP) Packets over Connection-Oriented Transport"
