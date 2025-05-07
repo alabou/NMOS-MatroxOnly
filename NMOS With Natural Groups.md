@@ -78,6 +78,8 @@ A Sender MAY be member of multiple groups. A Sender  that does not include the "
 
 A Receiver MAY be member of multiple groups. A Receiver that does not include the "urn:x-matrox:tag:groupcompatibility/v1.0" tag MUST be assumed to belong to all groups. Receivers that are members a common group are considered compatible and MAY be used simultaneously; otherwise they are not compatible and MUST be used exclusively.
 
+The groupcompatibility tag is intended to express exclusivity or compatibility among Senders or Receivers that reside within a single device and may share internal hardware or processing resources. Certain combinations of Senders or Receivers on the same device may not be usable simultaneously due to bandwidth limitations, hardware pipeline conflicts, or configuration constraints. By declaring group membership, a device can expose these limitations declaratively, allowing an NMOS Controller to enforce compatibility rules without requiring detailed, device-specific knowledge. Devices that omit the tag are assumed to have no such internal restrictions, ensuring compatibility with existing NMOS behaviors.
+
 ## Display Walls
 
 While the "urn:x-nmos:tag:grouphint/v1.0" tag allows grouping Senders and Receivers from a given Device, the "urn:x-nmos:tag:wallhint/v1.0" tag allows grouping Receivers across multiple Devices. The wallhint does not apply to Senders. It allows grouping all the Receivers of a given group associated to a given wall, connecting to Senders of the same group to be processed at once.
