@@ -68,6 +68,16 @@ The `<group-name> <group-index>` value for a Receiver "urn:x-nmos:tag:grouphint/
 
 Controllers SHOULD present to a User a group of Senders/Receivers in a similar way that a group of sub-Flows/sub-Streams would be presented for a multiplexed Sender/Receiver, using the same concepts of format and layer associated with sub-Flow/sub-Streams.
 
+## Group Compatibility
+
+Senders and Receivers MUST declare a "urn:x-matrox:tag:groupcompatibility/v1.0" tag in their `tags` attribute.
+
+The "urn:x-matrox:tag:groupcompatibility/v1.0" tag array MUST comprise entries formatted as the string representation of a decimal positive integer, where the leftmost digit MUST NOT be '0' unless the value is zero.
+
+A Sender MAY be member of multiple groups. A Sender  that does not include the "urn:x-matrox:tag:groupcompatibility/v1.0" tag MUST be assumed to belong to all groups. Senders that are members a common group are considered compatible and MAY be used simultaneously; otherwise they are not compatible and MUST be used exclusively.
+
+A Receiver MAY be member of multiple groups. A Receiver that does not include the "urn:x-matrox:tag:groupcompatibility/v1.0" tag MUST be assumed to belong to all groups. Receivers that are members a common group are considered compatible and MAY be used simultaneously; otherwise they are not compatible and MUST be used exclusively.
+
 ## Display Walls
 
 While the "urn:x-nmos:tag:grouphint/v1.0" tag allows grouping Senders and Receivers from a given Device, the "urn:x-nmos:tag:wallhint/v1.0" tag allows grouping Receivers across multiple Devices. The wallhint does not apply to Senders. It allows grouping all the Receivers of a given group associated to a given wall, connecting to Senders of the same group to be processed at once.
