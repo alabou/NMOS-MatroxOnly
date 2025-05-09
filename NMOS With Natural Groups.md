@@ -70,19 +70,19 @@ Controllers SHOULD present to a User a group of Senders/Receivers in a similar w
 
 ## Compatibility Groups
 
-Senders and Receivers SHOULD declare a "urn:x-matrox:tag:compatibility_groups/v1.0" tag in their `tags` attribute.
+Senders and Receivers SHOULD declare a "urn:x-matrox:tag:compatibility-groups/v1.0" tag in their `tags` attribute.
 
-The "urn:x-matrox:tag:compatibility_groups/v1.0" tag array MUST comprise entries formatted as the string representation of a decimal positive integer, where the leftmost digit MUST NOT be '0' unless the value is zero. Each array entry describes a compatibility group number to which a Sender or Receiver belongs.
+The "urn:x-matrox:tag:compatibility-groups/v1.0" tag array MUST comprise entries formatted as the string representation of a decimal positive integer, where the leftmost digit MUST NOT be '0' unless the value is zero. Each array entry describes a compatibility group number to which a Sender or Receiver belongs.
 
-A Sender MAY be a member of multiple groups. A Sender that does not include the "urn:x-matrox:tag:compatibility_groups/v1.0" tag MUST be assumed to belong to all groups. 
+A Sender MAY be a member of multiple groups. A Sender that does not include the "urn:x-matrox:tag:compatibility-groups/v1.0" tag MUST be assumed to belong to all groups. 
 
-A Receiver MAY be a member of multiple groups. A Receiver that does not include the "urn:x-matrox:tag:compatibility_groups/v1.0" tag MUST be assumed to belong to all groups. 
+A Receiver MAY be a member of multiple groups. A Receiver that does not include the "urn:x-matrox:tag:compatibility-groups/v1.0" tag MUST be assumed to belong to all groups. 
 
 Senders and Receivers that are members of a common compatibility group are considered compatible and MAY be used simultaneously. Otherwise, they are not compatible and MUST be used exclusively.
 
 Compatibility group numbers apply only to Senders and Receivers within the same device. Controllers MUST NOT infer compatibility or exclusivity across devices based on these tags. Each compatibility group number defines a set of Senders and Receivers within the same device that are compatible for concurrent operation. 
 
-> Note: The compatibility_groups tag is intended to express exclusivity or compatibility among Senders and Receivers that reside within a single device and may share internal hardware or processing resources. Certain combinations of Senders or Receivers on the same device may not be usable simultaneously due to bandwidth limitations, hardware pipeline conflicts, or configuration constraints. By declaring group membership, a device can expose these limitations declaratively, allowing an NMOS Controller to enforce compatibility rules without requiring detailed, device-specific knowledge. Devices that omit the tag are assumed to have no such internal restrictions, ensuring compatibility with existing NMOS behaviors.
+> Note: The compatibility-groups tag is intended to express exclusivity or compatibility among Senders and Receivers that reside within a single device and may share internal hardware or processing resources. Certain combinations of Senders or Receivers on the same device may not be usable simultaneously due to bandwidth limitations, hardware pipeline conflicts, or configuration constraints. By declaring group membership, a device can expose these limitations declaratively, allowing an NMOS Controller to enforce compatibility rules without requiring detailed, device-specific knowledge. Devices that omit the tag are assumed to have no such internal restrictions, ensuring compatibility with existing NMOS behaviors.
 
 ## Display Walls
 
