@@ -50,6 +50,8 @@ A Sender MAY provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to
 
 The application of a constraint using IS-11 on a Sender's `urn:x-matrox:cap:transport:clock_ref_type` capability, if allowed, MUST NOT change the value of the `clocks` attribute of the associated Node.
 
+A Sender constrained through IS-11 to `ptp` MUST NOT fallback to `internal` if there is not PTP clock available on the network and MUST consider this state as a constraint violation.
+
 > Note: An IPMX unconstrained Sender follows the [TR-10-1][] technical recommendation and uses a `ptp` common reference clock if one is available, otherwise it falls back to using an `internal` reference clock. A non-IPMX unconstrained Sender in a ST 2110 environment follows the SMPTE ST 2110-10 specification and usually uses a `ptp` common reference clock.
 
 ## Asynchronous/Synchronous Media
