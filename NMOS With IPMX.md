@@ -46,7 +46,7 @@ A Receiver MAY support either or both clock reference types.
 
 A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file to check for the `a=ts-refclk` attribute or using the Sender's associated Source's `clock_name` attribute and checking the `ref_type` attribute of the clock. For a `mux` Source, the parents Sources `clock_name` attribute MUST match with the `mux` Source's `clock_name` attribute.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate the reference clocks that it supports. A Controller MAY use Sender capabilities, if supported, to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:clock_ref_type` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained).
+A Sender MAY provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate the reference clocks that it supports. A Controller MAY use Sender capabilities, if supported, to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:clock_ref_type` capability in its [IS-11][] `constraints/supported` endpoint.
 
 The application of a constraint using IS-11 on a Sender's `urn:x-matrox:cap:transport:clock_ref_type` capability, if allowed, MUST NOT change the value of the `clocks` attribute of the associated Node.
 
@@ -64,7 +64,7 @@ A Controller MUST verify the compliance of Receivers with an active Sender using
 
 > Note: The SDP transport file attribute `a=mediaclk:sender` indicates an asynchronous media while `a=mediaclk:direct` indicates a synchronous one.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate the media synchronization that it supports. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:synchronous_media` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:synchronous_media` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained).
+A Sender MAY provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate the media synchronization that it supports. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:synchronous_media` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:synchronous_media` capability in its [IS-11][] `constraints/supported` endpoint.
 
 A Sender producing media that is synchronous with the Sender's reference clock MUST include an `urn:x-matrox:synchronous_media` attribute in its associated Source. A Sender producing media that is not synchronous with the Sender's reference clock MAY omit this attribute, which defaults to false.
 
