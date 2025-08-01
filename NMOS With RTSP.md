@@ -138,9 +138,11 @@ The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the 
 
 When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provide the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
 
-When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at the `manifest_href` MUST provide the `a=hkep:` attributes and the SDP transport files received from `DESCRIBE` MAY contain the `a=hkep:` attributes if the `port-id` parameter is different from the SDP transport file at `manifest_href`. The sub-Streams MAY come from different input ports when SDP transport files from `DESCRIBE` provide `a=hkep:` attributes at the media level for each media stream.
+When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at `manifest_href` MUST provide an `a=hkep:` attribute that applies by default to every sub-Stream.
 
-The media level `a=hkep:` attributes of an SDP transport file obtained from `DESCRIBE` MUST be identical to those present in the SDP transport file at `manifest_href`, with the exception of the `port-id` parameter which is allowed to differ for each media. Redundant legs MUST use the same `a=hkep:` attributes as required by VSF TR-10-5.
+If any sub-Streams are not HDCP-encrypted, or if HDCP-encrypted sub-Streams originate from different `port-id` values, the default `a=hkep:` attribute of the SDP transport file at `manifest_href` MUST NOT apply. Instead, the SDP transport file returned by `DESCRIBE` MUST provide an `a=hkep:` attribute for each HDCP-encrypted media stream, and MUST NOT include an `a=hkep:` attribute for media streams that are not HDCP-encrypted.
+
+The `a=hkep:` attributes in the SDP transport file returned by `DESCRIBE` MUST match the default `a=hkep:` parameters from the SDP transport file at `manifest_href`, except that the `port-id` parameter MAY differ per media stream. Redundant legs MUST use identical `a=hkep:` attributes across legs, as required by VSF TR-10-5.
 
 ##### Sender's SDP transport file
 
