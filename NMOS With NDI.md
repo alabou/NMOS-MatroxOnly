@@ -164,6 +164,8 @@ The `source_name` associated with a Sender MUST be made of the following charact
 
 An NDI Receiver MUST search for NDI Senders first in the `Public` group and then in other groups, unless configured differently through a vendor-specific mechanism.
 
+At activation with `master_enable` set to `true`,  the `machine_name` and `source_name` attributes of the transport parameters MUST be set to a non-`null` value.
+
 > Note: The NDI transport parameters of a Receiver do not include information about the Sender's group membership. A vendor-specific mechanism could be employed to configure NDI Senders and Receivers to utilize groups other than the default NDI `Public` group.
 
 If the Receiver is not capable of consuming the Stream described by a `PATCH` on the **/staged** endpoint, it SHOULD reject the request. If it is unable to assess the Stream compatibility because some parameters are not included in the `PATCH` request, it MAY accept the request and postpone Stream compatibility assessment.
@@ -185,6 +187,8 @@ A non-NMOS NDI Receiver MAY connect to an NDI Sender. IS-05 is then used only on
 ### Other transports
 
 ## Controllers
+
+A Controller SHOULD provide all the available transport parameters of an NDI Sender that are implemented by a subscribing NDI Receiver. As a minimum the Controller MUST provide the `machine_name` and `source_name` parameters of an NDI Sender. The transport parameters of a subscribing NDI Receiver that have no value available from the NDI Sender MUST be set to `null`.
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
