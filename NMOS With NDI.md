@@ -152,7 +152,9 @@ An example Receiver resource is provided in the [Examples](https://github.com/al
 
 ## NDI IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the NDI specific transport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json). Because of the one Sender to N Receivers relationship of the NDI transport the `receiver_id` attribute of the NDI Sender's activation MUST be `null`. The `sender_id` attribute of the NDI Receiver's activation MUST be set to the id of an NDI Sender or `null` if connecting to a non-NMOS NDI Sender or connecting without using IS-05.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the NDI specific transport parameters defined in [NDI Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_ndi.json) and [NDI Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_ndi.json). NDI Senders and Receivers MUST support all but the `source_url` property of their respective schema.
+
+Because of the one Sender to N Receivers relationship of the NDI transport the `receiver_id` attribute of the NDI Sender's activation MUST be `null`. The `sender_id` attribute of the NDI Receiver's activation MUST be set to the id of an NDI Sender or `null` if connecting to a non-NMOS NDI Sender or connecting without using IS-05.
 
 NDI Senders and Receivers SHOULD be controlled through IS-05 only. The activation of a Sender / Receiver and the associated transport parameters SHOULD be under the control of IS-05 only. Vendor specific mechanisms MAY be used to control NDI Senders and Receivers, in which case such control MUST appear to the NMOS environment as if performed through IS-05.
 
