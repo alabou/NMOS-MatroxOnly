@@ -158,7 +158,7 @@ Because of the one Sender to N Receivers relationship of the NDI transport the `
 
 NDI Senders and Receivers SHOULD be controlled through IS-05 only. The activation of a Sender / Receiver and the associated transport parameters SHOULD be under the control of IS-05 only. Vendor specific mechanisms MAY be used to control NDI Senders and Receivers, in which case such control MUST appear to the NMOS environment as if performed through IS-05.
 
-The `source_name` associated with a Sender MUST be made of the following characters: lower case characters from 'a' to 'z', upper case characters from 'A' to 'Z', numeric characters from '0' to '9', underscore character '_'. If the `source_name` transport parameter is a Receiver is not null, it follows the same rule.
+The `source_name` associated with a Sender MUST be made of the following characters: lower case characters from 'a' to 'z', upper case characters from 'A' to 'Z', numeric characters from '0' to '9', underscore character '_'. If the `source_name` transport parameter of a Receiver is not null, it follows the same rule.
 
 ### Receivers
 
