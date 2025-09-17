@@ -1,0 +1,180 @@
+show_data()
+===
+print(video_sender)
+===
+print(convert_caps_json_to_caps(json.loads(video_sender)))
+===
+print(caps_audio_sender)
+===
+print(caps_audio_receiver)
+===
+print(conset_included_in_caps(pcmAudio, caps_audio_sender))
+===
+print(capset_included_in_caps(pcmAudio.to_capset(), caps_audio_sender))
+===
+print(pcmAudio.to_capset())
+===
+print(namespace_inherit_from_conset(Namespace(), pcmAudio))
+print(namespace_inherit_from_capset(Namespace(), caps_audio_sender.get_capset(index=4)))
+===
+print(caps_constrict_by_conset(caps_audio_sender, pcmAudio).to_conset())
+===
+print(conset_included_in_caps(caps_constrict_by_conset(caps_audio_sender, pcmAudio).to_conset(), caps_audio_receiver))
+===
+print(conset_included_in_caps(caps_constrict_by_conset(caps_audio_sender, am824Audio).to_conset(), caps_audio_receiver))
+===
+print(caps_audio_sender)
+===
+configAudio = ConSet(
+    preference=100,
+    cons=make_conset(
+        Constraint(CapFormatMediaType, RangeValue(("audio/mpeg4-generic",))),
+    )
+)
+print(caps_constrict_by_conset(caps_audio_sender, configAudio))
+===
+print(caps_constrict_by_conset(caps_audio_sender.get(), configAudio))
+===
+configAudio = ConSet(
+    preference=100,
+    cons=make_conset(
+        Constraint(CapFormatMediaType, RangeValue(("audio/mpeg4-generic",))),
+        Constraint(CapFormatChannelCount, RangeValue((6,))),
+    )
+)
+
+print(caps_constrict_by_conset(caps_audio_sender.get(), configAudio))
+===
+configAudio = ConSet(
+    preference=100,
+    cons=make_conset(
+        Constraint(CapFormatMediaType, RangeValue(("audio/mpeg4-generic",))),
+        Constraint(CapFormatChannelCount, RangeValue(max=10)),
+    )
+)
+print(caps_constrict_by_conset(caps_audio_sender.get(), configAudio))
+print(caps_constrict_adjust_by_conset(caps_audio_sender.get(), configAudio))
+===
+print(conset_included_in_caps(configAudio, caps_audio_sender))
+===
+configAudio = Cons(consets=[
+    ConSet(
+        preference=100,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("audio/L24",))),
+            Constraint(CapFormatChannelCount, RangeValue((2,))),
+        )
+    ),
+    ConSet(
+        preference=90,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("audio/mpeg4-generic",))),
+            Constraint(CapFormatChannelCount, RangeValue(max=10)),
+        )
+    ),
+])
+print(caps_constrict_by_cons(caps_audio_sender.get(), configAudio.get()))
+print(caps_constrict_adjust_by_cons(caps_audio_sender.get(), configAudio.get()))
+===
+caps_included_in_caps(caps_video_receiver, caps_compressed_video_receiver)
+caps_included_in_caps(caps_compressed_video_receiver, caps_video_receiver)
+===
+print(caps_constrict_adjust_by_cons(caps_constrict_adjust_by_cons(caps_video_sender.get(), caps_video_receiver.get().to_cons()).get(), caps_compressed_video_receiver.get().to_cons()))
+===
+print(caps_ndi_sender)
+===
+print(caps_ndi_sender.get(format=FormatAudio))
+print(caps_ndi_sender.get(format=FormatVideo))
+print(caps_ndi_sender.get(format=FormatData))
+===
+print(caps_ndi_sender.get(format=None))
+===
+print(caps_ndi_sender.get(format=FormatAudio, layer=0))
+print(caps_ndi_sender.get(format=FormatVideo, layer=0))
+===
+print(caps_ndi_receiver.get()) 
+print(caps_ndi_receiver.get(no_filter=True)) 
+===
+print(caps_ndi_sender.get(no_filter=True).get_compatibility_groups())
+===
+print(caps_constrict_adjust_by_cons(caps_ndi_sender.get(no_filter=True), caps_ndi_receiver.get(no_filter=True).to_cons()))
+===
+available=caps_constrict_adjust_by_cons(caps_ndi_sender.get(no_filter=True), caps_ndi_receiver.get(no_filter=True).to_cons())
+available.get_compatibility_groups()
+available_group0=caps_constrict_adjust_by_cons(caps_ndi_sender.get(no_filter=True), caps_ndi_receiver.get(no_filter=True).to_cons()).get(compatibility_group=0)
+available_group1=caps_constrict_adjust_by_cons(caps_ndi_sender.get(no_filter=True), caps_ndi_receiver.get(no_filter=True).to_cons()).get(compatibility_group=1)
+===
+configMux = Cons(consets=[
+    ConSet(
+        preference=100,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("application/ndi",))),
+            Constraint(CapFormatAudioLayers, RangeValue((0,))),
+        )
+    )
+])
+print(caps_constrict_by_cons(available_group0.get(no_filter=True), configMux))
+===
+print(caps_constrict_by_cons(available_group0.get(no_filter=True), configMux.normalize(audio_layers=1, video_layers=1)))
+===
+configMux = Cons(consets=[
+    ConSet(
+        preference=100,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("application/ndi",))),
+            Constraint(CapFormatAudioLayers, RangeValue((0,))),
+        )
+    ),
+    ConSet(
+        preference=100,
+        format=FormatVideo,
+        layer=0,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("video/raw",))),
+            Constraint(CapFormatFrameWidth, RangeValue((3840,))),
+            Constraint(CapFormatFrameHeight, RangeValue((2160,))),
+        )
+    ),
+])
+print(caps_constrict_by_cons(available_group0.get(no_filter=True), configMux.normalize(audio_layers=1, video_layers=1)))
+===
+configMux = Cons(consets=[
+    ConSet(
+        preference=100,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("application/ndi",))),
+            Constraint(CapFormatVideoLayers, RangeValue((1,))),
+            Constraint(CapFormatAudioLayers, RangeValue((1,))),
+        )
+    ),
+    ConSet(
+        preference=100,
+        format=FormatVideo,
+        layer=0,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("video/raw",))),
+            Constraint(CapFormatFrameWidth, RangeValue((3840,))),
+            Constraint(CapFormatFrameHeight, RangeValue((2160,))),
+        )
+    ),
+    ConSet(
+        preference=100,
+        format=FormatAudio,
+        layer=0,
+        cons=make_conset(
+            Constraint(CapFormatMediaType, RangeValue(("audio/L24",))),
+            Constraint(CapFormatSampleDepth, RangeValue((24,))),
+            Constraint(CapFormatChannelCount, RangeValue((6,))),
+        )
+    ),    
+])
+print(caps_constrict_by_cons(available_group0.get(no_filter=True), configMux.normalize(audio_layers=1, video_layers=1)))
+===
+config=caps_constrict_by_cons(available_group0.get(no_filter=True), configMux.normalize(audio_layers=1, video_layers=1))
+caps_included_in_caps(config, caps_ndi_sender)
+===
+print(caps_mp2t_receiver)
+print(caps_mp2t_receiver.get_compatibility_groups())
+print(caps_mp2t_receiver.get(format=None))
+print(caps_mp2t_receiver.get(format=FormatVideo))
+print(caps_mp2t_receiver.get(format=FormatAudio))
