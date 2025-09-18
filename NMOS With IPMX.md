@@ -88,6 +88,8 @@ A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to 
 
 The `info_block` attribute and capability describe the RTCP stream produced by an IPMX Sender. A Sender that either does not produce media info blocks (non-IPMX) or produces media info blocks (IPMX) that are not supported by a Receiver MUST NOT prevent a Controller from connecting such a Receiver to the Sender. Such non-compliance only affects the Receiver's ability to adapt autonomously to dynamic changes in stream parameters, requiring intervention by the Controller instead. This is the reason why the Receiver's `info_block` capability is a class `meta`, which does not affect the compatibility assessment of a Controller.
 
+A Receiver MAY provide an `urn:x-matrox:cap:transport:info_block` capability to explicitly indicate that it is unconstrained for this parameter.
+
 ## HKEP
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:hkep` capability to indicate its support for Senders that use HDCP encryption and the HKEP protocol. A capability value of `true` indicates support for HDCP encryption and the HKEP protocol, while a value of `false` indicates that they are not supported.
