@@ -49,12 +49,5 @@ This document describes additional Sender attributes and their permitted values 
 - **Applicability:** `urn:x-nmos:transport:rtp`, `urn:x-matrox:transport:rtp.tcp`, `urn:x-matrox:transport:srt.rtp`, `urn:x-nmos:transport:rtsp`, `urn:x-nmos:transport:rtsp.tcp`
 - **Permitted Values:** array of non-negative integers, may be empty.
 
-### packet_time
-- **Name:** `urn:x-matrox:packet_time`
-- **Description:** An non-zero-int-or-real attribute indicating the audio packet time in milliseconds. This attribute allows a Controller to check the compatibility of audio streams without parsing the Sender's SDP transport file.
-- **Specification:** [AMWA IS-04](https://specs.amwa.tv/IS-04/v1.3)
-- **Applicability:** `urn:x-nmos:transport:rtp`, `urn:x-matrox:transport:rtp.tcp`, `urn:x-matrox:transport:srt.rtp`, `urn:x-nmos:transport:rtsp`, `urn:x-nmos:transport:rtsp.tcp`
-- **Permitted Values:** non-zero-int-or-real value in units of milliseconds.
-
 
 

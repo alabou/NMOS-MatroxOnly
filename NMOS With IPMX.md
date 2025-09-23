@@ -1,6 +1,6 @@
 # Matrox: NMOS With IPMX
 {:.no_toc}  
-Copyright 2024, Matrox Graphics Inc.
+Copyright 2025, Matrox Graphics Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -70,7 +70,7 @@ A Sender producing media that is synchronous with the Sender's reference clock M
 
 ## Info Block
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to indicate its support for IPMX Senders transmitting media info blocks (in RTCP Sender Report). The capability SHOULD enumerate the media info block types (integers) supported by the Receiver. An empty enumeration indicates that the Receiver does not support IPMX in-band media info blocks. Enumerating the value `0`, which is an invalid media info block type identifier, serves the same purpose.
+A Receiver SHOULD provide a `urn:x-matrox:cap:meta:info_block` capability to indicate its support for IPMX Senders transmitting media info blocks (in RTCP Sender Report). The capability SHOULD enumerate the media info block types (integers) supported by the Receiver. An empty enumeration indicates that the Receiver does not support IPMX in-band media info blocks. Enumerating the value `0`, which is an invalid media info block type identifier, serves the same purpose.
 
 A Receiver MAY support none, some, or all IPMX media info block types.
 
@@ -86,7 +86,9 @@ A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to 
 
 > Note: The info block types produced by a Sender and consumed by Receivers indicate the IPMX technical recommendations that establish the compliance of the associated stream.
 
-The `info_block` attribute and capability describe the RTCP stream produced by an IPMX Sender. A Sender that either does not produce media info blocks (non-IPMX) or produces media info blocks (IPMX) that are not supported by a Receiver MUST NOT prevent a Controller from connecting such a Receiver to the Sender. Such non-compliance only affects the Receiver's ability to adapt autonomously to dynamic changes in stream parameters, requiring intervention by the Controller instead.
+The `info_block` attribute and capability describe the RTCP stream produced by an IPMX Sender. A Sender that either does not produce media info blocks (non-IPMX) or produces media info blocks (IPMX) that are not supported by a Receiver MUST NOT prevent a Controller from connecting such a Receiver to the Sender. Such non-compliance only affects the Receiver's ability to adapt autonomously to dynamic changes in stream parameters, requiring intervention by the Controller instead. This is the reason why the Receiver's `info_block` capability is a class `meta`, which does not affect the compatibility assessment of a Controller.
+
+A Receiver MAY provide an `urn:x-matrox:cap:transport:info_block` capability to explicitly indicate that it is unconstrained for this parameter.
 
 ## HKEP
 
