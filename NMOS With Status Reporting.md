@@ -41,11 +41,13 @@ The following JSON object provides an example of a Source resource with the stat
   "tags": { },
   "caps": { },
   "device_id": "00000000-0100-4000-ab00-4d5458005179",
-  "parents": [
-    "00000000-0300-4000-ab00-4d5458005179"
+  "parents": [    
   ],
   "clock_name": null,
   "format": "urn:x-nmos:format:data",
+
+  "monitored_id:: "00000000-0300-4000-ab00-4d5458005179",
+  "monitored_type": "receiver",
 
   "overall_status": 1,
   "link_status": 1,
@@ -72,7 +74,7 @@ The value of a `*_status` attribute is a non-negative integer value correspondin
 
 The value of a `*_counter` attribute is an non-negative integer value.
 
-The `id` of the monitored Sender or Receiver MUST be the only member of the Source's `parents` attributes.
+The `id` of the monitored Sender or Receiver MUST be specified in the Source's `monitored_id` attribute and the `monitored_type` set to "sender" or "receiver" accordingly.
 
 The `version`  attribute MUST be updated whenever the value of a source's attribute changes.
 
