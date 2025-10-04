@@ -40,7 +40,6 @@ The following JSON object provides an example of a Source resource with the stat
   "description": "",
   "tags": { },
   "caps": { },
-  "receiver_id": null,
   "device_id": "00000000-0100-4000-ab00-4d5458005179",
   "parents": [
     "00000000-0300-4000-ab00-4d5458005179"
@@ -54,11 +53,12 @@ The following JSON object provides an example of a Source resource with the stat
   "connection_status": 1,
   "stream_status": 1,
   "link_counter": 0,
-  "synchronization_status": 0,
+  "synchronization_counter": 0,
   "connection_counter": 0,
   "stream_counter": 0
 }
 ```
+A Source MUST have the `format` attribute set to `urn:x-nmos:format:data`.
 
 A Source MUST provide the `overallStatus`, `linkStatus`, `transmissionStatus`, `connectionStatus`, `essenceStatus`, `streamStatus` and `externalSynchronizationStatus` of [BCP-008-01][] and [BCP-008-02][] and their associated transition counters.
 
@@ -73,6 +73,10 @@ The value of a `*_status` attribute is a non-negative integer value correspondin
 The value of a `*_counter` attribute is an non-negative integer value.
 
 The `id` of the monitored Sender or Receiver MUST be the only member of the Source's `parents` attributes.
+
+The `version`  attribute MUST be udpated whenever the value of a source's attribute changes.
+
+The `clock_name attribute MUST be `null`.
 
 The state of a monitoring Source SHOULD NOT be updated more than once per second.
 
