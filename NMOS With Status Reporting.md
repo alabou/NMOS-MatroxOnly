@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-[BCP-008-01][] and [BCP-008-02][] Describe a method for monitoring Receiver and Sender statuses through IS-12 asynchronous WebSockets. This document defines an alternative monitoring mechanism that uses the well-known IS-04 Node API and NMOS Registry to deliver asynchronous status updates through the IS-04 Query WebSocket interface. This specification retains the semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream and external synchronization statuses and their associated transition counters. What differs is the reporting mechanism, which reuses the IS-04 Node API instead of the more complex IS-12 transport.
+[BCP-008-01][] and [BCP-008-02][] describe a method for monitoring Receiver and Sender statuses through IS-12 asynchronous WebSockets. This document defines an alternative monitoring mechanism that uses the well-known IS-04 Node API and NMOS Registry to deliver asynchronous status updates through the IS-04 Query WebSocket interface. This specification retains the semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream and external synchronization statuses and their associated transition counters. What differs is the reporting mechanism, which reuses the IS-04 Node API instead of the more complex IS-12 transport.
 
 Statuses and transition counters are exposed via IS-04 Sources of type `urn:x-nmos:format:data`, each representing the health of a Sender or Receiver identified by its monitored_id.
 
@@ -32,59 +32,59 @@ The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are 
 
 ## Source
 
-The following JSON object provides an example of a Source resource with the statuses and transition counters of a parent Receiver. 
+The following JSON object provides an example of a Source resource with the status and transition counters of a sibling Receiver. 
 
 ```
 {
   "id": "00000000-0500-4003-ab00-4d5458005179",
-  "version": "1759548376:307433877",
+  "version": "1759597033:934345807",
   "label": "Source Monitor",
   "description": "",
-  "tags": { },
-  "caps": { },
+  "tags": {  },
+  "caps": {  },
+  "receiver_id": null,
   "device_id": "00000000-0100-4000-ab00-4d5458005179",
-  "parents": [    
-  ],
+  "parents": [  ],
   "clock_name": null,
   "format": "urn:x-nmos:format:data",
-
-  "monitored_id": "00000000-0300-4000-ab00-4d5458005179",
-  "monitored_type": "receiver",
-
-  "overall_status": 1,
-  "link_status": 1,
-  "synchronization_status": 1,
-  "connection_status": 1,
-  "stream_status": 1,
-  "link_counter": 0,
-  "synchronization_counter": 0,
-  "connection_counter": 0,
-  "stream_counter": 0
+  "monitor_type": "receiver",
+  "monitor_sibling_id": "00000000-0300-4000-ab00-4d5458005179",
+  "monitor_state": {
+    "overall_status": 1,
+    "link_status": 1,
+    "synchronization_status": 1,
+    "connection_status": 1,
+    "stream_status": 1,
+    "link_counter": 0,
+    "synchronization_counter": 0,
+    "connection_counter": 0,
+    "stream_counter": 0
+  }
 }
 ```
 A Source MUST have the `format` attribute set to `urn:x-nmos:format:data`.
 
-A Source MUST provide the `overallStatus`, `linkStatus`, `transmissionStatus`, `connectionStatus`, `essenceStatus`, `streamStatus` and `externalSynchronizationStatus` of [BCP-008-01][] and [BCP-008-02][] and their associated transition counters.
+A Source MUST have a `monitor_type` attribute indicating the resource type of the sibling and MUST be either "sender" or "receiver".
 
-The Source attributes MUST use the following names: `overall_status`, `link_status`, `transmission_status`, `connection_status`, `essence_status`, `stream_status` and `synchronization_status` for the statuses and `link_counter`, `transmission_counter`, `connection_counter`, `essence_counter`, `stream_counter` and `synchronization_counter` for the associated transition counters.
+A Source MUST have a `monitor_sibling_id` attribute indicating the resource `id` of the sibling. The `monitor_sibling_id` MUST identify a Sender or Receiver belonging to the same `device_id`. A monitoring Source MUST NOT reference its monitored resource using the parents attribute.
 
-A Source associated with a Sender MUST have the attributes `overall_status`, `link_status`, `transmission_status`, `essence_status`,  `synchronization_status`,  `link_counter`, `transmission_counter`, `essence_counter` and `synchronization_counter`.
+A Source MUST provide the `monitor_state` object attribute along with the corresponding `overallStatus`, `linkStatus`, `transmissionStatus`, `connectionStatus`, `essenceStatus`, `streamStatus` and `externalSynchronizationStatus` of [BCP-008-01][] and [BCP-008-02][] and their associated transition counters.
 
-A Source associated with a Receiver MUST have the attributes `overall_status`, `link_status`, `connection_status`, `stream_status`,  `synchronization_status`,  `link_counter`, `connection_counter`, `stream_counter` and `synchronization_counter`.
+The Source's `monitor_state` object attributes MUST have all the following attributes: `overall_status`, `link_status`, `transmission_status`, `connection_status`, `essence_status`, `stream_status` and `synchronization_status` for the status and `link_counter`, `transmission_counter`, `connection_counter`, `essence_counter`, `stream_counter` and `synchronization_counter` for the associated transition counters.
 
-The value of a `*_status` attribute is a non-negative integer value corresponding to the [BCP-008-01][] and [BCP-008-02][] statuses: AllUp (1), SomeDown (2), AllDown (3), Inactive (0), NotUsed (0), Healthy (1), PartiallyHealthy (2), Unhealthy (3).
+A Source associated with a Sender, having `monitor_type` set to "sender", MUST have the following attributes in the `monitor_state` object: `overall_status`, `link_status`, `transmission_status`, `essence_status`,  `synchronization_status`,  `link_counter`, `transmission_counter`, `essence_counter` and `synchronization_counter`.
+
+A Source associated with a Receiver, having `monitor_type` set to "receiver", MUST have the following attributes in the `monitor_state` object: `overall_status`, `link_status`, `connection_status`, `stream_status`,  `synchronization_status`,  `link_counter`, `connection_counter`, `stream_counter` and `synchronization_counter`.
+
+The value of a `*_status` attribute is a non-negative integer value corresponding to the [BCP-008-01][] and [BCP-008-02][] status definitions: AllUp (1), SomeDown (2), AllDown (3), Inactive (0), NotUsed (0), Healthy (1), PartiallyHealthy (2), Unhealthy (3).
 
 The value of a `*_counter` attribute is an non-negative integer value.
 
-The `id` of the monitored Sender or Receiver MUST be specified in the Source's `monitored_id` attribute and the `monitored_type` set to "sender" or "receiver" accordingly.
-
-The `version`  attribute MUST be updated whenever the value of a source's attribute changes.
+The `version` attribute MUST be updated whenever the value of a source's attribute changes. The version attribute MUST be updated only when one or more values in monitor_state change.
 
 The `clock_name attribute MUST be `null`.
 
-The state of a monitoring Source SHOULD NOT be updated more than once per second. A Source MUST NOT publish more than one update to the Registry per second. This limit applies per resource (per monitoring Source), not per Node.
-
 ## Controller
 
-A Controller or monitoring tools MUST NOT continously poll the IS-04 Node API of a Node. A Controller SHOULD use the Registry IS-04 Query API and WebSockets asynchronous notifications to get continuous monitoring information.
+A Controller or monitoring tools MUST NOT continuously poll the IS-04 Node API of a Node. A Controller SHOULD use the Registry IS-04 Query API and WebSockets asynchronous notifications to get continuous monitoring information.
 
