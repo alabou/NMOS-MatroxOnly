@@ -32,6 +32,7 @@ The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are 
 
 The following JSON object provides an example of a Source resource with the statuses and transition counters of a parent Receiver. 
 
+```
 {
   "id": "00000000-0500-4003-ab00-4d5458005179",
   "version": "1759548376:307433877",
@@ -57,6 +58,7 @@ The following JSON object provides an example of a Source resource with the stat
   "connection_counter": 0,
   "stream_counter": 0
 }
+```
 
 A Source MUST provide the `overallStatus`, `linkStatus`, `transmissionStatus`, `connectionStatus`, `essenceStatus`, `streamStatus` and `externalSynchronizationStatus` of [BCP-008-01][] and [BCP-008-02][] and their associated transition counters.
 
