@@ -62,7 +62,7 @@ A Source MUST have the `format` attribute set to `urn:x-nmos:format:data`.
 
 A Source MUST provide the `overallStatus`, `linkStatus`, `transmissionStatus`, `connectionStatus`, `essenceStatus`, `streamStatus` and `externalSynchronizationStatus` of [BCP-008-01][] and [BCP-008-02][] and their associated transition counters.
 
-The Source attributes MUST use the following names: `overall_status`, `link_status`, `transmission_statu`, `connection_status`, `essence_status`, `stream_status` and `synchronization_status` for the statuses and `link_counter`, `transmission_counter`, `connection_counter`, `essence_counter`, `stream_counter` and `synchronization_counter` for the associated transition counters.
+The Source attributes MUST use the following names: `overall_status`, `link_status`, `transmission_status`, `connection_status`, `essence_status`, `stream_status` and `synchronization_status` for the statuses and `link_counter`, `transmission_counter`, `connection_counter`, `essence_counter`, `stream_counter` and `synchronization_counter` for the associated transition counters.
 
 A Source associated with a Sender MUST have the attributes `overall_status`, `link_status`, `transmission_status`, `essence_status`,  `synchronization_status`,  `link_counter`, `transmission_counter`, `essence_counter` and `synchronization_counter`.
 
