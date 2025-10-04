@@ -14,11 +14,13 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-[BCP-008-01][] and [BCP-008-02][] Describe a method for monitoring Receiver and Sender statuses through IS-12 asynchronous WebSockets. This document describes an alternative to the monitoring through WebSockets using the well known IS-04 Node API and the NMOS Registry to provide asynchronous monitoring through WebSockets. This specification is retain the behavior expressed in [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream and external synchronization statuses and their associated transition counters. It is the reporting mechanism that totally differ, prefering the well known IS-04 Node API to the more complex IS-12 API.
+[BCP-008-01][] and [BCP-008-02][] Describe a method for monitoring Receiver and Sender statuses through IS-12 asynchronous WebSockets. This document defines an alternative monitoring mechanism that uses the well-known IS-04 Node API and NMOS Registry to deliver asynchronous status updates through the IS-04 Query WebSocket interface. This specification retains the semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream and external synchronization statuses and their associated transition counters. What differs is the reporting mechanism, which reuses the IS-04 Node API instead of the more complex IS-12 transport.
 
-The statuses and transition counters are provided through Sources of type `urn:x-nmos:format-data` identifying the Sender or Receiver being monitored through the Source's `parent` attribute.
+Statuses and transition counters are exposed via IS-04 Sources of type `urn:x-nmos:format:data`, each representing the health of a Sender or Receiver identified by its monitored_id.
 
 A Controller or monitoring tool can subscribe to WebSockets notifications about updated Sources (all of them or only very specific ones) and get asynchronous notifications when the status information of the target Sender or Receiver changes.
+
+This mechanism provides a lightweight alternative to IS-12-based status reporting, retaining the same status semantics as BCP-008-01 and BCP-008-02 while leveraging the existing IS-04 infrastructure for asynchronous notifications. It requires no additional transport protocols, reduces implementation cost, and allows uniform monitoring of Senders and Receivers via a single, well-known interface.
 
 ## Use of Normative Language
 
@@ -46,7 +48,7 @@ The following JSON object provides an example of a Source resource with the stat
   "clock_name": null,
   "format": "urn:x-nmos:format:data",
 
-  "monitored_id:: "00000000-0300-4000-ab00-4d5458005179",
+  "monitored_id": "00000000-0300-4000-ab00-4d5458005179",
   "monitored_type": "receiver",
 
   "overall_status": 1,
