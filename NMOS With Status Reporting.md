@@ -22,15 +22,15 @@ This document defines an alternative reporting mechanism that uses the existing 
 This specification retains the complete semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream, and external synchronization statuses and their associated transition counters.
 Only the transport mechanism differs, reusing the widely deployed IS-04 infrastructure rather than introducing a separate IS-12 layer.
 
-Statuses and transition counters are exposed via IS-04 Sources of type urn:x-nmos:format:data, each representing the health of a Sender or Receiver within the same Device.
+Statuses and transition counters are exposed via IS-04 Sources of type `urn:x-nmos:format:data`, each representing the health of a Sender or Receiver within the same Device.
 A Controller or monitoring application can subscribe to WebSocket notifications from the IS-04 Query API—either for all Sources or for specific monitored entities—to receive asynchronous updates whenever the state of a Sender or Receiver changes.
 
 This mechanism provides a lightweight and implementation-friendly alternative to IS-12-based status reporting.
 It preserves the established BCP-008 semantics while leveraging the mature IS-04 discovery and subscription model.
 As such, it requires no additional transport protocols, reduces implementation cost, and enables uniform monitoring of Senders and Receivers through a single, well-known interface.
 
-The IS-04 reporting mechanism defined in this document is fully compatible with the IS-12 transport defined by [BCP-008-01][] and [BCP-008-02][].
-An implementation may support both mechanisms concurrently, providing broader interoperability between IS-12 and IS-04 reporting models.
+The IS-04 reporting mechanism defined in this document is fully compatible with the implementation defined by [BCP-008-01][] and [BCP-008-02][].
+An implementation may support both mechanisms concurrently when the auto-reset of the transition counter is disabled, providing broader interoperability between IS-12 and IS-04 reporting models.
 
 ## Use of Normative Language
 
@@ -76,7 +76,7 @@ A Source MUST have the `format` attribute set to `urn:x-nmos:format:data`.
 
 A Source MUST have a `monitor_type` attribute indicating the resource type of the sibling and MUST be either "sender" or "receiver".
 
-A Source MUST have a `monitor_sibling_id` attribute indicating the resource `id` of the sibling. The `monitor_sibling_id` MUST identify a Sender or Receiver belonging to the same `device_id`. A monitoring Source MUST NOT reference its monitored resource using the parents attribute.
+A Source MUST have a `monitor_sibling_id` attribute indicating the resource `id` of the sibling. The `monitor_sibling_id` MUST identify a Sender or Receiver belonging to the same `device_id`. A monitoring Source MUST NOT reference its monitored resource using the `parents` attribute.
 
 A Source MUST provide the `monitor_state` object attribute along with the corresponding `overallStatus`, `linkStatus`, `transmissionStatus`, `connectionStatus`, `essenceStatus`, `streamStatus` and `externalSynchronizationStatus` of [BCP-008-01][] and [BCP-008-02][] and their associated transition counters.
 
@@ -90,9 +90,9 @@ The value of a `*_status` attribute is a non-negative integer value correspondin
 
 The value of a `*_counter` attribute is a non-negative integer value.
 
-The Source’s `monitor_state` attribute MUST reflect the effective state of the underlying Sender or Receiver Monitor as determined by the default state-reporting behavior defined in [BCP-008-01][] and [BCP-008-02][]. In particular, implementations MUST apply the default `statusReportingDelay` of 3 seconds, which functions as a low-pass filter on status transitions, and this delay MUST NOT be modified nor permitted to be modified.
+The Source’s `monitor_state` attribute MUST reflect the effective state of the underlying Sender or Receiver Monitor as determined by the state-reporting behavior defined in [BCP-008-01][] and [BCP-008-02][]. In particular, implementations MUST apply the default `statusReportingDelay` of 3 seconds, which functions as a low-pass filter on status transitions, and this delay MUST NOT be modified nor permitted to be modified. Implementations MUST also treat the `autoResetCountersAndMessages` property as if it were `false`. Transition counters in `monitor_state` MUST be monotonically increasing for the lifetime of the Source.
 
-The `version` attribute MUST be updated whenever the value of a source's attribute changes. The version attribute MUST be updated only when one or more values in monitor_state change.
+The `version` attribute MUST be updated whenever one or more values in `monitor_state` change, and MUST NOT be updated otherwise.
 
 The `clock_name` attribute MUST be `null`.
 
