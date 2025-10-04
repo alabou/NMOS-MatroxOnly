@@ -64,7 +64,7 @@ A Source MUST provide the `overallStatus`, `linkStatus`, `transmissionStatus`, `
 
 The Source attributes MUST use the following names: `overall_status`, `link_status`, `transmission_statu`, `connection_status`, `essence_status`, `stream_status` and `synchronization_status` for the statuses and `link_counter`, `transmission_counter`, `connection_counter`, `essence_counter`, `stream_counter` and `synchronization_counter` for the associated transition counters.
 
-A Source assocaited with a Sender MUST have the attributes `overall_status`, `link_status`, `transmission_status`, `essence_status`,  `synchronization_status`,  `link_counter`, `transmission_counter`, `essence_counter` and `synchronization_counter`.
+A Source associated with a Sender MUST have the attributes `overall_status`, `link_status`, `transmission_status`, `essence_status`,  `synchronization_status`,  `link_counter`, `transmission_counter`, `essence_counter` and `synchronization_counter`.
 
 A Source associated with a Receiver MUST have the attributes `overall_status`, `link_status`, `connection_status`, `stream_status`,  `synchronization_status`,  `link_counter`, `connection_counter`, `stream_counter` and `synchronization_counter`.
 
