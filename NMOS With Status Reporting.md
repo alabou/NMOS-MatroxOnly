@@ -20,7 +20,7 @@ Statuses and transition counters are exposed via IS-04 Sources of type `urn:x-nm
 
 A Controller or monitoring tool can subscribe to WebSockets notifications about updated Sources (all of them or only very specific ones) and get asynchronous notifications when the status information of the target Sender or Receiver changes.
 
-This mechanism provides a lightweight alternative to IS-12-based status reporting, retaining the same status semantics as BCP-008-01 and BCP-008-02 while leveraging the existing IS-04 infrastructure for asynchronous notifications. It requires no additional transport protocols, reduces implementation cost, and allows uniform monitoring of Senders and Receivers via a single, well-known interface.
+This mechanism provides a lightweight alternative to IS-12-based status reporting, retaining the same status semantics as [BCP-008-01][] and [BCP-008-02][] while leveraging the existing IS-04 infrastructure for asynchronous notifications. It requires no additional transport protocols, reduces implementation cost, and allows uniform monitoring of Senders and Receivers via a single, well-known interface.
 
 ## Use of Normative Language
 
@@ -78,15 +78,15 @@ A Source associated with a Receiver, having `monitor_type` set to "receiver", MU
 
 The value of a `*_status` attribute is a non-negative integer value corresponding to the [BCP-008-01][] and [BCP-008-02][] status definitions: AllUp (1), SomeDown (2), AllDown (3), Inactive (0), NotUsed (0), Healthy (1), PartiallyHealthy (2), Unhealthy (3).
 
-The value of a `*_counter` attribute is an non-negative integer value.
+The value of a `*_counter` attribute is a non-negative integer value.
 
 The Source’s `monitor_state` attribute MUST reflect the effective state of the underlying Sender or Receiver Monitor as determined by the default state-reporting behavior defined in [BCP-008-01][] and [BCP-008-02][]. In particular, implementations MUST apply the default `statusReportingDelay` of 3 seconds, which functions as a low-pass filter on status transitions, and this delay MUST NOT be modified nor permitted to be modified.
 
 The `version` attribute MUST be updated whenever the value of a source's attribute changes. The version attribute MUST be updated only when one or more values in monitor_state change.
 
-The `clock_name attribute MUST be `null`.
+The `clock_name` attribute MUST be `null`.
 
-> Note: With default [BCP-008-01][] and [BCP-008-01][] settings that are imutable in this specification (statusReportingDelay = 3s), devices typically emit ≤ 1 update per ~3s per monitored entity, with occasional immediate updates on deterioration.
+> Note: Under the immutable default settings defined by [BCP-008-01][] and [BCP-008-02][] (statusReportingDelay = 3 seconds), devices typically emit no more than one update approximately every three seconds per monitored entity, with occasional immediate updates on deterioration.
 
 ## Controller
 
