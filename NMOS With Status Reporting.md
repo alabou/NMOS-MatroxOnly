@@ -1,4 +1,4 @@
-# Matrox: NMOS With Natural Groups
+# Matrox: NMOS With Status Reporting
 {:.no_toc}  
 Copyright 2024, Matrox Graphics Inc.
 
