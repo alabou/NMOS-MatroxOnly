@@ -80,9 +80,13 @@ The value of a `*_status` attribute is a non-negative integer value correspondin
 
 The value of a `*_counter` attribute is an non-negative integer value.
 
+The Source’s `monitor_state` attribute MUST reflect the effective state of the underlying Sender or Receiver Monitor as determined by the default state-reporting behavior defined in [BCP-008-01][] and [BCP-008-02][]. In particular, implementations MUST apply the default `statusReportingDelay` of 3 seconds, which functions as a low-pass filter on status transitions, and this delay MUST NOT be modified nor permitted to be modified.
+
 The `version` attribute MUST be updated whenever the value of a source's attribute changes. The version attribute MUST be updated only when one or more values in monitor_state change.
 
 The `clock_name attribute MUST be `null`.
+
+> Note: With default [BCP-008-01][] and [BCP-008-01][] settings that are imutable in this specification (statusReportingDelay = 3s), devices typically emit ≤ 1 update per ~3s per monitored entity, with occasional immediate updates on deterioration.
 
 ## Controller
 
