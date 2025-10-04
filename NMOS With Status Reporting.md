@@ -14,13 +14,23 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 ## Introduction
 
-[BCP-008-01][] and [BCP-008-02][] describe a method for monitoring Receiver and Sender statuses through IS-12 asynchronous WebSockets. This document defines an alternative monitoring mechanism that uses the well-known IS-04 Node API and NMOS Registry to deliver asynchronous status updates through the IS-04 Query WebSocket interface. This specification retains the semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream and external synchronization statuses and their associated transition counters. What differs is the reporting mechanism, which reuses the IS-04 Node API instead of the more complex IS-12 transport.
+This document may be described as an “IS-04 Binding for BCP-008 Monitoring.”
 
-Statuses and transition counters are exposed via IS-04 Sources of type `urn:x-nmos:format:data`, each representing the health of a Sender or Receiver identified by its monitored_id.
+[BCP-008-01][] and [BCP-008-02][] describe a method for monitoring Receiver and Sender statuses using IS-12 asynchronous WebSockets.
+This document defines an alternative reporting mechanism that uses the existing IS-04 Node API and NMOS Registry to deliver the same monitoring information asynchronously through the IS-04 Query WebSocket interface.
 
-A Controller or monitoring tool can subscribe to WebSockets notifications about updated Sources (all of them or only very specific ones) and get asynchronous notifications when the status information of the target Sender or Receiver changes.
+This specification retains the complete semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream, and external synchronization statuses and their associated transition counters.
+Only the transport mechanism differs, reusing the widely deployed IS-04 infrastructure rather than introducing a separate IS-12 layer.
 
-This mechanism provides a lightweight alternative to IS-12-based status reporting, retaining the same status semantics as [BCP-008-01][] and [BCP-008-02][] while leveraging the existing IS-04 infrastructure for asynchronous notifications. It requires no additional transport protocols, reduces implementation cost, and allows uniform monitoring of Senders and Receivers via a single, well-known interface.
+Statuses and transition counters are exposed via IS-04 Sources of type urn:x-nmos:format:data, each representing the health of a Sender or Receiver within the same Device.
+A Controller or monitoring application can subscribe to WebSocket notifications from the IS-04 Query API—either for all Sources or for specific monitored entities—to receive asynchronous updates whenever the state of a Sender or Receiver changes.
+
+This mechanism provides a lightweight and implementation-friendly alternative to IS-12-based status reporting.
+It preserves the established BCP-008 semantics while leveraging the mature IS-04 discovery and subscription model.
+As such, it requires no additional transport protocols, reduces implementation cost, and enables uniform monitoring of Senders and Receivers through a single, well-known interface.
+
+The IS-04 reporting mechanism defined in this document is fully compatible with the IS-12 transport defined by [BCP-008-01][] and [BCP-008-02][].
+An implementation may support both mechanisms concurrently, providing broader interoperability between IS-12 and IS-04 reporting models.
 
 ## Use of Normative Language
 
@@ -91,4 +101,8 @@ The `clock_name` attribute MUST be `null`.
 ## Controller
 
 A Controller or monitoring tools MUST NOT continuously poll the IS-04 Node API of a Node. A Controller SHOULD use the Registry IS-04 Query API and WebSockets asynchronous notifications to get continuous monitoring information.
+
+[BCP-008-01]: https://specs.amwa.tv/bcp-008-01
+[BCP-008-02]: https://specs.amwa.tv/bcp-008-02
+[RFC-2119]: https://datatracker.ietf.org/doc/html/rfc2119
 
