@@ -18,7 +18,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 The statuses and transition counters are provided through Sources of type `urn:x-nmos:format-data` identifying the Sender or Receiver being monitored through the Source's `parent` attribute.
 
-A Controller or monitoring tool can subscribe to WebSockets notifications about udpated Sources (all of them or only very specific ones) and get asynchronous notifications when the status information of the target Sender or Receiver changes.
+A Controller or monitoring tool can subscribe to WebSockets notifications about updated Sources (all of them or only very specific ones) and get asynchronous notifications when the status information of the target Sender or Receiver changes.
 
 ## Use of Normative Language
 
@@ -74,11 +74,11 @@ The value of a `*_counter` attribute is an non-negative integer value.
 
 The `id` of the monitored Sender or Receiver MUST be the only member of the Source's `parents` attributes.
 
-The `version`  attribute MUST be udpated whenever the value of a source's attribute changes.
+The `version`  attribute MUST be updated whenever the value of a source's attribute changes.
 
 The `clock_name attribute MUST be `null`.
 
-The state of a monitoring Source SHOULD NOT be updated more than once per second.
+The state of a monitoring Source SHOULD NOT be updated more than once per second. A Source MUST NOT publish more than one update to the Registry per second. This limit applies per resource (per monitoring Source), not per Node.
 
 ## Controller
 
