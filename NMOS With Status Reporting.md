@@ -94,7 +94,8 @@ The `version` attribute MUST be updated whenever one or more values in `monitor_
 
 The `clock_name` attribute MUST be `null`.
 
-The `monitor_auto_reset_counters` atribute indicates if the implementation resets the transision counters at activation of the Sender or Receiver. Its value MUST correspond to the associated [BCP-008-01][] and [BCP-008-02][] autoResetCountersAndMessages property.
+The `monitor_auto_reset_counters` attribute indicates whether the implementation automatically resets transition counters at activation of the associated Sender or Receiver.
+Its Boolean value MUST correspond to the `autoResetCountersAndMessages` property defined in [BCP-008-01][] and [BCP-008-02][].
 
 > Note: Under the immutable default settings defined by [BCP-008-01][] and [BCP-008-02][] (statusReportingDelay = 3 seconds), devices typically emit no more than one update approximately every three seconds per monitored entity, with occasional immediate updates on deterioration.
 
