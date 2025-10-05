@@ -98,10 +98,13 @@ The `monitor_auto_reset_counters` attribute indicates whether the implementation
 Its Boolean value MUST correspond to the `autoResetCountersAndMessages` property defined in [BCP-008-01][] and [BCP-008-02][].
 
 > Note: Under the immutable default settings defined by [BCP-008-01][] and [BCP-008-02][] (statusReportingDelay = 3 seconds), devices typically emit no more than one update approximately every three seconds per monitored entity, with occasional immediate updates on deterioration.
+> Note: The various messages defined by [BCP-008-01][] and [BCP-008-02][] are out of scope of this specification in order to maintain the most compact representation of the monitoring states.
 
 ## Transport
 
-A Node or Device compliant with this specification MUST implement the IS-04 transport of the monitoring state as defined in this document. Such a Node or Device MAY also implement the transport mechanisms defined by [BCP-008-01][] and [BCP-008-02][] to provide interoperability with systems using IS-12 / IS-14 based monitoring.
+The primary purpose of this specification is to define an IS-04-only transport binding for the monitoring state model defined by [BCP-008-01][] and [BCP-008-02][].
+
+A Node or Device claiming compliance with this specification MUST implement the IS-04 transport described herein. Support for the IS-12 / IS-14 based transports defined in [BCP-008-01][] and [BCP-008-02][] is OPTIONAL. Implementations that provide only the IS-04 transport MUST be considered fully compliant with this specification.
 
 ## Controller
 
