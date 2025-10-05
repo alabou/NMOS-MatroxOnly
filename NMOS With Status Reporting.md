@@ -19,18 +19,15 @@ This document may be described as an “IS-04 Binding for BCP-008 Monitoring.”
 [BCP-008-01][] and [BCP-008-02][] describe a method for monitoring Receiver and Sender statuses using IS-12 asynchronous WebSockets.
 This document defines an alternative reporting mechanism that uses the existing IS-04 Node API and NMOS Registry to deliver the same monitoring information asynchronously through the IS-04 Query WebSocket interface.
 
-This specification retains the complete semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream, and external synchronization statuses and their associated transition counters.
-Only the transport mechanism differs, reusing the widely deployed IS-04 infrastructure rather than introducing a separate IS-12 layer.
+This specification retains the complete semantics of [BCP-008-01][] and [BCP-008-02][] for the link, transmission, connection, essence, stream, and external synchronization statuses and their associated transition counters. Only the transport mechanism differs, reusing the widely deployed IS-04 infrastructure rather than introducing a separate IS-12 layer.
 
 Statuses and transition counters are exposed via IS-04 Sources of type `urn:x-nmos:format:data`, each representing the health of a Sender or Receiver within the same Device.
-A Controller or monitoring application can subscribe to WebSocket notifications from the IS-04 Query API—either for all Sources or for specific monitored entities—to receive asynchronous updates whenever the state of a Sender or Receiver changes.
+A Controller or monitoring application can subscribe to WebSocket notifications from the IS-04 Query API for "monitoring" Sources to receive asynchronous updates whenever the monitor state of a Sender or Receiver changes.
 
-This mechanism provides a lightweight and implementation-friendly alternative to IS-12-based status reporting.
-It preserves the established BCP-008 semantics while leveraging the mature IS-04 discovery and subscription model.
-As such, it requires no additional transport protocols, reduces implementation cost, and enables uniform monitoring of Senders and Receivers through a single, well-known interface.
+This mechanism provides a lightweight and implementation-friendly alternative to IS-12-based status reporting. It preserves the established BCP-008 semantics while leveraging the mature IS-04 discovery and subscription model. As such, it requires no additional transport protocols, reduces implementation cost, and enables uniform monitoring of Senders and Receivers through a single, well-known interface.
 
 The IS-04 reporting mechanism defined in this document is fully compatible with the implementation defined by [BCP-008-01][] and [BCP-008-02][].
-An implementation may support both mechanisms concurrently when the auto-reset of the transition counter is disabled, providing broader interoperability between IS-12 and IS-04 reporting models.
+An implementation may support both mechanisms concurrently, providing broader interoperability between IS-12 and IS-04 reporting models.
 
 ## Use of Normative Language
 
@@ -59,6 +56,7 @@ The following JSON object provides an example of a Source resource with the stat
   "format": "urn:x-nmos:format:data",
   "monitor_type": "receiver",
   "monitor_sibling_id": "00000000-0300-4000-ab00-4d5458005179",
+  "monitor_auto_reset_counters": true,
   "monitor_state": {
     "overall_status": 1,
     "link_status": 1,
@@ -90,11 +88,13 @@ The value of a `*_status` attribute is a non-negative integer value correspondin
 
 The value of a `*_counter` attribute is a non-negative integer value.
 
-The Source’s `monitor_state` attribute MUST reflect the effective state of the underlying Sender or Receiver Monitor as determined by the state-reporting behavior defined in [BCP-008-01][] and [BCP-008-02][]. In particular, implementations MUST apply the default `statusReportingDelay` of 3 seconds, which functions as a low-pass filter on status transitions, and this delay MUST NOT be modified nor permitted to be modified. Implementations MUST also treat the `autoResetCountersAndMessages` property as if it were `false`. Transition counters in `monitor_state` MUST be monotonically increasing for the lifetime of the Source.
+The Source’s `monitor_state` attribute MUST reflect the effective state of the underlying Sender or Receiver Monitor as determined by the state-reporting behavior defined in [BCP-008-01][] and [BCP-008-02][]. In particular, implementations MUST apply the default `statusReportingDelay` of 3 seconds, which functions as a low-pass filter on status transitions, and this delay MUST NOT be modified nor permitted to be modified by the associated [BCP-008-01][] and [BCP-008-02][] implementation.
 
 The `version` attribute MUST be updated whenever one or more values in `monitor_state` change, and MUST NOT be updated otherwise.
 
 The `clock_name` attribute MUST be `null`.
+
+The `monitor_auto_reset_counters` atribute indicates if the implementation resets the transision counters at activation of the Sender or Receiver. Its value MUST correspond to the associated [BCP-008-01][] and [BCP-008-02][] autoResetCountersAndMessages property.
 
 > Note: Under the immutable default settings defined by [BCP-008-01][] and [BCP-008-02][] (statusReportingDelay = 3 seconds), devices typically emit no more than one update approximately every three seconds per monitored entity, with occasional immediate updates on deterioration.
 
