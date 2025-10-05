@@ -99,6 +99,10 @@ Its Boolean value MUST correspond to the `autoResetCountersAndMessages` property
 
 > Note: Under the immutable default settings defined by [BCP-008-01][] and [BCP-008-02][] (statusReportingDelay = 3 seconds), devices typically emit no more than one update approximately every three seconds per monitored entity, with occasional immediate updates on deterioration.
 
+## Transport
+
+A Node or Device compliant with this specification MUST implement the IS-04 transport of the monitoring state as defined in this document. Such a Node or Device MAY also implement the transport mechanisms defined by [BCP-008-01][] and [BCP-008-02][] to provide interoperability with systems using IS-12 / IS-14 based monitoring.
+
 ## Controller
 
 A Controller or monitoring tools MUST NOT continuously poll the IS-04 Node API of a Node. A Controller SHOULD use the Registry IS-04 Query API and WebSockets asynchronous notifications to get continuous monitoring information.
