@@ -50,6 +50,15 @@ IS-05 transport parameters MAY allow the selection of a specific network interfa
 
 In routing scenarios, it is possible to associate a Sender with a specific network interface through the IS-05 transport parameters. This operation allows a Sender to be routed a specific network interface. For connection oriented protocols this approach does not allow the Sender to listen to more than one interface. With redundancy, connection oriented protocol can listen to multiple interfaces. An example of this approach is MPTCP.
 
+## Various configurations
+
+The description of redundant paths with IS-05 transport parameters is very flexible. For instance the two legs may or not be on different network interfaces, may or not have  different source IP addresses, may or not have different multicast destination IP addresses.
+
+A Controller SHOULD NOT assume that a Receiver not supporting redundancy can be connected to a Sender that is streaming with redundancy and be able to reconstruct the stream from only one leg of the Sender. In most deployments, this scenario allows a Receiver to reconstruct the stream from a single leg of the Sender. The use of redundant legs allows the Sender to structure its traffic in such a way that a Receiver can fully reconstruct the stream from the two redundant legs. The use of redundancy does not impose that all packets transit on both legs all the time. A Sender using redundancy is allowed to structure its traffic over both legs and as such a Controller MUST NOT assume that a single leg is always sufficient to reconstruct the stream from a Sender.
+
+A Controller SHOULD inform the User in such scenarios to confirm the intent of the User connecting a Receiver not supporting redundancy to a Sender streaming with redundancy.
+
+
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
