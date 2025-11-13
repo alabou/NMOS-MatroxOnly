@@ -94,7 +94,7 @@ The value of a `*_status` attribute is a non-negative integer value correspondin
 
 The value of a `*_counter` attribute is a non-negative integer value.
 
-The value of the `overall_message` attribute is a string describing the overall status of a SEnder or Receiver. The length of the string SHOULD be kept to a minimum.
+The value of the `overall_message` attribute is a string describing the overall status of a Sender or Receiver. The length of the string SHOULD be kept to a minimum.
 
 > Note: A higher level standard is likely to impose a maximum length for such string in order to minimize the impact on the Registry at large scales. The per-domain optional messages of [BCP-008-01][] and [BCP-008-02][] are not part of the IS-04 binding to favor the smallest footprint.
 
