@@ -57,10 +57,10 @@ The following JSON object provides an example of a Source resource with the stat
   "monitor_type": "receiver",
   "monitor_sibling_id": "00000000-0300-4000-ab00-4d5458005179",
   "monitor_auto_reset_counters": true,
-  "monitor_status_reporting_delay": 3,
+  "monitor_reporting_delay": 3,
   "monitor_state": {
     "overall_status": 1,
-    "overall_message": ""
+    "overall_message": "",
     "link_status": 1,
     "synchronization_status": 1,
     "connection_status": 1,
@@ -84,7 +84,7 @@ A Source MUST provide the `monitor_state` object attribute along with the corres
 
 The Source's `monitor_state` object attributes MUST have all the following attributes: `overall_status`, `link_status`, `transmission_status`, `connection_status`, `essence_status`, `stream_status` and `synchronization_status` for the status and `link_counter`, `transmission_counter`, `connection_counter`, `essence_counter`, `stream_counter` and `synchronization_counter` for the associated transition counters. The Source's `monitor_state` object attributes MAY have an `overall_message` attribute.
 
-> Note: The attributes name of the IS-04 binding are simplified to favor a small JSON footprint while stil being easily associated with the [BCP-008-01][] and [BCP-008-02][] properties.
+> Note: The attributes name of the IS-04 binding are simplified to favor a small JSON footprint while still being easily associated with the [BCP-008-01][] and [BCP-008-02][] properties.
 
 A Source associated with a Sender, having `monitor_type` set to "sender", MUST have the following attributes in the `monitor_state` object: `overall_status`, `link_status`, `transmission_status`, `essence_status`,  `synchronization_status`,  `link_counter`, `transmission_counter`, `essence_counter` and `synchronization_counter`. It MAY have an `overall_message` attribute.
 
@@ -100,9 +100,11 @@ The value of the `overall_message` attribute is a string describing the overall 
 
 The Source’s `monitor_state` attribute MUST reflect the effective state of the underlying Sender or Receiver Monitor as determined by the state-reporting behavior defined in [BCP-008-01][] and [BCP-008-02][]. In particular, implementations MUST apply the default `statusReportingDelay` of 3 seconds, which functions as a low-pass filter on status transitions, and this delay MUST NOT be modified nor permitted to be modified by the associated [BCP-008-01][] and [BCP-008-02][] implementation.
 
-The `version` attribute MUST be updated whenever one or more values in `monitor_state` change, and MUST NOT be updated otherwise.
+The `version` attribute MUST be updated whenever the value of any attribute of the Source resource is modified.
 
 The `clock_name` attribute MUST be `null`.
+
+A monitoring Source MUST NOT have an associated Flow resource. Since monitoring Sources of type `urn:x-nmos:format:data` exist solely to expose monitoring state information through the IS-04 Query API, they do not represent media streams but monitoring states and therefore have no Flow. Controllers and Query API implementations SHOULD NOT expect to find Flows referencing a monitoring Source's `id` in their `source_id` attribute.
 
 The `monitor_auto_reset_counters` attribute indicates whether the implementation automatically resets transition counters at activation of the associated Sender or Receiver.
 Its Boolean value MUST correspond to the `autoResetCountersAndMessages` property defined in [BCP-008-01][] and [BCP-008-02][].
@@ -110,6 +112,25 @@ Its Boolean value MUST correspond to the `autoResetCountersAndMessages` property
 > Note: Under the immutable default settings defined by [BCP-008-01][] and [BCP-008-02][] (statusReportingDelay = 3 seconds), devices typically emit no more than one update approximately every three seconds per monitored entity, with occasional immediate updates on deterioration.
 
 > Note: The various messages defined by [BCP-008-01][] and [BCP-008-02][] are out of scope of this specification in order to maintain the most compact representation of the monitoring states.
+
+| BCP-008 Property Name | Source Monitor Attribute Name |
+|----------------------|-------------------------------|
+| overallStatus | overall_status |
+| overallStatusMessage | overall_message |
+| linkStatus | link_status |
+| transmissionStatus | transmission_status |
+| connectionStatus | connection_status |
+| essenceStatus | essence_status |
+| streamStatus | stream_status |
+| externalSynchronizationStatus | synchronization_status |
+| linkStatusCounter | link_counter |
+| transmissionStatusCounter | transmission_counter |
+| connectionStatusCounter | connection_counter |
+| essenceStatusCounter | essence_counter |
+| streamStatusCounter | stream_counter |
+| externalSynchronizationStatusCounter | synchronization_counter |
+| autoResetCountersAndMessages | monitor_auto_reset_counters |
+| statusReportingDelay | monitor_reporting_delay |
 
 ## Transport
 
@@ -120,6 +141,17 @@ A Node or Device claiming compliance with this specification MUST implement the 
 ## Controller
 
 A Controller or monitoring tools MUST NOT continuously poll the IS-04 Node API of a Node. A Controller SHOULD use the Registry IS-04 Query API and WebSockets asynchronous notifications to get continuous monitoring information.
+
+## Discovery
+
+A Controller discovers monitoring Sources by querying the IS-04 Registry or a Node's Node API for Sources having the `monitor_type` attribute. By examining the Source's `monitor_type` and `monitor_sibling_id` attributes, the Controller identifies the associated Sender or Receiver whose [BCP-008-01][] or [BCP-008-02][] status is provided by that monitoring Source.
+
+### WebSocket Subscription
+
+Controllers SHOULD subscribe to the IS-04 Query API WebSocket endpoint to receive real-time updates when monitoring state changes occur. The WebSocket subscription allows Controllers to receive notifications whenever a monitoring Source's `monitor_*` or `version` attributes are updated.
+
+The Registry sends WebSocket notifications for monitoring Sources whenever their `version` attribute changes, which occurs when any attribute of the Source resource is modified.
+
 
 [BCP-008-01]: https://specs.amwa.tv/bcp-008-01
 [BCP-008-02]: https://specs.amwa.tv/bcp-008-02
