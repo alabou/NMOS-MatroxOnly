@@ -60,6 +60,8 @@ This operation is atomic on a per Node basis. It is not possible to reserve mult
 
 This operation attempts to acquire an exclusive session and obtain an associated bearer token. The session expires in 60 minutes unless it is renewed. A session is "alive" for AliveTime seconds after being acquired or used. The `exclusive_key` is used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key remains valid even if the session expires until a new owner activate a Sender / Receiver. See [PEP](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) for more details about the Privacy Encryption Protocol.
 
+> Note: "no owner" is also considered a new owner in the previous paragraph.
+
 The operation fail with a status `BadRequest` if the posted JSON is invalid. The operation fail with a status `Locked` if there is an active session. Otherwise a status `Ok` and a bearer token are returned. The token MUST be used to access the NMOS RestAPIs that may change the Node state.
 
 The client receiving a `Locked` status MUST use an exponential back-off mechanism when retrying to obtain an exclusive session. Such a mechanism MUST consider the Lifetime of 60 minutes and the AliveTime of an exclusive session.
