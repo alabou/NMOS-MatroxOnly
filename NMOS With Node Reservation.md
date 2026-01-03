@@ -44,7 +44,7 @@ In this document, references to the `Authorization` HTTP header MUST be replaced
 
 A session is associated with a lifetime to protect against compromised Bearer tokens. A session is associated with an alivetime to quickly terminate a previous session when no longer used. 
 
-An entity MUST acquire Nodes to exclusively used them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective a a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST remain 60 seconds. The current values have been chosen to allow a quick turnaround when an entity that reserved Node becomes dead after a malfunction, power down or other reasons.
+An entity MUST acquire Nodes to exclusively used them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective of a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST remain 60 seconds. The current values have been chosen to allow a quick turnaround when an entity that reserved Node becomes dead after a malfunction, power down or other reasons.
 
 The owner of an exclusive session regularly Renew its session to obtain a new Bearer token to prevent its session to expire. Between the renewing intervals, the owner of an exclusive session regularly keeps its session alive by calling the KeepAlive endpoint or by using its Bearer token in an access to a Node RestAPI to keep its session alive.
 
