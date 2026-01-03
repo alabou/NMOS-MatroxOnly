@@ -414,7 +414,7 @@ The privacy_key MUST be derived from a Pre-Shared Key (PSK), a key generator (ke
 ### 256-bit key derivation (PSK is 512 bits):
 ```privacy_key = HMAC-SHA-512/256(PSK, AB || key_generator || key_version|| key_pfs || key_xcl)``` 
 
-The `key_xcl` MUST be the 128 bit `exclusive_key` of the exclusive session, acquired through the `acquire` endpoint of the Node Reservation RestAPI, that activated an associated Senders / Receivers. When  Node Reservation is not used, the key_xcl value MUST be an empty Octet String and it is not used by the key derivation process. Otherwise it MUST be a 16-byte Octet String. It is an Octet String in binary form. 
+The `key_xcl` MUST be the 128 bit `exclusive_key` of the exclusive session, acquired through the `acquire` endpoint of the Node Reservation RestAPI, that activated with `master_enable` becoming `true`, or re-activated with `master_enable` remaining `true` an associated Senders / Receivers. When  Node Reservation is not used, the key_xcl value MUST be an empty Octet String and it is not used by the key derivation process. Otherwise it MUST be a 16-byte Octet String. It is an Octet String in binary form. A Sender / Receiver configured for Privacy Encryption MUST derive a `privacy_key` whenever an IS-05 activation is performed with `master_enable` set to `true`'
 
 [H.222.0]: https://www.itu.int/rec/T-REC-H.222.0 "Generic coding of moving pictures and associated audio information: Systems"
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
