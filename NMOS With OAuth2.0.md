@@ -98,8 +98,6 @@ An NMOS Node MUST require TLS v1.2 or v1.3 when serving HTTP requests. An NMOS N
 ReadOnly access to a Node's API MUST be blocked if one of the following claims reject Read accesses.
 ReadWrite access to a Node's API MUST be blocked if one of the following claims reject Read or Write accesses.
 
-The `sub` and `client_id` claims MUST be equal which indicate `client_credentials`, otherwise access to the current API MUST NOT be allowed.
-
 By default the `aud` claim MUST NOT allow access to the current API if it not ["\*"] and it does not contain a DNS name that include the [BCP-002-02][] `Instance Identifier` string of the NMOS Node. There MAY be additional characters before and after the `Instance Identifier` in the DNS name. Authorizations SHOULD be delivered to OAuth2.0 Client for specific NMOS Nodes based on their serial number, as defined in the [BCP-002-02][] `Instance Identifier`. The DNS name of the `aud` clause matching the `Instance Identifier` of the Node MUST additionally be either the `CN` name or one of the alternates `DNS` names of the TLS server certificate associated with the NMOS endpoint.
 
 Alternatively, if configured by an administrator to operate in an envirionment where OAuth2.0 Authorizations are not delivered based on a serial number, the `aud` claim MUST NOT allow access to the current API if it not ["\*"] and it does not correspond to the `CN` name or one of the alternates `DNS` names of the TLS server certificate associated with the NMOS endpoint.
