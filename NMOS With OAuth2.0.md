@@ -95,7 +95,7 @@ NMOS Controllers, similar NMOS sub-systems, users and tools MAY obtain Bearer to
 
 The `sub` and `client_id` claims of a Bearer token MUST be equal for the `client_credentials` grant and MUST NOT be equal for the `authorization_code` and other grants.
 
-An NMOS Node MAY be configured to accept Access Tokens with either `client_credentials` grants or `authorization_code` grants or both.
+An NMOS Node MAY be configured to only accept Access Tokens with `client_credentials` grants or both `client_credentials` and `authorization_code` grants.
 
 ### Claims
 
