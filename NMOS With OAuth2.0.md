@@ -132,23 +132,17 @@ The `read` attribute of an `x-nmos-*` claim, if present, MUST provide read acces
 
 The array of signed integers is split in two sub-arrays, one for non-negative integers and one for negative integers, keeping the same ordering as in the original array. The non-negative integer array is an allow-list while the negative integer array is a deny-list.
 
-If the allow-list is not empty, access MUST be denied unless at least one allow-list entry matches. If an allow-list entry matches, access MUST be denied if any deny-list entry matches, otherwise access MUST be allowed.
+If the allow-list is not empty, access MUST be denied unless for at least one allow-list entry i, the associated aud claim array entry aud[i] considered alone allows access. If the allow-list processing allows access, such access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
 
-If the allow-list is empty, the deny-list is a deny-only list: access MUST be denied if any deny-list entry matches, otherwise access MUST be allowed.
-
-If the `read` attribute of an  `x-nmos-*` claim is present in the form of an array of signed integers, then for each entry of the array:
-    If a positive or zero integer `i` is present in the array entry, it MUST provide read access if the associated `aud` claim array entry `aud[i]` considered alone allows access.
-    If a negative integer `i` is present in the array entry, it MUST NOT provide read access if the associated `aud` claim array entry `aud[abs(i)]` considered alone allows access.
+If the allow-list is empty, the deny-list is a deny-only list: access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
 
 The `write` attribute of an `x-nmos-*` claim, if present, MUST provide write access if the array of paths is ["\*"] and MUST prevent write access if the array of paths is [""]. The absence of a `write` attribute prevents write access. Both read and write accesses MUST be allowed in order to get write access. An NMOS Node MUST provide such read and write access independently of the path being accessed. Values other than ["\*"], [""], or an array of signed integers MUST NOT be used. Implementations MUST support all three forms of the `read` and `write` attributes: `["*"]` for allow, `[""]` for deny, and arrays of signed integers for indexed allow/deny. The array of signed integers MUST NOT be empty and MUST be sorted to have positive integers first then negative integers. The integer value 0 MUST be considered as a positive integer. If the absolute value of any array entry is outside the bounds of the `aud` claim array, the access token is invalid and access MUST be denied.
 
-If the allow-list is not empty, access MUST be denied unless at least one allow-list entry matches. If an allow-list entry matches, access MUST be denied if any deny-list entry matches, otherwise access MUST be allowed.
+The array of signed integers is split in two sub-arrays, one for non-negative integers and one for negative integers, keeping the same ordering as in the original array. The non-negative integer array is an allow-list while the negative integer array is a deny-list.
 
-If the allow-list is empty, the deny-list is a deny-only list: access MUST be denied if any deny-list entry matches, otherwise access MUST be allowed.
+If the allow-list is not empty, access MUST be denied unless for at least one allow-list entry i, the associated aud claim array entry aud[i] considered alone allows access. If the allow-list processing allows access, such access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
 
-If the `write` attribute of an  `x-nmos-*` claim is present in the form of an array of signed integers, then for each entry of the array:
-    If a positive or zero integer `i` is present in the array entry, it MUST provide write access if the associated `aud` claim array entry `aud[i]` considered alone allows access.
-    If a negative integer `i` is present in the array entry, it MUST NOT provide write access if the associated `aud` claim array entry `aud[abs(i)]` considered alone allows access.
+If the allow-list is empty, the deny-list is a deny-only list: access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
 
 If the current API access is having side-effects on the state of the NMOS Node, read and write access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (Forbidden) if the token is valid but permissions are insufficient, or HTTP 401 (Unauthorized) with a `WWW-Authenticate` response header if the token is invalid or missing.
 
