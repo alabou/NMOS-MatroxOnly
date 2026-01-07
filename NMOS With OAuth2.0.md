@@ -132,21 +132,21 @@ The `read` attribute of an `x-nmos-*` claim, if present, MUST provide read acces
 
 The array of signed integers is split in two sub-arrays, one for non-negative integers and one for negative integers, keeping the same ordering as in the original array. The non-negative integer array is an allow-list while the negative integer array is a deny-list.
 
-If the allow-list is not empty, access MUST be denied unless for at least one allow-list entry i, the associated aud claim array entry aud[i] considered alone allows access. If the allow-list processing allows access, such access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
+If the allow-list is not empty, read access MUST be denied unless, for at least one allow-list entry `i`, the associated `aud` claim array entry `aud[i]` considered alone allows access. If the allow-list processing allows read access, such access MUST be denied if, for any deny-list entry `i` (a negative integer), the associated `aud` claim array entry `aud[abs(i)]` considered alone allows access; otherwise read access MUST be allowed.
 
-If the allow-list is empty, the deny-list is a deny-only list: access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
+If the allow-list is empty, the deny-list is a deny-only list: read access MUST be denied if, for any deny-list entry `i` (a negative integer), the associated `aud` claim array entry `aud[abs(i)]` considered alone allows access; otherwise read access MUST be allowed.
 
 The `write` attribute of an `x-nmos-*` claim, if present, MUST provide write access if the array of paths is ["\*"] and MUST prevent write access if the array of paths is [""]. The absence of a `write` attribute prevents write access. Both read and write accesses MUST be allowed in order to get write access. An NMOS Node MUST provide such read and write access independently of the path being accessed. Values other than ["\*"], [""], or an array of signed integers MUST NOT be used. Implementations MUST support all three forms of the `read` and `write` attributes: `["*"]` for allow, `[""]` for deny, and arrays of signed integers for indexed allow/deny. The array of signed integers MUST NOT be empty and MUST be sorted to have positive integers first then negative integers. The integer value 0 MUST be considered as a positive integer. If the absolute value of any array entry is outside the bounds of the `aud` claim array, the access token is invalid and access MUST be denied.
 
 The array of signed integers is split in two sub-arrays, one for non-negative integers and one for negative integers, keeping the same ordering as in the original array. The non-negative integer array is an allow-list while the negative integer array is a deny-list.
 
-If the allow-list is not empty, access MUST be denied unless for at least one allow-list entry i, the associated aud claim array entry aud[i] considered alone allows access. If the allow-list processing allows access, such access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
+If the allow-list is not empty, write access MUST be denied unless, for at least one allow-list entry `i`, the associated `aud` claim array entry `aud[i]` considered alone allows access. If the allow-list processing allows write access, such access MUST be denied if, for any deny-list entry `i` (a negative integer), the associated `aud` claim array entry `aud[abs(i)]` considered alone allows access; otherwise write access MUST be allowed.
 
-If the allow-list is empty, the deny-list is a deny-only list: access MUST be denied if for any deny-list entry i, the associated aud claim array entry aud[abs(i)] considered alone allows access, otherwise access MUST be allowed. 
+If the allow-list is empty, the deny-list is a deny-only list: write access MUST be denied if, for any deny-list entry `i` (a negative integer), the associated `aud` claim array entry `aud[abs(i)]` considered alone allows access; otherwise write access MUST be allowed.
 
-If the current API access is having side-effects on the state of the NMOS Node, read and write access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (Forbidden) if the token is valid but permissions are insufficient, or HTTP 401 (Unauthorized) with a `WWW-Authenticate` response header if the token is invalid or missing.
+If the current API access is having side-effects on the state of the NMOS Node, read and write access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (`Forbidden`) if the token is valid but permissions are insufficient, or HTTP 401 (`Unauthorized`) with a `WWW-Authenticate` response header if the token is invalid or missing.
 
-If the current API access is not having side-effects on the state of the NMOS Node, read access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (Forbidden) if the token is valid but permissions are insufficient, or HTTP 401 (Unauthorized) with a `WWW-Authenticate` response header if the token is invalid or missing.
+If the current API access is not having side-effects on the state of the NMOS Node, read access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (`Forbidden`) if the token is valid but permissions are insufficient, or HTTP 401 (`Unauthorized`) with a `WWW-Authenticate` response header if the token is invalid or missing.
 
 An NMOS Node SHOULD increment a status counter a) when a ReadOnly access is denied: a.1) based on the `sub` claim, a.2) based on the `aud` claim, a.3) based on the `scope` claim, a.4) based on the `x-nmos-*` claim, b) when a ReadWrite access is denied: b.1) based on the `sub` claim, b.2) based on the `aud` claim, b.3) based on the `scope` claim, b.4) based on the `x-nmos-*` claim, c) when an access without an Access Token is performed, d) when an access with an invalid/corrupted token is performed.
 
@@ -178,7 +178,7 @@ Implementations MUST use appropriate HTTP status codes for access failures:
 
 The following examples illustrate access tokens for a Controller operating on behalf of a user across multiple NMOS Nodes (for example in mux and independent-stream topologies such as MPEG2-TS over RTP/SRT/UDP/RTSP).
 
-**Example 1 (Valid): complete token using `["*"]` for multiple APIs and multiple Nodes**
+**Example 1: complete token using `["*"]` for multiple APIs and multiple Nodes**
 
 This example follows a simple pattern where the Authorization Server grants full read/write access for the listed APIs on all targeted Nodes.
 
@@ -196,7 +196,7 @@ This example follows a simple pattern where the Authorization Server grants full
 }
 ```
 
-**Example 2 (Valid): compact token using `aud` indices**
+**Example 2: compact token using `aud` indices**
 
 This example illustrates how the same token can remain compact by referencing `aud` entries by index. In this example, the Controller is authorized for write accesses only on node MTXCIP-CC91699. The "x-nmos-node" claim is not present because the "scope" claim already provides read access.
 
@@ -213,13 +213,28 @@ This example illustrates how the same token can remain compact by referencing `a
 }
 ```
 
+**Example 3: compact token using `aud` indices with universal read-only**
+
+This example illustrates how the same token can remain compact by referencing `aud` entries by index. In this example, the Controller is authorized for write accesses only on nodes MTXCIP-CC91629 and MTXCIP-CC91699. The "x-nmos-node" claim is not present because the "scope" claim already provides read access. ReadOnly access is allowed on any node.
+
+```json
+{
+  "iss": "https://oauth2.matrox.com/v1.0",
+  "scope": "offline node connection streamcompatibility",
+  "sub": "user@matrox.com",
+  "aud": ["*", "MTXCIP-CC91629", "MTXCIP-CC91699"],
+  "client_id": "nmosController-54321",
+  "exp": 1.720538859e+09,
+  "x-nmos-connection": { "read": ["*"], "write": [1, 2] },
+  "x-nmos-streamcompatibility": { "read": ["*"], "write": [1, 2] }
+}
+```
+
 ##### Pseudocode (Informative)
 
 The pseudocode below illustrates the normative requirements of this section for evaluating read/write access for a single HTTP request.
 
 ```python
-# Python-style pseudocode derived from the Go ValidateAccess flow, completed for aud indexing.
-#
 # Inputs:
 # - claims: decoded JWT access token claims (signature already validated)
 # - read_write: True if the request has side-effects on the state of the NMOS Node
