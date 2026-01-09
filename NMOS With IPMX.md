@@ -44,13 +44,13 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:clock_ref_type` capabili
 
 A Receiver MAY support either or both clock reference types.
 
-A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file to check for the `a=ts-refclk` attribute or using the Sender's associated Source's `clock_name` attribute and checking the `ref_type` attribute of the clock. For a `mux` Source, the parents Sources `clock_name` attribute MUST match with the `mux` Source's `clock_name` attribute.
+A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file to check for the `a=ts-refclk` attribute or using the Sender's associated Source's `clock_name` attribute and checking the `ref_type` attribute of the clock. A Node providing a mux Source MUST ensure that the `clock_name` attribute of all its parent Sources matches the `clock_name` attribute of the mux Source itself.
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:clock_ref_type` capability to indicate the reference clocks that it supports. A Controller MAY use Sender capabilities, if supported, to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:clock_ref_type` capability in its [IS-11][] `constraints/supported` endpoint.
 
 The application of a constraint using IS-11 on a Sender's `urn:x-matrox:cap:transport:clock_ref_type` capability, if allowed, MUST NOT change the value of the `clocks` attribute of the associated Node.
 
-A Sender constrained through IS-11 to `ptp` MUST NOT fallback to `internal` if there is not PTP clock available on the network and MUST consider this state as a constraint violation.
+A Sender constrained through IS-11 to `ptp` MUST NOT fallback to `internal` if there is no PTP clock available on the network and MUST consider this state as a constraint violation.
 
 > Note: An IPMX unconstrained Sender follows the [TR-10-1][] technical recommendation and uses a `ptp` common reference clock if one is available, otherwise it falls back to using an `internal` reference clock. A non-IPMX unconstrained Sender in a ST 2110 environment follows the SMPTE ST 2110-10 specification and usually uses a `ptp` common reference clock.
 
@@ -60,27 +60,35 @@ A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capab
 
 A Receiver MAY support either or both media types.
 
-A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file to check for the `a=mediaclk` attribute or by checking the Sender's associated Source's `urn:x-matrox:synchronous_media` attribute, if any. For a `mux` Source, the parents Sources `urn:x-matrox:synchronous_media` attribute MUST match with the `mux` Source's `urn:x-matrox:synchronous_media` attribute.
+A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file to check for the value of the `a=mediaclk` attribute or by checking the Sender's associated Source's `urn:x-matrox:synchronous_media` attribute, if any. A Node providing a mux Source MUST ensure that the `urn:x-matrox:synchronous_media` attribute of all its parent Sources matches the `urn:x-matrox:synchronous_media` attribute of the mux Source itself.
 
 > Note: The SDP transport file attribute `a=mediaclk:sender` indicates an asynchronous media while `a=mediaclk:direct` indicates a synchronous one.
 
 A Sender MAY provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate the media synchronization that it supports. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:synchronous_media` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:synchronous_media` capability in its [IS-11][] `constraints/supported` endpoint.
 
-A Sender producing media that is synchronous with the Sender's reference clock MUST include an `urn:x-matrox:synchronous_media` attribute in its associated Source. A Sender producing media that is not synchronous with the Sender's reference clock MAY omit this attribute, which defaults to false.
+A Sender producing media that is synchronous with the Sender's reference clock MUST include an `urn:x-matrox:synchronous_media` attribute in its associated Source. A Sender producing media that is not synchronous with the Sender's reference clock SHOULD include this attribute set to `false`. In the absence of this attribute, a Controller SHOULD refer to the Sender's SDP transport file to determine the media synchronization type.
 
 ## Info Block
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:meta:info_block` capability to indicate its support for IPMX Senders transmitting media info blocks (in RTCP Sender Report). The capability SHOULD enumerate the media info block types (integers) supported by the Receiver. An empty enumeration indicates that the Receiver does not support IPMX in-band media info blocks. Enumerating the value `0`, which is an invalid media info block type identifier, serves the same purpose.
+A Receiver SHOULD provide a `urn:x-matrox:cap:meta:info_block` capability to indicate its support for IPMX Senders transmitting media info blocks (in RTCP Sender Reports). The capability SHOULD enumerate the media info block types (integers) supported by the Receiver. An empty enumeration indicates that the Receiver does not support IPMX in-band media info blocks. Enumerating the value `0`, which is an invalid media info block type identifier, serves the same purpose.
+
+> Note: A Receiver declaring support for an info block declares that it can autonomously reconfigure itself from the parameter values of the media info block without requiring a Controller to transfer a new SDP transport file from the Sender.
 
 A Receiver MAY support none, some, or all IPMX media info block types.
 
 When media stream attributes associated with a Sender change, a Controller MAY allow the Receiver to handle these media stream attribute changes using the media info blocks produced by the Sender, provided that all the media info block types generated by the Sender are supported by the Receiver.
 
-A Sender compliant with the "Info Block" section of this document MUST provide a `urn:x-matrox:info_block` Sender attribute to indicate the media info block types that it produces. This attribute MUST be a subset of the Sender's `urn:x-matrox:cap:transport:info_block` capability.
+A Sender compliant with the "Info Block" section of this document MUST provide a `urn:x-matrox:info_block` Sender attribute to indicate the media info block types that it produces. This attribute MUST be a subset of the Sender's `urn:x-matrox:cap:transport:info_block` capability, if present.
 
-> Note: A Sender not providing the `urn:x-matrox:info_block` attribute is either not supporting IPMX media info blocks or declare itself as not being compatible with the "Info Block" section of this document.
+The `urn:x-matrox:info_block` attribute and the `urn:x-matrox:cap:transport:info_block` capability MUST NOT change during the activation (`master_enable` = true) of the Sender.
 
-A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to indicate the media info block types that it generates. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:info_block` capability or the Sender's associated `urn:x-matrox:info_block` attribute to verify the compliance of Receivers with a Sender. It is not allowed to constrain a Sender for this capability, as media info blocks are a required feature of IPMX.
+A Sender compliant with the "Info Block" section of this document MUST also provide a `urn:x-matrox:info_block_sdp_version` Sender attribute to indicate when the information stored in an SDP transport file (or that would be stored in one) has changed. This value MUST be a 64-bit integer that monotonically increments when this information changes. The `urn:x-matrox:info_block_sdp_version` MAY correspond to the SDP transport `sess-version` parameter.
+
+A Sender compliant with the "Info Block" section of this document MUST also provide a `urn:x-matrox:info_block_sdp_version_last_required` Sender attribute. This value MUST be a 64-bit integer less than or equal to `urn:x-matrox:info_block_sdp_version`. It MUST indicate the most recent value of `urn:x-matrox:info_block_sdp_version` for which the information that changed was not fully transmitted by the Sender through the media info blocks declared in the `urn:x-matrox:info_block` attribute (or `0` if no such change has occurred yet). This value MUST monotonically increase.
+
+> Note: A Sender not providing the `urn:x-matrox:info_block` attribute is either not supporting IPMX media info blocks or declaring itself as not being compatible with the "Info Block" section of this document.
+
+A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to indicate the media info block types that it generates. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:info_block` capability or the Sender's associated `urn:x-matrox:info_block` attribute to verify the compliance of Receivers with a Sender. A Sender MUST NOT allow itself to be constrained for this capability, as media info blocks are a required feature of IPMX.
 
 > Note: The "Media Info Block Type" section in [TR-10-0][] presents the various IPMX media info block types.
 
@@ -88,7 +96,18 @@ A Sender SHOULD provide a `urn:x-matrox:cap:transport:info_block` capability to 
 
 The `info_block` attribute and capability describe the RTCP stream produced by an IPMX Sender. A Sender that either does not produce media info blocks (non-IPMX) or produces media info blocks (IPMX) that are not supported by a Receiver MUST NOT prevent a Controller from connecting such a Receiver to the Sender. Such non-compliance only affects the Receiver's ability to adapt autonomously to dynamic changes in stream parameters, requiring intervention by the Controller instead. This is the reason why the Receiver's `info_block` capability is a class `meta`, which does not affect the compatibility assessment of a Controller.
 
-A Receiver MAY provide an `urn:x-matrox:cap:transport:info_block` capability to explicitly indicate that it is unconstrained for this parameter.
+A Controller SHOULD verify the `urn:x-matrox:info_block_sdp_version` and `urn:x-matrox:info_block_sdp_version_last_required` attributes of an active Sender.
+
+If `urn:x-matrox:info_block_sdp_version` has increased since the last time the Controller transferred the Sender's SDP transport file to the Receiver, the Controller MUST transfer the Sender's SDP transport file to the Receiver, unless all of the following conditions are met:
+
+- The Receiver supports all the media info blocks transmitted by the Sender.
+- `urn:x-matrox:info_block_sdp_version_last_required` is less than or equal to the value of `urn:x-matrox:info_block_sdp_version` that was last transferred to the Receiver.
+
+If all the above conditions are met, the Controller SHOULD consider that the Receiver will automatically update its state from the media info blocks and MAY omit transferring an updated SDP transport file.
+
+This optimization only applies after a Receiver has been successfully configured at least once using the Sender's SDP transport file for the current connection. If a Controller has no record of having transferred the Sender's SDP transport file to a Receiver for the current connection, the Controller MUST transfer the Sender's SDP transport file to the Receiver.
+
+If a Controller observes `urn:x-matrox:info_block_sdp_version` or `urn:x-matrox:info_block_sdp_version_last_required` attribute values that violate the requirements defined above, the Controller MUST transfer the Sender's SDP transport file to the Receiver.
 
 ## HKEP
 
@@ -147,7 +166,6 @@ Refer to the "Privacy" section "RTP Payload Header" sub-section for the detailed
 ### IS-11
 
 For an Input shared by multiple [IS-11][] Senders that support being constrained for the `urn:x-matrox:cap:transport:hkep` capability to either `true` or `false`, any Senders constrained to `false` MUST cause that Input to become non-HDCP protected. Consequently, any of these Senders  constrained to `true` MUST enter the IS-11 `active_constraints_violation` state, because the essence is no longer HDCP-protected until the `urn:x-matrox:cap:transport:hkep` capability of all relevant Senders is set to `true`.
-
 
 ## Privacy
 
@@ -218,23 +236,25 @@ As per ST 2110-31 there is no RTP Payload Header defined. The complete RTP Paylo
 
 ## Channel Order
 
-Receiver SHOULD provide a `urn:x-matrox:cap:transport:channel_order` capability for opaque AM824 multiplexed audio streams and PCM audio streams to indicate its support for the channels characteristics within an ST 2110-30 or ST 2110-31 stream produced by a Sender. The capability MUST follow the ST 2110 `channel-order` convention. The `channel_order` capability allows a Receiver to describe the number of audio sub-streams that it supports and, for each one, the channel configuration and whether it is linear PCM or non-PCM data.
+A Receiver SHOULD provide a `urn:x-matrox:cap:transport:channel_order` capability for opaque AM824 multiplexed audio streams and PCM audio streams to indicate its support for the channel characteristics within an ST 2110-30 or ST 2110-31 stream produced by a Sender. The capability MUST follow the ST 2110 `channel-order` convention. The `channel_order` capability allows a Receiver to describe the number of audio sub-Streams that it supports and, for each one, the channel configuration and whether it is linear PCM or non-PCM data.
 
-A Controller MAY verify the compliance of Receivers with an active Sender, for opaque AM824 multiplexed audio streams and PCM audio streams, using the Sender's SDP transport file to check for the format-specific `channel-order` parameter.
+A Controller SHOULD verify the compliance of Receivers with an active Sender for opaque AM824 multiplexed audio streams and PCM audio streams using the Sender's SDP transport file to check for the format-specific `channel-order` parameter.
 
-A Sender MAY provide a `urn:x-matrox:cap:transport:channel_order` capability to indicate the channel ordering that it supports. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:channel_order` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:channel_order` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained). A Controller MAY constrain a Sender's `urn:x-nmos:cap:format:channel_count` capability instead of `urn:x-matrox:cap:transport:channel_order`, selecting the required number of channel corresponding to the `channel_order`. A Sender is required as per IS-11 to support being constrained by the `urn:x-nmos:cap:channel_count` capability. If multiple `channel_order` have the same number of channels the Sender MAY select anyone matching the number of channels. A Sender MUST NOT support being constrained on the `urn:x-matrox:cap:transport:channel_order` capability for fully described AM824 multiplexed audio streams. 
+A Sender MAY provide a `urn:x-matrox:cap:transport:channel_order` capability to indicate the channel ordering that it supports. A Controller MAY use a Sender's `urn:x-matrox:cap:transport:channel_order` capability to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:transport:channel_order` capability in its [IS-11][] `constraints/supported` endpoint (Matrox products usually do not support being constrained). A Controller MAY constrain a Sender's `urn:x-nmos:cap:format:channel_count` capability instead of `urn:x-matrox:cap:transport:channel_order`, selecting the required number of channels corresponding to the `channel_order`. A Sender is required as per IS-11 to support being constrained by the `urn:x-nmos:cap:channel_count` capability. If multiple `channel_order` values have the same number of channels, the Sender MAY select any one matching the number of channels. A Sender MUST NOT support being constrained on the `urn:x-matrox:cap:transport:channel_order` capability for fully described AM824 multiplexed audio streams. 
 
 > Note: The `urn:x-matrox:cap:transport:channel_order` and `urn:x-nmos:cap:format:channel_count` are competing capabilities expressing/constraining the same entity. It is advised to constrain only one of them and let the other unconstrained.
 
 ## Audio layers
 
-A Receiver SHOULD provide a `urn:x-matrox:cap:format:audio_layers` capability for fully described AM824 multiplexed audio streams to indicate its support for the channels characteristics within an ST 2110-31 stream produced by a Sender. The `urn:x-matrox:cap:format:audio_layers` capability allows a Receiver to describe the number of audio sub-streams that it supports. A Receiver SHOULD also provide sub-streams capabilities for each audio layer to indicate what audio sub-streams it supports.
+A Receiver SHOULD provide a `urn:x-matrox:cap:format:audio_layers` capability for fully described AM824 multiplexed audio streams to indicate its support for the channel characteristics within an ST 2110-31 stream produced by a Sender. The `urn:x-matrox:cap:format:audio_layers` capability allows a Receiver to describe the number of audio sub-Streams that it supports. A Receiver SHOULD also provide sub-Stream capabilities for each audio layer to indicate what audio sub-Streams it supports.
 
 A Controller MUST verify the compliance of Receivers with an active Sender using the Sender's SDP transport file by checking for the format-specific `channel-order` parameter or by checking the Sender's mux Flow `urn:x-matrox:cap:format:audio_layers` attribute and parent sub-Flows attributes.
 
 A Sender MAY provide a `urn:x-matrox:cap:format:audio_layers` capability to indicate the number of audio layers that are supported. A Controller MAY use the Sender's capabilities to verify the compliance of Receivers with a Sender and, if necessary, constrain the Sender to ensure compliance with the Receivers. Only the number of audio layers MAY be constrained. A Sender indicates that it supports being constrained for this capability by enumerating the `urn:x-matrox:cap:format:audio_layers` capability in its [IS-11][] `constraints/supported` endpoint.
 
 A Controller MAY use IS-11 to constrain the Sender's sub-Flows to make them compliant with the Receiver.
+
+> Note: The `urn:x-matrox:cap:format:audio_layers` and its associated sub-Stream capabilities align with the hierarchical mux concept defined in the [Receiver Capabilities](ReceiverCapabilities.md) specification, where Constraint Sets use the `urn:x-matrox:cap:meta:format` and `urn:x-matrox:cap:meta:layer` meta attributes to describe the nested structure of a multiplexed Flow or Stream.
 
 [RFC-2119]: https://tools.ietf.org/html/rfc2119 "Key words for use in RFCs"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
