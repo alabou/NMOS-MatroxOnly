@@ -107,14 +107,14 @@ The private claims `x-nmos-*` SHOULD be placed in an `ext` claim to separate the
 
 #### Validation
 
-An NMOS Node MUST require TLS v1.2 or v1.3 when serving HTTP requests. An NMOS Node MUST only accept Access Tokens from the `Authorization` HTTP header of a request.
+An NMOS Node MUST require TLS v1.2 or v1.3 when serving HTTP requests. An NMOS Node MUST only accept Access Tokens from the `Authorization` HTTP header of a request. An NMOS Node MUST validate the cryptographic signature of the Access Token.
 
 ReadOnly access to a Node's API MUST be blocked if one of the following claims reject Read access.
 ReadWrite access to a Node's API MUST be blocked if one of the following claims reject Read or Write access.
 
 By default the `aud` claim MUST NOT allow access to the current API if it is not ["\*"] and no entry contains a DNS name that includes, possibly as a sub-string, the [BCP-002-02][] `Instance Identifier` of the NMOS Node. There MAY be additional characters before and after the `Instance Identifier` in the DNS name. Authorizations SHOULD be delivered to OAuth2.0 Clients for specific NMOS Nodes based on their serial number, as defined in the [BCP-002-02][] `Instance Identifier`. The DNS name of the `aud` clause matching the `Instance Identifier` of the Node MUST additionally be either the `CN` name or one of the alternates `DNS` names of the TLS server certificate associated with the NMOS endpoint.
 
-Alternatively, if configured by an administrator to operate in an environment where OAuth2.0 Authorizations are not delivered based on a serial number, the `aud` claim MUST NOT allow access to the current API if it is not ["\*"] and no entry corresponds to the `CN` name or one of the alternates `DNS` names of the TLS server certificate associated with the NMOS endpoint. The `aud` entries may contain wild-card characters in order to target a subset of devices on a network. Such wild-carding of domain names is documented in [RFC-4592][]. For example, `*.example.com` MUST match `subdomain.example.com` but not `example.com` or `other.example.com`. Implementations MUST support RFC 4592 DNS wildcard matching when evaluating audience entries.
+Alternatively, if configured by an administrator to operate in an environment where OAuth2.0 Authorizations are not delivered based on a serial number, the `aud` claim MUST NOT allow access to the current API if it is not ["\*"] and no entry corresponds to the `CN` name or one of the alternates `DNS` names of the TLS server certificate associated with the NMOS endpoint. The `aud` entries may contain wild-card characters in order to target a subset of devices on a network. Such wild-carding of domain names is documented in [RFC-4592][]. For example, `*.example.com` MUST match `subdomain.example.com` but not `example.com` or `other.example.com`. Implementations MUST support RFC 4592 DNS wildcard matching when evaluating audience entries. If the `aud` claim is an empty array, access MUST be denied.
 
 The ordering of the `aud` array is significant only for the purpose of interpreting the private `x-nmos-*` claims that reference `aud` entries by index (see `read` and `write` processing below). For generic audience validation, the `aud` claim is processed as usual, with no specific ordering requirement.
 
@@ -124,7 +124,7 @@ An implementation MUST maintain the `aud` ordering consistently within the proce
 
 The indexing of the `aud` array is zero-based so the first entry of the `aud` array has index 0.
 
-The `scope` claim MUST NOT allow access to the current API if the API name is not an element of the space separated list of API(s) of the claim. Otherwise the `scope` claim MUST provide Read access to the complete hierarchy of the current API which MAY further be restricted by a private `x-nmos-*` claim for the current API. An NMOS Node MUST provide such Read access independently of the path being accessed. The presence of an `x-nmos-*` claim MUST remove the default Read access from the `scope` claim for the associated API.
+The `scope` claim MUST NOT allow access to the current API if the API name is not an element of the space separated list of API(s) of the claim. Otherwise the `scope` claim MUST provide Read access to the complete hierarchy of the current API which MAY further be restricted by a private `x-nmos-*` claim for the current API. An NMOS Node MUST provide such Read access independently of the path being accessed. The presence of an `x-nmos-*` claim MUST remove the default Read access from the `scope` claim for the associated API. If the `scope` claim is an empty string, access MUST be denied.
 
 Note: As opposed to the AMWA/NMOS specification, the presence of an `x-nmos-*` claim matching an NMOS API does not grant implicit read only access. In fact it does the opposite by removing the implicit read only access from the `scope` claim for that NMOS API.
 
@@ -148,7 +148,7 @@ If the current API access is having side-effects on the state of the NMOS Node, 
 
 If the current API access is not having side-effects on the state of the NMOS Node, Read access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (`Forbidden`) if the token is valid but permissions are insufficient, or HTTP 401 (`Unauthorized`) with a `WWW-Authenticate` response header if the token is invalid or missing.
 
-An NMOS Node SHOULD increment a status counter a) when a ReadOnly access is denied: a.1) based on the `sub` claim, a.2) based on the `aud` claim, a.3) based on the `scope` claim, a.4) based on the `x-nmos-*` claim, b) when a ReadWrite access is denied: b.1) based on the `sub` claim, b.2) based on the `aud` claim, b.3) based on the `scope` claim, b.4) based on the `x-nmos-*` claim, c) when an access without an Access Token is performed, d) when an access with an invalid/corrupted token is performed.
+An NMOS Node SHOULD increment a status counter a) when a ReadOnly access is denied: a.1) based on the `sub` claim, a.2) based on the `aud` claim, a.3) based on the `scope` claim, a.4) based on the `x-nmos-*` claim, b) when a ReadWrite access is denied: b.1) based on the `sub` claim, b.2) based on the `aud` claim, b.3) based on the `scope` claim, b.4) based on the `x-nmos-*` claim, c) when an access without an Access Token is performed, d) when an access with an invalid/corrupted token is performed, e) when an access with an expired or not-yet-valid token is performed, f) when a TLS client certificate validation fails, g) when a TLS server certificate validation fails during a client access, h) when a fetch/update of the OAuth2.0 authorization server public keys fails, i) when an access is denied because no valid Public Keys are available.
 
 #### Mutual TLS Client Certificate Binding
 
