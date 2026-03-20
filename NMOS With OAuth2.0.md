@@ -101,7 +101,7 @@ An NMOS Node MAY be configured to only accept Access Tokens with `client_credent
 
 The claims `iss`, `aud`, `sub`, `exp`, `scope`, `client_id` MUST be present in the Bearer token. 
 
-The `nbf` claim SHOULD NOT be present in the Bearer token. If it is present it MUST be ignored.
+The `nbf` claim SHOULD NOT be present in the Bearer token. If it is present it MAY be ignored.
 
 The private claims `x-nmos-*` SHOULD be placed in an `ext` claim to separate them from standard claims. An NMOS Node MUST support having the private claims `x-nmos-*` either in the `ext` claim or along with the standard claims. An Access Token SHOULD either have the private claims `x-nmos-*` in the `ext` claim or along with the standard claims. If the private `x-nmos-*` claims are duplicated they MUST be identical.
 
