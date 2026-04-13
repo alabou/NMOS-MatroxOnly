@@ -82,7 +82,7 @@ Authorizations are not meant to be provided for short periods of time. An author
 
 ### Type and Algorithms
 
-The token type `typ` MUST be `JWT`.
+The JOSE header `typ` parameter MUST be present and MUST have one of the following values: `JWT`, `at+jwt`, or `application/at+jwt`. 
 
 The algorithm `alg` used for signing the Bearer token MUST be one of `RS256`, `RS512`, `ES256` or `ES512`. When `ES256` is used, the elliptic curve MUST be `P-256`. When `ES512` is used, the elliptic curve MUST be `P-521`.
 
