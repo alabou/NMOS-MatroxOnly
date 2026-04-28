@@ -72,7 +72,43 @@ An NMOS Node MUST log an event if it invalidates the Public Keys and it SHOULD l
 
 An NMOS Node MUST discover through DNS-SD the OAuth2.0 authorization server URL(s) from the standard IS-10 `_nmos-auth._tcp` service or it MAY be configured with a list of URLs. An NMOS Node MUST NOT use the `iss` claim of a Bearer token to get Public Keys. The OAuth2.0 authorization servers MUST publish the same set of Public Keys such that any OAuth2.0 authorization server MAY be used by an NMOS Node to obtain the Public Keys and validate access tokens.
 
+Note: The api_selector value is obtained from the DNS-SD TXT records.
+
 An NMOS Node MUST use TLS v1.2 or v1.3 when fetching / updating Public Keys from an OAuth2.0 authorization server. It MUST validate that the authorization server certificate has been signed by a trusted Certificate Authority. An NMOS Node MUST be configured with a set of trusted Certificate Authorities for validating access to OAuth2.0 authorization servers.
+
+#### Authorization Server Metadata Endpoint
+
+The location of the Public Keys (the `jwks_uri`) is not advertised directly. It MUST be obtained from the Authorization Server's metadata document, defined in [RFC-8414][] §3 and referenced from [IS-10][]. The DNS-SD `_nmos-auth._tcp` advertisement carries only the Authorization Server's hostname and port, plus an optional `api_selector` TXT record corresponding to the path component of the issuer identifier (per [RFC-8414][] §3.1, with leading and trailing `/` omitted).
+
+[IS-10][] / [RFC-8414][] §3.1 specifies that the metadata URL is constructed by inserting `/.well-known/oauth-authorization-server` between the host and the `api_selector`:
+
+```
+<scheme>://<hostname>:<port>/.well-known/oauth-authorization-server[/<api_selector>]
+```
+
+In practice, some widely deployed Authorization Servers — notably Keycloak — instead serve the metadata at the alternative form with the `api_selector` placed BEFORE the well-known suffix:
+
+```
+<scheme>://<hostname>:<port>[/<api_selector>]/.well-known/oauth-authorization-server
+```
+
+In addition, every OpenID-Connect-compliant Authorization Server publishes an equivalent metadata document at the [OpenID Connect Discovery 1.0][OIDC-Discovery] location, which uses the same "well-known appended to the issuer" placement as the Keycloak form:
+
+```
+<scheme>://<hostname>:<port>[/<api_selector>]/.well-known/openid-configuration
+```
+
+The OpenID Connect Discovery document carries a `jwks_uri` field with the same semantics as the [RFC-8414][] metadata document and SHOULD be considered an acceptable substitute for it.
+
+To remain interoperable with [RFC-8414][]-strict, Keycloak-style, and OpenID-Connect-only Authorization Servers, an NMOS Node MUST attempt the following URLs in order, stopping at the first one that returns HTTP 200 with a parseable JSON metadata document:
+
+1. `<scheme>://<hostname>:<port>/.well-known/oauth-authorization-server[/<api_selector>]` ([IS-10][] / [RFC-8414][] §3.1, normative)
+2. `<scheme>://<hostname>:<port>[/<api_selector>]/.well-known/oauth-authorization-server` (Keycloak-style placement)
+3. `<scheme>://<hostname>:<port>[/<api_selector>]/.well-known/openid-configuration` ([OpenID Connect Discovery 1.0][OIDC-Discovery] fallback)
+
+The three forms collapse to two (or one) distinct URLs when no `api_selector` is present, so the additional probes are no-ops for Authorization Servers whose issuer has no path component (such as ORY Hydra in its default configuration).
+
+Once a metadata document has been retrieved, the Node MUST read the `jwks_uri` field from that document and fetch the Public Keys from that URI. The Node MUST NOT hard-code the JWKS path (e.g. `/.well-known/jwks.json` or `/jwks`); the JWKS location is identified normatively only via the metadata document's `jwks_uri`.
 
 ### Access Token 
 
@@ -452,7 +488,10 @@ def eval_indexed_attr(attr, aud, node_instance_id, tls_server_cert_names, use_se
 [BCP-002-02]: https://specs.amwa.tv/bcp-002-02/ "AMWA BCP-002-02: NMOS Asset Distinguishing Information"
 [IS-04]: https://specs.amwa.tv/is-04/ "AMWA IS-04 NMOS Discovery and Registration Specification"
 [IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
+[IS-10]: https://specs.amwa.tv/is-10/ "AMWA IS-10 NMOS Authorization Specification"
 [NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
 [MS-005-02]: https://specs.amwa.tv/ms-05-02/ "AMWA MS-05-02 NMOS Control Framework"
 [RFC-4592]: https://tools.ietf.org/html/rfc4592 "The Role of Wildcards in the Domain Name System"
+[RFC-8414]: https://tools.ietf.org/html/rfc8414 "OAuth 2.0 Authorization Server Metadata"
 [RFC-8707]: https://tools.ietf.org/html/rfc8707 "Resource Indicators for OAuth 2.0"
+[OIDC-Discovery]: https://openid.net/specs/openid-connect-discovery-1_0.html "OpenID Connect Discovery 1.0"
