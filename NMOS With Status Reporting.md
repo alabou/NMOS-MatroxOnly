@@ -152,6 +152,20 @@ Controllers SHOULD subscribe to the IS-04 Query API WebSocket endpoint to receiv
 
 The Registry sends WebSocket notifications for monitoring Sources whenever their `version` attribute changes, which occurs when any attribute of the Source resource is modified.
 
+## IS-11 Sender and Receiver state
+The IS-11 Sender `state` available at the `status` enddoint SHOULD participate in establishing the Sender's `essenceStatus` as follow:
+
+"unconstrained"                 => Healthy (1)
+"constrained"                   => Healthy (1)
+"active_constraints_violation"  => Unhealthy (3)
+"no_essence"                    => PartiallyHealthy (2)
+"awaiting_essence"              => PartiallyHealthy (2)
+
+The IS-11 Receiver `state` available at the `status` enddoint SHOULD participate in establishing the Reeiver's `streamStatus` as follow:
+
+"unknown"                       => Healthy (1)
+"compliant_stream"              => Healthy (1)
+"non_compliant_stream"          => Unhealthy (3)
 
 [BCP-008-01]: https://specs.amwa.tv/bcp-008-01
 [BCP-008-02]: https://specs.amwa.tv/bcp-008-02
