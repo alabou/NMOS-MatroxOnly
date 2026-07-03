@@ -54,6 +54,17 @@ A Sender constrained through IS-11 to `ptp` MUST NOT fallback to `internal` if t
 
 > Note: An IPMX unconstrained Sender follows the [TR-10-1][] technical recommendation and uses a `ptp` common reference clock if one is available, otherwise it falls back to using an `internal` reference clock. A non-IPMX unconstrained Sender in a ST 2110 environment follows the SMPTE ST 2110-10 specification and usually uses a `ptp` common reference clock.
 
+### SDP transport file signaling
+
+Section 8.2 Timestamp Reference Clock Signaling of ST 2110-10 is amended by IPMX as follow:
+
+"Devices which are not referenced to IEEE Std 1588-2008 shall use an appropriate ts-refclk format as specified in IETF RFC 7272 or the extended form shown below, indicating the MAC address of the Sender using the token localmac. Receivers may assume that different streams which signal the same value for localmac are using the same Timestamp Reference Clock.
+a=ts-refclk:localmac=<Ethernet MAC address of sender>" is replaced by:
+
+Devices which are not referenced to IEEE Std 1588-2008 shall use an appropriate ts-refclk format as specified in IETF RFC 7272 or the extended form shown below, indicating the MAC address **of one of the Node endpoints** using the token localmac. Receivers may assume that different streams which signal the same value for localmac are using the same Timestamp Reference Clock.
+
+`a=ts-refclk:localmac=<Ethernet MAC address of one of the Node's endpoints>`
+
 ## Asynchronous/Synchronous Media
 
 A Receiver SHOULD provide a `urn:x-matrox:cap:transport:synchronous_media` capability to indicate its support for Senders that produce media that is not synchronous with the Sender's reference clock. The capability value `true` indicates support for synchronous media, while the value `false` indicates support for asynchronous media.
