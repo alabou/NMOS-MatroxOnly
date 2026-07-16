@@ -4,7 +4,7 @@ Copyright 2026, Matrox Graphics Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice MUST be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
@@ -78,113 +78,113 @@ The NMOS terms User, Controller, Registry, Node, Device, Source, Flow, Sender, R
 
 # Scope
 
-This Technical Recommendation does not redefine NMOS APIs or resource models; it specifies additional and/or overriding control-plane security requirements for the NMOS interfaces a Node exposes and consumes, as defined by the applicable AMWA NMOS specifications.
+This specification does not redefine NMOS APIs or resource models; it specifies additional and/or overriding control-plane security requirements for the NMOS interfaces a Node exposes and consumes, as defined by the applicable AMWA NMOS specifications.
 
-This Technical Recommendation is based on AMWA IS-10 and AMWA BCP-003-01. Where any requirement in this Technical Recommendation conflicts with a requirement in AMWA IS-10 or AMWA BCP-003-01, the requirement in this Technical Recommendation shall take precedence for any implementation claiming compliance with this Technical Recommendation.
+This specification is based on AMWA IS-10 and AMWA BCP-003-01. Where any requirement in this specification conflicts with a requirement in AMWA IS-10 or AMWA BCP-003-01, the requirement in this specification MUST take precedence for any implementation claiming compliance with this specification.
 
-A newly manufactured device shall implement the default values specified in this Technical Recommendation for all security-relevant configuration options for which defaults are defined. The scope of any vendor-specific mechanisms for a device to restore partially or fully the manufactured state is outside the scope of this Technical Recommendation.
+A newly manufactured device MUST implement the default values specified in this specification for all security-relevant configuration options for which defaults are defined. The scope of any vendor-specific mechanisms for a device to restore partially or fully the manufactured state is outside the scope of this specification.
 
 ## NMOS Node
 
 ![](images/NMOS-With-Control-Plane-Security.png)
 
-An NMOS Node comprises multiple Node API endpoints (IS-04) declared in the api.endpoints attribute of the Node’s “node” resource. It also comprises a number of control API endpoints (IS-05, IS-08, IS-11, IS-12, IS-14, etc.), as declared in the controls attribute of the Node’s “device” resources. Optionally, an NMOS Node exposes some service API endpoints and declares them in the services attribute of the Node’s “node” resource. All those endpoints are in the scope of this Technical Recommendation.
+An NMOS Node comprises multiple Node API endpoints (IS-04) declared in the api.endpoints attribute of the Node’s “node” resource. It also comprises a number of control API endpoints (IS-05, IS-08, IS-11, IS-12, IS-14, etc.), as declared in the controls attribute of the Node’s “device” resources. Optionally, an NMOS Node exposes some service API endpoints and declares them in the services attribute of the Node’s “node” resource. All those endpoints are in the scope of this specification.
 
-Additionally, an NMOS Node listens to and serves other client accesses from the network that are outside the scope of this Technical Recommendation.
+Additionally, an NMOS Node listens to and serves other client accesses from the network that are outside the scope of this specification.
 
-An NMOS Node performs client accesses to a number of NMOS Registry’s Registration API endpoints and IS-10 OAuth 2.0 endpoints. Accesses to those endpoints are in the scope of this Technical Recommendation.
+An NMOS Node performs client accesses to a number of NMOS Registry’s Registration API endpoints and IS-10 OAuth 2.0 endpoints. Accesses to those endpoints are in the scope of this specification.
 
-Additionally, an NMOS Node performs other client accesses to network services that are outside the scope of this Technical Recommendation.
+Additionally, an NMOS Node performs other client accesses to network services that are outside the scope of this specification.
 
 Note: Accesses from/to IS-05 transport streams (RTP, MQTT, WebSocket, etc.) are outside the scope of this specification which focuses on the standard NMOS TCP/IP based control plane, excluding transport streams that are covered in IS-05 or BCP-007 transport specific documents.
 
-Note: Accesses to / from DHCP, PTP, NTP, DNS, mDNS services are not covered by this document. Similarly, 802.1x protection of the Ethernet access is outside the scope of this Technical Recommendation.
+Note: Accesses to / from DHCP, PTP, NTP, DNS, mDNS services are not covered by this document. Similarly, 802.1x protection of the Ethernet access is outside the scope of this specification.
 
 ## NMOS Registry
 
-The IS-04 Registration API shall not require the NMOS Nodes to use OAuth 2.0 authorizations. The IS-04 Registration API shall be secured using TLS with server authentication or mutual client-server authentication.
+The IS-04 Registration API MUST not require the NMOS Nodes to use OAuth 2.0 authorizations. The IS-04 Registration API MUST be secured using TLS with server authentication or mutual client-server authentication.
 
-- api_auth of the Registry DNS-SD record shall be false.
+- `api_auth` of the Registry DNS-SD record MUST be false.
 
 ## Peer to Peer Mode
 
-A Node operating in peer-to-peer mode (without an NMOS Registry) broadcasts its Node API information through mDNS which is not encrypted, providing an “Unrestricted Read Only” access to the broadcast information. mDNS payload content is out of scope of the Technical Recommendation. The Node’s Node API follows the regular Node Access Policy (NAP).
+A Node operating in peer-to-peer mode (without an NMOS Registry) broadcasts its Node API information through mDNS which is not encrypted, providing an “Unrestricted Read Only” access to the broadcast information. mDNS payload content is out of scope of this specification. The Node’s Node API follows the regular Node Access Policy (NAP).
 
-A device shall provide a configuration option to turn off peer-to-peer mode to prevent any use of mDNS for strict customer security policies.
+A device MUST provide a configuration option to turn off peer-to-peer mode to prevent any use of mDNS for strict customer security policies.
 
 # TLS Communications and Cipher Suites
 
-A device shall comply with this Technical Recommendation. This Technical Recommendation is based on AMWA BCP-003-01 for secure communications; where requirements differ, this Technical Recommendation is authoritative. The following additional requirements apply:
+A device MUST comply with this specification. This specification is based on AMWA BCP-003-01 for secure communications; where requirements differ, this specification is authoritative. The following additional requirements apply:
 
-Implementations should support TLS 1.3 (RFC 8446) and shall support TLS 1.2 (RFC 5246). While TLS v1.2 is supported for backward compatibility, implementations should prefer TLS v1.3 for enhanced security.
+Implementations SHOULD support TLS 1.3 (RFC 8446) and MUST support TLS 1.2 (RFC 5246). While TLS v1.2 is supported for backward compatibility, implementations SHOULD prefer TLS v1.3 for enhanced security.
+`
+All TLS connections MUST use cipher suites that provide Perfect Forward Secrecy (PFS), such as those based on ECDHE or DHE. A device MUST support the ephemeral key exchange groups `25519` and `secp256r1` and SHOULD support `secp521r1` and `448`.
 
-All TLS connections shall use cipher suites that provide Perfect Forward Secrecy (PFS), such as those based on ECDHE or DHE. A device shall support the ephemeral key exchange groups 25519 and secp256r1 and should support secp521r1 and 448.
+Note: The cipher suite naming in this section follows the universal IANA/RFC nomenclature (e.g. `TLS_AES_128_GCM_SHA256`), which corresponds to the suites defined in AMWA BCP-003-01. The curve names (e.g. `25519`, `448`) follow the nomenclature used in VSF TR-10-13 (PEP) and correspond to the `X25519` and `X448` groups in universal TLS nomenclature.
 
-Note: The cipher suite naming in this section follows the universal IANA/RFC nomenclature (e.g. TLS_AES_128_GCM_SHA256), which corresponds to the suites defined in AMWA BCP-003-01. The curve names (e.g. 25519, 448) follow the nomenclature used in VSF TR-10-13 (PEP) and correspond to the X25519 and X448 groups in universal TLS nomenclature.
+For TLS v1.2, a device MUST support the cipher suite `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` and SHOULD support `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`, `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`, `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`, `TLS_DHE_RSA_WITH_AES_128_GCM_SHA256`, `TLS_DHE_RSA_WITH_AES_256_GCM_SHA384`. A device MAY support the `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256` and `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256` cipher suites.
 
-For TLS v1.2, a device shall support the cipher suite TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 and should support TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384. A device may support the TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 and TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 cipher suites.
+A device MAY support the `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256`, `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256`, `TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384`, `TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384`, `TLS_DHE_RSA_WITH_AES_128_CBC_SHA256`, `TLS_DHE_RSA_WITH_AES_256_CBC_SHA256` cipher suites when required due to constrained-device performance or capability limitations. A CBC-mode cipher suite SHOULD not be used unless the encrypt_then_mac extension is successfully negotiated.
 
-A device may support the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256 cipher suites when required due to constrained-device performance or capability limitations. A CBC-mode cipher suite should not be used unless the encrypt_then_mac extension is successfully negotiated.
-
-For TLS v1.3, a device shall support the cipher suite TLS_AES_128_GCM_SHA256 and should support TLS_AES_256_GCM_SHA384 and TLS_AES_128_CCM_SHA256. A device may support the TLS_CHACHA20_POLY1305_SHA256 cipher suite.
+For TLS v1.3, a device MUST support the cipher suite `TLS_AES_128_GCM_SHA256` and SHOULD support `TLS_AES_256_GCM_SHA384` and `TLS_AES_128_CCM_SHA256`. A device MAY support the `TLS_CHACHA20_POLY1305_SHA256` cipher suite.
 
 For state-of-the-art security, the use of GCM-based suites or TLS v1.3 is strongly recommended.
 
-Only the cipher suites and key exchange groups listed as "shall", "should", or "may" in this section shall be used. All other cipher suites are prohibited.
+Only the cipher suites and key exchange groups listed as "MUST", "SHOULD", or "MAY" in this section MUST be used. All other cipher suites are prohibited.
 
 # Registry Access Policy (RAP)
 
-An NMOS Registry operates in one of the following policies regarding access to the Registration of resources. All the NMOS registry accessible by an NMOS Node shall use the same access policy.
+An NMOS Registry operates in one of the following policies regarding access to the Registration of resources. All the NMOS registry accessible by an NMOS Node MUST use the same access policy.
 
 ## Unrestricted Registration
 
 An NMOS Registry configured with that policy grants registration access to anyone.
 
-If the api_proto parameter of the Registry DNS-SD record is “http”, the IS-04 Registration API is not protected by TLS.
+If the `api_proto` parameter of the Registry DNS-SD record is “http”, the IS-04 Registration API is not protected by TLS.
 
-If the api_proto parameter of the Registry DNS-SD record is “https”, the IS-04 Registration API is protected by TLS and a device shall authenticate the Registry using TLS server authentication.
+If the `api_proto` parameter of the Registry DNS-SD record is “https”, the IS-04 Registration API is protected by TLS and a device MUST authenticate the Registry using TLS server authentication.
 
 Shall be supported by all compliant devices.
 
 ## Restricted Registration
 
-An NMOS Registry configured with that policy grants registration access to those presenting a client certificate authorized for registration. A device and a Registry shall authenticate each other using TLS mutual authentication.
+An NMOS Registry configured with that policy grants registration access to those presenting a client certificate authorized for registration. A device and a Registry MUST authenticate each other using TLS mutual authentication.
 
-- api_proto of the Registry DNS-SD record shall be “https”
+- `api_proto` of the Registry DNS-SD record MUST be “https”
 
 Shall be supported by all compliant devices.
 
 # Node Access Policy (NAP)
 
-An NMOS Node operates in one of the following policies regarding access to the Node’s resources and states. A device shall allow an administrator to configure the device to use one of the following policies, which default to “Unrestricted Read Write”. The policy applies to all incoming accesses to the Node’s endpoints and to all outbound client accesses performed by the Node.
+An NMOS Node operates in one of the following policies regarding access to the Node’s resources and states. A device MUST allow an administrator to configure the device to use one of the following policies, which default to “Unrestricted Read Write”. The policy applies to all incoming accesses to the Node’s endpoints and to all outbound client accesses performed by the Node.
 
 ## Unrestricted Read Write
 
-A device configured with that policy explicitly indicates that it is not compliant with this Technical Recommendation. In that specific case, the protocol is HTTP without TLS, and the device shall not claim compliance with this Technical Recommendation while so configured.
+A device configured with that policy explicitly indicates that it is not compliant with this specification. In that specific case, the protocol is HTTP without TLS, and the device MUST not claim compliance with this specification while so configured.
 
-- Unrestricted read access shall be permitted to all clients.
+- Unrestricted read access MUST be permitted to all clients.
 
-- Unrestricted write access shall be permitted to all clients.
+- Unrestricted write access MUST be permitted to all clients.
 
 The Node's endpoints protocol and services href attribute indicates HTTP and the authorization attribute is false. The Device's control endpoints href attribute indicates HTTP and the authorization attribute is false.
 
 ## Unrestricted Read Only
 
-A device configured with that policy grants read only access to anyone, but requires authorization for write access (accesses with side effects on the device state). This mode of operation is not allowed when OAuth 2.0 authorizations are used, in which case even read access shall be explicitly provided by the OAuth 2.0 authorizations.
+A device configured with that policy grants read only access to anyone, but requires authorization for write access (accesses with side effects on the device state). This mode of operation is not allowed when OAuth 2.0 authorizations are used, in which case even read access MUST be explicitly provided by the OAuth 2.0 authorizations.
 
-- Unrestricted read access shall be permitted to all clients.
+- Unrestricted read access MUST be permitted to all clients.
 
-- Restricted write access shall be enforced by the NMOS Node in accordance with the configured RAAM policy.
+- Restricted write access MUST be enforced by the NMOS Node in accordance with the configured RAAM policy.
 
 The Node's endpoints protocol and services href attribute indicates HTTPS and the authorization attribute is set according to RAAM. The Device's control endpoints href attribute indicates HTTPS and the authorization attribute is set according to RAAM.
 
 ## Restricted Read Write
 
-A device configured with that policy grants read and write access to only those having the proper authorization. This mode of operation shall be supported by all devices. conforming to this specification.
+A device configured with that policy grants read and write access to only those having the proper authorization. This mode of operation MUST be supported by all devices. conforming to this specification.
 
-- Restricted read access shall be enforced by the NMOS Node in accordance with the configured RAAM policy.
+- Restricted read access MUST be enforced by the NMOS Node in accordance with the configured RAAM policy.
 
-- Restricted write access shall be enforced by the NMOS Node in accordance with the configured RAAM policy.
+- Restricted write access MUST be enforced by the NMOS Node in accordance with the configured RAAM policy.
 
 The Node's endpoints protocol and services href attribute indicates HTTPS and the authorization attribute is set according to RAAM. The Device's control endpoints href attribute indicates HTTPS and the authorization attribute is set according to RAAM.
 
@@ -200,11 +200,11 @@ An NMOS Node applies access restrictions based on one of the following modes of 
 
 - RSA, ECDSA or both (ECDSA attempted first by client)
 
-  - A device shall allow an administrator to configure the type of certificates to use as RSA, ECDSA, or both. The certificate type applies to both endpoint and client accesses, and to server and client certificates.
+  - A device MUST allow an administrator to configure the type of certificates to use as RSA, ECDSA, or both. The certificate type applies to both endpoint and client accesses, and to server and client certificates.
 
-  - RSA and ECDSA shall independently be supported by all compliant devices. Supporting both simultaneously is optional.
+  - RSA and ECDSA MUST independently be supported by all compliant devices. Supporting both simultaneously is optional.
 
-The Node's endpoints protocol and services href attribute indicates HTTPS and the authorization attribute is set to false. The Device's control endpoints href attribute indicates HTTPS and the authorization attribute is set to false.
+The Node's endpoints `protocol` and services `href` attribute indicates HTTPS and the `authorization` attribute is set to false. The Device's control endpoints `href` attribute indicates HTTPS and the `authorization` attribute is set to false.
 
 ## Server TLS authentication with OAuth 2.0 authorizations
 
@@ -214,11 +214,11 @@ The Node's endpoints protocol and services href attribute indicates HTTPS and th
 
 - RSA, ECDSA or both (ECDSA attempted first by client)
 
-  - A device shall allow an administrator to configure the type of certificates to use as RSA, ECDSA, or both. The certificate type applies to both endpoint and client accesses, and to server and client certificates.
+  - A device MUST allow an administrator to configure the type of certificates to use as RSA, ECDSA, or both. The certificate type applies to both endpoint and client accesses, and to server and client certificates.
 
-  - RSA and ECDSA shall independently be supported by all compliant devices. Supporting both simultaneously is optional.
+  - RSA and ECDSA MUST independently be supported by all compliant devices. Supporting both simultaneously is optional.
 
-The Node's endpoints protocol and services href attribute indicates HTTPS and the authorization attribute is set to true. The Device's control endpoints href attribute indicates HTTPS and the authorization attribute is set to true.
+The Node's endpoints `protocol` and services `href` attribute indicates HTTPS and the `authorization` attribute is set to true. The Device's control endpoints `href` attribute indicates HTTPS and the `authorization` attribute is set to true.
 
 ## Mutual TLS authentication with OAuth 2.0 authorizations
 
@@ -226,11 +226,11 @@ The Node's endpoints protocol and services href attribute indicates HTTPS and th
 
 - RSA, ECDSA or both (ECDSA attempted first by client)
 
-  - A device shall allow an administrator to configure the type of certificates to use as RSA, ECDSA, or both. The certificate type applies to both endpoint and client accesses, and to server and client certificates.
+  - A device MUST allow an administrator to configure the type of certificates to use as RSA, ECDSA, or both. The certificate type applies to both endpoint and client accesses, and to server and client certificates.
 
-  - RSA and ECDSA shall independently be supported by all compliant devices. Supporting both simultaneously is optional.
+  - RSA and ECDSA MUST independently be supported by all compliant devices. Supporting both simultaneously is optional.
 
-The Node's endpoints protocol and services href attribute indicates HTTPS and the authorization attribute is set to true. The Device's control endpoints href attribute indicates HTTPS and the authorization attribute is set to true.
+The Node's endpoints `protocol` and services `href` attribute indicates HTTPS and the `authorization` attribute is set to true. The Device's control endpoints `href` attribute indicates HTTPS and the `authorization` attribute is set to true.
 
 # Device Configuration Options
 
@@ -242,7 +242,7 @@ The Node's endpoints protocol and services href attribute indicates HTTPS and th
 
 - Restricted Registration (HTTPS mutual authentication) (value 2)
 
-- A device compliant with this specification shall support the Unrestricted and Restricted Registration modes.
+- A device compliant with this specification MUST support the Unrestricted and Restricted Registration modes.
 
 ## Node Access Policy (NAP)
 
@@ -252,7 +252,7 @@ The Node's endpoints protocol and services href attribute indicates HTTPS and th
 
 - Restricted Read Write (value 2)
 
-- A device compliant with this specification shall support the Restricted Read Write mode.
+- A device compliant with this specification MUST support the Restricted Read Write mode.
 
 ## Restricted Access Authorization Mode (RAAM)
 
@@ -262,9 +262,9 @@ The Node's endpoints protocol and services href attribute indicates HTTPS and th
 
 - Mutual TLS Authentication with OAuth 2.0 Authorizations (value 2)
 
-- A device compliant with this specification, not supporting IS-10 or when an IS-10 OAuth 2.0 server is not available, shall support Mutual TLS Authentication.
+- A device compliant with this specification, not supporting IS-10 or when an IS-10 OAuth 2.0 server is not available, MUST support Mutual TLS Authentication.
 
-- A device compliant with this specification, supporting IS-10 and when an IS-10 OAuth 2.0 server is available, shall support OAuth 2.0 Authorizations.
+- A device compliant with this specification, supporting IS-10 and when an IS-10 OAuth 2.0 server is available, MUST support OAuth 2.0 Authorizations.
 
 Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server is not available” refers to a configuration option of the device activating/de-activating the use of an OAuth2.0 server on the network. A device supporting IS-10 could have this option enabled or disabled.
 
@@ -276,29 +276,29 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - Either (value 2)
 
-- A device compliant with this specification shall support all modes.
+- A device compliant with this specification MUST support all modes.
 
 ## TLS Certificate Type (TCT)
 
 - RSA (default) (value 0)
 
-  - RSA certificates shall use a minimum key size of 2048 bits.
+  - RSA certificates MUST use a minimum key size of 2048 bits.
 
 - ECDSA (value 1)
 
-  - ECDSA certificates shall use a minimum curve size equivalent to secp256r1 or 25519.
+  - ECDSA certificates MUST use a minimum curve size equivalent to secp256r1 or 25519.
 
 - Both (value 2)
 
 - Shall be common to all certificates and Root CAs of the device.
 
-- RSA and ECDSA shall independently be supported by all compliant devices. Supporting both simultaneously is optional.
+- RSA and ECDSA MUST independently be supported by all compliant devices. Supporting both simultaneously is optional.
 
 ## TLS Server Certificate(s) (TSC)
 
 - According to TLS Certificate Type (TCT) configuration
 
-- Default: Vendor certificates or None (shall be configured in order to enable related configurations)
+- Default: Vendor certificates or None (MUST be configured in order to enable related configurations)
 
 - May be common for the Node and Control endpoints or specific to each one.
 
@@ -334,7 +334,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - According to TLS Certificate Type (TCT) configuration
 
-- Default: Vendor certificates or None (shall be configured in order to enable related configurations)
+- Default: Vendor certificates or None (MUST be configured in order to enable related configurations)
 
 - May be common for the Registration and Authorization accesses or specific to each one.
 
@@ -346,7 +346,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - Root or intermediate CA(s)
 
-- Default: Vendor Root CA(s) or None (shall be configured in order to enable related configurations)
+- Default: Vendor Root CA(s) or None (MUST be configured in order to enable related configurations)
 
 - Used to validate a TLS Client Certificate on the Node endpoints and services.
 
@@ -372,7 +372,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - Root or intermediate CA(s)
 
-- Default: Vendor Root CA(s) or None (shall be configured in order to enable related configurations)
+- Default: Vendor Root CA(s) or None (MUST be configured in order to enable related configurations)
 
 - Used to validate a TLS Client Certificate on the Control endpoints.
 
@@ -394,239 +394,239 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 ## Additional Provisions:
 
-- The device shall provide a means to update trust material such that a valid existing trust configuration remains usable until a new configuration has been successfully validated.
+- The device MUST provide a means to update trust material such that a valid existing trust configuration remains usable until a new configuration has been successfully validated.
 
-- When an administrator changes the security policy configuration (e.g., NAP, RAP, RAAM, OAIM, TCT) or updates trust material (CAs, CRLs, certificates), new connections shall follow the new configuration immediately. Existing sessions shall continue with the configuration that was in effect when the session was established until they can safely be terminated.
+- When an administrator changes the security policy configuration (e.g., NAP, RAP, RAAM, OAIM, TCT) or updates trust material (CAs, CRLs, certificates), new connections MUST follow the new configuration immediately. Existing sessions MUST continue with the configuration that was in effect when the session was established until they can safely be terminated.
 
-- The device shall provide a means for an administrator or management system to retrieve the current effective values of the security policy configuration options described in this section (e.g., NAP, RAP, RAAM, OAIM, TCT) and to identify the trust material in use (e.g., certificates, CAs, CRLs) through non-sensitive metadata (such as subject/issuer names, validity dates, serial numbers, fingerprints, or equivalent identifiers). Private keys are out of scope for retrievable configuration and shall be write-only and shall not be retrievable. User interfaces may omit options that are not applicable under the current configuration.
+- The device MUST provide a means for an administrator or management system to retrieve the current effective values of the security policy configuration options described in this section (e.g., NAP, RAP, RAAM, OAIM, TCT) and to identify the trust material in use (e.g., certificates, CAs, CRLs) through non-sensitive metadata (such as subject/issuer names, validity dates, serial numbers, fingerprints, or equivalent identifiers). Private keys are out of scope for retrievable configuration and MUST be write-only and MUST not be retrievable. User interfaces MAY omit options that are not applicable under the current configuration.
 
-- An implementation may combine the Client Trusted Certificates Revocation List (CTCRL), Node endpoints Server Trusted Certificates Revocation List (NESTCRL) and Control endpoints Server Trusted Certificates Revocation List (CESTCRL) into a single Global Trusted Certificates Revocation List (GTCRL) by concatenating the various CRL, each signed by its respective CA. If a single CA is used across all CTCA, NESTCA and CESTCA, then a single CRL may be used.
+- An implementation MAY combine the Client Trusted Certificates Revocation List (CTCRL), Node endpoints Server Trusted Certificates Revocation List (NESTCRL) and Control endpoints Server Trusted Certificates Revocation List (CESTCRL) into a single Global Trusted Certificates Revocation List (GTCRL) by concatenating the various CRL, each signed by its respective CA. If a single CA is used across all CTCA, NESTCA and CESTCA, then a single CRL MAY be used.
 
-  - There shall be as many different CRL as there are when described as independent resources.
+  - There MUST be as many different CRL as there are when described as independent resources.
 
-  - All the CA(s) CTCA, NESTCA and CESTCA shall be considered during the validation of the CRL signature.
+  - All the CA(s) CTCA, NESTCA and CESTCA MUST be considered during the validation of the CRL signature.
 
 - Certificates and Private Keys are either transferred in PEM format or PKCS#12 encrypted with a strong password .p12 format.
 
-  - When using the PEM format the transfer channel shall be secure.
+  - When using the PEM format the transfer channel MUST be secure.
 
-  - When using the PKCS#12 format the transfer of the password shall be secure.
+  - When using the PKCS#12 format the transfer of the password MUST be secure.
 
 ## NMOS Tags
 
-The following tags should be published in the Node’s ‘tags’ attribute to indicate the configuration of the Node’s security parameters: NAP, RAP, RAAM, OAIM, TCT.
+The following tags SHOULD be published in the Node’s ‘tags’ attribute to indicate the configuration of the Node’s security parameters: NAP, RAP, RAAM, OAIM, TCT.
 
-urn:x-matrox:tag:nmos-sec:nap-config/v1.0 
-urn:x-matrox:tag:nmos-sec:rap-config/v1.0 
-urn:x-matrox:tag:nmos-sec:raam-config/v1.0 
-urn:x-matrox:tag:nmos-sec:oaim-config/v1.0 
-urn:x-matrox:tag:nmos-sec:tct-config/v1.0 
+`urn:x-matrox:tag:security:nap-config/v1.0`  
+`urn:x-matrox:tag:security:rap-config/v1.0`  
+`urn:x-matrox:tag:security:raam-config/v1.0`  
+`urn:x-matrox:tag:security:oaim-config/v1.0`  
+`urn:x-matrox:tag:security:tct-config/v1.0`  
 
-The value of those tags is an array of strings where the first entry (index 0) shall be the single decimal digit in string form of the value associated with the configuration option. The second entry (if any, index 1) may be a string of a maximum of 128 characters describing the configuration value.
+The value of those tags is an array of strings where the first entry (index 0) MUST be the single decimal digit in string form of the value associated with the configuration option. The second entry (if any, index 1) MAY be a string of a maximum of 128 characters describing the configuration value.
 
 # IS-10 Authorizations General Provisions
 
 ## IS-10 and BCP-003-02
 
-An implementation supporting the OAuth 2.0 authorization scheme shall comply with AMWA/NMOS IS-10 and AMWA BCP-003-02 except where this Technical Recommendation specifies otherwise. In case of conflict, this Technical Recommendation takes precedence.
+An implementation supporting the OAuth 2.0 authorization scheme MUST comply with AMWA/NMOS IS-10 and AMWA BCP-003-02 except where this specification specifies otherwise. In case of conflict, this specification takes precedence.
 
-Note: This Technical Recommendation overrides some of the IS-10 and BCP-003-02 requirements and provides additional specific requirements to favor smaller, simpler and more deterministic implementations in devices.
+Note: This specification overrides some of the IS-10 and BCP-003-02 requirements and provides additional specific requirements to favor smaller, simpler and more deterministic implementations in devices.
 
 # IS-10 Authorizations specific requirements
 
 ## Scope
 
-The scope of an OAuth 2.0 authorization is usually the name of the NMOS API used in the path to access the API. For example, accessing the IS-05 ConnectionAPI at http://api.example.com/x-nmos/connection/{version} implies the "connection" scope. For IS-04 NodeAPI, QueryAPI, RegistrationAPI, IS-05 ConnectionAPI, IS-08 ChannelMappingAPI, IS-11 StreamCompatibilityManagementAPI and the IS-14 ConfigurationAPI the scope shall be "node", "query", "registration", "connection", "channelmapping", "streamcompatibility" and "configuration" respectively. For IS-12 the scope for accessing the MS-05-02 API  shall either be "nc" or "control". For accessing an "x-manufacturer" based API the scope shall be "manufacturer".
+The `scope` of an OAuth 2.0 authorization is usually the name of the NMOS API used in the path to access the API. For example, accessing the IS-05 ConnectionAPI at http://api.example.com/x-nmos/connection/{version} implies the "connection" scope. For IS-04 NodeAPI, QueryAPI, RegistrationAPI, IS-05 ConnectionAPI, IS-08 ChannelMappingAPI, IS-11 StreamCompatibilityManagementAPI and the IS-14 ConfigurationAPI the `scope` MUST be "node", "query", "registration", "connection", "channelmapping", "streamcompatibility" and "configuration" respectively. For IS-12 the `scope` for accessing the MS-05-02 API  MUST either be "nc" or "control". For accessing an "x-manufacturer" based API the `scope` MUST be "manufacturer".
 
 ## Paths
 
-Access to "/" and "/x-nmos" shall use the "node" API scope. Access to "/x-manufacturer" and "/x-manufacturer/*" shall use the "manufacturer" scope.
+Access to "/" and "/x-nmos" MUST use the "node" API `scope`. Access to "/x-manufacturer" and "/x-manufacturer/*" MUST use the "manufacturer" `scope`.
 
-Access to an endpoint of the "urn:x-nmos:control:ncp" control type shall use either the "nc" or "control" API scope.
+Access to an endpoint of the "urn:x-nmos:control:ncp" control type MUST use either the "nc" or "control" API `scope`.
 
 ## Behavior
 
 ### Time Synchronization
 
-The requirements on the clock used by NMOS Nodes are relaxed. An NMOS Node may not be capable of synchronizing its clock to an external source of time. The Node estimation of the true time shall be within 30 minutes of the true NTP / PTP time used by the OAuth 2.0 Authorization Server. The estimated time used by the Node to validate the claims of a token shall comply with this requirement. The estimated time used by the Node to schedule the fetch / update of the OAuth 2.0 Authorization Server public keys shall comply with this requirement.
+The requirements on the clock used by NMOS Nodes are relaxed. An NMOS Node MAY not be capable of synchronizing its clock to an external source of time. The Node estimation of the true time MUST be within 30 minutes of the true NTP / PTP time used by the OAuth 2.0 Authorization Server. The estimated time used by the Node to validate the claims of a token MUST comply with this requirement. The estimated time used by the Node to schedule the fetch / update of the OAuth 2.0 Authorization Server public keys MUST comply with this requirement.
 
 ### Public Keys
 
-An NMOS Node shall cache the OAuth 2.0 Authorization Server Public Keys. An NMOS Node shall fetch an initial set of Public Keys after it boots/resets/restarts or after an explicit administrative request, and it shall update them every 23 hours plus X seconds, where X is a random number in the range 0 to 3600. If an NMOS Node cannot obtain an initial set of the Public Keys, it shall refuse access to the NMOS APIs until it retries and obtains an initial set of Public Keys. An NMOS Node shall invalidate the Public Keys from a previous fetch / update operation 36 hours after obtaining them. It shall then refuse access to NMOS APIs until it is able to obtain a new set of Public Keys. An NMOS Node should use an exponential backoff, from 1 to 64 seconds, when retrying a fetch / update operation.
+An NMOS Node MUST cache the OAuth 2.0 Authorization Server Public Keys. An NMOS Node MUST fetch an initial set of Public Keys after it boots/resets/restarts or after an explicit administrative request, and it MUST update them every 23 hours plus X seconds, where X is a random number in the range 0 to 3600. If an NMOS Node cannot obtain an initial set of the Public Keys, it MUST refuse access to the NMOS APIs until it retries and obtains an initial set of Public Keys. An NMOS Node MUST invalidate the Public Keys from a previous fetch / update operation 36 hours after obtaining them. It MUST then refuse access to NMOS APIs until it is able to obtain a new set of Public Keys. An NMOS Node SHOULD use an exponential backoff, from 1 to 64 seconds, when retrying a fetch / update operation.
 
-An NMOS Node shall log an event if it invalidates the Public Keys and it should log an event when it gets a set of Public Keys. An NMOS Node may log an event when it starts refusing access because of a lack of Public Keys. An NMOS Node may log an event when it stops refusing access because of a lack of Public Keys.
+An NMOS Node MUST log an event if it invalidates the Public Keys and it SHOULD log an event when it gets a set of Public Keys. An NMOS Node MAY log an event when it starts refusing access because of a lack of Public Keys. An NMOS Node MAY log an event when it stops refusing access because of a lack of Public Keys.
 
-An NMOS Node shall discover through DNS-SD the OAuth 2.0 Authorization Servers URL from the standard IS-10 _nmos-auth._tcp service or it may be configured with a list of URLs. An NMOS Node shall not use the iss claim of a Bearer token to get Public Keys. All the accessible OAuth 2.0 Authorization Servers shall publish the same set of Public Keys such that any OAuth 2.0 Authorization Server may be used by an NMOS Node to obtain the Public Keys and validate access tokens.
+An NMOS Node MUST discover through DNS-SD the OAuth 2.0 Authorization Servers URL from the standard IS-10 _nmos-auth._tcp service or it MAY be configured with a list of URLs. An NMOS Node MUST not use the `iss` claim of a Bearer token to get Public Keys. All the accessible OAuth 2.0 Authorization Servers MUST publish the same set of Public Keys such that any OAuth 2.0 Authorization Server MAY be used by an NMOS Node to obtain the Public Keys and validate access tokens.
 
 Note: The api_selector value is obtained from the DNS-SD TXT records.
 
-An NMOS Node shall use TLS v1.2 or v1.3 when fetching / updating Public Keys from an OAuth 2.0 Authorization Server. It shall validate that the Authorization Server certificate has been signed by a trusted Certificate Authority. An NMOS Node shall be configured with a set of trusted Certificate Authorities for validating access to OAuth 2.0 Authorization Servers.
+An NMOS Node MUST use TLS v1.2 or v1.3 when fetching / updating Public Keys from an OAuth 2.0 Authorization Server. It MUST validate that the Authorization Server certificate has been signed by a trusted Certificate Authority. An NMOS Node MUST be configured with a set of trusted Certificate Authorities for validating access to OAuth 2.0 Authorization Servers.
 
 #### Authorization Server Metadata Endpoint
 
-The location of the Public Keys (the jwks_uri) is not advertised directly. It shall be obtained from the Authorization Server's metadata document, defined in RFC-8414 and referenced from IS-10. The DNS-SD _nmos-auth._tcp advertisement carries only the Authorization Server's hostname and port, plus an optional api_selector TXT record corresponding to the path component of the issuer identifier (per RFC-8414 §3.1, with leading and trailing / omitted).
+The location of the Public Keys (the `jwks_uri`) is not advertised directly. It MUST be obtained from the Authorization Server's metadata document, defined in RFC-8414 and referenced from IS-10. The DNS-SD `_nmos-auth._tcp` advertisement carries only the Authorization Server's hostname and port, plus an optional `api_selector` TXT record corresponding to the path component of the issuer identifier (per RFC-8414 §3.1, with leading and trailing / omitted).
 
-IS-10 / RFC-8414 specifies that the metadata URL is constructed by inserting /.well-known/oauth-authorization-server between the host and the api_selector:
+IS-10 / RFC-8414 specifies that the metadata URL is constructed by inserting `/.well-known/oauth-authorization-server` between the host and the `api_selector`:
 
-{scheme}://{hostname}:{port}/.well-known/oauth-authorization-server\[/{api_selector}\]
+`{scheme}://{hostname}:{port}/.well-known/oauth-authorization-server\[/{api_selector}\]`
 
-In practice, some widely deployed Authorization Servers instead serve the metadata at the alternative form with the api_selector placed before the well-known suffix:
+In practice, some widely deployed Authorization Servers instead serve the metadata at the alternative form with the `api_selector` placed before the `well-known` suffix:
 
-{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/oauth-authorization-server
+`{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/oauth-authorization-server`
 
 In addition, every OpenID-Connect-compliant Authorization Server publishes an equivalent metadata document at the OpenID Connect Discovery 1.0 location, which uses the same "well-known appended to the issuer" placement form:
 
-{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/openid-configuration
+`{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/openid-configuration`
 
-The OpenID Connect Discovery document carries a jwks_uri field with the same semantics as the RFC-8414 metadata document and should be considered an acceptable substitute for it.
+The OpenID Connect Discovery document carries a `jwks_uri` field with the same semantics as the RFC-8414 metadata document and SHOULD be considered an acceptable substitute for it.
 
-To remain interoperable with Authorization Servers, an NMOS Node shall attempt the following URLs in order, stopping at the first one that returns HTTP 200 with a parseable JSON metadata document:
+To remain interoperable with Authorization Servers, an NMOS Node MUST attempt the following URLs in order, stopping at the first one that returns HTTP 200 with a parseable JSON metadata document:
 
-{scheme}://{hostname}:{port}/.well-known/oauth-authorization-server\[/{api_selector}\]
+`{scheme}://{hostname}:{port}/.well-known/oauth-authorization-server\[/{api_selector}\]`
 
-{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/oauth-authorization-server
+`{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/oauth-authorization-server`
 
-{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/openid-configuration
+`{scheme}://{hostname}:{port}\[/{api_selector}\]/.well-known/openid-configuration`
 
 The three forms collapse to two (or one) distinct URLs when no api_selector is present, so the additional probes are no-ops for Authorization Servers whose issuer has no path component.
 
-Once a metadata document has been retrieved, the Node shall read the jwks_uri field from that document and fetch the Public Keys from that URI. The Node shall not hardcode the JWKS path (e.g. /.well-known/jwks.json or /jwks); the JWKS location is identified normatively only via the metadata document's jwks_uri.
+Once a metadata document has been retrieved, the Node MUST read the `jwks_uri` field from that document and fetch the Public Keys from that URI. The Node MUST not hardcode the JWKS path (e.g. `/.well-known/jwks.json` or `/jwks`); the JWKS location is identified normatively only via the metadata document's `jwks_uri`.
 
 ### Access Token
 
 #### Lifetime
 
-Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for an immediate need for a complete workday. An OAuth 2.0 Bearer token shall have a minimum expiration time (exp claim) of 1 hour and a maximum of 24 hours from its creation time (iat claim).
+Authorizations are not meant to be provided for short periods of time. An authorization is expected to be delivered for an immediate need for a complete workday. An OAuth 2.0 Bearer token MUST have a minimum expiration time (`exp` claim) of 1 hour and a maximum of 24 hours from its creation time (`iat` claim).
 
-If the Node estimated time is greater than the exp claim value, accounting for the clock synchronization tolerance defined in this Technical Recommendation, the request shall be rejected with HTTP 401 (Unauthorized).
+If the Node estimated time is greater than the `exp` claim value, accounting for the clock synchronization tolerance defined in this specification, the request MUST be rejected with HTTP 401 (`Unauthorized`).
 
 #### Type and Algorithms
 
-The JOSE header typ parameter shall be present and shall have one of the following values: JWT, at+jwt, or application/at+jwt.
+The JOSE header `typ` parameter MUST be present and MUST have one of the following values: "JWT", "at+jwt", or "application/at+jwt".
 
-The algorithm alg used for signing the Bearer token shall be one of RS256, RS512, ES256, or ES512. When ES256 is used, the elliptic curve shall be P256. When ES512 is used, the elliptic curve shall be P521.
+The algorithm `alg` used for signing the Bearer token MUST be one of "RS256", "RS512", "ES256", or "ES512". When "ES256" is used, the elliptic curve MUST be `P256`. When "ES512" is used, the elliptic curve MUST be `P521`.
 
-Note: This Technical Recommendation extends the interoperability expectations of IS-10.
+Note: This specification extends the interoperability expectations of IS-10.
 
-The Authorization Server may use any of the permitted alg values listed above; therefore, a Node claiming compliance with this Technical Recommendation shall support validation of Bearer tokens using all permitted alg values.
+The Authorization Server MAY use any of the permitted `alg` values listed above; therefore, a Node claiming compliance with this specification MUST support validation of Bearer tokens using all permitted alg values.
 
 #### Grants
 
-NMOS Controllers and similar NMOS sub-systems shall obtain Bearer tokens to access the APIs of NMOS Nodes.
+NMOS Controllers and similar NMOS sub-systems MUST obtain Bearer tokens to access the APIs of NMOS Nodes.
 
-NMOS Controllers and similar NMOS sub-systems should obtain Bearer tokens with client_credentials grants to access the APIs of NMOS Nodes.
+NMOS Controllers and similar NMOS sub-systems SHOULD obtain Bearer tokens with `client_credentials` grants to access the APIs of NMOS Nodes.
 
-NMOS Controllers, similar NMOS sub-systems, users and tools may obtain Bearer tokens with authorization_code grants to access the APIs of NMOS Nodes.
+NMOS Controllers, similar NMOS sub-systems, users and tools MAY obtain Bearer tokens with `authorization_code` grants to access the APIs of NMOS Nodes.
 
-The sub and client_id claims of a Bearer token shall be equal for the client_credentials grant and shall not be equal for the authorization_code and other grants.
+The `sub` and `client_id` claims of a Bearer token MUST be equal for the `client_credentials` grant and MUST not be equal for the `authorization_code` and other grants.
 
-An NMOS Node may be configured by an administrator to a) only accept Access Tokens with client_credentials grants,  b) only accept Access Tokens with client_credentials grants, or c) accept both client_credentials  and authorization_code grants. By default, both client_credentials and authorization_code grants shall be supported.
+An NMOS Node MAY be configured by an administrator to a) only accept Access Tokens with `client_credentials` grants, b) only accept Access Tokens with `authorization_code` grants, or c) accept both `client_credentials`  and `authorization_code` grants. By default, both client_credentials and authorization_code grants shall be supported.
 
-The claims iss, aud, sub, exp, scope, client_id shall be present in the Bearer token.
+The claims `iss`, `aud`, `sub`, `exp`, `scope`, `client_id` MUST be present in the Bearer token.
 
-The nbf claim should not be present in the Bearer token. If it is present, it may be ignored.
+The `nbf` claim SHOULD not be present in the Bearer token. If it is present, it MAY be ignored.
 
-The iat claim may be present in the Bearer token. If it is present, it shall be ignored.
+The `iat` claim MAY be present in the Bearer token. If it is present, it MUST be ignored.
 
-The private claims x-nmos-* should be placed in an ext claim to separate them from standard claims. An NMOS Node shall support having the private claims x-nmos-* either in the ext claim or along with the standard claims. An Access Token should either have the private claims x-nmos-* in the ext claim or along with the standard claims. If the private x-nmos-* claims are duplicated, they shall be identical.
+The private claims `x-nmos-*` SHOULD be placed in an `ext` claim to separate them from standard claims. An NMOS Node MUST support having the private claims `x-nmos-*` either in the `ext` claim or along with the standard claims. An Access Token SHOULD either have the private claims `x-nmos-*` in the `ext` claim or along with the standard claims. If the private `x-nmos-*` claims are duplicated, they MUST be identical.
 
 #### Validation
 
-An NMOS Node shall require TLS v1.2 or v1.3 when serving HTTP requests. An NMOS Node shall only accept Access Tokens from the Authorization HTTP header of a request.
+An NMOS Node MUST require TLS v1.2 or v1.3 when serving HTTP requests. An NMOS Node MUST only accept Access Tokens from the Authorization HTTP header of a request.
 
-An NMOS Node shall validate the cryptographic signature of the Access Token before processing any claims. If signature validation fails, the request shall be rejected with HTTP 401 (Unauthorized) and include a WWW-Authenticate response header as per RFC 6750.
+An NMOS Node MUST validate the cryptographic signature of the Access Token before processing any claims. If signature validation fails, the request MUST be rejected with HTTP 401 (`Unauthorized`) and include a `WWW-Authenticate` response header as per RFC 6750.
 
-The following requirements define an ordered sequence of validation steps that shall be performed in the specified order. Each step may block access if validation fails.
+The following requirements define an ordered sequence of validation steps that MUST be performed in the specified order. Each step MAY block access if validation fails.
 
-ReadOnly access to a Node's API shall be blocked if one of the following claims rejects Read accesses. ReadWrite access to a Node's API shall be blocked if one of the following claims rejects Read or Write accesses.
+ReadOnly access to a Node's API MUST be blocked if one of the following claims rejects Read accesses. ReadWrite access to a Node's API MUST be blocked if one of the following claims rejects Read or Write accesses.
 
-Note: The following requirements are summarized in the pseudo-code section at the end of this Technical Recommendation.
+Note: The following requirements are summarized in the pseudo-code section at the end of this specification.
 
-If the OAuth 2.0 Audience Identification Mode (OAIM) configuration is “Serial Number”, the aud claim shall not allow access to the current API if it is not \["*"\] and no entry corresponds to "*", or contains a DNS name that includes, possibly as a sub-string, the [BCP-002-02](https://specs.amwa.tv/bcp-002-02/) Instance Identifier of the NMOS Node. There may be additional characters before and after the Instance Identifier in the DNS name. Authorizations should be delivered to OAuth 2.0 Clients for specific NMOS Nodes based on their serial number, as defined in the [BCP-002-02](https://specs.amwa.tv/bcp-002-02/) Instance Identifier. The DNS name of the aud clause matching the Instance Identifier of the Node shall additionally be either the Common Name (CN) or one of the alternative DNS names of the TLS server certificate associated with the NMOS endpoint.
+If the OAuth 2.0 Audience Identification Mode (OAIM) configuration is “Serial Number”, the `aud` claim MUST not allow access to the current API if it is not \["*"\] and no entry corresponds to "*", or contains a DNS name that includes, possibly as a sub-string, the [BCP-002-02](https://specs.amwa.tv/bcp-002-02/) Instance Identifier of the NMOS Node. There MAY be additional characters before and after the Instance Identifier in the DNS name. Authorizations SHOULD be delivered to OAuth 2.0 Clients for specific NMOS Nodes based on their serial number, as defined in the [BCP-002-02](https://specs.amwa.tv/bcp-002-02/) Instance Identifier. The DNS name of the `aud` clause matching the Instance Identifier of the Node MUST additionally be either the Common Name (CN) or one of the alternative DNS names of the TLS server certificate associated with the NMOS endpoint.
 
-If the OAuth 2.0 Audience Identification Mode (OAIM) configuration is “TLS Server Certificate Common Name (CN) or alternative DNS names”, the aud claim shall not allow access to the current API if it is not \["*"\] and no entry corresponds to "*", the Common Name (CN), or one of the alternative DNS names of the TLS server certificate associated with the NMOS endpoint. The aud entries may contain wild-card characters to target a subset of devices on a network. Such wild-carding of domain names is documented in RFC 4592. Implementations shall support RFC 4592 DNS wildcard matching when evaluating audience entries. Authorizations may be delivered to OAuth 2.0 Clients for specific NMOS Nodes based on their DNS name.
+If the OAuth 2.0 Audience Identification Mode (OAIM) configuration is “TLS Server Certificate Common Name (CN) or alternative DNS names”, the `aud` claim MUST not allow access to the current API if it is not \["*"\] and no entry corresponds to "*", the Common Name (CN), or one of the alternative DNS names of the TLS server certificate associated with the NMOS endpoint. The `aud` entries MAY contain wild-card characters to target a subset of devices on a network. Such wild-carding of domain names is documented in RFC 4592. Implementations MUST support RFC 4592 DNS wildcard matching when evaluating audience entries. Authorizations MAY be delivered to OAuth 2.0 Clients for specific NMOS Nodes based on their DNS name.
 
 If the OAuth 2.0 Audience Identification Mode (OAIM) configuration allows either of the two previous modes, both evaluations are performed and access is allowed if either allows access, and it is denied if both deny access.
 
-If the aud claim is an empty array, access shall be denied.
+If the `aud` claim is an empty array, access MUST be denied.
 
-The ordering of the aud array is significant for the purpose of interpreting the private x-nmos-* claims that reference aud entries by index (see read and write attributes processing below). For audience validation, the aud claim is processed as usual, with no specific ordering requirement.
+The ordering of the `aud` array is significant for the purpose of interpreting the private `x-nmos-*` claims that reference `aud` entries by index (see read and write attributes processing below). For audience validation, the `aud` claim is processed as usual, with no specific ordering requirement.
 
-An implementation shall maintain the aud ordering consistently within the processing of a given access token.
+An implementation MUST maintain the `aud` ordering consistently within the processing of a given access token.
 
-The indexing of the aud array is zero-based so the first entry of the aud array has index 0.
+The indexing of the `aud` array is zero-based so the first entry of the `aud` array has index 0.
 
-The scope claim shall not allow access to the current API if the API name is not an element of the space separated list of APIs of the claim. If the API name is present, the scope claim shall provide a default Read access for that API. The scope claim shall not grant Write access. An NMOS Node shall provide such Read access independently of the path being accessed. The presence of an x-nmos-* claim shall remove the default Read access from the scope claim for the associated API, and authorization for that NMOS API shall be determined exclusively by the explicit permissions in the corresponding x-nmos-* access permissions object.
+The `scope` claim MUST not allow access to the current API if the API name is not an element of the space separated list of APIs of the claim. If the API name is present, the `scope` claim MUST provide a default Read access for that API. The `scope` claim MUST not grant Write access. An NMOS Node MUST provide such Read access independently of the path being accessed. The presence of an `x-nmos-*` claim MUST remove the default Read access from the `scope` claim for the associated API, and authorization for that NMOS API MUST be determined exclusively by the explicit permissions in the corresponding `x-nmos-*` access permissions object.
 
-If the scope claim is an empty string, access shall be denied.
+If the `scope` claim is an empty string, access MUST be denied.
 
-Note: Unlike the AMWA NMOS IS-10 specification, the presence of an x-nmos-* claim matching an NMOS API does not grant implicit Read access. This Technical Recommendation overrides IS-10 such that the presence of an x-nmos-* claim matching an NMOS API removes the implicit Read access that would otherwise apply due to the scope claim for that NMOS API.
+Note: Unlike the AMWA NMOS IS-10 specification, the presence of an `x-nmos-*` claim matching an NMOS API does not grant implicit Read access. This specification overrides IS-10 such that the presence of an `x-nmos-*` claim matching an NMOS API removes the implicit Read access that would otherwise apply due to the `scope` claim for that NMOS API.
 
-This design resolves an internal logical contradiction in the IS-10 specification, which states both that the presence of a private claim grants implicit read access and that permission keys must be omitted if the permission is not granted. By requiring explicit read permission whenever a private claim is present, this Technical Recommendation provides a consistent and deterministic authorization model where the absence of a permission key reliably indicates that the permission has not been granted.
+This design resolves an internal logical contradiction in the IS-10 specification, which states both that the presence of a private claim grants implicit read access and that permission keys must be omitted if the permission is not granted. By requiring explicit read permission whenever a private claim is present, this specification provides a consistent and deterministic authorization model where the absence of a permission key reliably indicates that the permission has not been granted.
 
-The read attribute of an x-nmos-* claim, if present, shall provide Read access if the array of paths is \["*"\] and shall deny Read access if the array of paths is \[""\]. The absence of a read attribute prevents Read access. An NMOS Node shall provide such Read access independently of the path being accessed. Values other than \["*"\], \[""\], or an array of signed integers shall not be used. Implementations shall support all three forms of the read attribute: \["*"\] for allow, \[""\] for deny, and arrays of signed integers for indexed allow/deny. The array of signed integers shall not be empty and shall be sorted to have positive integers first followed by negative integers. The integer value 0 shall be considered as a positive integer. If the absolute value of any array entry is outside the bounds of the aud claim array, the access token is invalid and Read access shall be denied.
-
-The array of signed integers is split into two sub-arrays, one for non-negative integers and one for negative integers, keeping the same ordering as in the original array. The non-negative integer array is an allow-list while the negative integer array is a deny-list.
-
-If the allow-list is not empty, Read access shall be denied unless, for at least one allow-list entry i, the associated aud claim array entry aud\[i\] considered alone allows access. If the allow-list processing allows Read access, such access shall be denied if, for any deny-list entry i, the associated aud claim array entry aud\[abs(i)\] considered alone allows access, otherwise Read access shall be allowed.
-
-If the allow-list is empty, the deny-list is a deny-only list: Read access shall be denied if, for any deny-list entry i, the associated aud claim array entry aud\[abs(i)\] considered alone allows access, otherwise Read access shall be allowed.
-
-The write attribute of an x-nmos-* claim, if present, shall provide Write access if the array of paths is \["*"\] and shall deny write access if the array of paths is \[""\]. The absence of a write attribute prevents Write access. Both Read and Write access shall be allowed in order to get Write access. An NMOS Node shall provide such Write access independently of the path being accessed. Values other than \["*"\], \[""\], or an array of signed integers shall not be used. Implementations shall support all three forms of the write attribute: \["*"\] for allow, \[""\] for deny, and arrays of signed integers for indexed allow/deny. The array of signed integers shall not be empty and shall be sorted to have positive integers first followed by negative integers. The integer value 0 shall be considered as a positive integer. If the absolute value of any array entry is outside the bounds of the aud claim array, the access token is invalid and Write access shall be denied.
+The `read` attribute of an `x-nmos-*` claim, if present, MUST provide Read access if the array of paths is \["*"\] and MUST deny Read access if the array of paths is \[""\]. The absence of a `read` attribute prevents Read access. An NMOS Node MUST provide such Read access independently of the path being accessed. Values other than \["*"\], \[""\], or an array of signed integers MUST not be used. Implementations MUST support all three forms of the `read` attribute: \["*"\] for allow, \[""\] for deny, and arrays of signed integers for indexed allow/deny. The array of signed integers MUST not be empty and MUST be sorted to have positive integers first followed by negative integers. The integer value 0 MUST be considered as a positive integer. If the absolute value of any array entry is outside the bounds of the `aud` claim array, the access token is invalid and Read access MUST be denied.
 
 The array of signed integers is split into two sub-arrays, one for non-negative integers and one for negative integers, keeping the same ordering as in the original array. The non-negative integer array is an allow-list while the negative integer array is a deny-list.
 
-If the allow-list is not empty, Write access shall be denied unless, for at least one allow-list entry i, the associated aud claim array entry aud\[i\] considered alone allows access. If the allow-list processing allows Write access, such access shall be denied if, for any deny-list entry i, the associated aud claim array entry aud\[abs(i)\] considered alone allows access, otherwise Write access shall be allowed.
+If the allow-list is not empty, Read access MUST be denied unless, for at least one allow-list entry i, the associated `aud` claim array entry `aud`\[i\] considered alone allows access. If the allow-list processing allows Read access, such access MUST be denied if, for any deny-list entry i, the associated `aud` claim array entry `aud`\[abs(i)\] considered alone allows access, otherwise Read access MUST be allowed.
 
-If the allow-list is empty, the deny-list is a deny-only list: Write access shall be denied if, for any deny-list entry i, the associated aud claim array entry aud\[abs(i)\] considered alone allows access, otherwise Write access shall be allowed.
+If the allow-list is empty, the deny-list is a deny-only list: Read access MUST be denied if, for any deny-list entry i, the associated `aud` claim array entry `aud`\[abs(i)\] considered alone allows access, otherwise Read access MUST be allowed.
 
-If the current API access is having side-effects on the state of the NMOS Node, Read and Write access shall be allowed. Otherwise the API request shall fail with HTTP 403 (Forbidden) if the token is valid but permissions are insufficient, or HTTP 401 (Unauthorized) with a WWW-Authenticate response header if the token is invalid or missing.
+The `write` attribute of an `x-nmos-*` claim, if present, MUST provide Write access if the array of paths is \["*"\] and MUST deny write access if the array of paths is \[""\]. The absence of a `write` attribute prevents Write access. Both Read and Write access MUST be allowed in order to get Write access. An NMOS Node MUST provide such Write access independently of the path being accessed. Values other than \["*"\], \[""\], or an array of signed integers MUST not be used. Implementations MUST support all three forms of the `write` attribute: \["*"\] for allow, \[""\] for deny, and arrays of signed integers for indexed allow/deny. The array of signed integers MUST not be empty and MUST be sorted to have positive integers first followed by negative integers. The integer value 0 MUST be considered as a positive integer. If the absolute value of any array entry is outside the bounds of the `aud` claim array, the access token is invalid and Write access MUST be denied.
 
-If the current API access is not having side-effects on the state of the NMOS Node, Read access shall be allowed. Otherwise the API request shall fail with HTTP 403 (Forbidden) if the token is valid but permissions are insufficient, or HTTP 401 (Unauthorized) with a WWW-Authenticate response header if the token is invalid or missing.
+The array of signed integers is split into two sub-arrays, one for non-negative integers and one for negative integers, keeping the same ordering as in the original array. The non-negative integer array is an allow-list while the negative integer array is a deny-list.
 
-An NMOS Node should increment a status counter a) when a ReadOnly access is denied: a.1) based on the sub claim, a.2) based on the aud claim, a.3) based on the scope claim, a.4) based on the x-nmos-* claim, b) when a ReadWrite access is denied: b.1) based on the sub claim, b.2) based on the aud claim, b.3) based on the scope claim, b.4) based on the x-nmos-* claim, c) when an access without an Access Token is performed, d) when an access with an invalid or corrupted token is performed, e) when an access with an expired or not-yet-valid token is performed, f) when a TLS client certificate validation fails, g) when a TLS server certificate validation fails during a client access, h) when a fetch/update of the OAuth 2.0 Authorization Server public keys fails, i) when an access is denied because no valid Public Keys are available.
+If the allow-list is not empty, Write access MUST be denied unless, for at least one allow-list entry i, the associated `aud` claim array entry `aud`\[i\] considered alone allows access. If the allow-list processing allows Write access, such access MUST be denied if, for any deny-list entry i, the associated `aud` claim array entry `aud`\[abs(i)\] considered alone allows access, otherwise Write access MUST be allowed.
 
-The status counters shall be 64-bit unsigned integers and shall be monotonic (non-decreasing) since boot/reset/restart. A device may persist the counters across boot/reset/restart and if so shall provide an administrator a means to reset them through an explicit administrative action.
+If the allow-list is empty, the deny-list is a deny-only list: Write access MUST be denied if, for any deny-list entry i, the associated `aud` claim array entry `aud`\[abs(i)\] considered alone allows access, otherwise Write access MUST be allowed.
+
+If the current API access is having side-effects on the state of the NMOS Node, Read and Write access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (`Forbidden`) if the token is valid but permissions are insufficient, or HTTP 401 (`Unauthorized`) with a `WWW-Authenticate` response header if the token is invalid or missing.
+
+If the current API access is not having side-effects on the state of the NMOS Node, Read access MUST be allowed. Otherwise the API request MUST fail with HTTP 403 (`Forbidden`) if the token is valid but permissions are insufficient, or HTTP 401 (`Unauthorized`) with a `WWW-Authenticate` response header if the token is invalid or missing.
+
+An NMOS Node SHOULD increment a status counter a) when a ReadOnly access is denied: a.1) based on the `sub` claim, a.2) based on the `aud` claim, a.3) based on the `scope` claim, a.4) based on the `x-nmos-*` claim, b) when a ReadWrite access is denied: b.1) based on the `sub` claim, b.2) based on the `aud`claim, b.3) based on the `scope` claim, b.4) based on the `x-nmos-*` claim, c) when an access without an Access Token is performed, d) when an access with an invalid or corrupted token is performed, e) when an access with an expired or not-yet-valid token is performed, f) when a TLS client certificate validation fails, g) when a TLS server certificate validation fails during a client access, h) when a fetch/update of the OAuth 2.0 Authorization Server public keys fails, i) when an access is denied because no valid Public Keys are available.
+
+The status counters MUST be 64-bit unsigned integers and MUST be monotonic (non-decreasing) since boot/reset/restart. A device MAY persist the counters across boot/reset/restart and if so MUST provide an administrator a means to reset them through an explicit administrative action.
 
 Note: These status counters represent the minimum required audit capability. This requirement does not prevent implementations from providing more elaborate logging (e.g., source IP, client_id, or timestamps) for security events if device resources permit.
 
 #### Security Failure Handling
 
-An NMOS Node shall adopt a "fail-closed" security posture. Access shall be denied if any required security validation step cannot be successfully completed. This includes, among other things, the following cases:
+An NMOS Node MUST adopt a "fail-closed" security posture. Access MUST be denied if any required security validation step cannot be successfully completed. This includes, among other things, the following cases:
 
-If a Certificate Revocation List (CRL) is required but cannot be retrieved, has an invalid signature, or is expired, the Node shall treat all certificates that would have been validated against that CRL as invalid and shall deny access.
+If a Certificate Revocation List (CRL) is required but cannot be retrieved, has an invalid signature, or is expired, the Node MUST treat all certificates that would have been validated against that CRL as invalid and MUST deny access.
 
-If the OAuth 2.0 Authorization Server is unreachable and the Node has no valid cached Public Keys, the Node shall deny access to all requests requiring OAuth 2.0 authorization.
+If the OAuth 2.0 Authorization Server is unreachable and the Node has no valid cached Public Keys, the Node MUST deny access to all requests requiring OAuth 2.0 authorization.
 
-If a certificate validation fails for any reason (including expiry, untrusted CA, or revocation), the connection shall be terminated if an HTTP response is not possible. If an HTTP response is possible, access shall be denied and the request shall return the status HTTP 401 (Unauthorized).
+If a certificate validation fails for any reason (including expiry, untrusted CA, or revocation), the connection MUST be terminated if an HTTP response is not possible. If an HTTP response is possible, access MUST be denied and the request MUST return the status HTTP 401 (Unauthorized).
 
 #### Mutual TLS Client Certificate Binding
 
-When a Node API endpoint is accessed using mutual TLS (mTLS) and an OAuth 2.0 access token is provided in the Authorization HTTP header of a request, the Node shall enforce an additional client_id entity verification as specified below:
+When a Node API endpoint is accessed using mutual TLS (mTLS) and an OAuth 2.0 access token is provided in the Authorization HTTP header of a request, the Node MUST enforce an additional client_id entity verification as specified below:
 
-- The Node shall authorize the request only if the client_id claim value matches the Common Name (CN) or one of the alternative DNS names of the TLS client certificate accessing the NMOS endpoint.
+- The Node MUST authorize the request only if the `client_id` claim value matches the Common Name (CN) or one of the alternative DNS names of the TLS client certificate accessing the NMOS endpoint.
 
-- The comparison shall be case-insensitive.
+- The comparison MUST be case-insensitive.
 
-- Wildcards shall not be considered a match. If a wildcard is present in any SAN entry the Node shall treat it as non-matching for the purpose of this check. If no match is found, the Node shall reject the request.
+- Wildcards MUST not be considered a match. If a wildcard is present in any SAN entry the Node MUST treat it as non-matching for the purpose of this check. If no match is found, the Node MUST reject the request.
 
-This check binds the access token to the identity of the OAuth 2.0 client (the Controller or tool), as identified by the client_id claim. The sub claim identifies the end user (where applicable) and shall not be used for this binding.
+This check binds the access token to the identity of the OAuth 2.0 client (the Controller or tool), as identified by the `client_id` claim. The `sub` claim identifies the end user (where applicable) and MUST not be used for this binding.
 
-When mTLS is used, OAuth 2.0 clients (Controllers or tools) shall be provisioned such that their client_id value matches (case-insensitively) the Common Name (CN) or one of the alternative DNS names of their TLS client certificate. Wildcards shall not be used for this purpose. An OAuth 2.0 Authorization Server should enforce this requirement at client registration time and/or when issuing access tokens.
+When mTLS is used, OAuth 2.0 clients (Controllers or tools) MUST be provisioned such that their `client_id` value matches (case-insensitively) the Common Name (CN) or one of the alternative DNS names of their TLS client certificate. Wildcards MUST not be used for this purpose. An OAuth 2.0 Authorization Server SHOULD enforce this requirement at client registration time and/or when issuing access tokens.
 
 #### WebSocket
 
-An NMOS Node should provide endpoints for getting a WebSocket upgrade that are specific for ReadOnly access and ReadWrite access. The ReadOnly endpoint should have the “Guest” suffix. If a ReadOnly access endpoint is not provided, the endpoint is qualified as having ReadWrite access and causing side-effects on the state of the NMOS Node. So, although a GET verb is used to get an upgrade to a WebSocket, the request cannot be qualified as ReadOnly unless explicitly qualified.
+An NMOS Node SHOULD provide endpoints for getting a WebSocket upgrade that are specific for ReadOnly access and ReadWrite access. The ReadOnly endpoint SHOULD have the `Guest` suffix. If a ReadOnly access endpoint is not provided, the endpoint is qualified as having ReadWrite access and causing side-effects on the state of the NMOS Node. So, although a `GET` verb is used to get an upgrade to a WebSocket, the request cannot be qualified as ReadOnly unless explicitly qualified.
 
-Subscribing to notification messages shall be considered a read-only operation. Registering a websocket for receiving notification messages from objects may cause side-effects on the state of the websocket connection. This shall not be considered as causing side-effects on the state of the NMOS Node. The Read-Only versus Read-Write qualifiers relate to objects in the MS-05-02 framework, not to the IS-12 mechanisms for accessing, controlling and monitoring those objects.
+Subscribing to notification messages MUST be considered a read-only operation. Registering a websocket for receiving notification messages from objects MAY cause side-effects on the state of the websocket connection. This MUST not be considered as causing side-effects on the state of the NMOS Node. The Read-Only versus Read-Write qualifiers relate to objects in the MS-05-02 framework, not to the IS-12 mechanisms for accessing, controlling and monitoring those objects.
 
 ### HTTP Status Codes
 
-Implementations shall use appropriate HTTP status codes for access failures:
+Implementations MUST use appropriate HTTP status codes for access failures:
 
-- 401 Unauthorized: Returned when the access token is missing, expired, malformed, has an invalid signature, or fails the Mutual TLS Client Certificate Binding check. Include a WWW-Authenticate response header as per RFC 6750.
+- 401 `Unauthorized`: Returned when the access token is missing, expired, malformed, has an invalid signature, or fails the Mutual TLS Client Certificate Binding check. Include a `WWW-Authenticate` response header as per RFC 6750.
 
-- 403 Forbidden: Returned when the token is valid but the requested operation is denied due to insufficient permissions (e.g., scope mismatch, audience restrictions, or explicit deny via x-nmos-* claims).
+- 403 `Forbidden`: Returned when the token is valid but the requested operation is denied due to insufficient permissions (e.g., scope mismatch, audience restrictions, or explicit deny via `x-nmos-*` claims).
 
 ### Examples (Informative)
 
@@ -634,7 +634,7 @@ The following examples illustrate access tokens for a Controller operating acros
 
 Example 1: complete token using \["*"\] for multiple APIs and multiple Nodes
 
-This example follows a simple pattern where the Authorization Server grants full read/write access for the listed APIs on all targeted Nodes. This example uses authorization_code grants.
+This example follows a simple pattern where the Authorization Server grants full read/write access for the listed APIs on all targeted Nodes. This example uses `authorization_code` grants.
 
 ```json
 {
@@ -652,7 +652,7 @@ This example follows a simple pattern where the Authorization Server grants full
 
 Example 2: compact token using aud indices
 
-This example illustrates how the same token can remain compact by referencing aud entries by index. In this example, the Controller is authorized for write accesses only on node MTXCIP-CC91699. The x-nmos-node claim is not present because the scope claim already provides read access.
+This example illustrates how the same token can remain compact by referencing aud entries by index. In this example, the Controller is authorized for write accesses only on node `MTXCIP-CC91699`. The `x-nmos-node` claim is not present because the `scope` claim already provides read access.
 
 ```json
 {
@@ -669,7 +669,7 @@ This example illustrates how the same token can remain compact by referencing au
 
 Example 3: compact token using aud indices with universal read-only
 
-This example illustrates how the same token can remain compact by referencing aud entries by index. In this example, the Controller is authorized for write accesses only on nodes MTXCIP-CC91629 and MTXCIP-CC91699 while ReadOnly access is authorized for any node. The x-nmos-node claim is not present because the scope claim already provides read access.
+This example illustrates how the same token can remain compact by referencing aud entries by index. In this example, the Controller is authorized for write accesses only on nodes `MTXCIP-CC91629` and `MTXCIP-CC91699` while ReadOnly access is authorized for any node. The `x-nmos-node` claim is not present because the `scope` claim already provides read access.
 
 ```json
 {
@@ -686,7 +686,7 @@ This example illustrates how the same token can remain compact by referencing au
 
 Example 4: complete token using \["*"\] for multiple APIs and multiple Nodes
 
-This example follows a simple pattern where the Authorization Server grants full read/write access for the listed APIs on all targeted Nodes. This example uses client_credentials grants.
+This example follows a simple pattern where the Authorization Server grants full read/write access for the listed APIs on all targeted Nodes. This example uses `client_credentials` grants.
 
 ```json
 {
@@ -770,7 +770,7 @@ def validate_access(
     if not any(aud_entry_allows_current_node(a, node_instance_id, tls_server_cert_names, use_serial_number_in_aud) for a in aud):
         return DENY
 
-    # ---- locate private claim x-nmos-{api} (it may be in ext or at top-level) ----
+    # ---- locate private claim x-nmos-{api} (it MAY be in ext or at top-level) ----
     priv = None
     access_key = "x-nmos-" + api_name
 
