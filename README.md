@@ -2,6 +2,10 @@
 
 This repository describes the extended features of the NMOS Advanced Streaming Architecture developed by Matrox.
 
+# Reference Implementation
+
+The [NMOS-Reference](https://github.com/alabou/NMOS-Reference) GitHub project provides a comprehensive Python 3 implementation of an NMOS Node, an embedded NMOS Controller, and an extensive test suite. It implements most of the NMOS specifications and serves as the reference implementation of the Matrox NMOS Advanced Streaming Architecture.
+
 # Purpose and Key Features
 
 ## Purpose
