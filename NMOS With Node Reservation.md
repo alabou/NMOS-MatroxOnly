@@ -30,7 +30,7 @@ The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are 
 
 The 'Session Lifetime' determines the amount of time, after being acquired or renewed, that a session and its token remain valid. A session SHOULD be renewed after half of its lifetime. A session MUST expire a) after its lifetime if not renewed or, b) after its alivetime if unused and an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. By default the lifetime of a session is 60 minutes.
 
-The 'Session AliveTime' determines the amount of time, after being used, that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired if an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. By default the AliveTime of a session is 60 seconds. The AliveTime MAY be configured by an administrator from 60 seconds to 120 seconds, based on a global enterprise policy. Implementations MUST NOT use other values for the AliveTime.
+The 'Session AliveTime' determines the amount of time, after being used, that a session and its token remain alive. A session is used when an NMOS RestAPI is accessed using the `Authorization` header and that the bearer token proves to be the owner of the session. A session that is not alive becomes expired if an NMOS RestAPI PUT, POST, PATCH or DELETE request changing the state of the Node is performed without a bearer token. There is a special keepalive endpoint that MAY be used for keeping a session alive. The AliveTime of a session is 60 seconds.
 
 ## Using Reservation along with OAuth2.0 authorizations
 
@@ -48,7 +48,9 @@ When neither OAuth2.0 authorizations nor an exclusive session are used, read-onl
 
 A session is associated with a lifetime to protect against compromised Bearer tokens. A session is associated with an alivetime to quickly terminate a previous session when no longer used. 
 
-An entity MUST acquire Nodes to exclusively use them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective of a given deployment to a maximum of 24 hours. The 'Session AliveTime' MUST be 60 or 120 seconds as configured by an administrator. The current values have been chosen to allow a quick turnaround when an entity that reserved a Node becomes dead after a malfunction, power down or other reasons.
+An entity MUST acquire Nodes to exclusively use them and it MUST prove that it is alive and actively using them to keep its ownership. The 'Session Lifetime' of all the devices MAY be changed by an administrator to better fit the objective of a given deployment. The configured 'Session Lifetime' MUST be 60 minutes or greater, to a maximum of 24 hours. The 'Session AliveTime' MUST be 60 seconds. These values have been chosen to allow a quick turnaround when an entity that reserved a Node becomes dead after a malfunction, power down or other reasons.
+
+A client that has not determined the 'Session Lifetime' configured on a Node MUST assume the minimum 'Session Lifetime' of 60 minutes when scheduling its first `Renew`. A client MAY subsequently determine the actual 'Session Lifetime' configured on a Node as described in `Renew` and adjust its renewal schedule accordingly.
 
 The owner of an exclusive session regularly renews its session to obtain a new Bearer token to prevent its session to expire. Between the renewing intervals, the owner of an exclusive session regularly keeps its session alive by calling the KeepAlive endpoint or by using its Bearer token in an access to a Node RestAPI to keep its session alive.
 
@@ -58,9 +60,11 @@ This RestAPI MUST use the HTTPS protocol with TLS v1.2 or TLS v1.3. The bare HTT
 
 The Reservation RestAPI MUST be published as a Node service of type `urn:x-matrox:service:exclusive/v1.0`. The service declaration indicates the URL where the service is accessible and if OAuth2.0 authorizations are required to access the service.
 
-The requests and responses MUST use `Content-Type: application/json`.
+Requests and responses containing a body MUST use `Content-Type: application/json`.
 
 In addition to the endpoint-specific status codes defined below, implementations MAY return any standard HTTP error status code (e.g., `405 Method Not Allowed`, `415 Unsupported Media Type`, `429 Too Many Requests`, `500 Internal Server Error`, `501 Not Implemented`) as appropriate.
+
+Responses carrying an error status are not required to include a response body, and this specification does not define one. The status code and the response headers defined in this specification are the only normative content of an error response.
 
 ### Acquire
 
@@ -68,13 +72,13 @@ The acquire endpoint MAY be protected by one or more of the following authentica
 
 This operation MUST be atomic on a per Node basis. The Node Reservation API MUST NOT allow reserving multiple Nodes simultaneously. 
 
-This operation attempts to acquire an exclusive session and obtain an associated bearer token. The session MUST expire in 60 minutes unless it is renewed. A session MUST remain "alive" for AliveTime seconds after being acquired or used. The `exclusive_key` MUST be used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key MUST remain valid even if the session expires until a new owner activates a Sender / Receiver. See [PEP](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) for more details about the Privacy Encryption Protocol.
+This operation attempts to acquire an exclusive session and obtain an associated bearer token. The session MUST expire after the configured 'Session Lifetime' (60 minutes by default) unless it is renewed. A session MUST remain "alive" for AliveTime seconds after being acquired or used. The `exclusive_key` MUST be used on activation of Senders and Receivers as additional keying material to derive the privacy encryption key. The privacy encryption key MUST remain valid even if the session expires until a new owner activates a Sender / Receiver. See [PEP](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md) for more details about the Privacy Encryption Protocol.
 
 > Note: "no owner" is also considered a new owner in the previous paragraph.
 
 The operation MUST fail with a status `400 Bad Request` if the posted JSON is invalid. The operation MUST fail with a status `423 Locked` if there is an active session. Otherwise a status `200 Ok` MUST be returned along with a bearer token. The token MUST be used to access the NMOS RestAPIs changing the state of a Node.
 
-The client receiving a `423 Locked` status MUST use an exponential back-off mechanism when retrying to obtain an exclusive session. Such a mechanism MUST consider the Lifetime of 60 minutes and the AliveTime of an exclusive session.
+The client receiving a `423 Locked` status MUST use an exponential back-off mechanism when retrying to obtain an exclusive session. Such a mechanism MUST consider the 'Session Lifetime' and the 'Session AliveTime' of an exclusive session.
 
 An implementation of the Node Reservation API MAY return a HTTP `Link` response header along with a `423 Locked` status to provide a means of contacting the owner of the exclusive session through some unspecified protocol. The `Link` header MUST be `Link: <https://owner>` with the `owner` string corresponding to the percent-encoded `owner` string provided to `Acquire` by the owner of the exclusive session. In the absence of a `Link` response header the identity / information about the `owner` of the exclusive session is confidential.
 
@@ -104,11 +108,19 @@ The renew endpoint MUST be accessed with an `Authorization` header and an opaque
 
 This operation MUST be atomic on a per Node basis. It MUST NOT be possible to renew multiple Nodes simultaneously. 
 
-This operation attempts to renew an exclusive session and obtain an associated bearer token. The session MUST expire in 60 minutes unless it is renewed. A session MUST remain "alive" for AliveTime seconds after being acquired or used. 
+This operation attempts to renew an exclusive session and obtain an associated bearer token. The session MUST expire after the configured 'Session Lifetime' (60 minutes by default) unless it is renewed. A session MUST remain "alive" for AliveTime seconds after being acquired or used. 
 
 This operation MUST fail with a status `401 Unauthorized` and MUST include a `WWW-Authenticate: Bearer` response header if the bearer token of an `Authorization` header is invalid or the session has expired.
 
-This operation MUST fail with a status `425 Too Early` if attempted before 1/3 of the session lifetime.
+This operation MUST fail with a status `425 Too Early` if attempted before 1/3 of the 'Session Lifetime' has elapsed since the most recent successful `Acquire` or `Renew` of the session.
+
+The `425 Too Early` status is used here to indicate that a `Renew` was attempted too early within the 'Session Lifetime'. This use is unrelated to the TLS early data replay semantics of [RFC 8470][RFC-8470], which is otherwise not normative for this specification.
+
+A `425 Too Early` response MUST include a `Retry-After` response header as defined in [RFC 9110][RFC-9110]. The `delay-seconds` form MUST be used and the `HTTP-date` form MUST NOT be used, so that the delay is unaffected by any clock difference between the client and the Node. The delay MUST be the number of seconds remaining until half of the 'Session Lifetime' has elapsed, measured from the most recent successful `Acquire` or `Renew` of the session. The delay therefore indicates the point at which the session SHOULD be renewed and not the earliest point at which a `Renew` would be permitted. Because `425 Too Early` is returned only before 1/3 of the 'Session Lifetime' has elapsed, the delay is always greater than 1/6 and at most 1/2 of the 'Session Lifetime'.
+
+A client receiving `425 Too Early` MUST consider its bearer token to be still valid. It SHOULD NOT discard the token, SHOULD NOT attempt to `Acquire` the Node, and SHOULD NOT attempt `Renew` again before the delay indicated by `Retry-After` has elapsed. While deferring, the client MUST continue to keep its session alive by calling the `KeepAlive` endpoint or by using its bearer token to access an NMOS RestAPI: a `425 Too Early` defers renewal only and does not extend the AliveTime of the session.
+
+A client MAY derive the 'Session Lifetime' configured on a Node from a `425 Too Early` response, as twice the sum of the `Retry-After` delay and the time elapsed since its most recent successful `Acquire` or `Renew`.
 
 A successful operation MUST return a status `200 Ok` and a new bearer token to be used subsequently.
 
@@ -118,7 +130,7 @@ The Renew request MUST NOT include a request body.
 POST /x-manufacturer/exclusive/renew
 
 output from RENEW:
-    string                  // bearer token as a base64 string
+    <string>                // bearer token as a base64 string
 ```
 
 ### Release
@@ -153,7 +165,7 @@ This operation MUST fail with a status `401 Unauthorized` and MUST include a `WW
 POST /x-manufacturer/exclusive/keepalive
 ```
 
-The KeepAlive operation MUST NOT extend the session Lifetime. Only the Renew operation extends the session Lifetime.
+The KeepAlive operation MUST NOT extend the 'Session Lifetime'. Only the Renew operation extends the 'Session Lifetime'.
 
 ## NMOS RestAPIs
 
@@ -165,7 +177,7 @@ Nodes reservation SHOULD be used in environments where multiple Controllers and/
 
 ## Verifying Ownership
 
-If an entity in possession of an exclusive session token lost track of the renewal and keep-alive schedules it SHOULD first attempt to KeepAlive its token and if successful it SHOULD then attempt to renew the token. If the renewal returns a `425 Too Early` status, the token SHOULD be considered to be still valid for at least half of its 'Session Lifetime'.
+If an entity in possession of an exclusive session token lost track of the renewal and keep-alive schedules it SHOULD first attempt to KeepAlive its token and if successful it SHOULD then attempt to renew the token. If the renewal returns a `425 Too Early` status, the token is still valid and the `Retry-After` header of the response re-establishes the renewal schedule, as specified in `Renew`. The token SHOULD be considered to be still valid for at least half of its 'Session Lifetime', so that deferring the next `Renew` until the delay indicated by `Retry-After` has elapsed does not risk the expiry of the session.
 
 ## Additional Applications
 
@@ -178,3 +190,5 @@ The `exclusive_key` MAY be used to carry epoch-specific keying material derived 
 [IS-05]: https://specs.amwa.tv/is-05/ "AMWA IS-05 NMOS Device Connection Management Specification"
 [RFC-7617]: https://tools.ietf.org/html/rfc7617 "The 'Basic' HTTP Authentication Scheme"
 [NMOS Parameter Registers]: https://specs.amwa.tv/nmos-parameter-registers/ "Common parameter values for AMWA NMOS Specifications"
+[RFC-8470]: https://tools.ietf.org/html/rfc8470 "Using Early Data in HTTP"
+[RFC-9110]: https://tools.ietf.org/html/rfc9110 "HTTP Semantics"
