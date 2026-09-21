@@ -6,7 +6,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY in anY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   
 ---
   
@@ -30,17 +30,17 @@ The `urn:x-matrox:transport:rtsp.tcp` transport identifies the `interleaved` mod
 
 > Note: The RTSP interleaved mode is supported by an NMOS device as a specific transport to emphasis the TCP nature of this option. TCP-based interleaving is often necessary for firewall/NAT traversal.
 
-> Note: The `Transport:UDP;` signaling is non-standard (not allowed in the syntax of RFC 2326 but allowed by RFC 7826) and if supported indicate an MPEG2-TS over UDP stream (`Transport:UDP;`) instead of an MPEG2-TS over RTP stream (`Transport:RTP/AVP/UDP;`). A Controller through IS-11 can configure the transport by applying a constraint on the mux Flow `media_type`.
+> Note: The `Transport:UDP;` signaling is non-standard (not allowed in the syntax of RFC 2326 but allowed by RFC 7826) and if supported indicate an MPEG2-TS over UDP stream (`Transport:UDP;`) instead in an MPEG2-TS over RTP stream (`Transport:RTP/AVP/UDP;`). A Controller through IS-11 can configure the transport by applying a constraint on the mux Flow `media_type`.
 
 The RTSP control endpoints of RTSP Senders/Receivers support the same security features (rtsp versus rtsps, OAuth2.0 authorizations or not) as the IS-05 control endpoint of the associated Senders/Receivers.
 
-The media Stream and sub-Streams of an RTSP session support the same privacy encryption and HDCP features as non-RTSP Streams. Unless privacy encryption is used, RTSP transports are assumed to be unencrypted. The SRTP protocol and its associated key exchange mechanisms are not supported by NMOS Senders and Receivers.
+The media Stream and sub-Streams in an RTSP session support the same privacy encryption and HDCP features as non-RTSP Streams. Unless privacy encryption is used, RTSP transports are assumed to be unencrypted. The SRTP protocol and its associated key exchange mechanisms are not supported by NMOS Senders and Receivers.
 
-The `DESCRIBE` method of an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the mux Flow/Stream and sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name individual sub-Flows/sub-Streams according to the `<group-name> <group-index>:<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregate control of the RTSP mux stream according to the `<group-name> <group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
+The `DESCRIBE` method in an RTSP Sender provides a mechanism for retrieving the SDP transport file that describe the mux Flow/Stream and sub-Flows/sub-Streams making the RTSP mux Flow/Stream. The SDP transport file media level attribute `a=control:` is used to name individual sub-Flows/sub-Streams according to the `<group-name> <group-index>:<role-in-group> <role-index>` rules described in the [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md). A session level attribute `a=control:` attribute is used for the aggregate control of the RTSP mux stream according to the `<group-name> <group-index>` rules described in [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md)
 
 For a non-NMOS RTSP Sender, the use of aggregate and/or individual controls and the URL path of such controls is out of the scope of this document. An RTSP Receiver adapts, as a best effort, to the non-NMOS RTSP Sender.
 
-The SDP transport file of an RTSP Sender using the `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` transports is only about how to access, through TCP, the RTSP server control endpoint of such Sender. The client uses the `DESCRIBE` method to obtain information about the media streams available and uses the `SETUP` method to select/configure stream/sub-streams transport parameters such as the use of multicast or unicast.
+The SDP transport file in an RTSP Sender using the `urn:x-matrox:transport:rtsp` or `urn:x-matrox:transport:rtsp.tcp` transports is only about how to access, through TCP, the RTSP server control endpoint of such Sender. The client uses the `DESCRIBE` method to obtain information about the media streams available and uses the `SETUP` method to select/configure stream/sub-streams transport parameters such as the use of multicast or unicast.
 
 ### Transports Capabilities Summary
 
@@ -57,13 +57,13 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 The NMOS terms 'Controller', 'Node', 'Source', 'Flow', 'Sender', 'Receiver' are used as defined in the [NMOS Glossary](https://specs.amwa.tv/nmos/main/docs/Glossary.html).
 
-A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of an RTSP Stream produced by a Sender.
+A 'sub-Flow' is defined as a Flow of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part in an RTSP Stream produced by a Sender.
 
-A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part of an RTSP Stream consumed by a Receiver.
+A 'sub-Stream' is defined as a Stream of format `urn:x-nmos:format:audio`, `urn:x-nmos:format:video` or `urn:x-nmos:format:data` which is part in an RTSP Stream consumed by a Receiver.
 
-A non-NMOS RTSP Sender is an RTSP sender device that is not an NMOS Node and as such not part of an NMOS system.
+A non-NMOS RTSP Sender is an RTSP sender device that is not an NMOS Node and as such not part in an NMOS system.
 
-A non-NMOS RTSP Receiver is an RTSP receiver device that is not an NMOS Node and as such not part of an NMOS system.
+A non-NMOS RTSP Receiver is an RTSP receiver device that is not an NMOS Node and as such not part in an NMOS system.
 
 An RTSP Stream is a multiplexed Stream transporting RTSP sub-Streams. When the RTSP sub-Streams are transmitted in parallel, the RTSP Stream is virtual and does not physically exist, otherwise it is real and embed the RTSP sub-Streams.
 
@@ -134,19 +134,29 @@ An example Sender resource is provided in the [Examples](https://github.com/alab
 
 #### SDP format-specific parameters
 
-The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provide information about the RTSP control endpoint. The SDP transport file describing the RTSP Stream and sub-Streams of an RTSP Sender MUST be provided as the response to a `DESCRIBE` request. An RTSP Sender MUST produce SDP transport files with absolute `control` URLs, making the `Content-Base` header optional.
+The SDP transport file at the `manifest_href` MUST comply with RFC 4145 and the following requirements. It MUST provide information about the RTSP control endpoint. The SDP transport file describing the RTSP Stream and sub-Streams in an RTSP Sender MUST be provided as the response to a `DESCRIBE` request. An RTSP Sender MUST produce SDP transport files with absolute `control` URLs, making the `Content-Base` header optional.
 
-When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href` MUST provide the `a=privacy:` attribute and the SDP transport files received from `DESCRIBE` MUST NOT contain any `a=privacy:` attribute. The privacy encryption `iv'` parameter of an independently encrypted sub-Streams is derived as described in the section "Privacy Encryption" of this document.
+When Privacy Encryption Protocol is used, as described in [NMOS With Privacy Encryption](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Privacy%20Encryption.md), the SDP transport file at the `manifest_href`, or received from a `DESCRIBE` request for an aggregate RTSP Stream control URL, MUST provide the `a=privacy:` attribute. The SDP transport files received from a `DESCRIBE` request for a non-aggregate (individual) RTSP Stream/sub-Stream MUST provide an `a=privacy:` attribute. The privacy encryption `iv'` parameter in an independently encrypted sub-Stream is derived as described in the section "Privacy Encryption" of this document from the `iv` parameter provided by the SDP transport file at the `manifest_href`, or received from a `DESCRIBE` request for an aggregate RTSP Stream control URL. The `iv` parameter in an SDP transport files received from a `DESCRIBE` for a non-aggregate (individual) RTSP Stream/sub-Stream already factors in the `sub-stream-id`.
 
-When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at `manifest_href` MUST provide an `a=hkep:` attribute that applies by default to every sub-Stream.
+The `a=privacy:` attributes in an SDP transport file received from a `DESCRIBE` request for a non-aggregate (individual) RTSP Stream/sub-Stream MUST match the `a=privacy:` attributes from the SDP transport file at `manifest_href` or received from a `DESCRIBE` request for an aggregate RTSP Stream control URL, except that the `iv` parameter MUST differ per media stream. Redundant legs MUST use identical `a=privacy:` attributes across legs, as required by VSF TR-10-13.
 
-If any sub-Streams are not HDCP-encrypted, or if HDCP-encrypted sub-Streams originate from different `port-id` values, the default `a=hkep:` attribute of the SDP transport file at `manifest_href` MUST NOT apply. Instead, the SDP transport file returned by `DESCRIBE` MUST provide an `a=hkep:` attribute for each HDCP-encrypted media stream, and MUST NOT include an `a=hkep:` attribute for media streams that are not HDCP-encrypted.
+> Note: the `a=privacy:` attribute can be specified at the session level or at the media level.
 
-The `a=hkep:` attributes in the SDP transport file returned by `DESCRIBE` MUST match the default `a=hkep:` parameters from the SDP transport file at `manifest_href`, except that the `port-id` parameter MAY differ per media stream. Redundant legs MUST use identical `a=hkep:` attributes across legs, as required by VSF TR-10-5.
+Media level `a=privacy:` attributes in an SDP transport file received from a `DESCRIBE` request for an aggregate RTSP Stream control URL MUST match those that would be provided in the SDP transport file of the non-aggregate (individual) RTSP Stream/sub-Stream.
+
+When HDCP encryption and the HKEP protocol are used, as described in [NMOS With IPMX](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20IPMX.md), the SDP transport file at `manifest_href` or received from a `DESCRIBE` request for an aggregate RTSP Stream control URL MUST provide an `a=hkep:` attribute that applies by default to every sub-Stream.
+
+If any sub-Streams are not HDCP-encrypted, or if HDCP-encrypted sub-Streams originate from different `port-id` values, the default `a=hkep:` attribute of the SDP transport file at `manifest_href` or received from a `DESCRIBE` request for an aggregate RTSP Stream control URL MUST NOT apply by default to every sub-Stream. Instead, the SDP transport file received from a `DESCRIBE` request for a non-aggregate (individual) RTSP Stream/sub-Stream MUST provide an `a=hkep:` attribute for each HDCP-encrypted media stream, and MUST NOT include an `a=hkep:` attribute for media streams that are not HDCP-encrypted.
+
+The `a=hkep:` attributes in the SDP transport file received from a `DESCRIBE` request for a non-aggregate (individual) RTSP Stream/sub-Stream MUST match the default `a=hkep:` parameters from the SDP transport file at `manifest_href` or received from a `DESCRIBE` request for an aggregate RTSP Stream control URL, except that the `port-id` parameter MAY differ per media stream. Redundant legs MUST use identical `a=hkep:` attributes across legs, as required by VSF TR-10-5.
+
+> Note: the `a=hkep:` attribute can be specified at the session level or at the media level. When media level attributes are used, it allows the SDP transport file received from a `DESCRIBE` request for an aggregate RTSP Stream control URL to precisely describe the sub-streams that are HDCP-encrypted and those that are not.
+
+Media level `a=hkep:` attributes in an SDP transport file received from a `DESCRIBE` request for an aggregate RTSP Stream control URL MUST match those that would be provided in the SDP transport file of the non-aggregate (individual) RTSP Stream/sub-Stream.
 
 ##### Sender's SDP transport file
 
-The SDP transport file from the RTSP Sender MUST contain an `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session or media attribute that indicate to the RTSP Receiver and non-NMOS RTSP Receiver the URL to use for RTSP commands. The `/x-nmos/` path element indicates that the RTSP server is of an NMOS RTSP Sender, otherwise it must be assumed as being of non-NMOS RTSP Sender.
+The SDP transport file from the RTSP Sender MUST contain an `a=control:rtsp://<host [ ":" port ]>/x-nmos/<group-name>/<group-index>` session or media attribute that indicate to the RTSP Receiver and non-NMOS RTSP Receiver the URL to use for RTSP commands. The `/x-nmos/` path element indicates that the RTSP server is in an NMOS RTSP Sender, otherwise it must be assumed as being of non-NMOS RTSP Sender.
 
 > Note: The `<group-name> <group-index>` are separated by a '/' in the rtsp URL, while a space is used for the grouphint.
 
@@ -250,7 +260,7 @@ An example Receiver resource is provided in the [Examples](https://github.com/al
 
 ## RTSP IS-05 Senders and Receivers
 
-Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the RTSP specific transport parameters defined in [TCP Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_tcp.json) and [TCP Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_tcp.json). Because of the one Sender to N Receivers relationship of the RTSP transport the `receiver_id` attribute of the RTSP Sender's activation MUST be `null`. The `sender_id` attribute of the RTSP Receiver's activation MUST be set to the id of an RTSP Sender or `null` if connecting to a non-NMOS RTSP Sender.
+Connection Management using IS-05 proceeds in exactly the same manner as for any other transports, using the RTSP specific transport parameters defined in [TCP Sender transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/sender_transport_params_tcp.json) and [TCP Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_tcp.json). Because of the one Sender to N Receivers relationship of the RTSP transport the `receiver_id` attribute of the RTSP Sender's activation MUST be `null`. The `sender_id` attribute of the RTSP Receiver's activation MUST be set to the id in an RTSP Sender or `null` if connecting to a non-NMOS RTSP Sender.
 
 RTSP Senders and Receivers MUST be controlled through IS-05 only. The activation of a Sender / Receiver and the associated transport parameters MUST be under the control of IS-05 only.
 
@@ -260,7 +270,7 @@ If the Receiver is not capable of consuming the RTSP Stream described by a `PATC
 
 An RTSP Receiver MAY connect to a non-NMOS RTSP Sender. IS-05 is then used only on the Receiver side and an unspecified mechanism MUST be used to activate such non-NMOS RTSP Sender. Such RTSP Receiver SHOULD as a best effort interoperate with the non-NMOS RTSP Sender.
 
-An RTSP Receiver MAY support an `ext_rtsp_session_control` transport parameter to simplify connections to non-NMOS RTSP Senders, using only the IS-05 Receiver's transport parameters to establish the connection. The `ext_rtsp_session_control` parameter corresponds to the `a=control` session attribute of an SDP transport file. The `source_ip` transport parameter MUST match the resolved IP address of the `host` component of the `ext_rtsp_session_control` URL. The `source_port` transport parameter MUST match the `port` component of the `ext_rtsp_session_control` URL. The optional `ext_rtsp_session_control` transport parameter dos not replace the required `source_ip` and `source_port` parameters defined in the [TCP Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_tcp.json) schema.
+An RTSP Receiver MAY support an `ext_rtsp_session_control` transport parameter to simplify connections to non-NMOS RTSP Senders, using only the IS-05 Receiver's transport parameters to establish the connection. The `ext_rtsp_session_control` parameter corresponds to the `a=control` session attribute in an SDP transport file. The `source_ip` transport parameter MUST match the resolved IP address of the `host` component of the `ext_rtsp_session_control` URL. The `source_port` transport parameter MUST match the `port` component of the `ext_rtsp_session_control` URL. The optional `ext_rtsp_session_control` transport parameter dos not replace the required `source_ip` and `source_port` parameters defined in the [TCP Receiver transport parameters](https://github.com/alabou/NMOS-MatroxOnly/blob/main/schemas/receiver_transport_params_tcp.json) schema.
 
 > Note: The following strings are examples of aggregate session controls: "a=control:rtsp://matrox.com/movie", "a=control:rtsps://matrox.com/movie".
 
@@ -295,7 +305,7 @@ An RTPS Sender server MUST NOT respond to RTSP requests prior to the Sender's ac
 
 ## Privacy Encryption
 
-When privacy encryption is used, the SDP transport file of the RTSP control endpoint MUST provide the `a=privacy:` attribute and parameters. The `iv` parameter as described in the [PEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-01-19.pdf) correspond to a base value and a `sub-stream-id` MUST be added modulo 2^64 to obtain the effective sub-Stream `iv'` of an independently encrypted sub-Stream.
+When privacy encryption is used, the SDP transport file of the RTSP control endpoint MUST provide the `a=privacy:` attribute and parameters. The `iv` parameter as described in the [PEP](https://vsf.tv/download/technical_recommendations/VSF_TR-10-13_2024-01-19.pdf) correspond to a base value and a `sub-stream-id` MUST be added modulo 2^64 to obtain the effective sub-Stream `iv'` in an independently encrypted sub-Stream.
 
 The `sub-stream-id` is defined as follow, using the definitions of [NMOS With Natural Groups](https://github.com/alabou/NMOS-MatroxOnly/blob/main/NMOS%20With%20Natural%20Groups.md):
 
@@ -307,11 +317,11 @@ sub-stream-id = role-major + role-index
 
 iv' = (iv + sub-stream-id) mod 2^64
 
-> Note: An RTSP Receiver gets the role-in-group and role-index values from a `DESCRIBE` SDP transport file `a=control:` attribute of an RTSP Sender. There is no privacy encryption with non-NMOS RTSP Sender.
+> Note: An RTSP Receiver gets the role-in-group and role-index values from a `DESCRIBE` SDP transport file `a=control:` attribute in an RTSP Sender. There is no privacy encryption with non-NMOS RTSP Sender.
 
 ## TLS and OAuth2.0
 
-The server endpoint of an RTSP Sender MUST follow the IS-05 Device's `urn:x-nmos:control:sr-ctrl` control scheme (`http` or `https`) and `authorization` mode. If the scheme is `http` then the RTSP scheme MUST be `rtsp` otherwise it MUST be `rtsps` (RTSP with TLS). When authorizations are required the client MUST provide an authorization token to access teh RTSP server.
+The server endpoint in an RTSP Sender MUST follow the IS-05 Device's `urn:x-nmos:control:sr-ctrl` control scheme (`http` or `https`) and `authorization` mode. If the scheme is `http` then the RTSP scheme MUST be `rtsp` otherwise it MUST be `rtsps` (RTSP with TLS). When authorizations are required the client MUST provide an authorization token to access teh RTSP server.
 
 ## Redundancy
 
