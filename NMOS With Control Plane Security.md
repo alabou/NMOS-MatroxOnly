@@ -136,7 +136,7 @@ Only the cipher suites and key exchange groups listed as "MUST", "SHOULD", or "M
 
 An NMOS Registry operates in one of the following policies regarding access to the Registration of resources. All the NMOS registry accessible by an NMOS Node MUST use the same access policy.
 
-If multiple DNS-SD records are available for a Registry, some having the api_proto parameter set to “http” and some other having api_proto set to “https”, a device compliant with this Technical Recommendation MUST select the DNS-SD record having the api_proto parameter set to “https”.
+The AMWA IS-04 specification indicates in the “Registration API – DNS-SD Advertisement” section: “Multiple DNS-SD advertisements for the same API are permitted where the API is exposed via multiple ports and/or protocols.”. If multiple DNS-SD records are available for a Registry, some having the api_proto parameter set to “http” and some other having api_proto set to “https”, a device compliant with this Technical Recommendation MUST select the DNS-SD record having the api_proto parameter set to “https”.
 
 ## Unrestricted Registration
 
