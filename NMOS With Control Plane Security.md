@@ -136,6 +136,8 @@ Only the cipher suites and key exchange groups listed as "MUST", "SHOULD", or "M
 
 An NMOS Registry operates in one of the following policies regarding access to the Registration of resources. All the NMOS registry accessible by an NMOS Node MUST use the same access policy.
 
+If multiple DNS-SD records are available for a Registry, some having the api_proto parameter set to “http” and some other having api_proto set to “https”, a device compliant with this Technical Recommendation shall select the DNS-SD record having the api_proto parameter set to “https”.
+
 ## Unrestricted Registration
 
 An NMOS Registry configured with that policy grants registration access to anyone.
@@ -144,7 +146,7 @@ If the `api_proto` parameter of the Registry DNS-SD record is “http”, the IS
 
 If the `api_proto` parameter of the Registry DNS-SD record is “https”, the IS-04 Registration API is protected by TLS and a device MUST authenticate the Registry using TLS server authentication.
 
-Shall be supported by all compliant devices.
+Unrestricted Registration shall be supported by all compliant devices.
 
 ## Restricted Registration
 
@@ -152,7 +154,7 @@ An NMOS Registry configured with that policy grants registration access to those
 
 - `api_proto` of the Registry DNS-SD record MUST be “https”
 
-Shall be supported by all compliant devices.
+Restricted Registration shall be supported by all compliant devices.
 
 # Node Access Policy (NAP)
 
