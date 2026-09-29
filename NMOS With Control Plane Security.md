@@ -136,7 +136,7 @@ Only the cipher suites and key exchange groups listed as "MUST", "SHOULD", or "M
 
 An NMOS Registry operates in one of the following policies regarding access to the Registration of resources. All the NMOS registry accessible by an NMOS Node MUST use the same access policy.
 
-If multiple DNS-SD records are available for a Registry, some having the api_proto parameter set to “http” and some other having api_proto set to “https”, a device compliant with this Technical Recommendation shall select the DNS-SD record having the api_proto parameter set to “https”.
+If multiple DNS-SD records are available for a Registry, some having the api_proto parameter set to “http” and some other having api_proto set to “https”, a device compliant with this Technical Recommendation MUST select the DNS-SD record having the api_proto parameter set to “https”.
 
 ## Unrestricted Registration
 
@@ -146,7 +146,7 @@ If the `api_proto` parameter of the Registry DNS-SD record is “http”, the IS
 
 If the `api_proto` parameter of the Registry DNS-SD record is “https”, the IS-04 Registration API is protected by TLS and a device MUST authenticate the Registry using TLS server authentication.
 
-Unrestricted Registration shall be supported by all compliant devices.
+Unrestricted Registration MUST be supported by all compliant devices.
 
 ## Restricted Registration
 
@@ -154,7 +154,7 @@ An NMOS Registry configured with that policy grants registration access to those
 
 - `api_proto` of the Registry DNS-SD record MUST be “https”
 
-Restricted Registration shall be supported by all compliant devices.
+Restricted Registration MUST be supported by all compliant devices.
 
 # Node Access Policy (NAP)
 
@@ -196,7 +196,7 @@ An NMOS Node applies access restrictions based on one of the following modes of 
 
 ## Mutual TLS authentication
 
-- Shall be supported by all compliant devices not supporting IS-10 or when an IS-10 OAuth 2.0 server is not available.
+- MUST be supported by all compliant devices not supporting IS-10 or when an IS-10 OAuth 2.0 server is not available.
 
 - Clients are authorized if properly authenticated.
 
@@ -210,7 +210,7 @@ The Node's endpoints `protocol` and services `href` attribute indicates HTTPS an
 
 ## Server TLS authentication with OAuth 2.0 authorizations
 
-- Shall be supported by all compliant devices supporting IS-10 when an IS-10 OAuth 2.0 server is available.
+- MUST be supported by all compliant devices supporting IS-10 when an IS-10 OAuth 2.0 server is available.
 
 - Clients are authorized only by explicit OAuth 2.0 authorizations
 
@@ -292,7 +292,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - Both (value 2)
 
-- Shall be common to all certificates and Root CAs of the device.
+- MUST be common to all certificates and Root CAs of the device.
 
 - RSA and ECDSA MUST independently be supported by all compliant devices. Supporting both simultaneously is optional.
 
@@ -316,7 +316,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - May be common for the Registration and Authorization accesses or specific to each one.
 
-- Shall support at least two CTCA for each type of access in order to allow certificate re-provisioning.
+- MUST support at least two CTCA for each type of access in order to allow certificate re-provisioning.
 
 - Also used to verify Certificate Revocation List CRL as per X.509
 
@@ -330,7 +330,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - Used to validate a TLS Server Certificate of the NMOS Registry and the OAuth 2.0 Authorization Server.
 
-- Shall support at least two CTCRL in order to allow certificate re-provisioning.
+- MUST support at least two CTCRL in order to allow certificate re-provisioning.
 
 ## TLS Client Certificate(s) (TCC)
 
@@ -354,7 +354,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - May be hidden to a User when the Restricted Access Authorization Mode does not include mutual authentication.
 
-- Shall support at least two NESTCA in order to allow certificate re-provisioning.
+- MUST support at least two NESTCA in order to allow certificate re-provisioning.
 
 ## Node endpoints Server Trusted Certificates Revocation List (NESTCRL)
 
@@ -366,7 +366,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - Used to validate a TLS Client Certificate(s) on the Node endpoints and services.
 
-- Shall support at least two NESTCRL in order to allow certificate re-provisioning.
+- MUST support at least two NESTCRL in order to allow certificate re-provisioning.
 
 ## Control endpoints Server Trusted CA(s) (CESTCA)
 
@@ -380,7 +380,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - May be hidden to a User when the Restricted Access Authorization Mode does not include mutual authentication.
 
-- Shall support at least two CESTCA in order to allow certificate re-provisioning.
+- MUST support at least two CESTCA in order to allow certificate re-provisioning.
 
 ## Control endpoints Server Trusted Certificates Revocation List(s) (CESTCRL)
 
@@ -392,7 +392,7 @@ Note: The expression “not supporting IS-10 or when an IS-10 OAuth 2.0 server i
 
 - Used to validate a TLS Client Certificate(s) on the Control endpoints.
 
-- Shall support at least two CESTCRL in order to allow certificate re-provisioning.
+- MUST support at least two CESTCRL in order to allow certificate re-provisioning.
 
 ## Additional Provisions:
 
@@ -522,7 +522,7 @@ NMOS Controllers, similar NMOS sub-systems, users and tools MAY obtain Bearer to
 
 The `sub` and `client_id` claims of a Bearer token MUST be equal for the `client_credentials` grant and MUST not be equal for the `authorization_code` and other grants.
 
-An NMOS Node MAY be configured by an administrator to a) only accept Access Tokens with `client_credentials` grants, b) only accept Access Tokens with `authorization_code` grants, or c) accept both `client_credentials`  and `authorization_code` grants. By default, both client_credentials and authorization_code grants shall be supported.
+An NMOS Node MAY be configured by an administrator to a) only accept Access Tokens with `client_credentials` grants, b) only accept Access Tokens with `authorization_code` grants, or c) accept both `client_credentials`  and `authorization_code` grants. By default, both client_credentials and authorization_code grants MUST be supported.
 
 The claims `iss`, `aud`, `sub`, `exp`, `scope`, `client_id` MUST be present in the Bearer token.
 
